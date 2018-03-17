@@ -1,0 +1,262 @@
+---
+path: "/learnings/kubernetes"
+title: "Learnings: Kubernetes"
+---
+
+Learning Kubertetes  <<Learning_Kubertetes>>
+==========================
+
+Components
+---------------
+
+ * Master <-- contains etcd, api server, scheduler
+   - note: scheduler may move "running" containers to reorg the cluster
+ * workers <-- kublet, kube-proxy, container runtime
+
+
+### Pods
+
+Pod <-- set of co-located containers. A worker instance runs many pods. List pods, not containers.
+
+A **pod template** can define how many replica pods to create for a container(s).
+
+Seems like people conflate the word "pod" to mean, "pod template" and "pod instance" ????? The former is what you'd feed to ReplicationController / ReplicaSet, and the latter is what you get when you call `kubectl get pods`.
+  
+Built in Capabilities
+------------------
+
+### Service Discovery <<Kubernetes_Service_Discovery>>
+
+  * (if asked?) all containers running same service can "share" same IP or DNS name <-- controlled via environmental variables
+
+Performed via DNS or environmental variables.
+
+### Load Balancing
+
+If running on supported cloud platforms, can actually request additional instances in cluster if load scaling needs > current cluster size
+
+### auto canery deploys
+
+(hmm)
+
+Minikube
+-------------
+
+download
+`minikube start` <-- might take a while
+
+Then install K8 client and run `kubectl`
+`kubectl cluster-info` <-- should return useful info like DNS name to dashboard
+
+
+`minikube dashboard` <-- opens up dashboard in your default browser
+
+Kubectl
+------------
+
+"Just" sends REST commands to master.
+
+kubectl has bash and zsh tab completions!!
+
+`kubectrl get -o ` <-- -o will output the YAML description of that print Object
+
+`kubectrl edit RESOURCE NAME` <-- will pop open your editor, and then when save/quit it will post the file back to the API server.
+
+`kubectrl exec` <--- how to get into the container(s) of a pod.
+
+API Server
+---------
+
+Configuration often done by YAML (and behind the scenes kubectl is POSTing it into)... but can also mbe JSON.
+
+**Think of YAML as a representation of the request body** <-- RESTful, and not just on outputted document formats!!!
+
+Pods
+-----------
+
+Each pod gets own internal IP addresss.
+
+Pods also = instances of container or group of containers.
+
+Does NOT span worker instances.
+
+Can tell pod to do port forwarding without using a load balancer.
+
+Can use labels on (pods, workers) to act on things as a bunch, or schedule based on capabilities of workers instances (big GPUs, etc).
+
+Can also namespace objects.
+
+Can also have `init` containers that run before the other containers ie to lay some required files and stuff down.
+
+### Volumes
+
+Can be configured with a volume that is an auto-checked-out git repo. (just not a private one! Use a git sidecar or something better like putting the files in the container...)
+
+Remember if you set a volume to be a folder on the node, if the node goes away or gets rescheduled you won't have that data. Use your cloud providers elastic block storage long term file systems for that.
+
+it also knows about Amazon EBS and Azure's disk/file stuff too.
+
+#### Abstracting away implementation of long term data storage
+
+can use a `PersistentVolumeClaim` to use a `PersistentVolume` set up by your k8 cluster admin.
+ 
+**NOTE**: the location etc of this volume is the same across all of the instances of that pod template. This may or may not be a good idea (databases).
+
+### And Service Discovery
+
+on init k8 sets environmental variables pointing to each service that exists in the moment.
+(ie if service is called odyssey-database ODYSSEY_DATABASE_SERVICE_HOST and ODYSSEY_DATABASE_SERVICE_PORT).
+
+OR
+
+provides a DNS server: odyssey-database.default.svc.cluster.local
+^^^ default above is the k8 namespace the service is in!!!
+(svc.cluster.local is the default domain in the pods, so you could refer to it by domain name of only `odyssey-database`)!!
+
+#### Notes:
+
+  * ping won't work <-- because of the virtual IP magic.
+  * can also use this to abstract where resources live: maybe even outside the k8 cluster!!!
+
+Service Objects
+----------
+
+    $ kubectl expose replicationcontroller MYREPLICATIONCONTROLLER --type=
+
+### Service Object Types <<Learning_Kubertetes_Service_Object_Types>>:
+
+### Jobs
+
+Runs a pod but don't restart the container when the container quits success. (failure causes re-schedule).
+
+Can have parallelism and number of completions
+
+Also can configure CronJobs.
+
+### LoadBalancer
+
+Remember that each pod (instance) has its own IP address. Need to use load balancer so other services can address the pods as if they are one.
+
+AND/OR you want a consistent IP address for a pod - ie a single IP for your database pod, regardless of pods moving around as they die or are scheduled away.
+
+(can also tell load balancer to just return IP addresses of a pod, instead of using the one external one. It will return multiple A records, so if you're good with DIG you can get all the IP addresses of all the pod instances you have). (set `clusterIP` to None).
+
+#### and Minikube
+
+Creating load balancer will not create an external IP for you, but you can use `kubectl describe MY-LOAD-BALANCER-SERVICE` to get the port it's running on, then just use that port. 
+
+MEANING: because Minikube doesn't support creating external IP addresses it WILL act like it's super class, NodePort.
+
+#### And load balancing HTTP 1.1
+
+Keep-Alive will just send to the same pod as it used the first time...
+
+#### And your cluster (just) serving HTTP traffic
+
+Instead of needing to set up a public load balancer that sits in front of your k8 loadbalancer service, can create an `Ingess` service. This will look at PATH or domain name to figure out where to send the request. Also supports cookies as it works on Layer 7.
+
+Ingress load balancers also terminate SSL traffic.
+
+### Replication Controller
+
+Want to create ReplicationController objects to manage pods - just creating pods directly will assign them to a node directly, and if the node goes down your pod will not be recreated.
+
+Pods created by an application controller aren't tied to their creating replication controller.
+
+Give ReplicationController a set of labels to manage pods that have that label.
+
+You can relabel a pod to make the replication controller spin up a new one, then you could (say) examine it for what went wrong.
+
+**Technically deprecated, prefer ReplicaSets and/or Deployments instead**
+
+### DaemonSets
+
+Runs one replica of a pod on every worker instance.
+
+### Deployments  <<Kubernetes_Deployments>>
+
+Creates ReplicaSets, but takes care of (rolling, or however you configure them) deployments.
+
+Also provides `rollout undo` option!
+
+Can do `pause` to halt rollback ie for canary deploys.
+
+### StatefulSets
+
+Like ReplicaSets, but can:
+
+  * preserve network identity (well... not the IP...)
+  * have seperate storages for each pod (instance)
+  * boot up one at a time
+
+To use you need a `Service` (at least). Need to create headless.
+
+StatefulSet instances are found by SRV DNS entries.
+
+When stateful pods fail need to have an admin go in and delete the pod - then another (identical!) pod will take its place.
+
+Operational Concerns
+----------------
+
+### Application configuration
+
+#### Environmental Variables
+
+Have to set for each container in the pod (no such thing as pod wide settings).
+
+Can also pass info about the container downward.
+
+<<Kubernetes_Environmental_Configuration>>
+
+Can use `env` block and create  variables that looks at `metadata.namespace`, for example. K8 will introspect and pass that info downward.
+
+Can even pass cluster name, etc etc downward.
+
+**NOTE**: can **NOT** use environmental variables for labels or annotations - these must be written to injected volumes. (because these may change!)
+
+#### ConfigMap
+
+Can create `ConfigMap` resources to hold config. Can reference these variables in `env` setting (special keys for this) one by one, have k8 put all of them in there (prefixed by something), use it to override `args` entry for container. Can also have mounted volume created to hold file version of these so your app can read it (including just mounting specific files so you don't blow away real directory mounting a Docker volume into /etc!)
+
+##### Secrets
+
+Yup, k8 has them (essentially as a subclass of `ConfigMap`).
+
+
+<<Kubernetes_Authenticating_With_Docker_Registry>>
+
+Use a secret to do this! Builtin!
+
+Configuring
+----------------
+
+Create YAML describing your object (pod, ReplicationController, etc) and POST it to the API server.
+
+
+Health Checks
+-------------
+
+Called "livenessProbe" in k8 yaml.
+
+Can set path, port, and initial delay seconds (remember to give your app time to boot!)
+
+Questions
+----------------
+
+Q: What about environments ie Kakfa where your broker string needs/wants to include all the addresses of all the brokers (to communicate with each directly-ish?)
+
+A: Create a Kafka pod and run multiple instances of it. Tell the broker strings about those IP addresses.
+
+Service Catalog
+---------------
+
+"Hey, I need a PostgreSQL install, does one exist Out There? If so go grab me it and instantiate it on the cluster"
+
+So like Heroku addons(??)
+
+Additional Tools
+--------------
+
+Helm: (from the deis people): create a "chart" which gets turned into a pod (eerrr.... tiller) which gets deployed.
+
+- [REVIEW]: worth looking into when thinking about making this stuff developer repeatable????

@@ -1,0 +1,63 @@
+---
+path: "/learnings/akka"
+title: "Learning Akka"
+---
+
+# <<Learning_Akka>>
+
+Akka really meant for Scala: can use it with Java but super verbose and really wants you to putt other things like partial functions that are hard in Java
+
+# thoughts on when to use Akka
+
+>For quite a while, I was of the opinion that it's better to not use Actors if you don't have either:
+>
+>State and concurrency; or
+Distribution
+If you aren't using Akka for remoting or you aren't using Akka for concurrent access to state by encapsulating state in Actors, then it may not be obvious what the benefits are compared to stateless classes that are asynchronous and non-blocking.
+
+>However, I believe this is because I was writing Actor code with poor designs. It is true that if you have no state, an asynchronous API is simpler than using Ask with Actors. However, if you are designing with the "Tell Don't Ask" principle, then you can have code that is simpler, better performing, and can be easier to debug when using Actors. 
+
+## in SEDA
+
+As an overriding architecture to enable Staged Event Driven Architecture (SEDA)???!!! Work gets passed from actor to actor, not raw executors?????
+
+
+# When to use Akka: Futures for Concurrency, Actors for State
+
+    Public class myActor extends akka.actor.AbstractFSM<S, D>
+    
+# Messgae sending patterns in Akka
+
+## Ask pattern
+
+>When you ask an Actor, Akka actually creates a temporary Actor in the Actor system. The sender() reference that the Actor replies to becomes this temporary Actor
+
+## tell pattern
+
+Requires you to pass a reference to the actor you want to send the reply to, then sending different types of messages for request and response for a message 
+
+### (This is called the pipe pattern)
+
+Can also manually create an extra actor aka for response callback composing
+
+### forward pattern 
+
+> The intermediate Actor hands off the message, or possibly a new one, but the original sender is passed with the new message.
+
+# message sending abstractions
+
+## Pool / router 
+
+Load balancer for messages, can use round robin, smallest mailbox, scatter / gather, consistent hashing, others
+
+## dispatchers
+
+Control where work assigned to actor etc runs (i.e. Can be pinned to a thread, run on same thread as called - aka awesome for testing , or just use the default one)
+
+One strategy here is to separate work of different importance or scaling characteristics into separate dispatchers, to make sure one set of actors don't resource starve another set (for example)
+
+### default dispatcher
+
+Don't block
+
+# Akka Cluster
