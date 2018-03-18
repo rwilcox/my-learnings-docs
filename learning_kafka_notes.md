@@ -10,23 +10,23 @@ title: "Learnings: Kafka"
 ## File format
   * running log: old data deleted after 1GB or a week: so NOT THR BLOCKCHAIN
   * can be compressed on disk with LZ4, Snappy
-  
+
   Why younneed state (in tables or somewhere else): because you may want to keep computations you've been doing on the data you've been seeing
-  
+
   You can make Kafka keep the most recent value for a published key in it's log (compact mode). this may or may not be awesome.
-  
+
   This is NOT awesome if you plan on using kstreams then reply the data, as the stream items are deltas, where as in ktables the field updates to a key are treated like new field values.
-  
+
 Not that on disk the messages are stored in the same format as from the producers sent - allowing Kafka to stream those bytes directly back to consumers.
 
 
 ## Uniqueness in Kafka:
   
     Topic(/partition) + [key]
-    
-    
+ 
+ 
 (Destination partition may be set up to be determined by message key)
-   
+ 
 ## Ordering in Kafka
 
   * preserves insert order of messages within a partition
@@ -139,3 +139,10 @@ Source: [(me on stackoverflow)](https://stackoverflow.com/a/48472218/224334)
 ## Schema Registry
 
 Set via `props.put( "schema.registry.url", "HOSTNAME1,HOSTNAME2" )`
+
+# KStreams
+
+See also:
+
+  * [Kstreams data storage internals](https://cwiki.apache.org/confluence/display/KAFKA/Kafka+Streams+Internal+Data+Management)
+  

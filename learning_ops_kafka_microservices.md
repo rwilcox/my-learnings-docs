@@ -1,0 +1,46 @@
+---
+path: "/learnings/ops_kafka_microservices"
+title: "Learnings: Ops: Kafka Microservices"
+---
+
+# <<Learning_Ops_Kafka_Microservices>>
+
+## Configuring Snappy C library location
+
+If you turn on compaction on your topics it will / can use Snappy compaction. Snappy is a C library that is downloaded by (Kafka?) on startup.
+
+Because it’s a C library it requires two things:
+  1. A downloadable location that the current user can write to
+  2. SELinux must be set to be permissive enough  to allow the C library to load, or for the jar to write files to the disk?? I forget which, but there was a fun issue here I think.
+
+Set download location 
+
+> -Dorg.xerial.snappy.tempdir=/some/writable/dir
+
+This location [does not have to be unique if you are running multiple Kstreams apps in a single VM / container](https://github.com/xerial/snappy-java/issues/84).
+
+
+# <<Learning_Ops_Kafka_Microservices_KStreams>>
+
+## Configuring RocksDB store location <<Learning_Ops_Kafka_Microservices_KStreams_RocksDB>>
+
+By default uses Java tmpdir. so can set that with a -D flag
+
+> -Djava.io.tmpdir=/someplace/this/can/write/to/and/is/unique/for/app/tmp
+
+### really overriding default
+
+Use the properties API to set `state.dir` to the directory you want.
+
+## KStreams Considerations on AWS <<Learning_Ops_Kafka_Microservices_KStreams_AWS>>
+
+> he AWS pricing model allocates a baseline read and write IOPS allowance to a volume, based on the volume size. Each volume also has an IOPS burst balance, to act as a buffer if the base limit is exceeded. Burst balance replenishes over time but as it gets used up the reading and writing to disks starts getting throttled to the baseline, leaving the application with an EBS that is very unresponsive. 
+
+From: [Confluent: Running Kafka Streams on AWS](https://www.confluent.io/blog/running-kafka-streams-applications-aws/)
+
+Answer: bigger disks - even though you don't need the storage - means more IOPS.
+
+## On Alpine Linux <<Learning_Ops_Kafka_Microservices_KStreams_Alpine>>
+
+[May have issues because of RockDB??](https://issues.apache.org/jira/browse/KAFKA-4988)
+
