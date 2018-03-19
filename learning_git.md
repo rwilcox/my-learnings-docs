@@ -1,3 +1,8 @@
+---
+path: "/learnings/git"
+title: "Learnings: Git"
+---
+
 Git is pretty neat, and lets you think about source code management in totally different ways. Go Git!
 
 # Git Branches (and stuff)

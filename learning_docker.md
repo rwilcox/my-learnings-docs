@@ -1,3 +1,8 @@
+---
+path: "/learnings/docker"
+title: "Learnings: Docker"
+---
+
 # <<Learning_Docker>>
 
 ## Docker Storage <<Learning_Docker_Storage>>
