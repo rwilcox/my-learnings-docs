@@ -3,7 +3,7 @@ path: "/learnings/aws_ecs"
 title: "Learning AWS: ECS"
 ---
 
-## <<Learning_AWS_ECS>>
+# <<Learning_AWS_ECS>>
 
 Abilities:
 
@@ -202,5 +202,7 @@ See also:
   * [AWS Documentation on ECS storage](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-ami-storage-config.html)
   * [Github bug on aws-ecs-client that TL;DRs this documentation](https://github.com/aws/amazon-ecs-agent/issues/312)
 
-    
+  
+## Docker Volume Management
 
+Q: [10 GB limit for Docker volumes on ECS???](https://aws.amazon.com/premiumsupport/knowledge-center/increase-default-ecs-docker-limit/)
