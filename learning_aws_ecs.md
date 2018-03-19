@@ -185,3 +185,22 @@ Additional provided metadata comes in via the `userdata` block of creating an EC
 ## Secrets configuration management
 
   * [aws-secrets](https://www.promptworks.com/blog/cli-for-managing-secrets-for-amazon-ec2-container-service-based-applications-with-amazon-kms-and-docker)
+
+## And Disk Space / Stateful Services  <<AWS_ECS_Stateful_Services>> <<AWS_ECS_DiskSpace>>
+
+### Disk storage
+
+If your Docker container is not read only - ie it needs to write some kind of temporary data for itself - then you may have disk space considerations.
+
+ECS uses volumes the following way:
+
+  * layers (images, containers) are stored on /dev/xvdcz     <-- aka an extra 22GB(?) EBS vol
+  * data written in containers is stored on /dev/xvda  <-- the boot volume, an 8GB(?) volume
+
+See also:
+
+  * [AWS Documentation on ECS storage](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-ami-storage-config.html)
+  * [Github bug on aws-ecs-client that TL;DRs this documentation](https://github.com/aws/amazon-ecs-agent/issues/312)
+
+    
+

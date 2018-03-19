@@ -3,7 +3,7 @@ path: "/learnings/ops_unix_misc"
 title: "Learnings: Unix: Misc"
 ---
 
-# Learning Operations: Unix (Misc)
+# Unix (Misc)
 
 ## Getting Information about running processes ( <<Learning_Ops_Unix_Running_Process_Information>> )
 
@@ -20,4 +20,14 @@ See: `/proc/$PID/`
 ## Debugging what's going on with your kernel 
 
 https://github.com/iovisor/bcc <-- toolkit for creating kernel tracing programs. Also serves as an awesome list for programs written
+
+## Examining mount points <<Learning_Ops_Unix_Mount_Points>>
+
+Unix lets you mount external volumes onto folder paths.
+
+`mount -l` lists all `/dev/NAME` mounts on `/what/path/it/maps/to`.
+
+Configuring mounts
+
+`$ cat /etc/fstab`
 

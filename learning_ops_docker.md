@@ -7,7 +7,13 @@ title: "Learnings: Ops: Docker"
 
 `docker stats` <-- a top but for running containers (can also be one shot static, not live updating)
 
-`docker inspec` <-- get instance IP's address, mac address, log path, etc etc.
+`docker inspect` <-- get instance IP's address, mac address, log path, etc etc.
+
+`docker info` <-- information from the docker daemon: number of containers running, plugins, storage drivers, etc
+
+See also:
+
+  * Learning_Docker_Storage_Where_It_All_Is
 
 <<VideoLessonsLearnedRunningDockerInProd>>
 ================================
