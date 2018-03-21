@@ -122,11 +122,8 @@ Warnings can be set to warn on since, etc etc
 
 [jdeps: lets you see what classes your dependancies rely on](http://marxsoftware.blogspot.com/2014/03/jdeps.html)
 
-# And Running in Docker Images <<Java_In_Docker_Containers>>
+# See also:
 
-Need to explicitly set heap size, memory because Java 8 can't understand limits placed upon it by Docker schedulers, Docker, cgroups, or CPU constraints.
-
-See also:
-
-  * [Deploying JVM in tiny containers](https://www.gamlor.info/wordpress/2017/04/deploying-jvm-in-tiny-containers-be-carefull/)
-
+  * Learning_Ops_Java_Docker
+  * Learning_Ops_SRE_Java
+  

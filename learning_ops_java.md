@@ -70,18 +70,34 @@ See also:
   * [8 Options for Capturing thread dump data](https://dzone.com/articles/how-to-take-thread-dumps-7-options)
   * [How to analyze a thread dump](https://dzone.com/articles/how-analyze-java-thread-dumps?fromrel=true)
 
+# Java on Docker <<Learning_Ops_Java_Docker>>
+
+## Running in Docker Images <<Java_In_Docker_Containers>>
+
+Need to explicitly set heap size, memory because Java 8 can't understand limits placed upon it by Docker schedulers, Docker, cgroups, or CPU constraints.
+
+See also:
+
+  * [Deploying JVM in tiny containers](https://www.gamlor.info/wordpress/2017/04/deploying-jvm-in-tiny-containers-be-carefull/)
+  * [Running Java in a Container - Mesosphere](https://mesosphere.com/blog/java-container/#talk) <-- goes into cgroups stuff, etc
+
+
+
 ## Introspection / Debugging <<Learning_Ops_SRE_Java_Debugging>> . Or: looking for signs of epidemic in your herd of cattle
 
 "WHY is my Java app leaking memory / needing to be restarted every 4 hours?"
 
 
-# <<Learning_Ops_Java_Docker_JMX_Considerations>>
+# JMX <<Learning_Ops_Java_JMX_Considerations>>
 
 Problems:
 
   * need to mount directories for heapdumps, and other binary files dumped to /tmp by the JVM diagnostic tools
   * JVM attach interface communicates and passes around PID (recent versions of this account for cgroups namespaces)
   * Serviability API requires EXACT match between JDK/JRE version on the container and the host (this is hard to get exact)
+
+## And Docker <<Learning_Ops_Java_Docker_JMX_Considerations>>
+
 
 ## Operational Problems:
 
