@@ -237,3 +237,11 @@ Then add stack instances...
 ### Documentation notes
 
 In the documentation the sections of the CloudFormation templates may be documented on seperate places, click the monospaced name that doesn't look like a link but really is to see the documentation for that.
+
+## Introspecting the Cloudformation resources
+
+### from an EC2 instance (ie port mans )  =[SERVICE_DISCOVERY]
+
+[list metadata from Cloudformation](http://brillozon.com/devops/2015/04/29/making-aws-metadata-available-on-ec2/)
+
+
