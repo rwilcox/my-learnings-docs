@@ -142,7 +142,7 @@ Finding
 
 `_alloc_pages` is called for specific zone, and checks zone. If zone not suitable allocator may fall back to other zones.
 
-### When memory is too tight or fragmented
+### When memory is too tight or fragmented <<Learning_Ops_Memory_Low_Unused_Process>>
 
 If number of free pages reaches `pages_low` it will wake up `kswapd` to being freeing up pages from zones.
 If memory super tight, caller will do work of `kswapd` itself.
@@ -173,6 +173,38 @@ Internal fragmentation (large block had to be assigned to service small request)
 ### Fixing
 
 Slab allocator with buddy allocation - carves up pages into small blocks for memory
+
+And OS File Page Cache   <<Learning_Ops_Unix_File_Cache>>
+=========================
+
+## - [BOOKQUOTE]: 
+
+> Pages read from a file or block device are generally added to the page cache to avoid further disk I/O
+> Types of pages that exist in the cache:
+> 
+>   * One is pages that were faulted in as a result of reading a memory mapped file.
+>   * Blocks read from a block device or filesystem are packed into special pages called buffer pages. The number of blocks that may fit depends on the size of the block and the page size of the architecture.
+>   * Anonymous pages exist in a special aspect of the page cache called the swap cache when slots are allocated in the backing storage for page-out, which is discussed further in Chapter 11.
+>   * Pages belonging to shared memory regions are treated in a similar fashion to anonymous pages. The only difference is that shared pages are added to the swap cache and space reserved in backing storage immediately after the first write to the page.
+
+
+- Gorman, LinuxVirtualMemory, Chapter 10.1, 10.2
+
+### Debugging / getting stats about Linux Page Cache Hit Ratio <<Learning_Ops_Unix_File_Cache_Debugging>>
+
+[See this blog on measuring page cache hit ratio](http://www.brendangregg.com/blog/2014-12-31/linux-page-cache-hit-ratio.html).
+
+### Q: But what if you are writing a big file and you know that'll blow the page cache?
+
+[Telling Unix you don't want to use the page cache for a large file; checking to see if a file exists in the cache before use](https://insights.oetiker.ch/linux/fadvise.html)
+
+### See also:
+
+  * Gorman Book (Linux Virtual Memory, Chap 10.2)
+  * [DB2 Memory and file cache performance tuning on Linux](https://www.ibm.com/developerworks/data/library/techarticle/dm-0509wright/index.html)
+  * [2017: Future of Page Cache](https://lwn.net/Articles/712467/)
+  * _Page/slab cache control in a virtualized environment_ (Singh) - IBM paper
+  * [RedHat Solutions: how to control size of page cache in REHL (paid content)](https://access.redhat.com/solutions/32769)
 
 Slab Allocator
 =========================
