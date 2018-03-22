@@ -3,6 +3,21 @@ path: "/learnings/java"
 title: "Learnings: Java"
 ---
 
+# Dev Environment Tools <<Learning_Dev_Env_Tools>>
+
+
+## Make all the folders in a Java module namespace
+
+    function packagePathToFolderPath() {
+        mkdir -p $1/main/java
+        cd $1/main/java
+    
+        mkdir -p $(echo $2 | sed -e 's/\./\//g')
+    }
+    
+    $ packagePathToFolderPath $PROJECT_DIR/src com.wilcoxd.myapp.things
+
+
 # Iteration <<Learning_Java_Iteration>>
 
 ## Enhanced for loop
