@@ -3,7 +3,7 @@ path: "/learnings/aws"
 title: "Learnings: AWS"
 ---
 
-#<<Learning_AWS>>
+# <<Learning_AWS>>
 
 
 ## <<Learning_AWS_Route53>>
@@ -20,6 +20,31 @@ From http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-store-swap-volu
 
 ... but **only** those - EC2 instances not those seem to have no swap (!!??)
 
+### See also:
+
+  * Learning_AWS_Good_DNS_Names_For_Instances
+
+## <<Learning_AWS_VPCs>>
+
+### Allows you to create auto DNS support (private and public names)
+
+By default given DNS names will be `ip-private-ipv4-address.region.compute.internal`
+
+(for non default VPC ???)
+
+#### ... or not using this, because the suck: <<Learning_AWS_Good_DNS_Names_For_Instances>>
+
+For better names:
+
+  * [Chef: setting /etc/hosts everywhere to not require a DNS server](https://dodizzle.wordpress.com/2015/04/06/using-chef-to-automate-internal-hostnames-in-a-vpc/)
+  * [Chef: use Route53 (assumes OpsWorks, but is portable)](http://hipsterdevblog.com/blog/2014/06/23/automatic-dns-records-using-route53/)
+  * [Use a userdata script](http://scraplab.net/custom-ec2-hostnames-and-dns-entries/)
+
+... or run your own bind server and create a Chef recipe to update that... 
+
+#### Limits
+
+1024 packets per second per network card
 
 ## <<Learning_ElasticBeanstalk>>
 
