@@ -190,15 +190,15 @@ And OS File Page Cache   <<Learning_Ops_Unix_File_Cache>>
 
 - Gorman, LinuxVirtualMemory, Chapter 10.1, 10.2
 
-### Debugging / getting stats about Linux Page Cache Hit Ratio <<Learning_Ops_Unix_File_Cache_Debugging>>
+## Debugging / getting stats about Linux Page Cache Hit Ratio <<Learning_Ops_Unix_File_Cache_Debugging>>
 
 [See this blog on measuring page cache hit ratio](http://www.brendangregg.com/blog/2014-12-31/linux-page-cache-hit-ratio.html).
 
-### Q: But what if you are writing a big file and you know that'll blow the page cache?
+## Q: But what if you are writing a big file and you know that'll blow the page cache?
 
 [Telling Unix you don't want to use the page cache for a large file; checking to see if a file exists in the cache before use](https://insights.oetiker.ch/linux/fadvise.html)
 
-### See also:
+## See also:
 
   * Gorman Book (Linux Virtual Memory, Chap 10.2)
   * [DB2 Memory and file cache performance tuning on Linux](https://www.ibm.com/developerworks/data/library/techarticle/dm-0509wright/index.html)
