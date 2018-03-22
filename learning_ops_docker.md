@@ -26,7 +26,8 @@ limit layers: about 30+ things break. So think about this a bit...
 one container = one responsibility
 (not just a process
 
-wait, lines in your Dockerfile = layers ??
+Q: wait, lines in your Dockerfile = layers ??
+A: YUPPP!!! That's how it works!
 
 logging your app's log files to Docker's log stuff
 
