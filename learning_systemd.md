@@ -3,7 +3,7 @@ path: "/learnings/systemd"
 title: "Learnings: Systemd"
 ---
 
-Systemd units
+Systemd units <<Learning_Systemd_Units>>
 ==================
 
   * .service
@@ -18,8 +18,8 @@ Features
 
   * starts sockets and reassigns to service once up, so can handle messages sent to service when it was restarting
 
-CLI Cheatsheet
-=================
+CLI Cheatsheet <<Learning_Systemd_CLI_Cheatsheet>>
+====================================================
 
     $ sudo systemctl status $SERVICE_NAME.service
     
