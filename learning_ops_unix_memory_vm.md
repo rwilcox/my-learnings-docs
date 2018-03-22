@@ -188,7 +188,7 @@ limitation on how much memory can be allocated this way: `VMALLOC_START` - `VMAL
 
 It finds process space large enough to allocate request, then updates the required PGD/PMD/PTE entries.
 
-kswapd
+kswapd  <<Learning_Ops_Unix_Virtual_Memory_kswapd>>
 =========================
 
 Gorman, section 10.7
