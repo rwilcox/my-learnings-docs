@@ -3,10 +3,10 @@ path: "/learnings/ops_kafka"
 title: "Learnings: Ops: Kafka"
 ---
 
-# <<Learning_Ops_Kafka>>
+# `<<Learning_Ops_Kafka>>`
 
 
-## <<ListingAllBrokersInCluster>>
+## `<<ListingAllBrokersInCluster>>`
 
     import org.apache.zookeeper.Zookeeper;
     
