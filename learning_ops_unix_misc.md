@@ -31,3 +31,9 @@ Configuring mounts
 
 `$ cat /etc/fstab`
 
+## File Handle Limits <<Learning_Ops_Unix_File_Handle_Limits>>
+[Q: How many file descriptors am I using now?](https://www.cyberciti.biz/tips/linux-procfs-file-descriptors.html)
+
+[RHEL / Centos Ulimit / max number of open files](https://tuxgen.blogspot.com/2014/01/centosrhel-ulimit-and-maximum-number-of.html)
+
+[Ubuntu: setting file limits for all users (or not)](https://serverfault.com/a/570560/91037)
