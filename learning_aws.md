@@ -20,6 +20,10 @@ From http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-store-swap-volu
 
 ... but **only** those - EC2 instances not those seem to have no swap (!!??)
 
+#### See also:
+
+  * Learning_Ops_Unix_Controlling_Swappiness
+
 ### See also:
 
   * Learning_AWS_Good_DNS_Names_For_Instances
@@ -45,6 +49,13 @@ For better names:
 #### Limits
 
 1024 packets per second per network card
+
+### And AZs
+
+AZs are presented to you called "Subnets". Note:
+
+  * CIDR block for subnet (see Learning_Ops_Networking_CIDR_Blocks )
+  * listed Availability zone
 
 ## <<Learning_ElasticBeanstalk>>
 

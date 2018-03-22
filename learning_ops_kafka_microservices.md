@@ -54,7 +54,7 @@ To reset offset - ie to rewind the consumer to the beginning of the group - requ
 Q: How does Kafka know that there's an active consumer?
 A: The group coordinator gets heart beats every 2 seconds, if no heartbeats received then the consumer group doesn't work.
 
-## Viewing Consumer Group Info
+## Viewing Consumer Group Info  <<Learning_Ops_Kafka_Viewing_Adjusting_Consumer_Offsets>>
 
     $ kafka-consumer-groups --bootstrap-server $KB --list
     
