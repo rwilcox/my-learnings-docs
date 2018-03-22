@@ -54,3 +54,7 @@ This is a list of unix commands that are fairly simple, but I always forget how 
 -c = recurse with running tally
 
 -k = sorted
+
+# How many lines are in this folder of text files??
+
+    find . -name '*.md' | xargs wc -l
