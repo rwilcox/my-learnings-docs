@@ -213,6 +213,21 @@ Two reasons swap is desirable:
   1. Expands amount of memory a process may use
   2. Pages may be referenced only during initialization and never used again
 
+### Controlling swap <<Learning_Ops_Unix_Controlling_Swappiness>>
+
+Parameters `vm.swappiness` can be turned down to 0 to force VM to not happen.
+
+On Ubuntu:
+
+    $ sysctl vm.swappiness=10
+    
+    
+See also:
+
+  * [SO: Controlling Swappiness on Ubuntu](https://askubuntu.com/questions/103915/how-do-i-configure-swappiness#103916)
+  * [RHEL 7 Performance Tuning Guide: System Memory / VM Parameters](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/performance_tuning_guide/sect-red_hat_enterprise_linux-performance_tuning_guide-configuration_tools-configuring_system_memory_capacity#sect-Red_Hat_Enterprise_Linux-Performance_Tuning_Guide-Configuring_system_memory_capacity-Virtual_Memory_parameters)
+
+
 Operator tools
 ==========================
 
