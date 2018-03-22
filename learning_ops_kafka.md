@@ -5,9 +5,6 @@ title: "Learnings: Ops: Kafka"
 
 # <<Learning_Ops_Kafka>>
 
-## Setup <<Learning_Ops_Kafka_Setup>>
-
-May need to up file handle limits. See Learning_Ops_Unix_File_Handle_Limits
 
 ## <<ListingAllBrokersInCluster>>
 
@@ -37,6 +34,17 @@ Set `KAFKA_HEAP_OPTS` <-- can set -X flags here.
 ### See also:
 
   * Learning_Ops_Unix_File_Cache
+
+## File Descriptor Use <<Learning_Ops_Kafka_File_Usage>>
+
+PROBABLY need to up file handle limits. See Learning_Ops_Unix_File_Handle_Limits
+
+Kafka opens 3 file descriptors for each topic-partition-segment that exists on the broker
+
+### See also:
+
+  * [KAFKA-2580: Kafka broker keeps file handles open for all log files](https://issues.apache.org/jira/browse/KAFKA-2580) <-- see also comment from Jay Kreps here.
+
 
 # See also:
 
