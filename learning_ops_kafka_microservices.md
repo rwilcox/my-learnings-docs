@@ -44,3 +44,24 @@ Answer: bigger disks - even though you don't need the storage - means more IOPS.
 
 [May have issues because of RockDB??](https://issues.apache.org/jira/browse/KAFKA-4988)
 
+# <<Learning_Ops_Kafka_Consumer_Groups>>
+
+Consumer Groups written to internal topic.
+Each consumer in consumer group writes its current offset to this topic.
+
+To reset offset - ie to rewind the consumer to the beginning of the group - requires no active members in the consumer group.
+
+Q: How does Kafka know that there's an active consumer?
+A: The group coordinator gets heart beats every 2 seconds, if no heartbeats received then the consumer group doesn't work.
+
+## Viewing Consumer Group Info
+
+    $ kafka-consumer-groups --bootstrap-server $KB --list
+    
+    $ kafka-consumer-groups --bootstrap-server $KB --group demo-group --describe
+    
+## Adjusting Offsets
+
+    $ $ kafka-consumer-groups --bootstrap-server $KB --group demo-group --reset-offsets --topic demo:3 --shift-by 1 --execute
+    
+    $ kafka-consumer-groups --bootstrap-server $KB --group demo-group --reset-offsets --topic demo:6 --topic demo2:4 --shift-by -5 --execute
