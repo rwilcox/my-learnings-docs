@@ -7,6 +7,15 @@ title: "Learnings: Docker"
 
 ## Docker Storage <<Learning_Docker_Storage>>
 
+### Docker Storage / Overlay Mount Types <<Learning_Docker_Storage_Types>>
+
+| Name                   | Desc                          |
+|:---------------------- |:----------------------------- |
+| Volumes                | what you know and love        |
+| Bind mounts            |                               |
+| tmpfs                  | RAM Disks for Docker!!!!! (... or virtual RAM disks, depending on the wills of Learning_Ops_Unix_Virtual_Memory_kswapd ). Only works on Linux / Unix containers, not Windows. Can not be shared across containers. |
+
+
 ### Writing Data in your container for state <<Learning_Docker_Storage_In_Container_State>>
 
 Normally, the top-most layer of a Docker image is read+write. You can treat this as a normal file system.
