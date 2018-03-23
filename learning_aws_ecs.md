@@ -74,7 +74,7 @@ ECS somewhat like Google Container Service, in GCloud
 	  to play back:
 	  ` $ aws ecs create-service --cli-input-json file://my_cluster_config.json`
 
-#### Task placement
+#### Task placement <<Learning_AWS_ECS_Task_Placement>>
 
 Can be bin packed based on memory, spread evenly, or random dist
 
@@ -155,7 +155,7 @@ Read blog article:
   * [Scale your cluster automatically](http://garbe.io/blog/2016/10/17/docker-on-ecs-scale-your-ecs-cluster-automatically/)
   * 
 
-#### Deploying a task that will over-subscribe your ECS cluster
+#### Deploying a task that will over-subscribe your ECS cluster <<Learning_AWS_ECS_Oversubscribing_Your_Cluster>>
 
 (On EC2 cluster type) Deploying a task that requires 2GB memory but your cluster only has 1GB free?
 
@@ -184,6 +184,10 @@ Perhaps even abstracting this call away in some kind of API / `Component` that k
 
 Additional provided metadata comes in via the `userdata` block of creating an EC2 instance. [Bootstrapping Container Instances with EC2 User Data](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/bootstrap_container_instance.html)
 
+#### See also:
+
+  * [Example code showing how to use the AWS Java API directly to get this instance metadata like ip address, hostname etc](https://github.com/spring-cloud/spring-cloud-netflix/issues/432#issuecomment-135327850)
+  
 ## Secrets configuration management
 
   * [aws-secrets](https://www.promptworks.com/blog/cli-for-managing-secrets-for-amazon-ec2-container-service-based-applications-with-amazon-kms-and-docker)
