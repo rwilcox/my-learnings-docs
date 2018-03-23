@@ -205,6 +205,8 @@ And OS File Page Cache   <<Learning_Ops_Unix_File_Cache>>
   * [2017: Future of Page Cache](https://lwn.net/Articles/712467/)
   * _Page/slab cache control in a virtualized environment_ (Singh) - IBM paper
   * [RedHat Solutions: how to control size of page cache in REHL (paid content)](https://access.redhat.com/solutions/32769)
+  * [The strange details of st::string at Facebook](https://www.youtube.com/watch?v=kPR8h4-qZdk) <-- yes, the page cache is involved!
+  
 
 Slab Allocator
 =========================
