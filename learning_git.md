@@ -258,3 +258,9 @@ as soon as you specify a directory of file for the commit, it ignores the partia
 == Integrating Git information into builds ==
 [Git and XCode build script (also has alternative versions and a Hg shell script too!)](http://www.cimgf.com/2008/04/13/git-and-xcode-a-git-build-number-script/)
 
+
+## Understanding Internals
+
+See also:
+
+  * [Safia Abdalla: learning more about commits are represented](https://blog.safia.rocks/post/172170673860/learning-more-about-how-commits-are-represented-in)
