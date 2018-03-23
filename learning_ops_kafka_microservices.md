@@ -28,6 +28,9 @@ By default uses Java tmpdir. so can set that with a -D flag
 
 > -Djava.io.tmpdir=/someplace/this/can/write/to/and/is/unique/for/app/tmp
 
+## Persistent vs ephemeral storage  <<Learning_Ops_Kafka_Microservices_Persistent_Storage>>
+
+
 ### really overriding default
 
 Use the properties API to set `state.dir` to the directory you want.
