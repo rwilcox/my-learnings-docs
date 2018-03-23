@@ -28,12 +28,20 @@ By default uses Java tmpdir. so can set that with a -D flag
 
 > -Djava.io.tmpdir=/someplace/this/can/write/to/and/is/unique/for/app/tmp
 
-## Persistent vs ephemeral storage  <<Learning_Ops_Kafka_Microservices_Persistent_Storage>>
-
-
 ### really overriding default
 
 Use the properties API to set `state.dir` to the directory you want.
+
+## Persistent vs ephemeral storage  <<Learning_Ops_Kafka_Microservices_Persistent_Storage>>
+
+> Kafka Streams allows for stateful stream processing, i.e. operators that have an internal state. This internal state is managed in so-called state stores. A state store can be ephemeral (lost on failure) or fault-tolerant (restored after the failure). The default implementation used by Kafka Streams DSL is a fault-tolerant state store using 1. an internally created and compacted changelog topic (for fault-tolerance) and 2. one (or multiple) RocksDB instances (for cached key-value lookups).
+>...
+> Kafka Streams commit the current processing progress in regular intervals (parameter commit.interval.ms). 
+> ...
+
+- [Kafka Streams Internal Data Management wiki page](https://cwiki.apache.org/confluence/display/KAFKA/Kafka+Streams+Internal+Data+Management)
+
+TL;DR: KStream data is stored on disk, yes, but also a Kafka topic. Thus, in default mode, the local data store can go away (instance reboot) and _nothing bad happens_. As the Kafka topic is used to boot back up the local data store.
 
 ## KStreams Considerations on AWS <<Learning_Ops_Kafka_Microservices_KStreams_AWS>>
 
