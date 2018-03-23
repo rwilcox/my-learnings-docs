@@ -78,6 +78,8 @@ ECS somewhat like Google Container Service, in GCloud
 
 Can be bin packed based on memory, spread evenly, or random dist
 
+ECS is also smart enough to not place multiple instances on the same host if your ECS Tasks have [static host port maps defined](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/create-service.html#basic-service-params).
+
 ### ECS and Deployment/Operations  <<AWS_ECS_Deployment>>
   
 #### ECS Deployment and command line
