@@ -8,10 +8,10 @@ title: "Learnings: Operations"
   1. have a clear strategy
   2. develop an execution plan
   3. set clear expectations 
- 4. Establish appropriate metrics
- 5. review performance regularly
- 6. Constantly review strategy
- 7. establish accountability 
+  4. Establish appropriate metrics
+  5. review performance regularly
+  6. Constantly review strategy
+  7. establish accountability 
  
 # and alerting
 
