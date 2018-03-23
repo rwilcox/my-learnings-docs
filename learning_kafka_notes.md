@@ -11,11 +11,11 @@ title: "Learnings: Kafka"
   * running log: old data deleted after 1GB or a week: so NOT THR BLOCKCHAIN
   * can be compressed on disk with LZ4, Snappy
 
-  Why younneed state (in tables or somewhere else): because you may want to keep computations you've been doing on the data you've been seeing
+Why you need state (in tables or somewhere else): because you may want to keep computations you've been doing on the data you've been seeing
 
-  You can make Kafka keep the most recent value for a published key in it's log (compact mode). this may or may not be awesome.
+You can make Kafka keep the most recent value for a published key in it's log (compact mode). this may or may not be awesome.
 
-  This is NOT awesome if you plan on using kstreams then reply the data, as the stream items are deltas, where as in ktables the field updates to a key are treated like new field values.
+This is NOT awesome if you plan on using kstreams then reply the data, as the stream items are deltas, where as in ktables the field updates to a key are treated like new field values.
 
 Not that on disk the messages are stored in the same format as from the producers sent - allowing Kafka to stream those bytes directly back to consumers.
 
@@ -44,9 +44,13 @@ Consumer notes:
   * Kafka commits offsets, not individual messages. thus, if you failed processing record 30 but record 31 succeeded (multi-threaded) you have a problet (you can't set the offset because the previous one didnMt work).
    * DON'T BLOCK THE POLL EVENT LOOP!!
    
-## Replication notes (producer side)
+#### See also:
 
-If set message to replicate to all replicas, this really means "in sync" brokers for that partion. This may be one, if all replicas are unavailable. Set  min.insync.replicas to a value > 1 to avoid this happening (consumers a trying to write to this topic will then throw an exception.
+  * Learning_Ops_Kafka_Poll_Interval
+
+## Replication notes (producer side) <<Learning_Kafka_What_Replication_Means>>
+
+If set message to replicate to all replicas, this really means "in sync" brokers for that partion. This may be one, if all replicas are unavailable. Set `min.insync.replicas` to a value > 1 to avoid this happening (consumers a trying to write to this topic will then throw an exception.
 
 Consumers can continue reading data in this case, but no writes
 
