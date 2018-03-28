@@ -335,7 +335,7 @@ but probably should be minimal with these
 
 Takes class name and lower cases first letter: TeamPlayer becomes teamPlayer
 
-##scanning mutliple bases packages with @ComponentScan
+## scanning mutliple bases packages with @ComponentScan
     @ComponentScan(base packages={"com.what", "com.where"})
 
 
