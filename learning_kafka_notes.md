@@ -89,7 +89,9 @@ Brokers store partitions on disk for each topic stored, and may contain replicas
 
 ### and ops
 
-Brokers with many topics and partitions may run across number of files open exceptions (see Stevens, 2.5.5)
+Brokers with many topics and partitions may run across number of files open exceptions
+
+See Learning_Ops_Kafka_File_Usage for more information on this.
 
 ## Producer client (Java)
 
