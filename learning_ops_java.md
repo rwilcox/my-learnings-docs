@@ -188,4 +188,15 @@ See also:
 
   * Optimizing Java !!!
   
+# <<Learning_Ops_Performance_Metrics>>
+
+"high dynamic range": or "long tail distributions": where yes the average is Nms, but 5% of consumers had a response time at ( (8*N)ms ) or some other waaaaayyyy outside the range metric.
+
+Maven Coordinates:
+
+  groupId  : org.hdrhistogram
+  artifact : HdrHistogram
   
+TL;DR: separate out distribution of data into buckets, display those buckets + their values.
+
+
