@@ -131,11 +131,6 @@ Warnings can be set to warn on since, etc etc
 
 [Debugging Java in a Container via IntelliJ](https://www.jetbrains.com/help/idea/2017.2/debugging-a-java-app-in-a-container.html)
 
-# And Maven <<Java_And_Maven>>
-
-## And Dependancies <<Java_And_Maven_And_Dependancies>>
-
-[jdeps: lets you see what classes your dependancies rely on](http://marxsoftware.blogspot.com/2014/03/jdeps.html)
 
 # See also:
 
