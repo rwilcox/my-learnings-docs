@@ -20,8 +20,8 @@ Why? Might be in a scenario where user's cart is stored about / known about / va
 
 For mostly server side Paypal creation / execution you need:
 
-  1. A script/route to create the payment object and return (some info about it) to front end
-  2. A script/route to execute the payment object and return info about it to front end
+  1. A script/route to create the payment object and return (some info about it) to front end. (Assumingely returning `Content-Type: application/json` ??)
+  2. A script/route to execute the payment object and return info about it to front end. (Assumingely returning `Content-Type: application/json` ??)
   3. UI for success, error conditions
   
 
