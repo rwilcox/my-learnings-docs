@@ -68,18 +68,53 @@ pre-allocated eden space from heap divvyed up for each app thread: called thread
   
 ### <<Learning_Java_Hotspot_Garbage_Collector_Type>>
 
-#### Low Latecy Mark and Sweep
+#### Concurrent Mark and Sweep (CMS):
 
 Phases:
 
-  1. initial mark
+  1. initial mark (stop the world)
   2. concurrent marking phase
-  3. remark
+  3. Concurrent Preclean
+  3. remark (Stop the World)
   4. concurrent sweep 
+  6. Concurrent Reset
 
 *Only collector that is not compacting*. Memory fragmentation problems, requiring time by CMS allocator to plan for / break or join blocks to deal with (See: Sun: Memory Management in Hotspot Virtual Machine)
 (means needs free lists)
 
+**ONLY** available for old generations. ( Usually paired with `ParNew` or `ParallelGC` ).
+
+Source: Memory Management in Hotspot
+
+See also:
+
+  * Tri-Color Invariant garbage collection; “On-the-Fly Garbage Collection: An exercise in Cooperation” (1978) by Dijkstra and (Leslie) Lamport. ALSO NOTE: initial publication contained some bugs that Dijkstra and Lamport semi independently solved slightly later. (See [Lamport's homepage](http://lamport.azurewebsites.net/pubs/pubs.html) for more information here)
+  * `ParallelOld` <-- what CMS falls back on if Concurrent Mode Failure happens aka the running app collects too much garbage while in the middle of concurrently collecting garbage.
+
+#### G1: Garbage First  <<Learning_Java_Hotspot_Java_9_Default_GC>>
+
+_not recommended for JVMs < 1.8u40_.
+
+**DEFAULT GARBAGE COLLECTOR IN JAVA 9**
+
+Works on regions: 1MB-ish a piece, and 2048-4095 regions in memory at a time.
+
+Large objects special cased into humongous region
+
+Still has:
+
+  * eden vs tenured regions
+  * TLABs
+
+Steps:
+
+  1. Initial Mark (Stop the World)
+  2. Concurrent Root Scane
+  3. Concurrent Mark
+  4. Remark (Stop the World)
+  5. Cleanup (Stop the World)
+
+G1 based around pause goals.
 
 #### <<Learning_Java_Hotspot_Memory_When_GC_Triggered>>
 
