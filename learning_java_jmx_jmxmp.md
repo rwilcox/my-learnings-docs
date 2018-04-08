@@ -26,3 +26,12 @@ Use [Jolokia](https://jolokia.org). Allows read, write, exec of attributes, bean
 See also:
 
   * https://www.ctheu.com/2017/02/14/all-the-things-we-can-do-with-jmx/#jolokia-jmx-to-http
+
+# JMX And GC Debugging <<Learning_Ops_Java_JMX_GC_Debugging>>
+
+## Why not
+
+  * JMX usually uses sampling runtime, thus can not know when collector ran thus unknown state of before / after memory
+  * 
+  
+- Optimizing Java 8.1
