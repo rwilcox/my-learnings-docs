@@ -97,3 +97,26 @@ Flow takes this a step further: if you pass a value into a function in your if s
     concat("hello", "world", " ") // compiles!
     concat("hello", "world", "!") // errors!
 
+## <<Learning_Javascript_Flow_And_Promise>>
+
+Promises are annoying, and I had to jump into the Flow source code to understand them.
+
+    let output: Promise<string> = new Promise( (resolve, reject) => resolve("hi") )
+    
+That will compile if you are not using [the flow plugin for ESLINT](https://github.com/gajus/eslint-plugin-flowtype). It will throw a linter error if you are, because `resolve` and `reject` don't have type annotations.
+
+### Using typed promise callbacks to ensure correct ordering
+
+If you are like me and:
+
+  1. you want to use the flow plugin for ESLint
+  2. ... or... you want to avoid confusing the ordering of these two function callbacks
+  
+Then there is a solution here. It _is_ a lot of typing, so I'm not 100% sure about it, but it does compile (and, more importantly, fail if you have the orders mixed up!)
+
+    type PromiseResolveType<R> = (Promise<R> | R) => void;
+    type PromiseRejectType     = (error: Error) => void;
+    
+    let output: Promise<string> = new Promise( (resolve: PromiseResolveType<string>, reject: PromiseRejectType) => { ... } )
+
+This took a bit of looking, and in fact browsing the Flow open source code to figure out what the Promise type declaration 
