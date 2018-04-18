@@ -5,6 +5,8 @@ title: "Learnings: Javascript: Publishing Own Modules"
 
 # <<NPM_Publish_Steps>>
 
+prepublish -> prepare -> prepublishOnly -> prepack -> postpack -> publish -> USER INSTALLS -> prepublish -> prepare -> preinstall -> install -> postinstall
+
 [Source](https://docs.npmjs.com/misc/scripts).
 
 ## Doing stuff (only) before publishing it
