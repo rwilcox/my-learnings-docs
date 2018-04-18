@@ -28,7 +28,7 @@ You should use `prepublishOnly` or `preinstall` instead. If you actually want to
 
 `npm pack` <-- does everything but the sending to the repo.
 
-# <<NPMPackageFieldsToSet>>
+# `<<NPMPackageFieldsToSet>>`
  
 ## Making sure you don't publish a closed source package to a public registry
 
