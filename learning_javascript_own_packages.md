@@ -5,7 +5,7 @@ title: "Learnings: Javascript: Publishing Own Modules"
 
 # <<NPM_Publish_Steps>>
 
-prepublish -> prepare -> prepublishOnly -> prepack -> postpack -> publish -> USER INSTALLS -> prepublish -> prepare -> preinstall -> install -> postinstall
+prepublish -> prepare -> prepublishOnly -> prepack -> postpack -> publish -> postPublish -> USER INSTALLS -> prepublish -> prepare -> preinstall -> install -> postinstall
 
 [Source](https://docs.npmjs.com/misc/scripts).
 
@@ -23,3 +23,21 @@ See also:
 This is the behavior of the `prepublish` since [npm 1.1.71](https://github.com/npm/npm/commit/351304d28c2afcfae93de05b4c6bcf035054de3e). So prepublish isn't... just for prepublishing.
 
 You should use `prepublishOnly` or `preinstall` instead. If you actually want to do the same thing two places use the new `prepare` script that does this.
+
+## Testing your script flow out
+
+`npm pack` <-- does everything but the sending to the repo.
+
+# <<NPMPackageFieldsToSet>>
+ 
+## Making sure you don't publish a closed source package to a public registry
+
+Two options: set `"private": true` OR specify the repo:
+
+    { 
+      publishConfig: {
+          registry: "https://MY.PRIVATE.REGISTRY.EXAMPLE.COM"
+      }
+    }
+    
+( can also do `npm install --registry=....` or `npm config set registry https://MY.PRIVATE.REGISTRY.EXAMPLE.COM` )
