@@ -56,6 +56,7 @@ See also:
 
   * https://lexi-lambda.github.io/blog/2016/08/24/understanding-the-npm-dependency-model/
   * https://bytearcher.com/articles/loading_modules_with_require/
+  * https://blog.safia.rocks/post/169267758290/node-module-deep-dive-module
 
 # <<NPM_Modules_And_Transative_Dependancies>>
 
