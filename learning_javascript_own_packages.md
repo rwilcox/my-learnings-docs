@@ -5,6 +5,8 @@ title: "Learnings: Javascript: Publishing Own Modules"
 
 # <<NPM_Publish_Steps>>
 
+Aka what stages are taken by npm when you ask it to publish or install something.
+
 prepublish -> prepare -> prepublishOnly -> prepack -> pack -> postpack -> publish -> postPublish -> USER INSTALLS -> prepublish -> prepare -> preinstall -> install -> postinstall
 
 [Source](https://docs.npmjs.com/misc/scripts).
