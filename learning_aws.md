@@ -285,3 +285,11 @@ Should be able to scale *LBs up to Web Scale traffic: aka all of ESPN.com is ser
 ### ELB
 
 Allows SSL termination on chosen instance, not just at load balancer level
+
+## <<Learning_AWS_Cloud9>>
+
+### <<Cloud9InstallingJava8>>
+
+  1. `$ sudo yum install java-1.8.0-openjdk-devel`
+  2. `sudo alternatives --config java`
+  3. `sudo yum remove java-1.7.0-openjdk-devel`
