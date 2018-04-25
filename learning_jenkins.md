@@ -22,4 +22,19 @@ See also:
 
   * https://stackoverflow.com/a/28481692/224334  <-- where this file is on the other distros
 
-`JENKINS_LISTEN_ADDRESS`
+`JENKINS_LISTEN_ADDRESS` <-- defaults to 0.0.0.0
+
+# Jenkins Concepts
+
+## Master Node
+
+has access to all data, config, options etc.
+Not recommended you run jobs here
+
+## (Build) Agents (Nodes)
+
+Only a lightweight Jenkins agent installed here
+
+## Executor
+
+How many concurrent jobs can be run on that (agent)
