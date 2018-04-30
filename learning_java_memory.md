@@ -68,7 +68,7 @@ pre-allocated eden space from heap divvyed up for each app thread: called thread
   
 ### <<Learning_Java_Hotspot_Garbage_Collector_Type>>
 
-#### Concurrent Mark and Sweep (CMS):
+#### Concurrent Mark and Sweep (CMS): <<Learning_Java_Garbage_Collector_Concurrent_Mark_And_Sweep>>
 
 Phases:
 
@@ -80,7 +80,9 @@ Phases:
   6. Concurrent Reset
 
 *Only collector that is not compacting*. Memory fragmentation problems, requiring time by CMS allocator to plan for / break or join blocks to deal with (See: Sun: Memory Management in Hotspot Virtual Machine)
-(means needs free lists)
+(means needs free lists).
+
+See: Learning_Java_Memory_Heap_Fragmentation
 
 **ONLY** available for old generations. ( Usually paired with `ParNew` or `ParallelGC` ).
 
@@ -120,3 +122,51 @@ G1 based around pause goals.
 
   * If TLAB is full but thread needs to have yet more memory
   *
+  
+# <<Learning_Java_GC>>
+
+Can set flags to enable GC logs (at ~0 cost: asynchronous log writer).
+
+Bad:
+  * will send to log _file_, not just stdlog (this may be a good thing)
+  * log format NOT standarized: your parser may super break if you add another option _>> use Censum or GCViewer
+  
+  Good:
+    * more metrics than (say) JMX
+  
+## Performance stats
+### tentured item promotion
+
+Too high? Unclaimed memory for longer!
+Too low? Could have more of that in Eden..
+
+### Pause time <<Learning_Java_Memory_Performace_Debuggin_Pause_Time>>
+ > One useful heuristic for pause time tuning is to divide applications into three broad bands. These bands are based on the application’s need for responsiveness, expressed as the pause time that the application can tolerate. They are:
+> 
+> >1s: Can tolerate over 1s of pause
+> 
+> 1s - 100ms: Can tolerate more that 200ms but less than 1s of pause
+> 
+> < 100ms: Cannot tolerate 100ms of pause.
+ - Optimizing Java
+ 
+ Can also use https://github.com/giltene/jHiccup to see pause times due to memory or just when you have a ns-scale application requirements and need to see profile.
+ 
+## heap fragmentation <<Learning_Java_Memory_Heap_Fragmentation>>
+
+### and concurrent mark and sweep collector
+
+GC logging includes additional flag for Free List Statistics: -XX:PrintFLSStatistics=1
+
+Java jargon: concurrent Mode Failures
+
+
+#### see also
+
+  * Learning_Java_Garbage_Collector_Concurrent_Mark_And_Sweep
+
+
+## See also
+
+  * Learning_Ops_Java_JMX_GC_Debugging
+  
