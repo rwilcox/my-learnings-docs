@@ -97,6 +97,15 @@ See Learning_Ops_Kafka_File_Usage for more information on this.
 
 Built in producer does things like retry when no leader for topic, etc. Need to handle yourself auth errors, serialization errors (and maybe message size limit???)
 
+
+# Kafka In Practice
+
+## Producers
+
+
+
+## Consumers
+
 # Kafka and CAP theorem
 
 ## Kafka processing and local storage
@@ -148,7 +157,12 @@ Set via `props.put( "schema.registry.url", "HOSTNAME1,HOSTNAME2" )`
 
 # KStreams
 
+## And Error Handling <<Learning_Kafka_Streams_Error_Handling>>
+
+- [REVIEW]: learn more about `org.apache.kafka.streams.errors` setting, can be set to `LogAndFailExceptionHandler` or `LogAndContinueExceptionHandler`. Maybe others too??
+
 See also:
 
   * [Kstreams data storage internals](https://cwiki.apache.org/confluence/display/KAFKA/Kafka+Streams+Internal+Data+Management)
+  * [Kstreams error handling consumer property](https://stackoverflow.com/a/50040737/224334) (actual answer unrelated to the posted question)
   
