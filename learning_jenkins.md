@@ -154,7 +154,7 @@ Can specify items shared by all jobs in the folder:
 
 ### Multibranch pipeline project
 
-creates new pipeline branches for new branches it sees in a SCM repo???
+creates new pipeline branches for new branches it sees in a (single) SCM repo
 
 Can set specific properties for certain branch names
 
@@ -226,6 +226,10 @@ If need to break out to actual imperative scripts, two ways:
       }
     }
 
+### Declarative mode tools
+
+Has built in Snippet creator, MPW Commando style. In normal mode left sidebar should be a Pipeline Syntax link - this will let you select the pipeline step you want and will output copy-pasteable text with your parameters.
+
 <<Learning_Jenkins_And_Libraries_Of_Code>>
 
 Can also break these out into libraries
@@ -246,7 +250,7 @@ Can also break these out into libraries
 
 ## <<Learning_Jenkins_Useful_DSL_API>>
 
-stash / unstash <-- save some files and retrive them on the next stage which maybe you've set up to run on some other machine
+* stash / unstash <-- save some files and retrive them on the next stage which maybe you've set up to run on some other machine
 
 ## <<Learning_Jenkins_Declarative_DSL_Getting_Variables_Out>>
 
@@ -321,4 +325,32 @@ Jenkinsfile
         }
       }
     }
+
+## <<Learning_Jenkins_Running_Groovy_Code_From_SCM>>
+
+Workflow Remote Loader plugin allows you to pull random code from SCM - then run it just like the `load` function
+
+## <<Learning_Jenkins_Shared_Libraries>>
+
+Source structure:
+
+    resources/
+    src/
+        com/
+            foo/
+                myUtils.groovy
+            myThing.groovy
+    vars/
+        globalVarsAndFunctionsThisLibraryIntroduces.groovy
+        globalVarsAndFunctionsThisLibraryIntroduces.txt <-- adds snippet generator docs
+
+src: added to classpath
+resources: use with `libraryResource` step
+vars: global vars or scripts accessible from pipeline scripts
+
+**NOTE WHEN USING DECLARATIVE PIPELINE**: src/ directory does not work (May, 2017). So use `vars` area.
+
+Pulled down from SCM repo. Legacy mode: git server served by Jenkins the server.
+
+Can configure these at the global shared librares, or at the folder level.
 
