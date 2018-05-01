@@ -106,6 +106,30 @@ On master: Manage Jenkins -> Manage Nodes -> New Node form.
 
 How many concurrent jobs can be run on that (agent)
 
+## <<Learning_Jenkins_Tools>>
+
+[Jenkins Build tools](https://www.safaribooksonline.com/library/view/jenkins-the-definitive/9781449311155/ch04s06.html) are nifty ways admins can install tools your projects may require in order to be built.
+
+Some plugins add additional tool types.
+Tools can be dynamically 
+
+Manage Jenkins -> Global Tool Configuration.
+
+Tools can be installed on demand, or can point to existing install of software.
+
+Jenkinsfiles can then declare they use those tools using `$TOOLNAME 'VERSION_IN_STRING`. Example: `tool 'node8.11'` (where I had previously installed a Node tool using the Node plugin and named it "node8.11").
+
+ADDITIONAL SYNTAX:
+
+`tool name: 'node8.11', type: 'SOMETHING_GOES_HERE'`
+
+Not completely sure what type is here.
+Q: maybe the "type" of the tool in `$JENKINS_HOME/tools` ?? ( ie is this the class in the plugin that `extend hudson.tools.ToolInstaller` ??)
+
+See also:
+
+  * Learning_Jenkins_Declarative_DSL_Using_Tools
+
 ## Job Types <<Learning_Jenkins_Job_Types>>
 
 ### Freestyle
@@ -189,6 +213,7 @@ Example:
       }
     }
 
+
 ## Declarative Model
 (Blue Ocean UI's editor and display meant to work with this better)
 
@@ -211,26 +236,18 @@ Example:
       }
     }
 
-If need to break out to actual imperative scripts, two ways:
+### See also:
 
-    pipeline {
-      agent {}
-      stages {
-        stage("Build") {
-          steps {
-            script {
-              def currentDate = new Date() // only availiable in this script block!
-            }
-          }
-        }
-      }
-    }
+  * Learning_Jenkins_Declarative_DSL_Embedding_Groovy
+  * Learning_Jenkins_Declarative_DSL_Using_Tools
+  * Learning_Jenkins_Declarative_DSL_Getting_Variables_Out
+  * Learning_Jenkins_Declarative_DSL_Useful_API
 
-### Declarative mode tools
+### Declarative mode code editing tools
 
 Has built in Snippet creator, MPW Commando style. In normal mode left sidebar should be a Pipeline Syntax link - this will let you select the pipeline step you want and will output copy-pasteable text with your parameters.
 
-<<Learning_Jenkins_And_Libraries_Of_Code>>
+### <<Learning_Jenkins_And_Libraries_Of_Code>>
 
 Can also break these out into libraries
 
@@ -251,6 +268,78 @@ Can also break these out into libraries
 ## <<Learning_Jenkins_Useful_DSL_API>>
 
 * stash / unstash <-- save some files and retrive them on the next stage which maybe you've set up to run on some other machine
+
+### <<Learning_Jenkins_Declarative_DSL_Embedding_Groovy>>
+
+#### In `script` stage
+
+    pipeline {
+      agent any
+      stages {
+        stage("Build") {
+          steps {
+            script {
+              def currentDate = new Date() // only available in this script block!
+            }
+          }
+        }
+      }
+    }
+
+#### Free floating functions
+
+    pipeline {
+      agent any
+      stages("Build") {
+        steps {
+          goJanetGo
+        }
+      }
+    }
+
+    def goJanetGo() {
+      echo "Janet, bring me a cactus"
+    }
+
+( [Supported in post mid 2017 versions of Jenkins???](https://stackoverflow.com/a/47631522/224334), may be some restrictions ).
+
+## <<Learning_Jenkins_Declarative_DSL_Using_Tools>>
+
+Section of the declarative Jenkinsfile: [tools](https://jenkins.io/doc/book/pipeline/syntax/#tools).
+
+    pipeline {
+      agent any
+      tools {
+        maven 'maven-version-here'
+      }
+    }
+
+This will be AUTO ADDED to any `sh` command's $PATH variable, so you don't _have_ to prefix PATH with it.
+
+### <<Learning_Jenkins_Declarative_DSL_Using_Tools_Setting_Environment_Variables_With_Tool_Locations>>
+
+... but maybe you're paranoid
+
+    pipeline {
+      agent any
+      tools {
+        maven 'maven-version-here'
+      }
+
+      environment {
+        MY_MAVEN_HOME = tool 'maven-version-here'
+      }
+
+      steps {
+        sh "$MY_MAVEN_HOME"
+      }
+    }
+
+See also:
+
+  * Learning_Jenkins_Tools
+  * https://jenkins.io/blog/2017/02/07/declarative-maven-project/   <-- scroll down to the "Adding Tools to Pipeline" section
+
 
 ## <<Learning_Jenkins_Declarative_DSL_Getting_Variables_Out>>
 
@@ -294,7 +383,7 @@ Jenkins auto adds `set -e` to shell scripts.
 
 ### `isUnix()`
 
-will return true if is unix, can be used in if statement or expression(??)
+will return true if is unix, can be used in if statement or expression??)
 
 ### `fileExists`
 
@@ -353,4 +442,32 @@ vars: global vars or scripts accessible from pipeline scripts
 Pulled down from SCM repo. Legacy mode: git server served by Jenkins the server.
 
 Can configure these at the global shared librares, or at the folder level.
+
+# Jenkins Plugins I've used
+
+## <<Learning_Jenkins_Plugins_NodeJS>>
+
+[Node.js Jenkins Plugin](https://plugins.jenkins.io/nodejs)
+
+### <<Learning_Jenkins_Plugins_NodeJs_Custom_NPMRC>>
+
+Manage Jenkins (popup version) -> Managed Files -> Add New Config
+
+With Node.js plugin, new file type is: npmrc
+includes a template of a .npmrc file.
+
+NOTE the **ID** (not name) of the configuration file (maybe change this to something human).
+
+#### Using this in a pipeline
+
+    pipeline {
+      agent any
+      steps {
+        nodejs(nodeJSInstallationName: 'MY_NODEJS_TOOL_NAME_HERE', configId: 'ID_OF_THE_CONFIG_FILE') {
+          sh "npm install"
+        }
+      }
+    }
+
+Node.js plugin will auto copy the managed file into the right place for npm and now settings from there (like `loggingLevel` or `registry` will be set appropriately).
 
