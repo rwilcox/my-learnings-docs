@@ -24,6 +24,69 @@ See also:
 
 `JENKINS_LISTEN_ADDRESS` <-- defaults to 0.0.0.0
 
+# Jenkins server Operations <<Learning_Jenkins_Ops>>
+
+## Configuration <<Learning_Jenkins_Ops_Configuration>>
+
+[Jenkins Docker provides `install-plugins.sh`](https://github.com/jenkinsci/docker/blob/master/install-plugins.sh) and give a text file so have a Jenkins configured via code (not manual clicking).
+
+Other configuration done in Groovy. (including plugin configuration!)
+
+<<Learning_Jenkins_Ops_Scripting_Configuration>>
+
+Groovy init script happens every server boot.
+
+Can be separated out into separate scripts, can be tested using built in Groovy console.
+
+Manage Jenkins -> Scripting Console to try these (changes will be in memory only).
+
+### Job configuration <<Learning_Jenkins_Ops_Job_Configuration_File_Storage_Location>>
+Source for much of this: _Extending Jenkins_
+
+lives in `$JENKINS_HOME` each job with it's own folder and `config.xml` with the configurations for that job. (some other misc files too)
+
+### ... and secrets
+
+can use Consul/Vault for service discovery, secret storage
+
+THEN use that in your Groovy init scripts (see Learning_Jenkins_Ops_Scripting_Configuration ) to ie do a curl and ask Vault for things and set it to env variable or write to a file, whatever.
+
+## And Groovy Scripting <<Learning_Jenkins_Scripting>>
+
+Can do a bunch of things via groovy scripting interface (and either putting them as init scripts or using the scripting console).
+
+Like:
+
+  * Creating a bunch of jobs/projects
+  * maintenance tasks
+
+
+
+#### See also
+
+  * http://nicolas.corrarello.com/general/vault/security/ci/2017/04/23/Reading-Vault-Secrets-in-your-Jenkins-pipeline.html
+  * https://wiki.jenkins.io/display/JENKINS/HashiCorp+Vault+Plugin
+
+# Jenkins Creating Plugins <<Learning_Jenkins_Plugin_Creation>>
+
+If have set up Maven settings.xml with Jenkins plugin repo, can do:
+
+    $ mvn -U org.jenkins-ci.tools:maven-hpi-plugins:create
+
+For archetype for Maven plugin.
+
+`mvn package` creates a .hpi file: what you provide to Jenkins.
+
+Bunch of helper stuff `mvn hpi:run` to ie boot a local dev copy of Jenkins so you can try out your plugin.
+
+#### but what about extending existing plugins?
+
+*Extension Points*: documented / auto created by Extension Indexer.
+
+#### Getting started
+
+Note: `@DataBoundConstructor`: annotating class with this means it'll be called when user selects this task/build type.
+
 # Jenkins Concepts
 
 ## Master Node
@@ -59,6 +122,8 @@ JENKINS can send artifact to Nexus
 
 can put build steps in job, or in file Jenkinsfile.
 
+plugins called here need to support Pipelines
+
 <<Learning_Jenkins_Scm_details>>
 
 Configuration page:
@@ -67,6 +132,12 @@ Configuration page:
 
 Q: These details here is what Jenkins uses to do the auto check out of your project?
 A: YES! These are using in `checkout scm` step.
+
+#### And Security <<Learning_Jenkins_Pipelines_Security>>
+
+#### Pipeline Libraries <<Learning_Jenkins_Pipelines_Libraries>>
+
+Less sandbox requirements
 
 ### Multi configuration
 
