@@ -30,6 +30,14 @@ s
 
 demarked so because `klassWord` does _not_ point to an Class instance, but a struct in C memory.
 
+#### <<Learning_Java_Memory_Hotspot_Object_Layout_With_JIT_Optimizations>>
+
+- [BOOKQUOTE]:
+
+> By proving that an allocated object does not escape the method (classed as a NoEscape) the VM can apply an optimization called scalar replacement. The fields in the object become scalar values, similar to if they had all been local variables instead of object fields. They can then be arranged into CPU registers by a HotSpot component called the register allocator.
+
+- Optimizing Java
+
 ### <<Learning_Java_Hotspot_Memory_Zones>>
 
 Hypothesis: most objects live and are discarded young.

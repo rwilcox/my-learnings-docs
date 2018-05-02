@@ -202,3 +202,17 @@ TL;DR: separate out distribution of data into buckets, display those buckets + t
 ## See also:
 
   * Learning_Java_Memory_Performace_Debuggin_Pause_Time
+  
+# <<Learning_Ops_Java_Operational_Information_Flags>>
+
+## <<Learning_Java_Operational_Information_Flags_JIT>>
+
+  * -XX:+PrintCompilation — prints information about what HotSpot is JIT-ing
+  * -XX:+LogCompilation with -XX:+UnlockDiagnosticVMOptions (will generate 100s of MB of XML, use JITWatch)
+  
+  
+### See Also
+
+  * https://jakubstransky.com/2018/02/03/jvm-code-friendly-to-jit-optimisation/ —- using JITWatch
+  
+  
