@@ -126,6 +126,17 @@ ADDITIONAL SYNTAX:
 Not completely sure what type is here.
 Q: maybe the "type" of the tool in `$JENKINS_HOME/tools` ?? ( ie is this the class in the plugin that `extend hudson.tools.ToolInstaller` ??)
 
+### <<Learning_Jenkins_Tools_And_Agents>>
+
+Each agent can specify their own locations for various Tools. Thus with a single name you can refer to ("wherever this tool may be on our agents")
+
+Q: What tools and tool locations are on all my Nodes?
+
+A: Maybe this Jenkins console shell script will help?
+https://wiki.jenkins.io/display/JENKINS/Display+Tools+Location+on+All+Nodes
+
+
+
 See also:
 
   * Learning_Jenkins_Declarative_DSL_Using_Tools
@@ -470,4 +481,10 @@ NOTE the **ID** (not name) of the configuration file (maybe change this to somet
     }
 
 Node.js plugin will auto copy the managed file into the right place for npm and now settings from there (like `loggingLevel` or `registry` will be set appropriately).
+
+# <<Learning_Jenkins_Building_For>>
+
+## <<Learning_Jenkins_Building_For_Java>>
+
+[Setting `JAVA_HOME`](https://support.cloudbees.com/hc/en-us/articles/204421664-Select-which-Java-JDK-to-use-in-Pipeline)
 
