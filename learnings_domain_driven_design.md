@@ -15,6 +15,9 @@ Embrace the fact that differences always exist and apply Bounded Contexts to sep
 
 Q: How large is a Bounded Context? Large enough to only capture the complete Ubiquitous Language of the isolated business domain, and no larger.
 
+Contains: Modules, Aggregates, Events, Services
+
+Only single team should work on a bounded context (ie don't try to split the bounded context up across two teams)
 
 # Domains
 
