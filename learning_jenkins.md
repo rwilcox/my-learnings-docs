@@ -488,3 +488,12 @@ Node.js plugin will auto copy the managed file into the right place for npm and 
 
 [Setting `JAVA_HOME`](https://support.cloudbees.com/hc/en-us/articles/204421664-Select-which-Java-JDK-to-use-in-Pipeline)
 
+# <<Learning_Jenkins_Enterprise>>
+
+## <<Learning_Jenkins_Enterprise_OnPrem_Bitbucket_Server>>
+
+After installing Bitbucket plugin(s), Go into Configure system, -> Bitbucket Endpoints. Add -> Bitbucket Server, put your server name here.
+
+THEN each Bitbucket related item will have a Server option, where you can pick real bitbucket or your Bitbucket.
+
+NOTE: When you do a multi-branch group the "OWNER" in the Configure screen is the **SHORT NAME** of the project (read: the `/projects/INIT/something` <-- the INITials here>)
