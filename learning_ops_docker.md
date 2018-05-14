@@ -90,3 +90,37 @@ Q: if both containe and host are doing caching for commonly used files, will thi
 
 
 # <<Learning_Ops_Docker_With_Scheduler>>
+
+
+# <<Learning_Ops_Docker_PID1>>
+
+<<Learning_Ops_Docker_PID1_Signals>>
+
+[AWESOME blog article that details signals and trapping them in Docker containers](https://medium.com/@gchudnov/trapping-signals-in-docker-containers-7a57fdda7d86)
+
+
+
+## <<Learning_Ops_Unix_PID1_Responsibilies>>
+
+This is a bad idea. PID1 has special responsibilities under Unix, including:
+
+  * handing SIGKILL, SIGTERM signals
+  * inheriting child processes whose parent has unexpectedly quit
+
+See also:
+
+  * RPW's copy of Stephen's (p 210)
+  * http://blog.phusion.nl/2015/01/20/docker-and-the-pid-1-zombie-reaping-problem/
+  * Yelp's [dumb init system](https://engineeringblog.yelp.com/2016/01/dumb-init-an-init-for-docker.html)
+
+## Dealing with PID1 under Docker
+
+### "Just wrap it in bash" <<Learning_Ops_Docker_PID1_Why_Not_Bash>>
+
+NOPE. Bash doesn't know any more about those PID1 responsibilities than your program does natively. Of course you could write bash code to trap the signals, but then you're in the same place....
+
+### Docker's Native init system
+
+#### See also:
+
+  * Learning_AWS_ECS_Docker_Init_Support
