@@ -497,3 +497,48 @@ After installing Bitbucket plugin(s), Go into Configure system, -> Bitbucket End
 THEN each Bitbucket related item will have a Server option, where you can pick real bitbucket or your Bitbucket.
 
 NOTE: When you do a multi-branch group the "OWNER" in the Configure screen is the **SHORT NAME** of the project (read: the `/projects/INIT/something` <-- the INITials here>)
+
+# <<Learning_Jenkins_Provisioning>>
+
+## <<Learning_Jenkins_Provisioning_Init_Script>>
+
+Init script run on launch: `$JENKINS_HOME/HOOK.groovy.d/init.groovy`
+
+### <<Learning_Jenkins_Provisioning_Init_Script_Installing_Plugins>>
+
+First, get a list of plugins you have currently installed (if you are duplicating an existing install...)
+
+    def plugins = []
+    Jenkins.instance.pluginManager.plugins.each { plugin ->
+        if ( (plugin.isBundled() == false) && (plugin.isEnabled() == true ) ) {
+          	plugins << "'${plugin.shortName}'"
+        }
+    }
+
+Then with this list, run:
+
+    def installPlugins = ["github-issues"]
+
+    installPlugins.each { plugin ->
+        def instance = Jenkins.getInstance()
+        def pm = instance.getPluginManager()
+        def uc = instance.getUpdateCenter()
+        if (pm.getPlugin(plugin)) {
+            println "Plugin ${plugin} already installed"
+        } else {
+            println "Looking UpdateCenter for " + plugin
+            def pluginObject = uc.getPlugin( plugin )
+            def installFuture = pluginObject.deploy()
+            while(!installFuture.isDone()) {
+                println "Waiting for plugin install: " + plugin
+                sleep(3000)
+            }
+        }
+    }
+
+### <<Learning_Jenkins_Provisioning_Init_Script_Configuring_Executioners>>
+
+
+### <<Learning_Jenkins_Provisioning_Init_Script_Tools>>
+
+
