@@ -119,8 +119,9 @@ See also:
 
 NOPE. Bash doesn't know any more about those PID1 responsibilities than your program does natively. Of course you could write bash code to trap the signals, but then you're in the same place....
 
-### Docker's Native init system
+### "Just use Docker's Native init system"
 
 #### See also:
 
+  * Learning_Ops_Docker_Init_And_Compose
   * Learning_AWS_ECS_Docker_Init_Support

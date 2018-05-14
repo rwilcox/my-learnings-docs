@@ -99,6 +99,15 @@ then in the services section define what network this is on
           - network_one
           - network_two
 
-  
+# <<Learning_Docker_Compose>>
 
+## Using Init flag: <<Learning_Ops_Docker_Init_And_Compose>>
+
+NOTE: This is **only** supported in Docker Compose format 2.2, [not Docker format 3.x](https://github.com/docker/compose/issues/5049)!!
+
+    version: '2.2'
+    services:
+      web:
+        image: 'co/thingy'
+        init: true
 
