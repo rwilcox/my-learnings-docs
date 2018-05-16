@@ -21,6 +21,8 @@ Defaults: 1GB old space??
 
 Node—max_old_space_size=2000 —- now 2 gb ish
 
+- [TODO]: read / understand https://github.com/thlorenz/v8-perf/blob/turbo-updates/gc.md
+
 ### see also
   * https://stackoverflow.com/q/42212416/224334 Docker and max_old_space_size
   
@@ -41,5 +43,4 @@ Will print out to console(??) every time GC happens
 Package, emits and event every time things get weird / leak
 
 Can also do heapdiffs
-
 
