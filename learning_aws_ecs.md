@@ -166,7 +166,7 @@ Thus when you go to deploy your service that requires 2GB of memory, your cluste
 
 ## And Docker Considerations
 
-### docker run --init support
+### docker run --init support <<Learning_AWS_ECS_Docker_Init_Support>>
 
 `docker run --init` sets ENTRYPOINT to be a built-in simple INIT scheduler.
 
