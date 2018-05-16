@@ -13,6 +13,9 @@ First, install Java 8... (see Cloud9InstallingJava8)
   3. In /etc/sysconfig/jenkins set `JENKINS_LISTEN_ADDRESS` to 127.0.0.1 (see: https://community.c9.io/t/cant-preview-in-aws-c9/23340/2)
   4. ???????
 
+## On Ubuntu box
+
+    /var/lib/jenkins
 
 # <<Learning_Jenkins_Config_File_Location>>
 
@@ -502,7 +505,16 @@ NOTE: When you do a multi-branch group the "OWNER" in the Configure screen is th
 
 ## <<Learning_Jenkins_Provisioning_Init_Script>>
 
-Init script run on launch: `$JENKINS_HOME/HOOK.groovy.d/init.groovy`
+Init script run on launch:
+  * `$JENKINS_HOME/init.groovy`
+  * `$JENKINS_HOME/init.groovy.d/*.groovy` <-- scripts in here run in alphabetical order
+
+- Source:
+
+  * https://wiki.jenkins.io/display/JENKINS/Groovy+Hook+Script
+
+### using libraries in init script
+
 
 ### <<Learning_Jenkins_Provisioning_Init_Script_Installing_Plugins>>
 
@@ -541,4 +553,65 @@ Then with this list, run:
 
 ### <<Learning_Jenkins_Provisioning_Init_Script_Tools>>
 
+
+Unlike Plugins, broad based approach apparently won't work....
+
+#### Iterating through Tools <<Learning_Jenkins_Provisioning_Init_Script_Tools_Listing_Tools>>
+
+But can iterate through all tools on machine like so:
+
+    import hudson.tools.ToolDescriptor
+    import hudson.tools.ToolInstallation;
+
+    for (ToolDescriptor desc : ToolInstallation.all()) {
+      for (ToolInstallation inst : desc.getInstallations()) {
+        print("\tInstallation Class: ${inst.class.name}")
+        println('\tTool Name: ' + inst.getName());
+        //print("\tTool Location: " + inst.location);
+      }
+    }
+
+Because the installation of a tool is dependent / can be specialized by the Node it's installed on, you must iterate every agent to know where the tool is installed.
+
+#### Installing tool with a hard coded path (Maven example)
+
+    import jenkins.model.* 
+
+    a=Jenkins.instance.getExtensionList(hudson.tasks.Maven.DescriptorImpl.class)[0]; 
+    b=(a.installations as List); 
+    b.add(new hudson.tasks.Maven.MavenInstallation("MAVEN", "/usr/local/maven", [])); 
+    a.installations=b 
+    a.save()
+
+#### Installing tool with auto install (Ant example)
+
+    def instance = Jenkins.getInstance()
+
+    // Ant
+    println "--> Configuring Ant"
+    def desc_AntTool = instance.getDescriptor("hudson.tasks.Ant")
+
+    def antInstaller = new AntInstallation(ant_version)
+    def ant_installations = desc_AntTool.getInstallations()
+
+
+   def installSourceProperty = new InstallSourceProperty([antInstaller])
+   def ant_inst = new AntInstallation(
+      "ADOP Ant", // Name
+      "", // Home
+      [installSourceProperty]
+   )
+
+    ant_installations += ant_inst
+    desc_AntTool.setInstallations((AntInstallation[]) ant_installations)
+    desc_AntTool.save()
+
+    // Save the state
+    instance.save()
+
+
+See also:
+
+  * https://wiki.jenkins.io/display/JENKINS/Display+Tools+Location+on+All+Nodes
+  * https://github.com/Accenture/adop-jenkins/tree/master/resources/init.groovy.d  <-- they install a ton of tools!
 
