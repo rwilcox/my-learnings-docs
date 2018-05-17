@@ -582,7 +582,7 @@ Because the installation of a tool is dependent / can be specialized by the Node
 
 You use the values from this list and pass that into `getExtensionList` down below
 
-#### Installing tool with a hard coded path (Maven example)
+#### Installing tool with a hard coded path (Maven example) <<Learning_Jenkins_Provisioning_Init_Script_Installing_Tools_Example>>
 
     import jenkins.model.* 
 
@@ -635,4 +635,28 @@ See also:
 
   * https://wiki.jenkins.io/display/JENKINS/Display+Tools+Location+on+All+Nodes
   * https://github.com/Accenture/adop-jenkins/tree/master/resources/init.groovy.d  <-- they install a ton of tools!
+
+### <<Learning_Jenkins_Provisioning_Init_Script_Tools_Custom_Tools>>
+
+[CustomTools](https://plugins.jenkins.io/custom-tools-plugin) are a bit different than the tools / installers built into a plugin.
+
+#### Adding a custom tool
+
+    import jenkins.model.* 
+    import com.cloudbees.jenkins.plugins.customtools.CustomTool;
+    import com.synopsys.arc.jenkinsci.plugins.customtools.versions.ToolVersionConfig;
+
+    a=Jenkins.instance.getExtensionList(com.cloudbees.jenkins.plugins.customtools.CustomTool.DescriptorImpl.class)[0]; 
+
+    a.setInstallations( new CustomTool("g", "/usr/local/git/", null, "bin", null, ToolVersionConfig.DEFAULT, null) ); 
+    a.save()
+
+This will install a custom tool configured as such:
+
+  * name: "g"
+  * Exported Paths: "bin"
+  * Installation Directory: "/usr/local/git"
+
+Checking to see if a custom tool is installed follows the same pattern as any other plugin instance. (see Learning_Jenkins_Provisioning_Init_Script_Installing_Tools_Example).
+
 
