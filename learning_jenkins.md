@@ -573,15 +573,37 @@ But can iterate through all tools on machine like so:
 
 Because the installation of a tool is dependent / can be specialized by the Node it's installed on, you must iterate every agent to know where the tool is installed.
 
+#### Iterating through installations of Tools / Extensions
+
+    import hudson.tools.DownloadFromUrlInstaller;
+    import hudson.tools.ToolDescriptor;
+
+    Jenkins.instance.getExtensionList(ToolDescriptor.class);
+
+You use the values from this list and pass that into `getExtensionList` down below
+
 #### Installing tool with a hard coded path (Maven example)
 
     import jenkins.model.* 
 
-    a=Jenkins.instance.getExtensionList(hudson.tasks.Maven.DescriptorImpl.class)[0]; 
+    def looking_for_maven_install_named = "apache-maven-3.5.3"
+    def maven_install_location          = "/usr/local/maven"
+
+    a=Jenkins.instance.getExtensionList(hudson.tasks.MavenInstallation.DescriptorImpl.class)[0]; 
+    // ^^^^ Q: where did we get that class name? Jenkins.instance.getExtensionList( hudson.tools.ToolDescriptor.class )
+
     b=(a.installations as List); 
-    b.add(new hudson.tasks.Maven.MavenInstallation("MAVEN", "/usr/local/maven", [])); 
-    a.installations=b 
-    a.save()
+    def found = false
+    b.each {
+      found = found || (it.name == looking_for_maven_install_named)
+    }
+    if (found) {
+      println "did have an installation of ${looking_for_maven_install_named}"
+    } else {
+      b.add(new hudson.tasks.Maven.MavenInstallation(looking_for_maven_install_named, maven_install_location, [])); 
+      a.installations=b 
+      a.save()
+    }
 
 #### Installing tool with auto install (Ant example)
 
@@ -593,14 +615,13 @@ Because the installation of a tool is dependent / can be specialized by the Node
 
     def antInstaller = new AntInstallation(ant_version)
     def ant_installations = desc_AntTool.getInstallations()
-
-
-   def installSourceProperty = new InstallSourceProperty([antInstaller])
-   def ant_inst = new AntInstallation(
+    
+    def installSourceProperty = new InstallSourceProperty([antInstaller])
+    def ant_inst = new AntInstallation(
       "ADOP Ant", // Name
       "", // Home
       [installSourceProperty]
-   )
+    )
 
     ant_installations += ant_inst
     desc_AntTool.setInstallations((AntInstallation[]) ant_installations)
