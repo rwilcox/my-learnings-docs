@@ -121,6 +121,12 @@ If *only* `server.port` is set (read: no `management.port`), the following is tr
 
 [Can read from generated git.properties file on classpath to give information about what commit the running code is](https://docs.spring.io/spring-boot/docs/current/reference/html/production-ready-endpoints.html#production-ready-application-info-git)
 
+### /threaddump
+
+See also:
+
+  * https://moelholm.com/2016/08/15/spring-boot-enhance-your-threaddumps/
+
 
 <<Java_Spring_Boot_JMX>>
 

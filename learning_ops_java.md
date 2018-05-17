@@ -90,6 +90,8 @@ See also:
 
 # JMX <<Learning_Ops_Java_JMX_Considerations>>
 
+[Oracle: Deep Monitoring with JMX intro article on this](https://blogs.oracle.com/java-platform-group/deep-monitoring-with-jmx)
+
 Problems:
 
   * need to mount directories for heapdumps, and other binary files dumped to /tmp by the JVM diagnostic tools
@@ -214,5 +216,63 @@ TL;DR: separate out distribution of data into buckets, display those buckets + t
 ### See Also
 
   * https://jakubstransky.com/2018/02/03/jvm-code-friendly-to-jit-optimisation/ —- using JITWatch
-  
-  
+ 
+# Java 9: Unified Logging <<Learning_Java_Ops_Unified_Logging>>
+
+**JAVA 9 intros new unified JVM internals log format**
+
+New `-Xlog:THING` gives several abilities:
+
+  * namespacing only select topics or all `Xlog:THING,THING+subthing` or `Xlog:THING*` <-- for all
+  * destination (`java -Xlog:THING:stdout`), can also send to stderr or a specific file
+  * field format
+
+Command format: `-Xlog:SELECTOR:OUTPUT:DECORATORS:OUTPUT-OPTIONS`
+
+See avail tags, etc: `java -Xlog:help`
+
+## See Also:
+
+  * 
+
+# Why might pause time? <<Learning_Java_Ops_Stop_The_World_Pauses>>
+
+  * Deoptimization
+  * Thread dump
+  * Heap inspection
+  * Class Redefinition
+  * ... more
+  *
+- Source: https://stackoverflow.com/a/29673564/224334 , http://hg.openjdk.java.net/jdk8u/jdk8u/hotspot/file/fc3cd1db10e2/src/share/vm/runtime/vm_operations.hpp#l39
+
+See also:
+
+  * Learning_Java_Operational_Information_Flags
+
+## <<Learning_Java_Ops_Stop_The_World_Pauses_Monitoring>>
+
+JDK 8 and earlier add -XX:+PrintGCApplicationStoppedTime JVM option;
+starting from JDK 9 add -Xlog:safepoint.
+
+- [Source](https://stackoverflow.com/a/50381457/224334)
+
+# <<Learning_Java_Ops_Monitoring_Threads>>
+
+Can use thread dumps to get information about all running threads.
+
+Will contain name, priority, ID, status and current callstack.
+
+## Giving threads names:
+
+  * A single thread: `Thread t = new Thread("myName!")`
+  * In ThreadPools / ExecutorServices: can specify own `ThreadFactory`. See: [the simple implementation](https://stackoverflow.com/a/6113794/224334) and [the more complex one that auto increments thread numbers](https://stackoverflow.com/a/30279532/224334)
+  * In `Runnable`s: just grab the name of `Thread.currentThread()`, stash it somewhere, then use a getter in some monitoring code
+
+## See also:
+
+  * https://www.javaworld.com/article/2074769/core-java/detecting-java-threads-in-deadlock-with-groovy-and-jmx.html
+  * https://dzone.com/articles/how-analyze-java-thread-dumps
+
+
+
+

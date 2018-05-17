@@ -134,14 +134,21 @@ G1 based around pause goals.
 # <<Learning_Java_GC>>
 
 Can set flags to enable GC logs (at ~0 cost: asynchronous log writer).
+(`java -X:+PrintGC`).
+
+**JAVA 9 CHANGE**: Use `java -X:log:gc*` instead!!
 
 Bad:
-  * will send to log _file_, not just stdlog (this may be a good thing)
+  * (the JVM < 1.9 version): will send to log _file_, not just stdlog (this may be a good thing)
   * log format NOT standarized: your parser may super break if you add another option _>> use Censum or GCViewer
   
-  Good:
-    * more metrics than (say) JMX
-  
+Good:
+  * more metrics than (say) JMX
+
+## See also:
+
+  * https://dzone.com/articles/disruptive-changes-to-gc-logging-in-java-9
+ 
 ## Performance stats
 ### tentured item promotion
 
@@ -160,6 +167,8 @@ Too low? Could have more of that in Eden..
  
  Can also use https://github.com/giltene/jHiccup to see pause times due to memory or just when you have a ns-scale application requirements and need to see profile.
  
+
+
 ## heap fragmentation <<Learning_Java_Memory_Heap_Fragmentation>>
 
 ### and concurrent mark and sweep collector
