@@ -648,14 +648,27 @@ See also:
 
     a=Jenkins.instance.getExtensionList(com.cloudbees.jenkins.plugins.customtools.CustomTool.DescriptorImpl.class)[0]; 
 
-    a.setInstallations( new CustomTool("g", "/usr/local/git/", null, "bin", null, ToolVersionConfig.DEFAULT, null) ); 
-    a.save()
+	def installs = a.getInstallations()
+	def found = installs.find { 
+  		it.name == "gcc"
+	}
+
+	if ( found ) {
+  		println "gcc is already installed"
+    } else {
+     	println "installing gcc tool"
+      
+      	def newI = new CustomTool("gcc", "/usr/local/gcc/", null, "bin", null, ToolVersionConfig.DEFAULT, null)
+		installs += newI
+		a.setInstallations( (com.cloudbees.jenkins.plugins.customtools.CustomTool[])installs ); 
+    	a.save()
+    }
 
 This will install a custom tool configured as such:
 
-  * name: "g"
+  * name: "gcc"
   * Exported Paths: "bin"
-  * Installation Directory: "/usr/local/git"
+  * Installation Directory: "/usr/local/gcc"
 
 Checking to see if a custom tool is installed follows the same pattern as any other plugin instance. (see Learning_Jenkins_Provisioning_Init_Script_Installing_Tools_Example).
 
