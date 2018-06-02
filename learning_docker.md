@@ -111,3 +111,31 @@ NOTE: This is **only** supported in Docker Compose format 2.2, [not Docker forma
         image: 'co/thingy'
         init: true
 
+# <<Learning_Docker_Windows>>
+
+Windows 10 (or Win Server 2016)? Use the new Docker (HyperV)
+
+Windows version earlier than Windows 10? Use Docker Machine
+
+## <<Learning_Docker_Windows_Docker_Machine>>
+
+See [Docker Toolbox (Windows)](https://docs.docker.com/toolbox/toolbox_install_windows/)
+
+Q: Can my machine handle (Docker Machine's) virtualization well?
+
+Under Windows 8, check Task Manager -> Performance -> Virtualization
+Windows 7? [Download a tool from Microsoft to check](http://www.microsoft.com/en-us/download/details.aspx?id=592)
+
+^^^^^^ if there's no hardware supported virtualization that also will likely mean you can't run VirtualBox with PAE (see Learning_Unix_Memory_PAE). Linux Kernels > Ubuntu 12or so _require_ pae to boot.
+
+### <<Learning_Docker_Windows_Docker_Machine_Remote_Hosts>>
+
+With Windows / Docker machine you can point it to non local Docker hosts in different cloud providers:
+
+  * [Docker Machine spinning up AWS instances for you](https://docs.docker.com/machine/examples/aws/)
+
+Preprovisioned VMs:
+
+        $ docker-machine create --driver none --url=tcp://50.134.234.20:2376 custombox
+        $ docker-machine ls
+
