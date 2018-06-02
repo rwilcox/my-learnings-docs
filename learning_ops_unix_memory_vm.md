@@ -127,9 +127,8 @@ Why? Because `struct page` has a cost of about 11MB memory / 1GB memory describe
 Eventually - around 16GB - this will fill up `ZONE_NORMAL` and thus trigger oom.
 
 
-Q: Wait, how does 32bit Linux run on machines with >4GB memory?
+Q: Wait, how does 32bit Linux run on machines with >4GB memory? <<Learning_Unix_Memory_PAE>>
 --------------------
-
 Physical Address Extension (PAE) <-- from Intel. Gives extra bits for addressing, thus can get to 64GB memory.
 
 
