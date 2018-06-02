@@ -330,6 +330,12 @@ Section of the declarative Jenkinsfile: [tools](https://jenkins.io/doc/book/pipe
 
 This will be AUTO ADDED to any `sh` command's $PATH variable, so you don't _have_ to prefix PATH with it.
 
+### Specifying hard to know tools
+
+  1. Use the Snippet Generator: tools. This will let you pick what tool type (ie custom tool, git tool) and what tool name
+  2. or just do: `tool( name: 'gitgit', type: 'git' )`
+
+
 ### <<Learning_Jenkins_Declarative_DSL_Using_Tools_Setting_Environment_Variables_With_Tool_Locations>>
 
 ... but maybe you're paranoid
@@ -485,6 +491,40 @@ NOTE the **ID** (not name) of the configuration file (maybe change this to somet
 
 Node.js plugin will auto copy the managed file into the right place for npm and now settings from there (like `loggingLevel` or `registry` will be set appropriately).
 
+### <<Learning_Jenkins_Plugins_NexusArtifact>>
+
+[Nexus Artifact Plugin](https://github.com/jenkinsci/nexus-artifact-uploader-plugin).
+
+Personal Opinion: artifact uploading should be separated from artifact building. If we only know how to use Maven (release plugin) to upload to Nexus, then what happens when we need to upload Node modules? Or Python? Do we force these languages through an (unnatural) Maven workflow? Do we figure out how to upload to Nexus using Yet Another Build Tool?
+
+If we always do it through a Jenkins plugin then we can just point Jenkins at where our artifacts build and let it take care of the uploading.
+
+#### Example
+
+    pipeline {
+      agent any
+      ...
+      stage("Upload Artifact") {
+        nexusArtifactUploader(
+          nexusVersion: 'nexus3',
+          protocol: 'http',
+          nexusUrl: 'my.nexus.address',
+          groupId: 'com.example',
+          version: version,
+          repository: 'RepositoryName',
+          credentialsId: 'CredentialsId',
+          artifacts: [
+            [artifactId: projectName,
+             classifier: '',
+             file: 'my-service-' + version + '.jar',
+             type: 'jar']
+          ]
+        )
+      }
+    }
+
+Works great!!
+
 # <<Learning_Jenkins_Building_For>>
 
 ## <<Learning_Jenkins_Building_For_Java>>
@@ -500,6 +540,15 @@ After installing Bitbucket plugin(s), Go into Configure system, -> Bitbucket End
 THEN each Bitbucket related item will have a Server option, where you can pick real bitbucket or your Bitbucket.
 
 NOTE: When you do a multi-branch group the "OWNER" in the Configure screen is the **SHORT NAME** of the project (read: the `/projects/INIT/something` <-- the INITials here>)
+
+## <<Learning_Jenkins_Enterprise_And_ActiveDirectory>>
+
+Q: "What groups does this user belong to, so I can use the [Role Strategy Plugin](https://wiki.jenkins.io/display/JENKINS/Role+Strategy+Plugin) and the Manage And Assign Roles + Project Roles pattern to make sure they have access to the correct top level items?
+
+A: Have them visit `/whoAmI/` <-- this will list their roles ("Authorities") so you can make sure they match
+
+- [NOTE]: Q: Do roles only apply to views ??? (that was an experience once...)
+
 
 # <<Learning_Jenkins_Provisioning>>
 
