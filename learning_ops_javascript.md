@@ -44,25 +44,60 @@ Also [Node Process module documentation](https://nodejs.org/api/process.html#pro
 
 ## <<Learning_Ops_Javascript_Node_Memory>>
 
-(Incremental) Mark -> (lazy) Sweep -> Compact
-- Node.js High Performance
+By default memory limit for Node.js is 512MB (SOURCE?)
 
+### Memory segments:
 
-v8 garbage collector: periodic stop the world scans "cycle" - Node.js High Performance
+  * code <-- actual code executed
+  * stack <-- primitives, data types, pointers
+  * heap <-- objects, strings, closures
 
-"Shallow size" — size of object
+#### Segments of `heap` memory:
+
+  * new space
+  * old space
 
 New space and old space. each space has memory pages.
 
-Defaults: 1GB old space??
-
-Node—max_old_space_size=2000 —- now 2 gb ish
+`node --max_old_space_size=2000` —- now 2 gb ish
 
 - [TODO]: read / understand https://github.com/thlorenz/v8-perf/blob/turbo-updates/gc.md
 
 ### see also
   * https://stackoverflow.com/q/42212416/224334 Docker and max_old_space_size
-  
+
+##### new space information
+
+Size of 1-8MB ??
+
+###### <<Learning_Ops_Javascript_Node_Memory_NewSpace_GC>>
+
+GC algorithm: Scavenge and Mark and Sweep
+
+`Scavenge` <-- concurrent!
+
+##### old space information
+
+###### <<Learning_Ops_Javascript_Node_Memory_OldSpace_GC>>
+
+Garbage Collector:(Incremental, Concurrent) Mark -> (lazy) Sweep  (stop the world) -> Compact
+- Node.js High Performance
+
+`node --max-old-space-size=2042` <-- old space now 2GB
+
+v8 garbage collector: periodic stop the world scans "cycle" - Node.js High Performance
+
+"Shallow size" — size of object
+
+This coupling of Mark/Sweep means gc pauses are (usually) minimal (5-50ms).
+
+### <<Learning_Ops_Javascript_Node_Memory_Monitoring>>
+
+Built in tools:
+
+  * [process.cpuUsage](https://nodejs.org/dist/latest-v8.x/docs/api/process.html#process_process_cpuusage_previousvalue)
+  * [process.memoryUsage](https://nodejs.org/dist/latest-v8.x/docs/api/process.html#process_process_memoryusage)
+
 ### Heap Snapshots
 
 require v8-profiler in your JS code then connect to it.
@@ -81,3 +116,29 @@ Package, emits and event every time things get weird / leak
 
 Can also do heapdiffs
 
+## <<Learning_Ops_Javascript_Node_JIT_Compilers>>
+
+### OLD WORLD:
+
+#### Full Compiler (full-codegen)
+
+Generates code quickly. No type analysis, uses inline caches to refine type knowledge as running.
+
+#### Optimizing Compiler (Crankshaft)
+
+Classical JIT compiler, recompiles hot functions. Uses types from inline cache.
+
+Some language features not supported yet (June 2018).
+
+#### Machine Code JIT Compiler (Lithium)
+
+### NEW WORLD
+
+#### Ignition
+
+##### Turbofan
+
+### See also:
+
+  * https://blog.sessionstack.com/how-javascript-works-inside-the-v8-engine-5-tips-on-how-to-write-optimized-code-ac089e62b12e
+  * 
