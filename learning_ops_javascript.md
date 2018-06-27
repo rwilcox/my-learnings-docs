@@ -120,7 +120,7 @@ This coupling of Mark/Sweep means gc pauses are (usually) minimal (5-50ms).
    
 #### See also
 
-  * [Stackoverflow: what does the output to trace-go mean?](https://stackoverflow.com/q/35360939/224334)
+  * [Stackoverflow: what does the output to trace-gc mean?](https://stackoverflow.com/q/35360939/224334)
    
 ### <<Learning_Ops_Javascript_Node_Memory_Monitoring>>
 
