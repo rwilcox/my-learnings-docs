@@ -42,9 +42,21 @@ But:
 
 Also [Node Process module documentation](https://nodejs.org/api/process.html#process_signal_events) seems to say it can handle `SIGTERM`, just not `SIGKILL`.
 
+## <<Learning_Ops_Javascript_Inspection>>
+
+Useful inspection flags listed [v8-perf wiki](https://github.com/thlorenz/v8-perf/blob/master/inspection.md#inspecting-v8)
+
 ## <<Learning_Ops_Javascript_Node_Memory>>
 
+Dual space / generation memory model. Each space has their own garbage collector.
+
+Memory pages 512kb / 512kb aligned.
+
+
 By default memory limit for Node.js is 512MB (SOURCE?)
+- [TODO]: source / validate this ^^^ 
+
+Two garbage collectors, one for new space and one for old space.
 
 ### Memory segments:
 
@@ -58,19 +70,15 @@ By default memory limit for Node.js is 512MB (SOURCE?)
   * old (pointer) space
   * old (data) space
   * large object space — large objects sit here, mmaped space
+  * code space
 
 New space and old space. each space has memory pages.
 
-`node --max_old_space_size=2000` —- now 2 gb ish
+`node --max_old_space_size=2000` # <—- now 2 gb ish
 
-- [TODO]: read / understand https://github.com/thlorenz/v8-perf/blob/turbo-updates/gc.md
 
 ### see also
   * https://stackoverflow.com/q/42212416/224334 Docker and max_old_space_size
-
-- [TODO]: read / understand following links, update information
-
-
   * https://v8project.blogspot.com/2018/04/improved-code-caching.html
      ^^ talking about code caching and how v8 Javascript isn’t really an interpreted language
   * https://v8project.blogspot.com/2018/06/concurrent-marking.html
@@ -79,22 +87,23 @@ New space and old space. each space has memory pages.
 
 ##### new space information
 
-Size of 1-8MB ??
+Size of 1-8MB
 
 ###### <<Learning_Ops_Javascript_Node_Memory_NewSpace_GC>>
 
 GC algorithms: Scavenge and Mark and Sweep/compact
 
-`Scavenge` <-- concurrent!
-Mark / sweep — pause
+`Scavenge` <-- concurrent! (especially past Node 8)
+Mark / sweep / compact — pause
 
+compaction paralleled on a page level.
 
 ##### old space information
 
 ###### <<Learning_Ops_Javascript_Node_Memory_OldSpace_GC>>
 
 Garbage Collector:(Incremental, Concurrent) Mark -> (lazy) Sweep  (stop the world) -> Compact
-- Node.js High Performance
+- Node.js High Performance, v8-pref wiki
 
 `node --max-old-space-size=2042` <-- old space now 2GB
 
@@ -106,7 +115,8 @@ This coupling of Mark/Sweep means gc pauses are (usually) minimal (5-50ms).
 
 ### <<Learning_Ops_Javascript_Node_Debugging_GC>>
 
-    node —trace-gc
+    $ node --trace-gc
+    $ node --expose-gc # <-- debugging aid that allows you to call gc() to understand memory
    
 #### See also
 
@@ -119,17 +129,20 @@ Built in tools:
   * [process.cpuUsage](https://nodejs.org/dist/latest-v8.x/docs/api/process.html#process_process_cpuusage_previousvalue)
   * [process.memoryUsage](https://nodejs.org/dist/latest-v8.x/docs/api/process.html#process_process_memoryusage)
 
-### Heap Snapshots
+### Heap Snapshots <<Learning_Ops_Javascript_Heap_Dump>>
 
 require v8-profiler in your JS code then connect to it.
 
 Also heapdump module, where you can trigger a heap dump to disk
 
-### GC log
-—tracegc
-Will print out to console(??) every time GC happens
+#### See also:
 
-^^^^^ but not for long term usage!
+  * https://github.com/thlorenz/v8-perf/blob/master/memory-profiling.md#taking-heap-snapshot-with-nodejs
+
+### GC log
+    $ node --tracegc
+
+Will print out to console(??) every time GC happens (but not for long term usage)!
 
 ### memwatch
 
@@ -141,33 +154,49 @@ Can also do heapdiffs
 
   * [Toptal: Debugging Node.js Memory Leaks](https://www.toptal.com/nodejs/debugging-memory-leaks-node-js-applications
   )
+
 ## <<Learning_Ops_Javascript_Node_JIT_Compilers>>
 
-- [TODO]: what, what is Node 8 ? New or old world??
--
-### OLD WORLD:
+Node v8 removes "Crankshaft" JIT engine 
 
-#### Full Compiler (full-codegen)
+### OLD WORLD (pre Node 8.x):
 
-Generates code quickly. No type analysis, uses inline caches to refine type knowledge as running.
+  * full-codegen
+  * Lithium <-- to machine code
+  * Crankshaft <-- JIT
 
-#### Optimizing Compiler (Crankshaft)
+### NEW WORLD (post Node 8.x)
 
-Classical JIT compiler, recompiles hot functions. Uses types from inline cache.
-
-Some language features not supported yet (June 2018).
-
-#### Machine Code JIT Compiler (Lithium)
-
-### NEW WORLD
-
-- [TODO]: fill this out more
--
 #### Ignition
 
-##### Turbofan
+"interpreter"
+
+Uses Turbofan low level macroassembly instructions to generate bytecode for each opcode
+
+Optimizes bytecode
+local state held in (physical!) registers
+maps slots to native machine stack memory
+keeps stack frame, program counter, etc
+
+
+#### Turbofan
+
+Compiler + Backend responsible for:
+
+  * instruction selection
+  * register allocation
+  * bytecode gen
+  * speculative optimization
+
+Not an optimizing compiler (that fancy stuff runs on top of Turbofan)
+
+### <<Learning_Ops_Javascript_Monitoring_JIT>>
+
+    $ node --print-opt-code # <-- prints optimized code generated by turbofan
+    $ node --trace-opt      # <-- traces lazy optimizations
+    $  
 
 ### See also:
 
   * https://blog.sessionstack.com/how-javascript-works-inside-the-v8-engine-5-tips-on-how-to-write-optimized-code-ac089e62b12e
-  * 
+  * https://github.com/thlorenz/v8-perf/blob/master/compiler.md
