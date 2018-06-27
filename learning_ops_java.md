@@ -245,6 +245,24 @@ See avail tags, etc: `java -Xlog:help`
   *
 - Source: https://stackoverflow.com/a/29673564/224334 , http://hg.openjdk.java.net/jdk8u/jdk8u/hotspot/file/fc3cd1db10e2/src/share/vm/runtime/vm_operations.hpp#l39
 
+To do STW operations requires threads to be at safe point. 
+
+## <<Learning_Ops_Java_Safepoint_Requirements>>
+
+Activities requiring a Safepoint: 
+* creating heap dump
+* method deoptimization
+* revoking biased lock
+* class redefinition
+
+BUT Safepoints happen when:
+  * method return
+  * loop back branch
+  
+  Loop unrolling etc may mean Safepoints are further away than normal! - source: Optimized Java
+  
+You can print information about mean time to Safepoint.
+
 See also:
 
   * Learning_Java_Operational_Information_Flags
@@ -273,6 +291,7 @@ Will contain name, priority, ID, status and current callstack.
   * https://www.javaworld.com/article/2074769/core-java/detecting-java-threads-in-deadlock-with-groovy-and-jmx.html
   * https://dzone.com/articles/how-analyze-java-thread-dumps
 
+# <<Learning_Java_Finalize_Lifecycle>>
 
 
 
