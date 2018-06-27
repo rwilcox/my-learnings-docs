@@ -55,7 +55,9 @@ By default memory limit for Node.js is 512MB (SOURCE?)
 #### Segments of `heap` memory:
 
   * new space
-  * old space
+  * old (pointer) space
+  * old (data) space
+  * large object space — large objects sit here, mmaped space
 
 New space and old space. each space has memory pages.
 
@@ -66,15 +68,26 @@ New space and old space. each space has memory pages.
 ### see also
   * https://stackoverflow.com/q/42212416/224334 Docker and max_old_space_size
 
+- [TODO]: read / understand following links, update information
+
+
+  * https://v8project.blogspot.com/2018/04/improved-code-caching.html
+     ^^ talking about code caching and how v8 Javascript isn’t really an interpreted language
+  * https://v8project.blogspot.com/2018/06/concurrent-marking.html
+     ^^ concurrent mark and sweep coming to v8, and Node eventually.
+
+
 ##### new space information
 
 Size of 1-8MB ??
 
 ###### <<Learning_Ops_Javascript_Node_Memory_NewSpace_GC>>
 
-GC algorithm: Scavenge and Mark and Sweep
+GC algorithms: Scavenge and Mark and Sweep/compact
 
 `Scavenge` <-- concurrent!
+Mark / sweep — pause
+
 
 ##### old space information
 
@@ -91,6 +104,14 @@ v8 garbage collector: periodic stop the world scans "cycle" - Node.js High Perfo
 
 This coupling of Mark/Sweep means gc pauses are (usually) minimal (5-50ms).
 
+### <<Learning_Ops_Javascript_Node_Debugging_GC>>
+
+    node —trace-gc
+   
+#### See also
+
+  * [Stackoverflow: what does the output to trace-go mean?](https://stackoverflow.com/q/35360939/224334)
+   
 ### <<Learning_Ops_Javascript_Node_Memory_Monitoring>>
 
 Built in tools:
@@ -116,8 +137,14 @@ Package, emits and event every time things get weird / leak
 
 Can also do heapdiffs
 
+### see also
+
+  * [Toptal: Debugging Node.js Memory Leaks](https://www.toptal.com/nodejs/debugging-memory-leaks-node-js-applications
+  )
 ## <<Learning_Ops_Javascript_Node_JIT_Compilers>>
 
+- [TODO]: what, what is Node 8 ? New or old world??
+-
 ### OLD WORLD:
 
 #### Full Compiler (full-codegen)
@@ -134,6 +161,8 @@ Some language features not supported yet (June 2018).
 
 ### NEW WORLD
 
+- [TODO]: fill this out more
+-
 #### Ignition
 
 ##### Turbofan
