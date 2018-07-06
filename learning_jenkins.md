@@ -549,6 +549,14 @@ A: Have them visit `/whoAmI/` <-- this will list their roles ("Authorities") so 
 
 - [NOTE]: Q: Do roles only apply to views ??? (that was an experience once...)
 
+## <<Learning_Jenkins_Enterprise_Code_Coverage>>
+
+Using the [Cobertura Plugin](https://plugins.jenkins.io/cobertura).
+
+In Pipeline syntax:
+
+                    step([$class: 'CoberturaPublisher', autoUpdateHealth: false, autoUpdateStability: false, coberturaReportFile: 'coverage/cobertura-coverage.xml', failUnhealthy: false, failUnstable: false, maxNumberOfBuilds: 0, onlyStable: false, sourceEncoding: 'ASCII', zoomCoverageChart: false])
+
 
 # <<Learning_Jenkins_Provisioning>>
 
