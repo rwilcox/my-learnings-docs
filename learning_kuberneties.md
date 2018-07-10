@@ -223,9 +223,44 @@ Can create `ConfigMap` resources to hold config. Can reference these variables i
 Yup, k8 has them (essentially as a subclass of `ConfigMap`).
 
 
-<<Kubernetes_Authenticating_With_Docker_Registry>>
+###### <<Kubernetes_Authenticating_With_Docker_Registry>>
 
 Use a secret to do this! Builtin!
+
+### Pre launch tasks ("Init Containers")
+
+Run before the main pod is launched. Needs to execute its task then quit before the main container is launched (_not_ for long running tasks.)
+
+Different file system from main container.
+
+Can have multiple.
+
+#### Potential usage
+
+  1. Pull down a bash image to lay down some infrastructure / adjust something. But you don't want bash in your main container because of size limits... Then just do your work in the `command` part of the `initContainer` in your PodSpec.
+
+### <<Learning_Kubernetes_Container_Lifecycle>>
+
+container can define commands to run as part of lifecycle:
+
+  * `preStart` <-- may be called before, or after, ENTRYPOINT
+  * `preStop`  <-- K8's management of container will block, also must execute before the grace period happens (race!)
+
+#### <<Learning_Kubernetes_Container_Lifecyle_And_Your_Microservice>>
+
+Kubernetes shuts down your app with the following process:
+
+  1. Will send `SIGTERM`
+  2. Will wait (grace period)
+  3. Will send `SIGKILL`
+  4. container removed from load balancers
+
+See also
+
+  * [Graceful shutdown in k8](https://hackernoon.com/graceful-shutdown-in-kubernetes-435b98794461)
+  * [Learning about k8 and Unix Signals](https://jbodah.github.io/blog/2017/05/23/learning-about-kubernetes-and-unix-signals/)
+  * Learning_Ops_Docker_PID1_Signals
+
 
 Configuring
 ----------------
