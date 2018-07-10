@@ -35,3 +35,8 @@ See also:
   * 
   
 - Optimizing Java 8.1
+
+# <<Learning_Java_JMX_Useful_mbeans>>
+
+  * thread information (ThreadMXBean)
+  
