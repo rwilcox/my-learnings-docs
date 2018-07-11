@@ -5,6 +5,12 @@ title: "Learnings: Docker"
 
 # <<Learning_Docker>>
 
+## Parts
+
+  * daemon     <-- REST API to instruct containerd to do things
+  * runc       <-- OCI container runtime spec
+  * containerd <-- manages lifecycle operations (start, stop, pause, etc etc)
+
 ## Docker Storage <<Learning_Docker_Storage>>
 
 ### Docker Storage / Overlay Mount Types <<Learning_Docker_Storage_Types>>
