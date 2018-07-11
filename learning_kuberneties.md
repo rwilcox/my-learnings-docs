@@ -218,9 +218,16 @@ Can even pass cluster name, etc etc downward.
 
 Can create `ConfigMap` resources to hold config. Can reference these variables in `env` setting (special keys for this) one by one, have k8 put all of them in there (prefixed by something), use it to override `args` entry for container. Can also have mounted volume created to hold file version of these so your app can read it (including just mounting specific files so you don't blow away real directory mounting a Docker volume into /etc!)
 
-##### Secrets
+##### Secrets <<Learning_Kubernetes_Secrets>>
 
 Yup, k8 has them (essentially as a subclass of `ConfigMap`).
+
+[Integration with Vault via K8 Service Account Token](https://www.vaultproject.io/docs/auth/kubernetes.html)
+
+See also:
+
+  * Learning_Ops_Vault
+  * [A sample Rails app with secrets, K8, and Vault](https://medium.com/@gmaliar/dynamic-secrets-on-kubernetes-pods-using-vault-35d9094d169)
 
 
 ###### <<Kubernetes_Authenticating_With_Docker_Registry>>
@@ -266,7 +273,6 @@ Configuring
 ----------------
 
 Create YAML describing your object (pod, ReplicationController, etc) and POST it to the API server.
-
 
 Health Checks
 -------------
