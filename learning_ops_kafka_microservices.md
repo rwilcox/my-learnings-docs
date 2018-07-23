@@ -76,3 +76,12 @@ A: The group coordinator gets heart beats every 2 seconds, if no heartbeats rece
     $ $ kafka-consumer-groups --bootstrap-server $KB --group demo-group --reset-offsets --topic demo:3 --shift-by 1 --execute
     
     $ kafka-consumer-groups --bootstrap-server $KB --group demo-group --reset-offsets --topic demo:6 --topic demo2:4 --shift-by -5 --execute
+    
+# <<Learning_Ops_Kafka_Monitoring>>
+
+## <<Learning_Ops_Kafka_Monitoring_Applications>>
+
+### KStreams
+
+[Add state listener](https://stackoverflow.com/a/51454631/224334) ???
+
