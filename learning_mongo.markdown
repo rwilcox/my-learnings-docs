@@ -8,3 +8,10 @@ title: "Learnings: Mongodb"
     db.users.update({"_id": "0000000000001"}, {$set: {role_level: 10}})
     
 Will just update the `role_level` field in the found record **NOT** anything else)
+
+# <<Learning_Mongo_Geo_Queries>>
+
+Indexing data:
+
+  * 2dsphere index: $geoNear via GeoJson or coordinate pair
+  * 2d       index: coordinate pair
