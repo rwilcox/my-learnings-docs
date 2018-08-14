@@ -409,6 +409,17 @@ will return true if is unix, can be used in if statement or expression??)
 
     fileExists "build-overrides/thing"
 
+### <<Learning_Jenkins_Declarative_DSL_Making_REST_Calls>>
+
+Can make REST calls (and authorized ones too)!
+
+    def response = httpRequest contentType: 'APPLICATION_JSON', url: 'http://someApi.example.com'
+    def responseJSON = readJSON text: response.content
+    echo responseJSON.someAttribute
+
+Authorized ones are similar, but use the credentials. Pass the key to your credentials
+
+    def response = httpRequest url: 'http://someApi.example.com', authentication: 'MY_CRED_ID'
 
 # Libraries and external code
 
