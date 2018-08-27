@@ -552,6 +552,17 @@ THEN each Bitbucket related item will have a Server option, where you can pick r
 
 NOTE: When you do a multi-branch group the "OWNER" in the Configure screen is the **SHORT NAME** of the project (read: the `/projects/INIT/something` <-- the INITials here>)
 
+### unable to fetch ref errors with pull requests
+
+Bitbucket PRs live on their own separate branches, like Github PRs do.
+
+This branch is [updated lazily](https://jira.atlassian.com/browse/BSERV-5288?focusedCommentId=656872&page=com.atlassian.jira.plugin.system.issuetabpanels:comment-tabpanel#comment-656872).
+
+There are two ways to get it to update:
+
+  1. Someone visits the pull request page
+  2. Use the Bitbucket Source plugin 2.11.12 which adds a [mergability check](https://github.com/jenkinsci/bitbucket-branch-source-plugin/pull/116) which has a side effect of updating the PR branch
+
 ## <<Learning_Jenkins_Enterprise_And_ActiveDirectory>>
 
 Q: "What groups does this user belong to, so I can use the [Role Strategy Plugin](https://wiki.jenkins.io/display/JENKINS/Role+Strategy+Plugin) and the Manage And Assign Roles + Project Roles pattern to make sure they have access to the correct top level items?
