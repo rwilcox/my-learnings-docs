@@ -105,10 +105,56 @@ In fact, to debug issues in graphql you may have to turn on debug mode, note the
 
 Which will spit out GraphQL queries. Running these queries against the playground may help understand what's going on.
 
+# Validating that the GraphQL client schemas validate (and stay validating) with the server capabilites / queries
 
-# Using Apollo client libaries to interact with this
+## Validation as a static step `<<Learning_GraphQL_Validation_CLI>>`
 
-Apollo - from the Meteor people - are some good GraphqL tols.
+First, download the graphQL IDL/SDL file
+
+[get-graphql-schema](https://github.com/prisma/get-graphql-schema) looks like a good tool to download this in [GraphQL SLD](https://www.prisma.io/blog/graphql-sdl-schema-definition-language-6755bcb9ce51/) format
+
+    $ get-graphql-schema https://somegrapql.api.example.com > schema.graphql
+
+
+Then validate your queries against the schmea validator using [graphql-validator](https://github.com/creditkarma/graphql-validator)
+
+This validator requires the schema to be in SDL, not JSON, format.
+
+
+# Using Apollo client libaries to interact with GraphQL based server
+
+[Apollo](https://www.apollographql.com/) - from the Meteor people - are some good GraphqL tools.
+
+## warnings about anonymous operations
+
+Apollo, and its CLI tools, may give warnings about not supporting anoymous operations.
+
+In fact, this is not just a warning, but your queries will fail validation if they are anoymous, even if they pass other GraphQL query validation steps.
+
+You **MUST** give your queries names. While most of the time you can write
+
+    query {
+        getCars() {
+            name
+        }
+    }
+
+With Apollo you **must** write it as so
+
+
+    query getCurrentUserCars {
+        getCars() {
+            name
+        }
+    }
+
+(Noticed we have named the query??)
+
+
+Source:
+
+  * https://github.com/apollographql/apollo-cli/issues/344#issuecomment-411110005
+
 
 ## Apollo CLI
 
@@ -124,7 +170,7 @@ Meaning that if we have a "list the current user's cars" query. A particular scr
 
 Imagine this query can be created like so:
 
-    query {
+    query getUserCars{
         getUsersCars() {
             name
         }
@@ -132,7 +178,7 @@ Imagine this query can be created like so:
 
 This is a client side query. Our client application (an Angular 5 based application, for example) will want typesafty around that query.
 
-Put this client side query in a seperate file and pull it into your program somehow so it is sent to the server.
+Put this client side query in a seperate file and pull it into your program somehow so it is sent to the server. See Learning_GraphQL_Validation_CLI
 
 #### First, download the generic schema from the GraphQL server ( <<LearningGraphQL_Apollo_Schema_Download>> )
 
@@ -142,14 +188,12 @@ Put this client side query in a seperate file and pull it into your program some
 
     $ apollo codegen:generate --schema=schema.json --target=swift --queries=./graphql.queries/*.graphql graphql
 
-This will generate types for you, in this case in graphql/Types.graphql.swift
+This will generate types for you, in this case in `graphql/Types.graphql.swift`
 
 
 #### See also
 
   * Graph.cool lets you extend the schema in the source code.  [Per](https://github.com/apollographql/apollo-cli/issues/344#issuecomment-371530068). 
-  * 
-
-- ["when a graphQL file contains no operation definitions types.swift is empty"](https://github.com/apollographql/apollo-cli/issues/211). 
+  * ["when a graphQL file contains no operation definitions types.swift is empty"](https://github.com/apollographql/apollo-cli/issues/211). 
 
 
