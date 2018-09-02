@@ -50,6 +50,9 @@ or better
        }
     }
 
+See also:
+
+  * LearningGraphQL_Apollo_Schema_Download
 
 ## Sending GraphQL commands via curl
 
@@ -102,6 +105,7 @@ In fact, to debug issues in graphql you may have to turn on debug mode, note the
 
 Which will spit out GraphQL queries. Running these queries against the playground may help understand what's going on.
 
+
 # Using Apollo client libaries to interact with this
 
 Apollo - from the Meteor people - are some good GraphqL tols.
@@ -109,4 +113,43 @@ Apollo - from the Meteor people - are some good GraphqL tols.
 ## Apollo CLI
 
 `npm install apollo` <-- replaces other tools like apollo-code-gen
+
+### Generating Code using Apollo CLI
+
+Some type based languages (TypeScript, Flow, Swift) will require / want you to add types to the data you get back, for type checking.
+
+Remember that GraphQL the server specifies the things it can accept, and the client specifies the things it wants from the availiable types.
+
+Meaning that if we have a "list the current user's cars" query. A particular screen in the client application may only care about the car's names.
+
+Imagine this query can be created like so:
+
+    query {
+        getUsersCars() {
+            name
+        }
+    }
+
+This is a client side query. Our client application (an Angular 5 based application, for example) will want typesafty around that query.
+
+Put this client side query in a seperate file and pull it into your program somehow so it is sent to the server.
+
+#### First, download the generic schema from the GraphQL server ( <<LearningGraphQL_Apollo_Schema_Download>> )
+
+    $ apollo schema:download --endpoint https://api.graph.cool/simple/v1/example-project schema.json
+
+#### Secondly, use that schema against the .graphql queries your application uses
+
+    $ apollo codegen:generate --schema=schema.json --target=swift --queries=./graphql.queries/*.graphql graphql
+
+This will generate types for you, in this case in graphql/Types.graphql.swift
+
+
+#### See also
+
+  * Graph.cool lets you extend the schema in the source code.  [Per](https://github.com/apollographql/apollo-cli/issues/344#issuecomment-371530068). 
+  * 
+
+- ["when a graphQL file contains no operation definitions types.swift is empty"](https://github.com/apollographql/apollo-cli/issues/211). 
+
 
