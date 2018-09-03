@@ -120,6 +120,9 @@ Then validate your queries against the schmea validator using [graphql-validator
 
 This validator requires the schema to be in SDL, not JSON, format.
 
+    $ graphql-validator -s schema.graphql 'my_graphql_queries/**/*.graphl'
+
+(make sure to use quotes: you acutally **don't** want the shell interpreting those quotes).
 
 # Using Apollo client libaries to interact with GraphQL based server
 
