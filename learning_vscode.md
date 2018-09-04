@@ -3,6 +3,11 @@ path: "/learnings/vscode"
 title: "Learning: VSCode"
 ---
 
+# Command Pallete
+
+no keyboad shortcuts
+
+
 # Terminal Integration
 
 Split Terminal Editor into two
@@ -16,6 +21,7 @@ Trigger tasks via Tasks menu
 
 npm + tasks
 
+# The Editor
 Edit with Shell Command
 
 Split editor
