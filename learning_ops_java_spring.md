@@ -1,0 +1,95 @@
+---
+path: "/learnings/ops_java_spring"
+title: "Learnings: Ops: Java: Spring"
+---
+
+
+# <<Learning_Ops_Java_Spring>>
+
+See also: 
+
+  * Spring_Actuators  (includes more complete list)
+  
+but here's ops scenarios you're probably running into...
+
+
+## Jolokia Spring endpoint "built in"
+
+See: Learning_Ops_Java_JMX_HTTP_Solution_Jolokia
+
+`/jolokia`  <--- automatically there for Spring WebMVC or Jersey apps. If not then you can add it (see link)
+
+See also:
+
+  * [Spring Boot docs on Jolokia for JMX over HTTP](https://docs.spring.io/spring-boot/docs/current/reference/html/production-ready-jmx.html#production-ready-jolokia)
+
+
+## Changing log level on the fly using HTTP
+
+[POST a partial entry (or null, meaning reset) to /loggers](https://docs.spring.io/spring-boot/docs/current/reference/html/production-ready-loggers.html)
+
+this means you can increase log level to debug to temporarily debug an issue, then set it back when you're done!!!
+
+## Reporting JMX to Metric Collection Tools
+
+[Supported JMX Metrics sent to metrics registries](https://docs.spring.io/spring-boot/docs/current/reference/html/production-ready-metrics.html#production-ready-metrics-meter). Sends:
+
+  * memory and buffer pools
+  * GC stats
+  * thread utilization
+  * number of classes loaded / unloaded
+
+^^^^^ Note: some breaking changes around here in Spring Boot 2.0
+
+## Debugging what metrics are / should be sent
+
+`/metrics` can be used to examine metrics collected.
+
+### Viewing metric related to Max JVM non heap memory
+
+`/actuator/metrics/jvm.memory.max?tag=area:nonheap`
+
+## Getting Heapdumps
+
+`/heapdump` <-- outputs it in `hprof` output format
+
+## Getting threaddump
+
+`/dump`  <-- outputs it in json format
+
+See also:
+
+  * [Idea for enhancing your thread names so you can see whats going on](https://moelholm.com/2016/08/15/spring-boot-enhance-your-threaddumps/)
+
+# <<Learning_Ops_Java_Spring_Servlet_Information>>
+
+Q: How many threads does Tomcat create by default for a Spring Boot App?
+A: [200 by default](https://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html), controlled by server.tomcat.max-thread (do a Find in that page...)
+
+
+
+# <<Learning_Ops_Java_Spring_Health_Endpoint>>
+
+## See also:
+
+  * Spring_Actuators_Health
+
+# <<Learning_Ops_Java_Spring_And_Kubernetes>>
+
+# <<Learning_Ops_Java_Tomcat>>
+
+How Tomcat works
+
+[Also creates a threadpool for JDBC connections in case your client connections need the database](https://blog.zenika.com/2013/01/30/using-tomcat-jdbc-connection-pool-in-a-standalone-environment/)
+
+## See also:
+
+  * http://www.jcgonzalez.com/java-monitor-jdbc-connection-pool-servlet
+  * https://nixmash.com/post/how-to-increase-embedded-tomcat-cache-in-spring
+
+
+
+
+# See also:
+
+  * https://spring.io/blog/2015/12/10/spring-boot-memory-performance
