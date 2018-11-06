@@ -96,7 +96,14 @@ Tomcat is a:
 
 Acceptor thread -> worker thread pool -> worker thread. Worker thread reads data from connection, does the thing and responds. [Source](https://medium.com/netflix-techblog/tuning-tomcat-for-a-high-throughput-fail-fast-system-e4d7b2fc163f).
 
-## Setting the size of the Tomcat Connection Thread Pool
+## Setting the size of the Tomcat Connection Thread Pool 
+
+See Learning_Ops_Java_Spring_Tomcat_Set_Thread
+
+## <<Learning_Ops_Java_Tomcat_Metrics_Monitoring>>
+
+[some information about when the aggregated metrics are updated](https://docs.oracle.com/cd/E73210_01/EMASM/GUID-2BC1C083-EC80-4E10-B6DE-EAA6C74B8959.htm#EMASM34238)
+
 
 ## <<Learning_Ops_Java_Tomcat_Spring_Boot_Metrics>>
 
@@ -106,12 +113,11 @@ Useful metrics from Spring Boot 2.0:
 
   * tomcat.threads.busy        <-- busy threads
   * tomcat.threads.current     <-- busy + free threads
-  * tomcat.threads.config.max  <-- point where thread exhaustion happens
+  * tomcat.threads.config.max  <-- point where thread exhaustion happens. (See below)
 
 [Good explanation here at source](https://stackoverflow.com/a/41578938/224334)
 
 **How to set** `tomcat.threads.config.max` : see Learning_Ops_Java_Spring_Tomcat_Set_Threads
-
 
 ## See also:
 
