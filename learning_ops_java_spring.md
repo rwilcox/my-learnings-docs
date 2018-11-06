@@ -61,7 +61,7 @@ See also:
 
   * [Idea for enhancing your thread names so you can see whats going on](https://moelholm.com/2016/08/15/spring-boot-enhance-your-threaddumps/)
 
-# <<Learning_Ops_Java_Spring_Servlet_Information>>
+# <<Learning_Ops_Java_Spring_Servlet_Information>> , <<Learning_Ops_Java_Spring_Tomcat_Set_Threads>>
 
 Q: How many threads does Tomcat create by default for a Spring Boot App?
 A: [200 by default](https://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html), controlled by server.tomcat.max-thread (do a Find in that page...)
@@ -78,16 +78,45 @@ A: [200 by default](https://docs.spring.io/spring-boot/docs/current/reference/ht
 
 # <<Learning_Ops_Java_Tomcat>>
 
-How Tomcat works
+Tomcat provides the following features:
 
-[Also creates a threadpool for JDBC connections in case your client connections need the database](https://blog.zenika.com/2013/01/30/using-tomcat-jdbc-connection-pool-in-a-standalone-environment/)
+  * HTTP Sessions. [See some example code about using that directly](https://www.oxxus.net/tutorials/tomcat/persistent-sessions)
+  * A thread pool for handling connections
+  * [A threadpool for JDBC connections in case your client connections need the database](https://blog.zenika.com/2013/01/30/using-tomcat-jdbc-connection-pool-in-a-standalone-environment/)
+  * A cache for things??
+    - code
+    - responses?????
+
+Tomcat is a:
+
+  * standalone server you can run .wars in
+  * embedded server Spring Boot can use
+
+## About the Tomcat connection thread pool:
+
+Acceptor thread -> worker thread pool -> worker thread. Worker thread reads data from connection, does the thing and responds. [Source](https://medium.com/netflix-techblog/tuning-tomcat-for-a-high-throughput-fail-fast-system-e4d7b2fc163f).
+
+## Setting the size of the Tomcat Connection Thread Pool
+
+## <<Learning_Ops_Java_Tomcat_Spring_Boot_Metrics>>
+
+[Published metrics from Tomcat](https://github.com/micrometer-metrics/micrometer/blob/master/micrometer-core/src/main/java/io/micrometer/core/instrument/binder/tomcat/TomcatMetrics.java).
+
+Useful metrics from Spring Boot 2.0:
+
+  * tomcat.threads.busy        <-- busy threads
+  * tomcat.threads.current     <-- busy + free threads
+  * tomcat.threads.config.max  <-- point where thread exhaustion happens
+
+[Good explanation here at source](https://stackoverflow.com/a/41578938/224334)
+
+**How to set** `tomcat.threads.config.max` : see Learning_Ops_Java_Spring_Tomcat_Set_Threads
+
 
 ## See also:
 
   * http://www.jcgonzalez.com/java-monitor-jdbc-connection-pool-servlet
   * https://nixmash.com/post/how-to-increase-embedded-tomcat-cache-in-spring
-
-
 
 
 # See also:
