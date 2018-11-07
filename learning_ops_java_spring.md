@@ -119,6 +119,8 @@ Useful metrics from Spring Boot 2.0:
 
 **How to set** `tomcat.threads.config.max` : see Learning_Ops_Java_Spring_Tomcat_Set_Threads
 
+**GOTCHA when running not embedde Tomcat**: make sure you are running > 1.0.7 of micrometer metrics to avoid [this bug](https://github.com/micrometer-metrics/micrometer/issues/835).
+
 ## See also:
 
   * http://www.jcgonzalez.com/java-monitor-jdbc-connection-pool-servlet
