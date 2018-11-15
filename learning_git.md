@@ -18,6 +18,8 @@ This is disconnected with the server's version of the repository until you push 
 
 A remote copy of the code, on something that behaves like a server. (Github, Bitbucket, or a machine you have git ssh into to store changes. Git is super scale-downable.)
 
+Can be named whatever, but by default your first remote is named "origin".
+
 ### branch
 
 These are easy to ceate. Unlike subversion Git does not use the file system to store different branches, and because everything is distributed you ca create a branch on your local machine, and it doesn't exist anyhere else (until you push it)
@@ -61,6 +63,10 @@ puts all your changes in a temorpary holding area, and clears the working direct
 
 There's a couple different ways you can do this. One can set it up so that merges of pull requests will condense all the commits in your pull request into one, clearly labelled, commit. This is called a squash merge.
 
+## See also:
+
+  * http://gitready.com/
+  * https://guides.github.com/introduction/git-handbook/
 
 # Git Branches (and stuff)
 
