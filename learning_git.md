@@ -5,6 +5,63 @@ title: "Learnings: Git"
 
 Git is pretty neat, and lets you think about source code management in totally different ways. Go Git!
 
+# Git Nouns and verbs
+
+## Nouns
+### clone / checkout / repository
+
+a complete (approximately) copy of the repository on your local machine.
+
+This is disconnected with the server's version of the repository until you push or pull
+
+### remote
+
+A remote copy of the code, on something that behaves like a server. (Github, Bitbucket, or a machine you have git ssh into to store changes. Git is super scale-downable.)
+
+### branch
+
+These are easy to ceate. Unlike subversion Git does not use the file system to store different branches, and because everything is distributed you ca create a branch on your local machine, and it doesn't exist anyhere else (until you push it)
+
+### commit
+
+Commit. These are also easy to create and commits can exist just on your local machine. Because of thi I like to make my Git commits very small. I like to aim for my commits to feel like a single thought: almost a sentence, as if it was code.
+
+Does this commit do one thing? No, seriously, one thing. I may write some code for a ticket or task and break it up into 5 or 6 seperate commit yjust committing the right parts.
+Theres a bit of an art form here, and also it might not matter if you squash your merges, but it makes me feel good.
+
+In Git commit numbers are SHA1 summaries of the content (they are not sequential ie as in Subversion or CVS). Additionally, in most cases only the first 7 characters of a SHA-1 matter to uniquely identify a commit (unless you're the Linux kernel, which needs 8 due to the sheer size of the codebase).
+
+### Stage
+
+Unlike Subverion, the whole woking copy is not automatically included in a commit. You have to add files to the stage, then commit them.
+
+Some Git UIs may ignore parts of this, but because o how it work (splittig work into sentences) I see this as a feature, not a bug.
+
+Git doesn't work on just a file level: you can stage indidivual parts or lines of a file. SourceTree does this really well, the git CLI you have to be clever about.
+
+## Verbs
+
+### Push / Pull
+
+Push: send the code you have to the server
+
+Pull: pull the code on the server down to you.
+
+If you are pushing a feature on a branch you are working on with a friend, and they have committed to the repository, you'll need to `pull` to get their changes. If that happens and you have changes on your end, Git will probably figure out the merge and do it corectly (unless you literally change the same lines). Only then can you `push` your changes to the remote.
+
+### Fetch
+
+download all the branches from the remote repository. Usually not required, but if you get an error from git about it can't checkout a branch you know exists, do a fit fetch.
+
+### Stash
+
+puts all your changes in a temorpary holding area, and clears the working directory. This may allow you to switch branches when you for example realize that some of your work belongs in another branch.
+
+### Merge a branch
+
+There's a couple different ways you can do this. One can set it up so that merges of pull requests will condense all the commits in your pull request into one, clearly labelled, commit. This is called a squash merge.
+
+
 # Git Branches (and stuff)
 
 ## Remote Branches
