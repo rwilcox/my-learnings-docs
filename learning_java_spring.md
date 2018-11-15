@@ -116,7 +116,11 @@ If `management.port` is set, the following is true:
 If *only* `server.port` is set (read: no `management.port`), the following is true:
 
   * `/health` is exposed on server.port <-- if management.security.enabled=false this will NOT contain sensitive information
-   
+
+#### And Reactive WebFlux stuff
+
+There's a `ReactiveHealthIndicator`, and `ReactiveHealthRegistry`
+
 ### /git
 
 [Can read from generated git.properties file on classpath to give information about what commit the running code is](https://docs.spring.io/spring-boot/docs/current/reference/html/production-ready-endpoints.html#production-ready-application-info-git)
