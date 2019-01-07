@@ -29,3 +29,11 @@ These should be off the separate channel off the main thread (but observing the 
   * Learning_Ops_Java_Docker
   * Learning_Ops_Java_Docker_JMX_Considerations
   * 
+
+# kubectl get pods
+
+      NAME                          DESIRED   CURRENT   READY   AGE
+      nginx-deployment-2035384211   3         3         3       18s
+
+Notice that the name of the ReplicaSet is always formatted as [DEPLOYMENT-NAME]-[POD-TEMPLATE-HASH-VALUE]. The hash value is automatically generated when the Deployment is created.
+
