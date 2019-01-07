@@ -28,3 +28,19 @@ Split editor
 Editor Layout Flip Layout
 New Widow -> Interactive Playground
 
+# Extensions I like
+
+  * Document This
+  * ESLint
+  * eslint-disable-snippets
+  * File templates for VSCode
+  * Jasmine Code Snippets
+  * Javascript (ES6) code snippets
+  * JSON Viewer
+  * Modelines
+  * Node.js REPL
+  * npm intellisense
+  * Python
+  * REST Client
+  * Vim
+  * 
