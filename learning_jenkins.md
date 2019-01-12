@@ -474,6 +474,31 @@ Pulled down from SCM repo. Legacy mode: git server served by Jenkins the server.
 
 Can configure these at the global shared librares, or at the folder level.
 
+### <<Learning_Jenkins_Shared_Libraries_Development_Cycle>>
+
+There's two ways to test your jenkins shared library work. At least this works for items in the `vars` folder...
+
+#### Use the replay button in a build
+
+When you do a build on a folder configured to pull shared libraries, you can hit the replay button for any build that at least passes syntax checks of the Groovy.
+
+You will have one text box for every file the shared library has in it.
+
+#### Commit your work to a branch in the shared library repo and have your target use that
+
+This requires some tweaking of the built project's Jenkinsfile.
+
+app/Jekinsfile
+
+    #!groovy
+    @Library('NAME_OF_THE_PIPELINE_LIBRARY_IN_THE_FOLDERS_JENKINS_CONFIGURATION@BRANCH') _
+
+    pipeline {
+      ...
+    }
+
+**NOTE**: that underscore after the annotation is **required**. (I have no idea what that's about).
+
 # Jenkins Plugins I've used
 
 ## <<Learning_Jenkins_Plugins_NodeJS>>
