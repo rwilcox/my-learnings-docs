@@ -559,7 +559,9 @@ If we always do it through a Jenkins plugin then we can just point Jenkins at wh
       }
     }
 
-Works great!!
+Works great for non Java projects!!!
+
+For Java projects see Java_Maven_Saving_Releases_To_Nexus, there's non-obvious factors at play!
 
 # <<Learning_Jenkins_Building_For>>
 
