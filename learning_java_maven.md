@@ -38,3 +38,8 @@ There doesn't seem to be any tool outside of Maven (maybe Gradle?) to update thi
   * https://jfrog.com/blog/dont-let-maven-deploy-plugin-trip-you/
   * https://blog.packagecloud.io/eng/2017/03/09/how-does-a-maven-repository-work/
 
+
+# Maven and Other Build Tools
+
+  * Gradle_Interact_With_Maven
+  * Scala_Interacting_With_Maven
