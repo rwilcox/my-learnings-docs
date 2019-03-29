@@ -64,6 +64,15 @@ kubectl has bash and zsh tab completions!!
 
 `kubectrl exec` <--- how to get into the container(s) of a pod.
 
+
+### Operations with Kubectl
+
+    $ kubectl get services # <-- gets the services aka the routing rules
+    $ kubectl get pods     # <-- gets the deployed pods and information about them (for the services)
+    $ kubectl logs $PODNAME # <-- logs from the thing
+
+
+
 API Server
 ---------
 
@@ -267,6 +276,10 @@ See also
   * [Graceful shutdown in k8](https://hackernoon.com/graceful-shutdown-in-kubernetes-435b98794461)
   * [Learning about k8 and Unix Signals](https://jbodah.github.io/blog/2017/05/23/learning-about-kubernetes-and-unix-signals/)
   * Learning_Ops_Docker_PID1_Signals
+
+### So how DOES the magic DNS stuff worked???
+
+  * https://pracucci.com/kubernetes-dns-resolution-ndots-options-and-why-it-may-affect-application-performances.html
 
 
 Configuring
