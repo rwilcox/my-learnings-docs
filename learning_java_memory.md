@@ -187,3 +187,6 @@ Java jargon: concurrent Mode Failures
 
   * Learning_Ops_Java_JMX_GC_Debugging
   
+# Book Recommendations
+
+  * [Optimizing Java](https://www.amazon.com/Optimizing-Java-Techniques-Application-Performance-dp-1492025798/dp/1492025798/ref=as_li_ss_tl?_encoding=UTF8&me=&qid=1555870760&linkCode=ll1&tag=wilcodevelsol-20&linkId=be039084b39d61a72afb9e6fa0be2a37&language=en_US)

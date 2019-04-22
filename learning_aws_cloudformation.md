@@ -244,4 +244,8 @@ In the documentation the sections of the CloudFormation templates may be documen
 
 [list metadata from Cloudformation](http://brillozon.com/devops/2015/04/29/making-aws-metadata-available-on-ec2/)
 
+# See Also
 
+  * [rwilcox: Ansible / Cloudfomation Integration Treatise](https://github.com/rwilcox/ansible_cloudformation_integration_treatise)
+
+# Book Recommendations

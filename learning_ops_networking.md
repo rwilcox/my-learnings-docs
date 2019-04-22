@@ -48,3 +48,10 @@ I put a !! on bit 23 here
     base 2       1100 0100 .    1010 1000 .    0010 10!!10   . 1000 1010
     
 Thus any address of `198.168.40.*` , (198.168.0010 !! 1000) , `198.168.41.*` ((198.168.0010 !! 1001), `198.168.42.*` ((198.168.0010 !! 1010), `198.168.43.*` ((198.168.0010 !! 1011), `198.168.44.*` ((198.168.0010 !! 1100) ... etc to `198.168.47.*` is matched by this CIDR block
+
+# Book Recommendations
+
+  * [TCP/IP Illustrated Vol 1: The Protocols](https://www.amazon.com/TCP-Illustrated-Protocols-Addison-Wesley-Professional-ebook/dp/B00666M52S/ref=as_li_ss_tl?keywords=TCP+stevens&qid=1555896412&s=books&sr=1-1&linkCode=ll1&tag=wilcodevelsol-20&linkId=c4bd05545265738515040768cb31c1ae&language=en_US)
+  * [TCP/IP Illustated Vol 2: The Implementation](https://www.amazon.com/TCP-IP-Illustrated-Implementation-Vol-dp-020163354X/dp/020163354X/ref=as_li_ss_tl?_encoding=UTF8&me=&qid=1555896493&linkCode=ll1&tag=wilcodevelsol-20&linkId=62d54b786768a0abe5ab163a7691e0b1&language=en_US)
+  * [Advanced Progamming in the Unix Environment](https://www.amazon.com/gp/product/0321637739/ref=as_li_ss_tl?ie=UTF8&linkCode=ll1&tag=wilcodevelsol-20&linkId=93f1e348175640241249d112ba254402&language=en_US)
+  

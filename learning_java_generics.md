@@ -37,3 +37,7 @@ And Type Erasure <<Java_Type_Erasure>>
 See also:
 
   * <<Kotlin_Type_Erasure>>
+
+# Book Recommendations
+
+  * [Java Generics](https://www.amazon.com/Java-Generics-Collections-Development-Process/dp/0596527756/ref=as_li_ss_tl?_encoding=UTF8&qid=1555869983&sr=1-1&linkCode=ll1&tag=wilcodevelsol-20&linkId=acfe8e02f14d4329fa5865d7425ea665&language=en_US)
