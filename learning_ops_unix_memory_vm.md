@@ -173,6 +173,15 @@ Internal fragmentation (large block had to be assigned to service small request)
 
 Slab allocator with buddy allocation - carves up pages into small blocks for memory
 
+Page Sizes
+=========================
+
+See also
+-------------------------
+
+  * https://unix.stackexchange.com/questions/128213/how-is-page-size-determined-in-virtual-address-space
+
+,
 And OS File Page Cache   <<Learning_Ops_Unix_File_Cache>>
 =========================
 
