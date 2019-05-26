@@ -115,6 +115,8 @@ But it has some major ADVANTAGES:
   1. eslint, even with [eslint-plugin-jsdoc](https://www.npmjs.com/package/eslint-plugin-jsdoc) seems to be relatively happy with the typescript in the stub declaration
   2. Typechecking / IntelliSense totally works!
 
+[See it is in use / I made a sample repo](https://github.com/rwilcox/blog_sample_code_jsdoc_with_typescript_checking/blob/master/b.js#L4)
+
 ### ESLINT
 
 You're likely running eslint in your project, so you have to make sure that any code you write stays valid. Because you're not really writing Typescript, you can't go down that route entirely
