@@ -113,3 +113,26 @@ Need to iron out your release process: or else you just are making chaos
 Alerts need to link to something actionable!!!! 
 Standards in interfaces are a good thing (esp configurations!)
 
+# Netflix and availability (coneference video I watched)
+
+With heartbeat: with network partitions then that makes it a local thing:  can your current mode see that instance? Maybe the network  has partitioned in such a way the service discovery machine can see the instance but your calling instance can not
+
+OR your network has portioned in such a way that ONE of your service discovery nodes has partitions from your instances and replicates the bad data - and incorrectly missing nodes - across your service discovery workers... So now all your instances are "down" even though they are up
+
+Availibility  is doubtful: but unavailability is the sure thing
+
+Also: paranoid question: what happens if services discovery is unavailable???
+     If unavailable only: then you wouldn't know about new nodes, but you would know about the availiable ones..... 
+     
+Service discovery has STRONG availability requirements!!! But you still have to pay the CAP therum!!!!
+In most cases choosing A > C for service discovery is correct
+
+Can we create a  coorientation free service discovery???:
+   * use a connection oriented ordered and reliable protocol.. For the whole lifecycle of the instance(s)!!!
+   * would need to send heartbeats from both directions....
+   * the connection will break.. but so go ahead and establish a new connection, although your new connection may be to another machine. So you might have some conflicts
+   * conflict resolution
+   * we know that in general all instances usually don't fail together... - jus this worker is wrong
+   
+   V2 of Netflix Eureka does all this!!!
+   
