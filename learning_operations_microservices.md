@@ -136,3 +136,30 @@ Can we create a  coorientation free service discovery???:
    
    V2 of Netflix Eureka does all this!!!
    
+[Engineering for the long haul](https://www.youtube.com/watch?v=p0jGmgIrf_M)
+============================
+
+Systems should have a standard status page that tells information about machine it's running on, when it was built, traffic, if it's up, how to page the team / guy who is responsible for the app
+^^^^ why: person on call paged about a dependency they've never heard of
+
+Principals of distributed systems:
+
+  1. If you talk to another server have a time out, exponential backoff. + JITTER!!!!!
+  2. Systems should be able to perform "reasonably" under degraded modes.
+  3. Note duplication: between 3-5 services doing essentially the same thing probably means you need to rethink / consolidate
+  4. ABANDONED SERVICES!!
+  5. BORING infrastructure choices
+
+Second systems:
+
+  1. Refactor in place OR iterate often and get something into prod fast
+  2. Move your biggest customer FIRST
+  3. Sometimes things have long lead time: make sure your planning can account for this (ie don't need this new version of the system 9 months before it's done)
+  
+take care of team:
+
+  * Not ENG or OPS: need both
+  * Manage interrupt load
+  * Keep the noise floor low
+  
+  Your team is your service: if you burn them out you / it won't last
