@@ -16,3 +16,33 @@ title: "Learnings: Management: Agile"
 
 > Why bother writing any code if all you’re doing is small stuff? The answer is that you need to stay enough in the code to see where the bottlenecks and process problems are. You might be able to see this by observing metrics, but it’s far easier to feel these problems when you’re actively engaged in writing code yourself. If the build is really slow or deploying code takes too long or on-call is a nightmare, you’ll feel it in the difficulties you, an experienced engineer, have in knocking out trivial programming tasks
 
+		
+Your company is awesome (but is "Company Culture" a lie?) (http://www.confreaks.com/videos/4179-rmr2014-your-company-is-awesome-but-is-company-culture-a-lie)
+========================
+
+Model for happiness (PERMA):
+
+  * Positive Emotion
+  * Engagement
+  * Relationships  <-- must have trust to have good relationships
+  * Meaning
+  * Achievement
+  
+Developers want to work on challenging, innovative projects that are complex but autonomous and finite (ideally with a clear relationship between work and reward)
+(hey look these can be categorized under the above categories!!)
+
+Potential formula:               `E + M == A == (more) P`
+the inverse, by math properties: `A - (E + M) == nil == SAD KITTEN`
+
+
+Retrospective questions:
+
+  * Does PO respond to requests in a responsible timeframe?
+  * Does the PO appreciate and value the work done by the developing team?
+  * Does the PO follow, within reason, the process defined by the dev team?
+  * Is the PO pleasant to work with in general?
+  * Do we, as developers, have the resources needed to move the project forward?
+  
+By actively praising the values we want in the culture (helpfulness, etc) we shape company culture
+the inverse, by math properties: you get what you praise
+
