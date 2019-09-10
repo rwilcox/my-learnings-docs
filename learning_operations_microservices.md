@@ -163,3 +163,22 @@ take care of team:
   * Keep the noise floor low
   
   Your team is your service: if you burn them out you / it won't last
+
+Serve Meals not ingredients (https://www.youtube.com/watch?v=hoXf0Uo5bCo&index=32&list=PL11cZfNdwNyO9CpTWH2qjYfzysEtpfOCd)
+========================
+
+How do we get teams talking to each other to reduce repeating yourself work WHILE ALSO not wasting
+time and effort with 'survey's that are done and analyized then don't reflect the real world again in 3 months??
+
+Tangential thought: Why Teraform?
+
+  * disaster recovery: stand up your configuration across another instance and back you go
+  * organization tool communication: can use teraform manifests as way to enforce / suggest topology best practices across the Enterprise
+  * easily create test, staging environments that look like production
+
+
+GREAT TERM: SHADOW IT:
+
+  teams going off and doing their own thing on a variety of providers b/c no guidance, or Politics or ??
+  
+  
