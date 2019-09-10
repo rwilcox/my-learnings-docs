@@ -90,3 +90,26 @@ Principals of microservices:
 THeory: we plan for applications to be around for 10 years, in practice they're usually around for 17
 
 Systems communication via pub-sub
+
+# arch patterns for resilient distributed systems (video / conference talk I watched)
+
+From medical industry: safety critical systems always operating on edge of failure (as you're maximizing your resources!): cook and Rasmussen 
+
+Engineering resistance requires a model of safety based on mentoring, responding adapting and learning
+
+Buile suyport for contious mainatince; reveal control of system to operotors
+know it’s goitg to get used in woys you didin’&0t intend
+thinx obout configuration as interfaces
+
+mvp needs to include metrics and monitoring from thE ops sid
+
+Key insighto from google’s chubby paper: engineers don’t plan for avail, concensesus, prumary elections, fIlures, their own bugs OR the future. They olso don’T understand distributed systems
+
+Unknown unknows: prevented by cognitive diversity: it may be unxnown to you but someone with more or different experience may know that there’s a problem: reducing yoer unknowns!!!
+
+Optimization a can also make less redundant
+Rank your services on what can be dropped, killed or deferred
+Need to iron out your release process: or else you just are making chaos 
+Alerts need to link to something actionable!!!! 
+Standards in interfaces are a good thing (esp configurations!)
+
