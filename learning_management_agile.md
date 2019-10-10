@@ -16,3 +16,24 @@ title: "Learnings: Management: Agile"
 
 > Why bother writing any code if all you’re doing is small stuff? The answer is that you need to stay enough in the code to see where the bottlenecks and process problems are. You might be able to see this by observing metrics, but it’s far easier to feel these problems when you’re actively engaged in writing code yourself. If the build is really slow or deploying code takes too long or on-call is a nightmare, you’ll feel it in the difficulties you, an experienced engineer, have in knocking out trivial programming tasks
 
+# empowerment model
+
+employee empowerment model that includes three degrees of empowerment.3
+  1. The first level encourages employees to play a more active role in their work. 
+  2. The second level asks employees to become more involved with improving the way things are done
+  3.. The third level enables employees to make bigger and better decisions without having to engage upper management. The third level is key for an Agile culture.
+  
+## do I have the authority to do one of the following items with a decision in my team (that I need help with?? / that’s in my  bounded area of responsibility)
+
+tell, sell, consult, agree, advise, inquire, and delegate.
+
+- Jurgen Appelo / Managing for Happiness (??)
+
+# team knowledge models
+
+  * T shaped skills
+  * lightning bolt (where teams / people have primary, secondary and tertiary skills)
+  
+# servant leadership
+
+Servant Leadership, Robert K. Greenleaf and Larry C. Spears share ten attributes of servant leadership: listening, empathy, healing, awareness, persuasion, conceptualization, foresight, stewardship, commitment to grow people, and building community. 
