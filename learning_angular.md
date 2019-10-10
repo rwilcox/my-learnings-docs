@@ -4,6 +4,102 @@ title: "Learnings: Angular"
 ---
 
 # General Angular Information
+
+## async patterns
+
+### asyncpipe - `{{ blahblah | async}}`
+
+Will only do the filter when the observable has some value.
+
+## async as
+
+Gives you a large object that you can route the value from the subscription into variable
+
+## order of callbacks:
+  0. Constructor
+  1. `ngOnChanges`
+  2. `ngOnInit`
+  3. `ngDoCheck`  <-- each pass of change detector
+  4. `ngAfterContextInit` <-- after child component state inited and projection complete
+  5. `ngAfterContentChecked`
+  6. `ngAfterViewInit`
+  7. `ngAfterViewChecked`
+  8. `ngDestroy`
+
+to pull those in inherit from interface that is the name without the Ng `implements DoCheck` for example
+
+
+# Architecture / Organization
+
+Can separate project out into root Application and modules. (The add the component to the root application ‘s manifest and use the directives from the module(s) you imported)
+
+Gyou could organize your modules by feature, or by component, maybe even by domain in a domain driven design approach.
+
+## Style Guides
+
+  * [File Naming/Location Style Guide](https://angular.io/guide/styleguide#application-structure-and-ngmodules)
+
+## Ways to talk to each other
+
+  * event emmitter
+  * Subject <-- RxJS
+  * BehaviorSubject <-- rxjs
+
+### EventEmitter
+
+- [BOOKNOTE]:
+
+> You’ll notify the parent about the latest prices by emitting custom events via the @Output property of the component.
+
+- Angular Component with Typescript
+`@Input`: lets you speciff essentially HTML attributes when you instantiate your compontent in an HTML template
+
+`@Output` : way to send events _up_, from child -> parent (). (Repmember, one way data flow. To send data up you need to use events.)
+
+
+#### NOTE: Angular doesn’t offer an API to support event bubbling. (Have to use native DOM events for that)
+
+### @Input, @Output
+
+## Actually making loosely coupled components: Mediator pattern
+
+(Mediator handles @Ouput events from one component and sends them as @Input attributes into another).
+
+(Could make this an injectable service too...)
+
+### or just seriously use  <<Angular_NgRx>>
+
+It’s redux but for Angular
+
+And this time with RxJS backing it - subscribe the the store.
+
+1. action
+2. Effect
+3. Reducer
+4. (The Store)
+5. Selectors
+
+#### Main concepts 
+## and routes
+
+Routes are defined on a component / module level. export routes with `forChild` to do this.
+
+By default / generator routes live in `routing.module.ts`
+
+## and pulling DI provider items from component / library modules in the main app
+
+- [BOOKQUOTE]:
+
+> If a module is loaded eagerly, its providers can be used in the entire app, but each lazy-loaded module has its own injector that doesn’t expose providers. Providers declared in the @NgModule() decorator of a lazy-loaded module are available within such a module, but not to the entire application. L
+
+-  Angular Development with Typescript (Ed 2)
+## Network communication
+
+Usually you'll stash all your HttpClient stuff into a service.
+
+Can use Http Interceptors to add special things to the request, etc etc.
+
+
 # Directives
 
   1. Componets
@@ -34,6 +130,13 @@ title: "Learnings: Angular"
             this.contact = contactIn
         }
     }
+
+## gotchas
+
+### can not use a Typescript interface as a DI type for the provided parameter
+
+Because types son’t really exist / are removed by the compiler. use abstract classes instead (really) and your classes that conform to that interface should just inherit from that base class.
+
 
 # Testing Angular Applications
 
@@ -108,7 +211,8 @@ this also automatically does `fakeAsync` work, so you don't have to call `done`.
 
 # End To End / Integration Tests
 
-Protractor (which bundles up Chrome, Firefox by way of WebDriver and/or Selenium)
+Protractor (which bundles up Chrome, Firefox by way of WebDriver and/or Selenium).
+Firefox and and Chrome can support direct connections, without going though Selenium server, but all the other browsers you’ll have to use that.
 
 ## Using Headless Chrome with Protractor
 
@@ -139,4 +243,16 @@ also points to their headless chrome container they use
 A: It seems so:
 
   * [instructions from TestingBot on how to do that](https://testingbot.com/support/getting-started/protractor.html)
+  
+### can I run multiple browsers in my test?
+
+  A: yes. set multiCapabilities
+  
+## Using Pupetter With Protractor
+  
+  Very easy: just point protractor towards the exec path from Puppetter?
+  
+### See also:
+  
+  * https://medium.com/@danharris_io/how-to-setup-angular-e2e-tests-on-vsts-ci-be0872f9dc31
   
