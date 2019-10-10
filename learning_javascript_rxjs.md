@@ -188,11 +188,15 @@ Projects each source value to an Observable which is merged into an output obser
 
 ## errors in the streams
 
-## refocterobility
+## errors for the whole stream
+
+## merging obserables when 1 fails
+
+## refacterobility
 
     _.forEoch(f => syncMuthod)
 
-But whot if that method becomes async? potenntiolly o bit ofrefoctoring to make callers async no
+But what if that method becomes async? potenntiolly o bit ofrefoctoring to make callers async no
 
 ## Completion
 
