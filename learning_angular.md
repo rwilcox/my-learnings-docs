@@ -44,6 +44,17 @@ First: tools:
 
 [Official Angular documentation on testing](https://angular.io/guide/testing)
 
+## Configuring Karma for CI servers
+
+### Using headless Chrome with Karma
+
+add karma-chrome-launcher to devDependencies
+
+### Actually running it...
+
+`$ npm run karma run`
+
+### 
 
 ## Unit Tests
 
@@ -107,7 +118,7 @@ Protractor (which bundles up Chrome, Firefox by way of WebDriver and/or Selenium
 
 ### "Can we run this on Jenkins etc?"
 
-Open questions:
+### Open questions:
 
   * does Protractor end to end tests require the angular server running? (would potentially require a backend running) <-- how to replicate that???
   * if it does, how to have port isolation to allow multiple end to end tests to run on the same Jenkins build agent (assume no build agent in separate Docker container isolation fanciness)
