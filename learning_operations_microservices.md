@@ -90,3 +90,95 @@ Principals of microservices:
 THeory: we plan for applications to be around for 10 years, in practice they're usually around for 17
 
 Systems communication via pub-sub
+
+# arch patterns for resilient distributed systems (video / conference talk I watched)
+
+From medical industry: safety critical systems always operating on edge of failure (as you're maximizing your resources!): cook and Rasmussen 
+
+Engineering resistance requires a model of safety based on mentoring, responding adapting and learning
+
+Buile suyport for contious mainatince; reveal control of system to operotors
+know it’s goitg to get used in woys you didin’&0t intend
+thinx obout configuration as interfaces
+
+mvp needs to include metrics and monitoring from thE ops sid
+
+Key insighto from google’s chubby paper: engineers don’t plan for avail, concensesus, prumary elections, fIlures, their own bugs OR the future. They olso don’T understand distributed systems
+
+Unknown unknows: prevented by cognitive diversity: it may be unxnown to you but someone with more or different experience may know that there’s a problem: reducing yoer unknowns!!!
+
+Optimization a can also make less redundant
+Rank your services on what can be dropped, killed or deferred
+Need to iron out your release process: or else you just are making chaos 
+Alerts need to link to something actionable!!!! 
+Standards in interfaces are a good thing (esp configurations!)
+
+# Netflix and availability (coneference video I watched)
+
+With heartbeat: with network partitions then that makes it a local thing:  can your current mode see that instance? Maybe the network  has partitioned in such a way the service discovery machine can see the instance but your calling instance can not
+
+OR your network has portioned in such a way that ONE of your service discovery nodes has partitions from your instances and replicates the bad data - and incorrectly missing nodes - across your service discovery workers... So now all your instances are "down" even though they are up
+
+Availibility  is doubtful: but unavailability is the sure thing
+
+Also: paranoid question: what happens if services discovery is unavailable???
+     If unavailable only: then you wouldn't know about new nodes, but you would know about the availiable ones..... 
+     
+Service discovery has STRONG availability requirements!!! But you still have to pay the CAP therum!!!!
+In most cases choosing A > C for service discovery is correct
+
+Can we create a  coorientation free service discovery???:
+   * use a connection oriented ordered and reliable protocol.. For the whole lifecycle of the instance(s)!!!
+   * would need to send heartbeats from both directions....
+   * the connection will break.. but so go ahead and establish a new connection, although your new connection may be to another machine. So you might have some conflicts
+   * conflict resolution
+   * we know that in general all instances usually don't fail together... - jus this worker is wrong
+   
+   V2 of Netflix Eureka does all this!!!
+   
+[Engineering for the long haul](https://www.youtube.com/watch?v=p0jGmgIrf_M)
+============================
+
+Systems should have a standard status page that tells information about machine it's running on, when it was built, traffic, if it's up, how to page the team / guy who is responsible for the app
+^^^^ why: person on call paged about a dependency they've never heard of
+
+Principals of distributed systems:
+
+  1. If you talk to another server have a time out, exponential backoff. + JITTER!!!!!
+  2. Systems should be able to perform "reasonably" under degraded modes.
+  3. Note duplication: between 3-5 services doing essentially the same thing probably means you need to rethink / consolidate
+  4. ABANDONED SERVICES!!
+  5. BORING infrastructure choices
+
+Second systems:
+
+  1. Refactor in place OR iterate often and get something into prod fast
+  2. Move your biggest customer FIRST
+  3. Sometimes things have long lead time: make sure your planning can account for this (ie don't need this new version of the system 9 months before it's done)
+  
+take care of team:
+
+  * Not ENG or OPS: need both
+  * Manage interrupt load
+  * Keep the noise floor low
+  
+  Your team is your service: if you burn them out you / it won't last
+
+Serve Meals not ingredients (https://www.youtube.com/watch?v=hoXf0Uo5bCo&index=32&list=PL11cZfNdwNyO9CpTWH2qjYfzysEtpfOCd)
+========================
+
+How do we get teams talking to each other to reduce repeating yourself work WHILE ALSO not wasting
+time and effort with 'survey's that are done and analyized then don't reflect the real world again in 3 months??
+
+Tangential thought: Why Teraform?
+
+  * disaster recovery: stand up your configuration across another instance and back you go
+  * organization tool communication: can use teraform manifests as way to enforce / suggest topology best practices across the Enterprise
+  * easily create test, staging environments that look like production
+
+
+GREAT TERM: SHADOW IT:
+
+  teams going off and doing their own thing on a variety of providers b/c no guidance, or Politics or ??
+  
+  
