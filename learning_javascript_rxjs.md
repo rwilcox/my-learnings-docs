@@ -257,22 +257,26 @@ this approach of using an operator and optionally calling the function is used f
 Two things to take into consideration:
 
   1. once a pipeline fails it is not called / used again. This may be a factor if you are watching a stream and ie sending HTTP requests
-	2. some operations around combining operators will error if any of the observables you are joining fail
+  2. some operations around combining operators will error if any of the observables you are joining fail
 
-
-		let pretendHttpRequest = from([1]).pipe(
-								map( () => {throw new Error('sad!')} ) ,
-								catchError( e => of(e) )
-								// ^^^ here I chose to convert this from an throwed excption to an object we are passing around that happens to be an exception
-								// later on we can check for `isinstance Error` and map results appropriately
+```javascript
+	let pretendHttpRequest = from([1]).pipe(
+					map( () => {throw new Error('sad!')} ) ,
+					catchError( e => of(e) )
+					// ^^^ here I chose to convert this from an throwed excption to
+					// an object we are passing around that happens to be an exception
+					// later on we can check for `isinstance Error` and map results
+					[[]] appropriately
 		)
     let pretendTwo = from([42])
     
-		forkJoin(pretendHttpRequest, pretendTwo ).pipe(
-      map( curr => `${curr}, Ryan` ),
-      tap( curr => console.log(curr) ),
-			catchError( err => console.error(err))
-		)
+	forkJoin(pretendHttpRequest, pretendTwo ).pipe(
+    	map( curr => `${curr}, Ryan` ),
+      	tap( curr => console.log(curr) ),
+		catchError( err => console.error(err))
+	)
+
+```
 
 But did you se our pretendHttpRequest we wrapped it up in a pipe and used catchError to catch the exception / error that would have come out?
 
