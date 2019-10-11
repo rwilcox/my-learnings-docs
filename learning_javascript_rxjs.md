@@ -266,7 +266,7 @@ Two things to take into consideration:
 					// ^^^ here I chose to convert this from an throwed excption to
 					// an object we are passing around that happens to be an exception
 					// later on we can check for `isinstance Error` and map results
-					[[]] appropriately
+					// appropriately
 		)
 	let pretendTwo = from([42])
 
