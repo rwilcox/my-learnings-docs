@@ -268,11 +268,11 @@ Two things to take into consideration:
 					// later on we can check for `isinstance Error` and map results
 					[[]] appropriately
 		)
-    let pretendTwo = from([42])
-    
+	let pretendTwo = from([42])
+
 	forkJoin(pretendHttpRequest, pretendTwo ).pipe(
-    	map( curr => `${curr}, Ryan` ),
-      	tap( curr => console.log(curr) ),
+		map( curr => `${curr}, Ryan` ),
+		tap( curr => console.log(curr) ),
 		catchError( err => console.error(err))
 	)
 
