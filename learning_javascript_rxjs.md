@@ -7,7 +7,6 @@ title: "Learnings: Javascript: RxJS"
 
 [RxJS](https://rxjs.dev/).
 
-
 RxJS 6.0 released April 2018.
 
 Ideas based on Reactive design patterns using the ReactiveX patterns and terminologies. This means it's familiar to developers who have done reactive development across say RxJava, AND is very familiar for developers who like to use functional patterns in their code.
@@ -16,7 +15,7 @@ ReactiveX operates on discrete values that are emitted over time.
 
 Good Documentation:
 
-  * website
+  * [RxJS.dev](https://rxjs.dev/)
   * learnrxjs.io
   * RxJS In Action, from Manning <-- but covers RxJS 5 syntax
   * Building Reactive Websites with RxJS, from Prag Bookshelf
@@ -47,6 +46,8 @@ Super useful in Javascript where sync patterns and async patterns have pretty si
 
 # Producers in RxJS
 
+In Reactive terms these are called Observables.
+
 Two different kinds: hot and cold (like RxJS).
 
 hot: always emits events, listening or not.
@@ -69,6 +70,30 @@ cold: doesn't start emiting until you listen
 Some sources are default hot, like events.
 
 # Consumers in RxJS
+
+## subscribing to a producer
+
+    ```javascript
+		createdObservable.subscribe(
+			next => console.log('current value of the stream'),
+			err => console.error('will be called if there is an error'),
+			() => console.log('the stream is complete')
+		)
+		```
+
+You can also pass a class that implements this interface
+
+		class ObserverInterface {
+			next(value) {
+
+			}
+			error() {
+
+			}
+			complete() {
+				
+			}
+		}
 
 ## Interacting with rest of Javascript world
 
@@ -128,6 +153,14 @@ This seperation means better testing: ability to throw different data in, and th
 
 ## marble diagrams
 
+  * https://rxmarbles.com/
+	* [RxViz](https://rxviz.com/)  <-- write code, get a marble diagram generated for you...
+
+## every item in the pipeline takes an input observable and returns an output observable
+
+pipeline is a series of observables getting consumed and creating more observables, until the end.
+
+(youch).
 
 # Schedulers
 
@@ -161,22 +194,26 @@ Projects each source value to an Observable which is merged into an output obser
 
 #  Hot vs Cold Observables
 
+Same as RxJava. See Reactive_Hot_vs_Cold
 
 # Interesting Operators
 
 
-## Functional style Methods
+| Observable Method | What it does                                                                                                                                                                |
+|:----------------- |:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| iif               |  subscribe to the first or second observable based on condition                                                                                                             |
+| filter            | emit values that pass the condition                                                                                                                                         |
+| find              | emit the first item that passes the predicate (then complete the Observer)                                                                                                  |
+| skip              | skips the provided number of emitted values                                                                                                                                 |
+| partition         | split one observable into two based on predicate (could use this to seperate out successful events and error conditions, for example...)                                    |
+| flatmap/mergeMap  | This operator is best used when you wish to flatten an inner observable but want to manually control the number of inner subscriptions.                                     |
+| tap               | side effect zone!!!                                                                                                                                                         |
+| zip               | after all observables are finished, emit the entire array                                                                                                                   |
+| merge             | emits items that are the result of every observable. Completes only when all have completed                                                                                 |
+| concat            | subscribes to observables in order as previous completes                                                                                                                    |
+| concatMap         | map values emitted to an inner obserable, subscribe and emit in order (translate an object into a observable)                                                               |
+| forkJoin          | when all observables complete, emit the last value for each                                                                                                                 |
 
-  * iif
-  * filter
-  * find
-  * skip
-  * partition
-  * flatMap / mergeMap
-  * tap <-- side effect zone!!!
-
-
-##
 
 # User Stories I care about
 
@@ -186,23 +223,68 @@ Projects each source value to an Observable which is merged into an output obser
 
 ## streams and multiple sources
 
-## errors in the streams
-
 ## errors for the whole stream
+
+errors that occur in the stream are propegated down to any observers, finally resulting in a call to the error "callback".
+
+(ie errors `throw`n in the body of an operator)
+
+## catching errors in the pipeline
+
+`catchError` will only call the function when the previous item in the pipeline errors.
+		
+		```javascript
+		from( [0] ).pipe(
+			map( curr => {throw new Error('boo!') } ),
+			catchError( err => {
+				console.error(err)
+				return 'maybe a default value here?'
+			})
+		)
+		```
+
+Because `catchError` doesn't have to happen directly after the operator that fails this gives you some options. Maybe you make a network request and grab some data out for display. Do those as two seperate operations in the pipelie, then put your `catchError` there, with a "could not get" message. Then put - whatever text you have - to the correct component.
+
+(or something like that, of course)
+
+
+## retrying when errors happen
+
+this approach of using an operator and optionally calling the function is used for `retry` and `retryWhen` operators.
 
 ## merging obserables when 1 fails
 
-## refacterobility
+Two things to take into consideration:
 
-    _.forEoch(f => syncMuthod)
+  1. once a pipeline fails it is not called / used again. This may be a factor if you are watching a stream and ie sending HTTP requests
+	2. some operations around combining operators will error if any of the observables you are joining fail
 
-But what if that method becomes async? potenntiolly o bit ofrefoctoring to make callers async no
 
-## Completion
+		let pretendHttpRequest = from([1]).pipe(
+								map( () => {throw new Error('sad!')} ) ,
+								catchError( e => of(e) )
+								// ^^^ here I chose to convert this from an throwed excption to an object we are passing around that happens to be an exception
+								// later on we can check for `isinstance Error` and map results appropriately
+		)
+    let pretendTwo = from([42])
+    
+		forkJoin(pretendHttpRequest, pretendTwo ).pipe(
+      map( curr => `${curr}, Ryan` ),
+      tap( curr => console.log(curr) ),
+			catchError( err => console.error(err))
+		)
 
-  * <-- wait for all of these to be done
-  * <-- wait for all these to be done, successful or not
-  * *
+But did you se our pretendHttpRequest we wrapped it up in a pipe and used catchError to catch the exception / error that would have come out?
+
+## refactorability
+
+In regular ol JS you have this problem:
+
+    _.forEach(f => syncMuthod)
+
+But what if that method becomes async? potentially a bit ofrefoctoring to make callers async (especially if you have a deep call tree assuming sync..)
+
+## backpressure
 
 
 # See also
@@ -212,4 +294,6 @@ But what if that method becomes async? potenntiolly o bit ofrefoctoring to make 
   * [my rxjs tags](https://pinboard.in/u:rwilcox/t:rxjs/)
   * [official documentation](https://rxjs-dev.firebaseapp.com/guide/overview)
   
+# Book Recommendations
 
+  * [RxJS In Action](https://www.amazon.com/RxJS-Action-Paul-P-Daniels/dp/1617293415/ref=as_li_ss_tl?keywords=RxJS+in+Action&qid=1570748058&sr=8-1&linkCode=ll1&tag=wilcodevelsol-20&linkId=929629a486c6ced551f7aeb7075e22be&language=en_UShttps://amzn.to/2nwrymm)
