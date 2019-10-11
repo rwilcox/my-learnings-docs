@@ -27,7 +27,7 @@ See also:
 
 Observable operations are *synchronous*
 
-## Hot vs cold flux
+## Hot vs cold flux  <<Reactive_Hot_vs_Cold>>
 
 ### Cold flux
 
