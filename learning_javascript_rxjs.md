@@ -24,6 +24,8 @@ Good Documentation:
 
 The ReactiveX Observable model allows you to treat streams of asynchronous events with the same sort of simple, composable operations that you use for collections of data items like arrays. 
  
+There's consistancy here: observable creators, and operators, alwayso return observables.
+
 Super useful in Javascript where sync patterns and async patterns have pretty significant implications. Just the other day had to refactor a fair bit of code where I had assumed all operations would be sync (stupid)... but then I had to introduce an operation that wasn't anymore.
 
 ## Better control
@@ -54,7 +56,7 @@ hot: always emits events, listening or not.
 cold: doesn't start emiting until you listen
 
 
-	```javascript
+```javascript
 	import { from } from 'rxjs'
 	
 	let data = [1, 2, 3]
@@ -65,7 +67,7 @@ cold: doesn't start emiting until you listen
 
 	res.subscribe( v => console.log(v) )
 	// only NOW will we start processing the events from 
-	```
+```
 
 Some sources are default hot, like events.
 
@@ -73,13 +75,13 @@ Some sources are default hot, like events.
 
 ## subscribing to a producer
 
-    ```javascript
+	```javascript
 		createdObservable.subscribe(
 			next => console.log('current value of the stream'),
 			err => console.error('will be called if there is an error'),
 			() => console.log('the stream is complete')
 		)
-		```
+	```
 
 You can also pass a class that implements this interface
 
@@ -125,17 +127,17 @@ works for strings, records, arrays...
 
 Old
 
-	```javascript
+```javascript
 	import { map, filter, catch } from 'rxjs/operators'
 	source
 		.map( x => x.title )
 		.filter( x => x.legth > 10 )
 		.catch( err => console.log(err) )
-	```
+```
 	
 New
 
-	```javascript
+```javascript
 	
 	import { merge, filter, catchError } from 'rxjs'
 	source.pipe(
@@ -143,7 +145,7 @@ New
 		filter( x => x.length > 10 ),
 		catchError( err => console.log(err) )
 	)
-	```
+```
 
 # development helping paradigms
 
@@ -178,7 +180,7 @@ docs: "does not subscribe to the next observable until the previous one complete
 
 Projects each source value to an Observable which is merged into an output observable, in a serialized fashion, waiting for each to complete before merging the next
 
-	```javascript
+```javascript
 	
 	let urls = [...]
 	let o = from(urls).pipe(
@@ -187,7 +189,7 @@ Projects each source value to an Observable which is merged into an output obser
 			from( axios.get(currentURL) )
 		})
 	)
-	```
+```
 
 ## changing schedulers 
 
@@ -217,11 +219,16 @@ Same as RxJava. See Reactive_Hot_vs_Cold
 
 # User Stories I care about
 
-## cancellable streams
-
-## nested streams(?)
-
 ## streams and multiple sources
+
+Athe RxJS documentation says these are combination operators:
+
+  * forkJoin
+  * merge
+  * zip
+  * race
+
+some others may be useful here
 
 ## errors for the whole stream
 
@@ -233,7 +240,7 @@ errors that occur in the stream are propegated down to any observers, finally re
 
 `catchError` will only call the function when the previous item in the pipeline errors.
 		
-		```javascript
+```javascript
 		from( [0] ).pipe(
 			map( curr => {throw new Error('boo!') } ),
 			catchError( err => {
@@ -241,7 +248,7 @@ errors that occur in the stream are propegated down to any observers, finally re
 				return 'maybe a default value here?'
 			})
 		)
-		```
+```
 
 Because `catchError` doesn't have to happen directly after the operator that fails this gives you some options. Maybe you make a network request and grab some data out for display. Do those as two seperate operations in the pipelie, then put your `catchError` there, with a "could not get" message. Then put - whatever text you have - to the correct component.
 
@@ -290,6 +297,21 @@ But what if that method becomes async? potentially a bit ofrefoctoring to make c
 
 ## backpressure
 
+### Wrap it in a mergeMap wint concurrency of one
+
+might work to keep the upstream operators from sending you data too fast
+
+although this is not reolly backpressure as it is making the hihwoy go down to one lane.
+
+### lossy methods
+
+debounce, sample, throttle
+
+although this is backpressure os mcuh as a spam filter is: ignore stuff we don't want to deal with
+
+### getting the next value only if you're ready for it
+
+You may be able to abuse `Subject` to do this. Interesting and maybe promising prototype code: [Lossless Backpressure in RxS](https://itnext.io/lossless-backpressure-in-rxjs-b6de30a1b6d4)
 
 # See also
 
