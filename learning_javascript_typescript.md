@@ -106,6 +106,16 @@ What you almost want is a Java Optional type, or something to make less typing h
         return `hello, ${name}'
     }
 
+#### Optional Parameters
+
+If it's at the end you can use the optional punctuation:
+
+    function setName(firstName: string, lastName?: string) {}
+
+However the compiler will not let you put that in anything but last parameter. (even if strict type checking is off).
+
+In the case of an optional parameter in the middle (what ARE you doing???) you will need to do `function setName(firtName: string, middleName: string|null, lastName: string) {}`
+
 #### Generic Types
 
     let v: Arry<Honkable> = []
