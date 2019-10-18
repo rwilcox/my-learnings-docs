@@ -3,7 +3,7 @@ path: "/learnings/javascript_typescript_null_handling_strategies"
 title: "Learnings: Javascript: Typescript: Null Handling Strategies"
 ---
 
-# Introduction
+# Introduction <<Learning_Typescript_Null_Handling_Strategies>>
 
 Typescript with it's `strict` compiler mode makes optional values something we have to think about all the time. If you have programming in Swift this feels familiar.
 
@@ -44,6 +44,8 @@ If you ae looking for a more Haskell inspired version (Maybe Monad), see [typesc
 
 # The Typescript way
 
+Using compiler fanciness, and not fundimentals of functional programming, is possible here too...
+
 ## Using Type Guards
 
 We can use [user defined type guards](https://www.typescriptlang.org/docs/handbook/advanced-types.html) to enter into a block of code where the compiler knows what kind of object a thing is (because we told it).
@@ -65,7 +67,7 @@ Fancy...
 
 You could also get super fancy and switch on field attributes: only tall people allowed in this part of the `if` statement, etc.
 
-## Using Refinments
+## Using Refinments... type predicates <<Learning_Typescript_Null_Handling_Predicate_Explaination>>
 
 Flow has a feature it calls Refinments (see Learning_Javascript_Refinements). This basically means that the compiler will gain context the more code and if statements you put the object in question in.
 
@@ -84,6 +86,10 @@ Let's see this in action:
         console.log(currentPerson.firstName)
         // no compile error! remove the if guard and TS will complain that firstName may not exist on null!!
     }
+
+### See also:
+
+  * Learning_Javascript_Typescript_Type_Predicate
 
 # Conclusion
 
