@@ -17,6 +17,15 @@ Typescript' [design goals ane enumerated on the Typescript Github](https://githu
     console.log(concat("a", "b"))
     console.log( concat(42, {"name": "Ryan"}) )  // will not compile 
 
+Like Flow, which does this more drastically, Typescript splits the language into two:
+
+  * type space <-- where the types live
+  * variable space  <-- your transpiled code
+
+Type space declarations are not reflected in the running of you program. There's a couple places where keywords implement things in both type and variable space (`class` being a prime example).
+
+But this also make things hard, especially in certain situations when you want to know the type at runtime.
+
 ## Declaring Types
 
 ### Variable Declarations 
@@ -24,6 +33,15 @@ Typescript' [design goals ane enumerated on the Typescript Github](https://githu
     let thing: string = 'John Doe'
 
 But sometimes types are infered
+
+You can think of it NOT as "this variable is of this type", but "this variable should match this declaration, or conform to this series of duck-types.
+
+You could think of an object being described by a shape, not an imstance of a type.
+
+### Declaring your own types
+
+- [TODO]: write this. Both inline types and part of their own thing types.
+
 
 #### When that variable is a higher order function
 
@@ -67,6 +85,10 @@ You might think you can use the `readonly` attribute, but this only applies to a
 (also `readonly` only applies to the array, not deep: it does not mean elements in the array are `readonly`!! Cast these to `ReadOnly<>`).
 
 But note `Readonly<>` is not itself deep either.... you can use a `DeepReadonly` generic in `ts-essentials` to do this.
+
+##### readonly parameter vs ReadOnly<>
+
+- [TODO]: write me
 
 #### Declaring variables null - or not
 
@@ -228,10 +250,30 @@ Typescript alo has something similar to Learning_Javascript_Refinements
 ### See also
 
   * Learning_Typescript_Null_Handling_Predicate_Explaination
+  * Effective Typescript Chapter 3 Item 22 calls this "type narrowing"
 
 # swicth statment completion
 
 use the never type in the default case to man=ke sure you implemented all of switch
+
+## Having the type system build types for you
+
+All this typing sometimes gets annoying, particularly when you have a lot of types that are kind sort of but not really like each other. Typescript is here for you
+
+### Creating a more restrict type than what you currently have
+
+    type CheckingAccount {
+        accountNumber: number,
+        checks: Array<Check>
+        balance: number
+    }
+
+    type SavingsAccount = Pick<CheckingAccount, 'accountNumber', 'balanace'>
+
+### See also
+
+  * [ts-essentials](https://www.npmjs.com/package/ts-essentials)
+
 
 # Interesting additions to JS
 
@@ -252,6 +294,19 @@ Q: But this doesn't include type information??
 A: if you have type information in jsdoc, yes it appears so
 
 - [TODO]: check out this statement....
+
+# Interacting with Javascript
+
+## Places you can provide the types for
+
+## Interacting with some JS Object (aka: you have parsed some JSON... but want to make it type safe)
+
+You likely need the type here before going very far. Couple different ways to do this:
+
+  1. Just cast it. `foobar as Thinger`. May have to pass through any type or something.
+  2. Use a user defined type guard (see Learning_Typescript_Type_Guards) and have that cast the variable to the correct type
+  3. Use something like json-schema to generate TS classes from JSON Schema, [as described in an atomicobject blog post](https://spin.atomicobject.com/2018/03/26/typescript-data-validation/)
+  4. You can use Learning_Typescript_Null_Handling_Predicate_Explaination and `if field in object` checking the various shapes of the instance in quesion... until you find the right one, which by then the compiler should have refined it enogh to know what you are talking about.
 
 ## See also
 
