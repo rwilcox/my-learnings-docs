@@ -105,7 +105,7 @@ Promises are annoying, and I had to jump into the Flow source code to understand
     
 That will compile if you are not using [the flow plugin for ESLINT](https://github.com/gajus/eslint-plugin-flowtype). It will throw a linter error if you are, because `resolve` and `reject` don't have type annotations.
 
-### Using typed promise callbacks to ensure correct ordering
+### Using typed promise callbacks to ensure correct ordering <<Learning_Flow_Typed_Promises>>
 
 If you are like me and:
 
