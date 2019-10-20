@@ -46,7 +46,7 @@ If you ae looking for a more Haskell inspired version (Maybe Monad), see [typesc
 
 Using compiler fanciness, and not fundimentals of functional programming, is possible here too...
 
-## Using Type Guards
+## Using Type Guards <<Learning_Typescript_Type_Guards>>
 
 We can use [user defined type guards](https://www.typescriptlang.org/docs/handbook/advanced-types.html) to enter into a block of code where the compiler knows what kind of object a thing is (because we told it).
 
@@ -86,6 +86,7 @@ Let's see this in action:
         console.log(currentPerson.firstName)
         // no compile error! remove the if guard and TS will complain that firstName may not exist on null!!
     }
+
 
 ### See also:
 
