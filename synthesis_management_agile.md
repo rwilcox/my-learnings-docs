@@ -1,6 +1,6 @@
 ---
-path: "/learnings/management_agile"
-title: "Learnings: Management: Agile"
+path: "/synthesis/management_agile"
+title: "Synthesis: Management: Agile"
 ---
 
 
@@ -28,6 +28,14 @@ employee empowerment model that includes three degrees of empowerment.3
 tell, sell, consult, agree, advise, inquire, and delegate.
 
 - Jurgen Appelo / Managing for Happiness (??)
+
+## And how that affects leadership
+
+- [BOOKNOTES]:
+
+> Without leadership at all levels, frameworks such as Scrum and XP are just defined processes that force people to act as directed.
+
+- From: Big Agile
 
 # team knowledge models
 
@@ -66,3 +74,49 @@ Retrospective questions:
   
 By actively praising the values we want in the culture (helpfulness, etc) we shape company culture
 the inverse, by math properties: you get what you praise
+
+# -[BOOKNOTES]: Agile performance Holarchy
+
+- Leading:
+  * visioning
+  * valuing
+   * enabling
+- Envisioning:
+   * defining
+   * road mapping
+   * clarifying
+- Providing:
+  * equipping
+  * contributing 
+  * partnering
+- Crafting:
+  * solving
+  * delivering
+  * planning
+- Teaming:
+  * organizing
+  * growing
+  * governing
+- Affirming:
+  * confirming
+  * understanding 
+
+
+- From: The Big Agile
+
+# Retrospectives
+
+- [BOOKNOTES]:
+> Use the Functional Retrospective to capture experiences and best practice by functional group, including managers, engineers, developers, architects, and more.
+
+- From: The Big Agile
+
+So: retrospective for the team about how it work together, but sometimes also ave a retrospective of just developers, just QA people, just POs etc. Especially if you have multiple teams going at a time
+
+This migt help find issues that you can fix at a larger level tha just the team level (organization fixes).
+
+- [BOOKNOTES]:
+
+Maintenance and strengthening of Agile values are best conducted informally, rather than “top down.”
+
+- From: Big Agile
