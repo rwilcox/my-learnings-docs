@@ -168,6 +168,19 @@ In the case of an optional parameter in the middle (what ARE you doing???) you w
 
 but note: If we have a value that has a union type, we can only access members that are common to all types in the union.
 
+##### And interfaces
+
+- [BOOKQUOTE]: Pros of this approach
+> would it make sense to have type: 'fill' but then a LineLayout and PointPaint? Certainly not. Convert Layer to a union of interfaces to exclude this possibility:
+- from: Effective Typescript
+
+
+- [BOOKQUOTE]: Cons of this approach
+> Interfaces with multiple properties that are union types are often a mistake because they obscure the relationships between these properties.
+- from: Effective Typescript
+
+
+- From: Effective Typescript
 ### Declaring Type Types
 
 can declare a type that is just a value
@@ -194,6 +207,14 @@ Mostly like ES6, except
             console.log('HONK!')
         }
     }
+
+#### Access control 
+
+You can mark fields as private, protected, public, like so
+
+- [TODO]: example
+
+But private is a feature of the type system and, like all features of the type system, it goes away at runtime (Effective Typescript)
 
 ### Examples of places where we generate types
 
@@ -326,6 +347,7 @@ in tsconfig.json
 # Type Checking > Clever Lint Rules
 
 - [TODO]: write me
+
 
 # Book Recommendations
 
