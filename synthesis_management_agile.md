@@ -12,9 +12,13 @@ title: "Synthesis: Management: Agile"
 
 > As a new tech lead, be careful of relying on process to solve problems that are a result of communication or leadership gaps on your team. Sometimes a change in process is helpful, but its rarely a silver bullet, and no two great teams ever look exactly alike in process, tools, or work style. My other piece of advice is to look for self-regulating processes. If you find yourself playing the role of taskmastercriticizing people who break the rules or dont follow the processsee if the process itself can be changed to be easier to follow. Its a waste of your time to play rules cop, and automation can often make the rules more obvious.
 
-# - [BOOKNOTES]: Manager's path on why a leader should write code
+# - [BOOKNOTES]: Manager's path on why a leader should write code <<Managers_Writing_Code>>
 
 > Why bother writing any code if all youre doing is small stuff? The answer is that you need to stay enough in the code to see where the bottlenecks and process problems are. You might be able to see this by observing metrics, but its far easier to feel these problems when youre actively engaged in writing code yourself. If the build is really slow or deploying code takes too long or on-call is a nightmare, youll feel it in the difficulties you, an experienced engineer, have in knocking out trivial programming tasks
+
+## see also
+
+  * Dual_Roles_That_Might_Work_Manager_Developer
 
 # empowerment model
 
@@ -41,6 +45,7 @@ tell, sell, consult, agree, advise, inquire, and delegate.
 
   * T shaped skills
   * lightning bolt (where teams / people have primary, secondary and tertiary skills)
+  * paint drip skills
   
 # servant leadership
 
@@ -120,3 +125,15 @@ This migt help find issues that you can fix at a larger level tha just the team 
 Maintenance and strengthening of Agile values are best conducted informally, rather than “top down.”
 
 - From: Big Agile
+
+# And things that actually take longer than a sprint
+
+## sprint themes
+
+What I love using for my projects is a rotation of: feature, fix, harden.
+Each of the three representing an individual sprint so that the PO can show
+an actual roadmap to their business partners that has work prioritized
+around the theme itself. Predictable is good and that clarity helps teams
+organization around what to actually work on. 
+
+- A T H
