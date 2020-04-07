@@ -29,3 +29,14 @@ See also
 
   * [Let's talk about Javascript string encoding](https://kevin.burke.dev/kevin/node-js-string-encoding/)
   *
+
+More fun: Emojis and modifiers and other wildness
+======================================================================
+
+Key words:
+
+  * color modifiers
+  * zero width joiners
+
+  * https://eng.getwisdom.io/emoji-modifiers-and-sequence-combinations/
+  * https://thekevinscott.com/emojis-in-javascript/
