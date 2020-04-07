@@ -109,6 +109,18 @@ Commercially supported Smalltalk. about $7,000 per license
 
 Smalltalk image based... but on the web.
 
+# Idioms
+
+## Complex things to a string
+
+    |s t|
+    t := Time now asDateAndTime .
+    s := String new writeStream.
+    s << t dayOfWeekName.
+    s << ','.
+
+    s contents.
+
 # Learning Resources
 
   * http://ceronio.net/2017/07/first-steps-with-pharo-smalltalk/
