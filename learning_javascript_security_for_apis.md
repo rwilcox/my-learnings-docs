@@ -112,6 +112,10 @@ Best practice:: use parameterized queries in your code
 
 don't `eval`. You can set `eslint` to warn you about this.
 
+### See also
+
+  * https://www.websecgeeks.com/2017/04/pentesting-nodejs-application-nodejs.html
+
 ## Javascript Prototype poisoning
 Because Javascript has prototype inheritance, evil requests that are json.parsed could set attributes of the Object / Array class to things *during parsing*.
 
