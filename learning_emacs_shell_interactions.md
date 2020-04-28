@@ -17,6 +17,13 @@ Like:
 
 This also does the thing I want natively: being able to go into the output of a command, edit it, and run the (previously outputted!) line like another command.
 
+## Setting this up properly
+
+You'll likely want to install this package from MELPA, because something somewhere is going to assume you can do escape color codes, in 2020.
+
+https://github.com/atomontage/xterm-color
+
+
 ## Neat workflow thing: Plan 9 smart display
 
 enable by putting this in init.el
@@ -54,6 +61,26 @@ and run it through the sort shell command.
 
 Note: this only runs it through the shell shell, not eshell
 
+### Giving an arbitrary (elisp) shell command the region
+
+(defun current-region-to-shell-file ()
+    ; must have ln at end, but write-region by default does not
+    (write-region
+         (concat (rpw/current-region) "\n\n")
+	 "junk"
+	 "/tmp/current-region")
+)
+
+
+(defun bb/script-pass-region-to-stdin ()
+  ; even more useful if you do something like, in the minibuffer, ruby >>> /dev/kill !!!
+  (interactive)
+  (current-region-to-shell-file)
+  (let ((current-command (read-string "run command (will be piped the current region): ")))
+    (run-this-in-eshell (concat "cat /tmp/current-region | " current-command))
+  )
+)
+
 ### Running an arbitrary (eshell) command
 
 	(defun bb/script-eval-selected-in-eshell ()
@@ -86,7 +113,14 @@ Now, this is pretty bare bones, but this is not bad because we can use clever es
     { echo && uptime && whoami } >>> #<buffer *scratch*>
 
 This sends the output to the buffer named.... (well, I was using the scratch buffer)
-	
+
+### Variations on a theme: I'm already IN eshell
+
+    (defun rpw/exec-only-current-eshell-region ()
+    	   "you're taken the output from a previus command, maybe typed some more but maybe not, and want to run it. Make that easy"
+    	    (interactive)
+	    (run-this-in-eshell (rpw/current-region)))
+     
 ## Windows support
 
 Because it's lisp reimplementations of corebins, AND it doesn't do interactive TTY mode very well, it should actually work well on Windows!
