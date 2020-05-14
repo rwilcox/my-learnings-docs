@@ -15,6 +15,15 @@ C-Shift Backspace
 
 OR `M-x kill-whole-line`
 
+# Renaming buffers
+
+M-x rename-buffer RET name RET
+
+note Buffer menu won't refresh - click over to another window and click back I think that will work
+
+# line numbers
+
+M-x display-lines-numbers-mode
 
 # Filtering Lines
 
@@ -34,3 +43,32 @@ M-x flush-lines
 
 in minibugger enter your regex
 
+# Splits
+
+M-x split-window TAB
+
+## Deleting sprits
+
+M-x delete-window
+
+(when the one you want to close is the currently active one)
+
+# Switching languages and mode
+
+M-x *-mode
+
+shows you all the modes you can choose from
+
+M-x markdown-mode
+
+turns the buffer - saved or not - into a Markdown syntax highlighted buffer
+
+# Column / rectangle selection
+
+C-x SPC
+
+now you can NOT use the mouse to select your text, must use (arrow?) keys to select it
+
+# Deleting duplicate lines
+
+M-x delete-duplicate-lines
