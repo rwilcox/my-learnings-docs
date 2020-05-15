@@ -783,6 +783,7 @@ Checking to see if a custom tool is installed follows the same pattern as any ot
 ## How do I get the current git commit?
 
 there used to be `env.GIT_COMMIT` but I found it missing the other day
+UPDATE: it's missing if you use `skipDefaultCheckout`. But still.
 
 do something like this instead
 
