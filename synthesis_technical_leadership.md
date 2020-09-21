@@ -1,3 +1,6 @@
+#lang scribble/text 
+@(require "scribble-utils.rkt")
+
 ---
 path: "/synthesis/technical_leadership"
 title: "Synthesis:Technical Leadership"
@@ -57,6 +60,22 @@ Even at this point, what is your role? See SDLC_Roles
 
 - Principle Based Enterprise Architecture
 
+# SDLC and business partners
+
+@quote-highlight[
+	#:title       "IT Enabled Business Change"
+	#:author      "Dr. Sharm Manwani"
+	#:page-number 14
+	#:url         "https://learning.oreilly.com/library/view/it-enabled-business-change/9781902505916/9781902505916_ch02_sec01_02.html”
+	] {
+  1. Align business and IT goals
+  2. Define business improvement
+  3. Design Business Change
+   4.Implement business change 
+   5.Deliver business benefits 
+}
+
+
 # Flowing Goals down
 
 as you scale up both the number of
@@ -68,6 +87,27 @@ strategy and guidelines - then you use different means to ensure compliance
 with those targets.
 
 - A T H
+
+## Q: How much control after all??
+
+@quote-highlight[
+	#:title       "Fundamentals of Software Architecture"
+	#:author      "Mark Richards, Neal Ford"
+	#:page-number 22
+	#:url         "https://learning.oreilly.com/library/view/fundamentals-of-software/9781492043447/ch22.html”
+	] {
+* Team familiarity
+How well do the team members know each other? Have they worked together before on a project? Generally, the better team members know each other, the less control is needed because team members start to become self-organizing.
+  * Team size
+How big is the team? (We consider more than 12 developers on the same team to be a big team, and 4 or fewer to be a small team.) The larger the team, the more control is needed
+  * Overall experience
+How many team members are senior? How many are junior? Is it a mixed team of junior and senior developers? How well do they know the technology and business domain? Teams with lots of junior developers require more control and mentoring, whereas teams with more senior developers require less control
+  * Project complexity
+Is the project highly complex or just a simple website? Highly complex projects require the architect to be more available to the team and to assist with issues that arise, hence more control is needed on the team. Relatively simple projects are straightforward and hence do not require much control.
+
+  * Project duration
+Is the project short (two months), long (two years), or average duration (six months)? The shorter the duration, the less control is needed; conversely, the longer the project, the more control is needed.
+}
 
 ## your area of responsibility
 
@@ -114,25 +154,22 @@ In product organizations this may be the product owner???? (This May or May not 
 
   * ArchitectureAgileSecurityModel 
 
-# - [BOOKQUOTE]: MOI model of leadership
+# MOI model of leadership
 
+@quote-highlight[
+	#:title       "Becoming a technical leader"
+	#:author      "Gerald Weinburg"
+	#:page-number 412
+	#:url         "https://www.amazon.com/Becoming-Technical-Leader-Gerald-Weinberg-ebook/dp/B004J4VV3I/ref=sr_1_1?crid=FHTWINGGX9HB&dchild=1&keywords=becoming+a+technical+leader&qid=1597625292&sprefix=becoming+a+techical+leader%2Caps%2C668&sr=8-1"
+	] {
+	
 MOI model of leadership
 
   * M: motivation
   * O: organization
    * ideas / innovation
+}
 
-- Becoming a technical leader
-
-# - [BOOKQUOTE]: how tech leaders emphasize innovation
-
-
-They focus on:
-  * understanding problem
-  * managing flow of ideas
-  * maintaining quality
-
-- Becoming a technical leader
 
 # - [ BOOKQUOTE]: misc leaderahip
 
@@ -156,7 +193,16 @@ first job: esablizh a comfortzbld environment, which means geftinf acquanted wit
   8. Be a tutor
   9. Let other people show you how smart they ae
 
-# - [BOOKQUOTE]: managing flow of ideas
+# Managing flow of ideas
+
+@quote-highlight[
+	#:title       "Becoming a technical leader"
+	#:author      "Gerald Weinburg"
+	#:page-number 1624
+	#:url         "https://www.amazon.com/Becoming-Technical-Leader-Gerald-Weinberg-ebook/dp/B004J4VV3I/ref=sr_1_1?crid=FHTWINGGX9HB&dchild=1&keywords=becoming+a+technical+leader&qid=1597625292&sprefix=becoming+a+techical+leader%2Caps%2C668&sr=8-1"
+	] {
+
+managing flow of ideas
 
   * contribute a clever idea to the team
   * encouraging copying of useful ideas
@@ -173,11 +219,17 @@ first job: esablizh a comfortzbld environment, which means geftinf acquanted wit
   * revive a dropped idea when it will now work because of change 
   * does the idea add to, reduce, or keep the same the amount of toil on the project? (Can it be refined to be automatable? But sure, simple things that don’t scale have a place too... just maybe not if you’be scaled) (-RW)
   * is it an idea that didn’t use to work, but now can? (-RW)
-  
+}  
 
-- Becoming a technical leader
+# lessons form a task oriented style
 
-# - [BOOKQUOTE]: lessons form a task oriented style
+@quote-highlight[
+	#:title       "Becoming a technical leader"
+	#:author      "Gerald Weinburg"
+	#:page-number 1624
+	#:url         "https://www.amazon.com/Becoming-Technical-Leader-Gerald-Weinberg-ebook/dp/B004J4VV3I/ref=sr_1_1?crid=FHTWINGGX9HB&dchild=1&keywords=becoming+a+technical+leader&qid=1597625292&sprefix=becoming+a+techical+leader%2Caps%2C668&sr=8-1"
+	] {
+lessons form a task oriented style
 
   1. when survival is concerned, there is no choice but to put people first
   2. if the job isn’t highly technical, the leader need not be competent, but can lead by fear
@@ -189,15 +241,19 @@ first job: esablizh a comfortzbld environment, which means geftinf acquanted wit
   8. when the work is complete, no leader can be absolutely sure that plans won’t go "aft algey”
   9. to be a successful problem solving leader, yoloorvqnizationi u fmust keep everyone’s humanness at the fore
   10. If you are a leader, the people are your work. there is no other work worth doing.
+}
 
-- Becoming a technical leader
-
-# - [BOOKQUOTE]: three essential fucnctions of a problem solving leadership:
+@quote-highlight[
+	#:title       "Becoming a technical leader"
+	#:author      "Gerald Weinburg"
+	#:page-number 2729
+	]{
+three essential fucnctions of a problem solving leadership:
   1. defininv the problem
-  2. managing thr flow of ideas
-  3. controllng thr quality
-
-- Becoming a technical leader
+  2. managing the flow of ideas
+  3. controllng the quality
+}
+ 
 
 # leadership considerations
 
@@ -210,3 +266,8 @@ first job: esablizh a comfortzbld environment, which means geftinf acquanted wit
    * tell them what you’re going to tell them, tell them, then tell them what you told them 
    * empower them; ensure they are actually empowered; make sure they stay empowered; increase empowerment
    * ask questions, learn what it’a actually like for boots on the ground
+   
+## Management and technical leadership should be seperate
+
+your manager likely can not be a tech lead. Your tech lead likely can not be a manager. Or at least for long or for scale.
+Why? Both different temperment job AND those are both full time jobs at scale. 

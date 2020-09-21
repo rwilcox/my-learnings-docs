@@ -8,14 +8,28 @@ title: "Synthesis: Management: Agile"
 
 > The tech lead role is not a point on the ladder, but a set of responsibilities that any engineer may take on once they reach the senior level. This role may or may not include people management, but if it does, the tech lead is expected to manage these team members to the high management standards of RTR tech. These standards include:
 
-# - [BOOKNOTES]: Manager's Path On Processes
+#  On Processes
 
-> As a new tech lead, be careful of relying on process to solve problems that are a result of communication or leadership gaps on your team. Sometimes a change in process is helpful, but its rarely a silver bullet, and no two great teams ever look exactly alike in process, tools, or work style. My other piece of advice is to look for self-regulating processes. If you find yourself playing the role of taskmastercriticizing people who break the rules or dont follow the processsee if the process itself can be changed to be easier to follow. Its a waste of your time to play rules cop, and automation can often make the rules more obvious.
+@quote-highlight[
+	#:title       "The Manager's Path"
+	#:author      "Camille Fournier"
+	#:page-number 0
+	#:url         "https://learning.oreilly.com/library/view/the-managers-path/9781491973882/ch03.html"
+	] {
+As a new tech lead, be careful of relying on process to solve problems that are a result of communication or leadership gaps on your team. Sometimes a change in process is helpful, but its rarely a silver bullet, and no two great teams ever look exactly alike in process, tools, or work style. My other piece of advice is to look for self-regulating processes. If you find yourself playing the role of taskmastercriticizing people who break the rules or dont follow the processsee if the process itself can be changed to be easier to follow. Its a waste of your time to play rules cop, and automation can often make the rules more obvious.
+}
 
-# - [BOOKNOTES]: Manager's path on why a leader should write code <<Managers_Writing_Code>>
 
+# why a leader should write code <<Managers_Writing_Code>>
+
+@quote-highlight[
+	#:title       "The Manager's Path"
+	#:author      "Camille Fournier"
+	#:page-number 5
+	#:url         "https://learning.oreilly.com/library/view/the-managers-path/9781491973882/ch05.html"
+	] {
 > Why bother writing any code if all youre doing is small stuff? The answer is that you need to stay enough in the code to see where the bottlenecks and process problems are. You might be able to see this by observing metrics, but its far easier to feel these problems when youre actively engaged in writing code yourself. If the build is really slow or deploying code takes too long or on-call is a nightmare, youll feel it in the difficulties you, an experienced engineer, have in knocking out trivial programming tasks
-
+}
 ## see also
 
   * Dual_Roles_That_Might_Work_Manager_Developer
