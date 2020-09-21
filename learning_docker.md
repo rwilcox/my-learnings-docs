@@ -117,6 +117,22 @@ NOTE: This is **only** supported in Docker Compose format 2.2, [not Docker forma
         image: 'co/thingy'
         init: true
 
+# <<Learning_Docker_Build>>
+
+## <<Learning_Docker_Build_Parameters>>
+
+### <<Learning_Docker_Build_Parameters_Example_Base_Image_Example>>
+
+Dockerfile snippet
+
+    ARG ROOT_IMAGE
+
+    FROM $ROOT_IMAGE
+
+Building this on the CLI
+
+    $ docker build -t my_image --build-arg 'ROOT_IMAGE=scratch'
+    
 # <<Learning_Docker_Windows>>
 
 Windows 10 (or Win Server 2016)? Use the new Docker (HyperV)
