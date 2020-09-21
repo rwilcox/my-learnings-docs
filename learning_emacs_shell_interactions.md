@@ -143,6 +143,16 @@ Note because it's super trivial and I have no idea what I'm doing, you need to p
 
 Interestingly enough: calls to `p` seem to be passed the `cwd`, so I can `cd` around all I want and something like `p Get-ChildItems` works just fine.
 
+## Workflows
+
+### Sending results of a command to a elisp variable
+
+You may want to do this - this could be a way to work around eshell not supporting input redirection properly, or _seriously sometimes you want to do this in bash easily too_.
+
+    echo "hi" > #'from_elisp
+	echo $from_elisp
+	
+
 ## See also
 
   * https://masteringemacs.org/article/complete-guide-mastering-eshell
