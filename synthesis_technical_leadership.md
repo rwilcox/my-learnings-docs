@@ -6,6 +6,15 @@ path: "/synthesis/technical_leadership"
 title: "Synthesis:Technical Leadership"
 ---
 
+# Managing Smart People
+
+  * leadership based on perception: knows what to do, tells others
+  * leadership based on ??? servant-leadership??:  take recommendations from those that know more, make decision, get out of Do-ers way
+  
+Problem with Problem Statements:
+ 
+Are they really _problem statements_, or is it a _prescription_ statement?
+
 # types of technical leadership 
 
 ## technical leadership but you’re also a people manager ("officer")
@@ -119,6 +128,13 @@ A technical coordinating many / all the projects around the enterprise
 This depends on how controlly you can get, and how "admiral Kirk" vs "Grand Moff Tarkin" you have to be
 
 ### see also
+
+## pro tips 
+
+### pie in the sky goals are good, and also try to measure them
+
+"10x faster software development" is a great goal... but in what ways? Else people will just complain that the goal is never met, even if things are objectively better / faster ("why are we not a faster feature factory?" "Because that’a not what it means...."
+
 
 ## Principals
 - [BOOKQUOTE]:
