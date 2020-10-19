@@ -79,7 +79,6 @@ If you include the SM+PO+BA you onlf get down to _maybe_ H. But that leaves you 
 
   * no backups
   * still a very small team
-  * where is developer's ability to grow / lead in the small / in the team? Especially with orgs that say "we want to see you performing at the level required for your new role for 6-12 months before we give it to you". (_is_ that possible in your teams?)
 
 With say 3 of each part of the stack you both have backups, some ability for a developer to be shown as a leader across the team (or sneak into other areas in the stack).
 
@@ -89,10 +88,22 @@ It's not a great, but compare the two teams when you include the SM/PO in the wo
 
 (But this is around 12? people at the larger extreme.)
 
+## Problems with too small of a team
+
+  * expecting everyone to perform tasks equally well
+  * if they don't likelihood of very small silos happening ("oh, I didn't get too much into their work at a practical level, because I don't really understand Typescript, and they don't really understand Java. We mostly just checkboxed each others PRs at a good enough level, but if you want me to actually write some Typescript ummmmm....")
+  * what happens if even 1 person goes on long term leave, or quits (ie paternity / maternity leave)
+  * where is developer's ability to grow / lead in the small / in the team? Especially with orgs that say "we want to see you performing at the level required for your new role for 6-12 months before we give it to you". (_is_ that possible in your teams?)
+  * Slack time and time for individual developer growth goes down (because a developer with a 20% task means the cross-functional team's velocity is down 10%, if there's two developers on the team)
+  * Q: what about bleedy individuals, whose efforts bleed into other teams? PO/SM will feel like they don't have velocity to spare _but_ this person is likely helping out the project and or organization by being glue
+
+
 ## See also:
 
   * [TopTal article on scum team size](https://www.toptal.com/product-managers/agile/scrum-team-size)
   * [Scrum Guide on team size](https://www.scrumguides.org/scrum-guide.html#team-dev)
+  * Book notes from Demarco' _Slack_ book
+  *
 
 # dual people roles
 
