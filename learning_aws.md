@@ -293,3 +293,28 @@ Allows SSL termination on chosen instance, not just at load balancer level
   1. `$ sudo yum install java-1.8.0-openjdk-devel`
   2. `sudo alternatives --config java`
   3. `sudo yum remove java-1.7.0-openjdk-devel`
+  
+## <<Learning_AWS_Amplify>>
+
+### APIs on Amplify
+
+For graphql APIs can auto generate your code for you to talk back to AWS AppSync. Start with the graphql schema and it will generate :
+  * CRUD queries,  mutations and subscriptions 
+  * provision databases with amplify push
+  
+  Can generate in javascript, typescript or Flow
+ Can also use Cognito to create application specific users for your app. Including, for react, widgets for sign up and sign in.
+ 
+#### AWS also includes a FraphQL console to poke at the store using graphql queries / mutations
+
+
+## <<AWS_Cognito>>
+
+Slows users to create sign ins with your application. provides a console to view all the users created, serarch through them, set the attributes of the username and password rules, customize the UI. can also use a lambda function to trigger when users are created etc etc
+
+Can also use Google Auth time based one time passwords from the users auth app of choice.
+
+Also [supports Sign In with Apple](https://aws.amazon.com/about-aws/whats-new/2019/11/amazon-cognito-now-supports-sign-in-with-apple/)
+
+Also lets people sign in with their Facebook or Google account
+
