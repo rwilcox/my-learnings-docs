@@ -3,6 +3,12 @@ path: "/learnings/learning_operations_sre"
 title: "Learnings: Operations: SRE"
 ---
 
+# what is SRE
+
+> SREs build holistic reliability across the software organization, by stewarding feedback processes and enabling observability.
+
+https://twitter.com/missamytobey/status/1316122214270287873?s=21
+
 # Site Reliability Engineering Highlighted Passages
 
   * Google places a 50% cap on the aggegate "ops" work for all SREs <-- or "toil", see below
