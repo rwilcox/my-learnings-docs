@@ -47,11 +47,18 @@ in minibugger enter your regex
 
 M-x split-window TAB
 
+C-X 3: split right
+
+C-X 2: split bottom
+
 ## Deleting sprits
 
 M-x delete-window
 
 (when the one you want to close is the currently active one)
+
+C-X 0
+
 
 # Switching languages and mode
 
@@ -65,10 +72,36 @@ turns the buffer - saved or not - into a Markdown syntax highlighted buffer
 
 # Column / rectangle selection
 
+## without CUDA mode being on
+
 C-x SPC
 
-now you can NOT use the mouse to select your text, must use (arrow?) keys to select it
+now you can NOT use the mouse to select your text, must use (arrow?) keys to select it. AND it won't show just the region you selected.
+
+## with CUDA mode
+
+C-RETURN
+
+now use arrow or character movement keys to define your region. It will highlight the columnar selection.
+
+See also [CUDA Rectangle selection shortcuts](http://trey-jackson.blogspot.com/2008/10/emacs-tip-26-cua-mode-specifically.html)
+
 
 # Deleting duplicate lines
 
 M-x delete-duplicate-lines
+
+# Parans
+
+C-M-f forwards to next opening paran
+
+# Typing commands
+
+## Interactive Commands
+
+M-x
+
+## Quickly call random lisp code
+
+M-:
+
