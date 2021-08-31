@@ -7,14 +7,14 @@ title: "Synthesis: Microservices: In The Enterprise"
 
 | Book Name                                                        | Read | Notes Extracted | Additional Notes                       |
 |------------------------------------------------------------------|------|-----------------|----------------------------------------|
-| omplex application architecture                                  | Y    | N               | in `Goodreader/Project_Related`          |
+| omplex application architecture                                  | Y    | N               | in `Goodreader/Project_Related`        |
 | Microservice Patterns                                            | Y    | N               |
 | Driving Technical Change                                         | Y    |                 |
 | Elastic Leadership: Growing self organizing teams                |      |                 |
 | Architeting for Scale                                            |      |                 |
 | Microservices for the Enterprise                                 |      |                 |
 | Enterprise API Management                                        |      |                 |
-| Software Design X-Rays                                           |      |                 |
+| Software Design X-Rays                                           | Y    |                 | Safari
 | An Executives Guide to software quality in an Agile organization | Y    | N               |
 | Cloud Native Transformation                                      |  y   |                 |
 | microservices in action                                          | Y    | N               |
@@ -26,7 +26,7 @@ title: "Synthesis: Microservices: In The Enterprise"
 | Patterns for decentralized Organization                          |      |                 | in `GoodReader/Technical_Leadership`  |
 | The Digital Transformation Playbook                              | Y    | N               | Kindle
 | The Tecnology Fallicy                                            |      |                 |
-| Software Engineering at Google                                   |      |                 | Safari
+| Software Engineering at Google                                   | Y    |                 | Safari
 
 
 
@@ -36,7 +36,7 @@ title: "Synthesis: Microservices: In The Enterprise"
 ## Starter Kit
 
 - [BOOKNOTE]: On starter kit
-> This cloud native “starter kit” of materials should include tool configurations, version-control repository, CI/CD pipelines, example applications for practice, target platform description, trainings, 
+> This cloud native “starter kit” of materials should include tool configurations, version-control repository, CI/CD pipelines, example applications for practice, target platform description, trainings,
 - From Cloud Native Transformation
 
 
@@ -84,7 +84,7 @@ Characteristics of good plans:
   * clear
   * not a draft, or a _plan_ to make a plan
   * business value is clear (even if this is "faster features" or "better security".... but hopefully not too often)
-  
+
 ## Required changes
 
 Do you have a process for rolling out a manditory change ALONG A TIMELINE. Like:
@@ -105,3 +105,13 @@ How do you propegate patterns that aren't required but that help the teams, that
 OR are things like, "We're going to make it obvious that business can easily have THIS feature." Like the enterprise has the technical infrastructure laid down for business metrics gathering, there is easy developer support for the thing... the business leaders just need to make user stories that use this new ability in business relevant places.
 
 These plans are - from the architect mindset - optional ("use this to help your users, or if you don't have a business use case I don't care") AND don't have a deadline BUT are of course clear and have obvious next steps etc
+
+# Ownership
+
+Knowing ownership up front is good for when the pager goes off or Ops wants to have a talk with you :)
+
+Ownership problems:
+
+  1. What if team moves on to other responsibilites? Do they also take along their previous baggage (survey says: probably not)
+  2. What if they are disbanded or layed off?
+  3. What if they are so good at their jobs the number of microservices they own. Hopefully the older ones will be more stable than labile, so that the team can continue to function without have to accumulate bandwidth(team members?) at the same rate that it accumulates services...
