@@ -51,8 +51,7 @@ Then install K8 client and run `kubectl`
 
 `minikube dashboard` <-- opens up dashboard in your default browser
 
-Kubectl
-------------
+## Kubectl
 
 "Just" sends REST commands to master.
 
@@ -71,7 +70,16 @@ kubectl has bash and zsh tab completions!!
     $ kubectl get pods     # <-- gets the deployed pods and information about them (for the services)
     $ kubectl logs $PODNAME # <-- logs from the thing
 
+### neat tips
 
+    kubectl get pods,deployments # list TWO resources at a time
+
+#### give me a junk container to just do stuff
+
+    kubectl run -it—image=$SOMEDOCKERIMAGE—restart=never /bin/sh
+    
+  
+  (But you will need to delete the pod when you exit the container, k8s will not do thst cleanup for you )
 
 API Server
 ---------
@@ -166,6 +174,8 @@ Instead of needing to set up a public load balancer that sits in front of your k
 
 Ingress load balancers also terminate SSL traffic.
 
+There’s also ClusterIp and NodePort kinds. see (NodePort Vs ClusterIP Vs LoadBalancer Vs Ingress)[https://medium.com/google-cloud/kubernetes-nodeport-vs-loadbalancer-vs-ingress-when-should-i-use-what-922f010849e0]
+
 ### Replication Controller
 
 Want to create ReplicationController objects to manage pods - just creating pods directly will assign them to a node directly, and if the node goes down your pod will not be recreated.
@@ -190,6 +200,16 @@ Also provides `rollout undo` option!
 
 Can do `pause` to halt rollback ie for canary deploys.
 
+    kubectl get deployments -a # get all deploys across cluster
+    kubectl describe deployment $deploymentname
+
+
+### Services
+
+    kubectl get svc
+
+    kubectl describe service $servicename
+
 ### StatefulSets
 
 Like ReplicaSets, but can:
@@ -204,8 +224,10 @@ StatefulSet instances are found by SRV DNS entries.
 
 When stateful pods fail need to have an admin go in and delete the pod - then another (identical!) pod will take its place.
 
-Operational Concerns
-----------------
+### Nodes
+
+## Operational Concerns
+
 
 ### Application configuration
 
@@ -315,6 +337,7 @@ Helm: (from the deis people): create a "chart" which gets turned into a pod (eer
 
 - [REVIEW]: worth looking into when thinking about making this stuff developer repeatable????
 
+  
 # Book Recommendations
 
   * [Kubernetes Up And Running](https://www.amazon.com/Kubernetes-Running-Dive-Future-Infrastructure/dp/1492046531/ref=as_li_ss_tl?crid=8VWERBMXPN5B&keywords=kubernetes+up+and+running&qid=1555896154&s=books&sprefix=kubernetes+up+and+run,stripbooks,216&sr=1-15&linkCode=ll1&tag=wilcodevelsol-20&linkId=35134f1cbb6bc4c334def2d531ea65d4&language=en_US)
