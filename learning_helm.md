@@ -5,7 +5,28 @@ title: "Learning Helm"
 
 # Intro / Why
 
-# Helm chart storage
+Automate Version handling, rollback, installation
+
+Templatize k8s resources, search and reuse templates
+
+## components
+
+  * helm client (CLI)
+  * charts — application configuration definitions 
+  * repositories— where charts are stored
+  * release— chart instances loaded into k8s
+  
+## v2 Vs v3
+  
+  V2: Helm -> Tiller pod -> k8s cluster
+  
+  V3: helm -> k8s cluster via role based access controls
+  
+# Helm chart storage (different types of repositories)
+
+## using repositories from the CLI
+
+Helm provides search and repo add commands for selecting different repos, searching them and getting a specific  helm chart.
 
 ## public access
 
@@ -28,13 +49,17 @@ Just configure your helm CLI to have a registry that points to (the site)
 
 There’a a chart for chart museum 
 
+
+
 # Deployments
+
+Can see these via helm ls. 
 
 ## Attributes
 
   * **Revisions**: number of times you’ve deployed the service to this cluster  (this is NOT the artifact version number AND is reset say with a new cluster)
 
-  * **name**: is the adjective-noun style, not the artifact name
+  * **name**: is the adjective-noun style, not the artifact name — sometimes? Or sometimes it’s the name /—generate-name provided (?)
 
 
 ## environmental variables for a deployment
@@ -66,7 +91,7 @@ can specify in three locations (precedence):
 
    Can deploy multiple charts in a herd.
 
-   See (declaratively running helm charts using helmfile)[https://medium.com/swlh/how-to-declaratively-run-helm-charts-using-helmfile-ac78572e6088]
+   See [declaratively running helm charts using helmfile]([https://medium.com/swlh/how-to-declaratively-run-helm-charts-using-helmfile-ac78572e6088)
    
    Can select various sections you want to act on with selectors
    
