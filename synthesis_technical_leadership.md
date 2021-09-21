@@ -23,6 +23,10 @@ Are they really _problem statements_, or is it a _prescription_ statement?
 
 ### 3-4 direct reports
 
+My advice here: also take a Technical person to be your trusted "get it done with the boots on thr ground" operator
+
+But NOTE: this person still counts against your max network cap!!
+
 ### 6-7-+ direct reports
 
 Read a leadership book. .
@@ -31,6 +35,11 @@ split your reports in a couple different areas
 
 Try not to touch code (??)  too often
 
+### 10+ directs 
+
+Create middle managers to get the number of your directs - including technical leaders that report to you - down to ~ 7. (Maybe factoring in potential growth of your  part of org/team, or potential contraction, )
+
+At this point the network connections will start to bite 
 ## technical leadership, you don’t have much technical skills, but the people you lead / manage have them
 
 
@@ -135,6 +144,15 @@ This depends on how controlly you can get, and how "admiral Kirk" vs "Grand Moff
 
 "10x faster software development" is a great goal... but in what ways? Else people will just complain that the goal is never met, even if things are objectively better / faster ("why are we not a faster feature factory?" "Because that’a not what it means...."
 
+### Don't have too many people where you can't listen to them
+
+Having too many people means you can't gather feedback from them as often as you should be able to. And you can't run your decisions past them to make sure you're not swooping in, dumping poop on them, and then swooping out.
+
+### Gather people that know things you don't
+
+You don't need to:
+  * command and control
+  * know everything <-- lean on people that have more experience (either tech wise OR in the culture/company!!) than you do
 
 ## Principals
 - [BOOKQUOTE]:
