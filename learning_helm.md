@@ -18,10 +18,21 @@ Templatize k8s resources, search and reuse templates
   
 ## v2 Vs v3
   
+### Differences in required supporting infrastructure
+
   V2: Helm -> Tiller pod -> k8s cluster
   
   V3: helm -> k8s cluster via role based access controls
   
+### User Facing Differences
+
+#### Chart name <<Helm_Name_Differences_In_V2_V3>>
+
+In Helm 2: unless you provided a `--name` parameter, Helm created adjective-noun names for releases. 
+
+In Helm 3 this now uses the name of the chart, or what you override with `--name-template`_OR_ `--generate-name`
+
+
 # Helm chart storage (different types of repositories)
 
 ## using repositories from the CLI
@@ -55,18 +66,35 @@ There’a a chart for chart museum
 
 Can see these via helm ls. 
 
+When a Helm chart is installed becomes a release (this is a Helm standard object type) 
+
 ## Attributes
 
   * **Revisions**: number of times you’ve deployed the service to this cluster  (this is NOT the artifact version number AND is reset say with a new cluster)
 
-  * **name**: is the adjective-noun style, not the artifact name — sometimes? Or sometimes it’s the name /—generate-name provided (?)
+  * **name**: for more info see Helm_Name_Differences_In_V2_V3
 
 
 ## environmental variables for a deployment
 
 Vs changing these one by one in k8s pods
 
+## Reverting a deploy
 
+## Removing a microservice completely from the cluster
+
+`helm delete --purge $name`
+
+# Templates
+
+## get previously stored template
+
+    helm fetch $repo/$artifactName—version=$arifactVersion—untar
+
+## Making sure your template works (local machine development)
+
+  * `helm lint`
+  * `helm template` <-- renders the Helm chart as a k8s resource. You could use this to ensure you're telling k8s to do what you think you're telling it
 
 # Values / The Template Nature
 
@@ -80,11 +108,6 @@ can specify in three locations (precedence):
 
 # Operating
 
-## get previously stored template
-
-    helm fetch $repo/$artifactName—version=$arifactVersion—untar
-
-## deleting a deployment
 
 
 # Helmfile
