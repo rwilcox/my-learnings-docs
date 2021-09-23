@@ -87,16 +87,65 @@ Vs changing these one by one in k8s pods
 
 # Templates
 
-## get previously stored template
+can run values through various operations, like quote and upper.
 
-    helm fetch $repo/$artifactName—version=$arifactVersion—untar
+    {{ quote .Value.some.value.here }}
 
-## Making sure your template works (local machine development)
+[List of built in functions](https://helm.sh/docs/chart_template_guide/function_list/)
 
-  * `helm lint`
-  * `helm template` <-- renders the Helm chart as a k8s resource. You could use this to ensure you're telling k8s to do what you think you're telling it
+Can for example even look up attributes from the running k8s cluster!
 
-# Values / The Template Nature
+Uses template functions from [Sprig template library](https://masterminds.github.io/sprig/)
+
+Pipe character to send values into another function
+
+Can use "with" to drill into a nested values object without navigating the object graph every time in a certain scope (Pascal has a similar syntax feature)
+
+Variables are assigned by Pascal / Smalltalk assignment syntax
+       
+    {{- $var := "foo" -}}
+    
+
+{{- — do not print the results from this
+-}} — do not print out a new line
+
+## falsiness in template language
+
+Falsely:
+  * Boolean false
+  * numeric zero
+  * empty string 
+  * nil
+  * empty collection
+  
+  
+## template includes
+ 
+ _filename.tpl — traditionally starts with underscore
+ 
+ ** but** using built in objects in these templates might not work like you expect! Need to pass root context at the template call site
+
+### How you create a block you're going to include
+
+    {{- define "template_name" }} 
+    foobar: baz
+    {{- end }
+    }
+
+### How you call it: with the template tag
+
+     {{- template "template_name" .}}
+
+(. can also be $)
+
+`template` is relatively literal include mechanism - you must make sure you do the whitespace alignment properly across the two files
+
+### How you can call it: with the include tag
+
+    {{ include "template_name" . | indent 4 }}
+
+
+## Values / The Template Nature
 
 can specify in three locations (precedence):
   * parent chart
@@ -105,9 +154,68 @@ can specify in three locations (precedence):
 
 [source](https://v3-1-0.helm.sh/docs/chart_template_guide/values_files/)
 
+## See also:
+
+  * Helm_Development_Checking_Your_Created_Chart
+  *
+
+# Release
+
+This is a built in object you can refer to in the Jinja templates!
+
+# Developing
+
+## making a new chart
+
+`helm create $name`
+
+creates the skeleton of what you need
+
+### interesting files
+
+  * values.schema.json <-- OPTION schema for values in values.yaml file!!!
+  * crds <-- custom k8s resources
+  * templates <-- templates + values = k8s resources
+  *
+
+## Making sure your template works (local machine development)  <<Helm_Development_Checking_Your_Created_Chart>>
+
+  * `helm lint`
+  * `helm template` <-- renders the Helm chart as a k8s resource. You could use this to ensure you're telling k8s to do what you think you're telling it
+  * `helm install --dry-run` <-- same as `helm template` (?)
+  *
+
+## tests??!!
+
+
+# Introspecting a repository
+
+## searching for an artifact / chart in a repository
+
+    helm search $repo/$artifactName
+    
+As Helm keeps a local cache of repositories, you may need to manually `helm repo update` before these queries return expected results...
+
+## get previously stored template
+
+### Helm v2 
+
+    helm fetch $repo/$artifactName --version=$arifactVersion --untar
+
+
+### Helm v3
+
+	helm pull $repo/$name --version=$artifactVersion --untar
+	
+	
+## Get K8s resources created by a chart
+
+### Helm 3
+
+	helm get manifest $repo/$releaseName
+
 
 # Operating
-
 
 
 # Helmfile

@@ -265,7 +265,19 @@ See also:
 
 Use a secret to do this! Builtin!
 
-### Pre launch tasks ("Init Containers")
+#### operationally seeing WTF is in your configmap
+
+
+    kubectl get configmap $artifactName -o yaml
+    
+Without the -o yaml part you'll just see the name of the configmap, which is not super helpful.
+
+
+### volume mounts
+
+
+
+### Pre launch tasks ("Init Containers") <<K8s_Init_Containers>>
 
 Run before the main pod is launched. Needs to execute its task then quit before the main container is launched (_not_ for long running tasks.)
 
@@ -284,7 +296,23 @@ container can define commands to run as part of lifecycle:
   * `preStart` <-- may be called before, or after, ENTRYPOINT
   * `preStop`  <-- K8's management of container will block, also must execute before the grace period happens (race!)
 
-#### <<Learning_Kubernetes_Container_Lifecyle_And_Your_Microservice>>
+#### Operationally Debugging Init Containers
+
+Not much difference from regular containers, beyond the fact that these are not long running. So you have to be quick or your debug information will just go away.
+
+Steps:
+
+  1. use `kubectl get pods` to wait for a pod named YOUR-THING-init-ADJECTIVE-NOUN-NUMBERS-AND-LETTERS
+
+  2. When that shows up use that name to do `kubectl describe pod`
+  
+  3. `kubectl describe pod` will tell you what stage the container is in (ie downloading your docker image, booting the thing up, etc etc)
+  
+  4. When it looks up, do `kubectl logs` on that name. Logs should spew forth from the container.
+  
+  5. Eventually the init container will go away and be replaced with the non-init version of the container
+  
+### <<Learning_Kubernetes_Container_Lifecyle_And_Your_Microservice>>
 
 Kubernetes shuts down your app with the following process:
 
