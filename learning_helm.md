@@ -13,9 +13,14 @@ Templatize k8s resources, search and reuse templates
 
   * helm client (CLI)
   * charts — application configuration definitions 
-  * repositories— where charts are stored
-  * release— chart instances loaded into k8s
+  * repositories — where charts are stored
+  * release — chart instances loaded into k8s
   
+### helm client / CLI interesting facts
+
+Can be extended with plugins
+
+
 ## v2 Vs v3
   
 ### Differences in required supporting infrastructure
@@ -35,6 +40,8 @@ In Helm 3 this now uses the name of the chart, or what you override with `--name
 
 # Helm chart storage (different types of repositories)
 
+
+
 ## using repositories from the CLI
 
 Helm provides search and repo add commands for selecting different repos, searching them and getting a specific  helm chart.
@@ -47,19 +54,35 @@ You could use hemp fetch to get the public ones, inspect and install from your f
 
 ## A static site
 
-[perhaps hosted via GitHub pages??](https://faun.pub/how-to-host-helm-chart-repository-on-github-b76c854e1462)
+[perhaps hosted via GitHub pages](https://faun.pub/how-to-host-helm-chart-repository-on-github-b76c854e1462)
 
 Just configure your helm CLI to have a registry that points to (the site)
 
+just need a index.yaml file! `helm repo index .` generates this!
+
+You can also use the raw.github URL to the repository, and add that as a remote with Github user and password
+
 ## nexus
+
+OCI compatible ?
 
 ### ECR
 
+OCI compatible ?
 
-### chart museum
 
-There’a a chart for chart museum 
+### [chart museum](https://chartmuseum.com)
 
+Installation options:
+
+  * Download a chart museum binary
+  * docker image
+  * Helm chart
+
+Can point storage to S3, GCP, Azure Blob storage, local file system, etc.
+
+
+OCI compatible ?
 
 
 # Deployments
@@ -81,9 +104,14 @@ Vs changing these one by one in k8s pods
 
 ## Reverting a deploy
 
+`helm rollback $artifactName $revision`
+
 ## Removing a microservice completely from the cluster
 
 `helm delete --purge $name`
+
+# Hooks
+
 
 # Templates
 
@@ -185,7 +213,26 @@ creates the skeleton of what you need
   * `helm install --dry-run` <-- same as `helm template` (?)
   *
 
+## version numbering
+
+charts.yaml:
+  * `version` attribute, which is the chart version. Per convention should be incremented every time you change something, including the app version
+
+  * `appVersion` attribute: version number of the application being deployed
+
+## manually creating a chart artifact
+
+`helm package chartName` <-- makes a .tar file for this with the correct version number appending.
+
+You could theoretically use `curl` to upload this to the chart repository (but you likely don't want to directly do that...)  
+
+## deploying a chart
+
+the Helm Push plugin is a good solution here. can run this after a helm package, or have the push plugin do it for you...
+
+
 ## tests??!!
+
 
 
 # Introspecting a repository
@@ -195,6 +242,9 @@ creates the skeleton of what you need
     helm search $repo/$artifactName
     
 As Helm keeps a local cache of repositories, you may need to manually `helm repo update` before these queries return expected results...
+
+By default `helm search` only returns latest version of an artifact in the repository. Use `helm search -l` to list all artifact coordinates.
+
 
 ## get previously stored template
 
@@ -218,6 +268,36 @@ As Helm keeps a local cache of repositories, you may need to manually `helm repo
 # Operating
 
 
+# Charts that depend on other charts
+
+## On Sub Charts
+
+You can put dependencies in the `charts/` folder. Like `charts/my-sub-dependency-chart`
+
+From within the parents values.yml you can interject values into the subchart.
+
+Like so
+
+```yaml
+
+my-sub-dependency-chart:
+  keyToOverride: value
+```
+
+(values are passed to the subchart as the bare key, no namespace)
+
+### Global values and charts
+
+use the `global` key in the parents values.yml and the name will be the same everywhere, in the subcharts and the parent chart.
+
+## Dependent Charts
+
+charts.yml file:
+
+`dependencies` key: give name, version and repository
+
+`helm dependency update` <-- updates dependencies
+
 # Helmfile
 
    Can deploy multiple charts in a herd.
@@ -227,3 +307,11 @@ As Helm keeps a local cache of repositories, you may need to manually `helm repo
    Can select various sections you want to act on with selectors
    
    Can also use template helmfile subcommand to see rendered k8s charts
+
+
+# See also
+
+  * [waytoeasylearn tutorial on Helm](https://www.waytoeasylearn.com/learn/helm-introduction/) 
+  * [learning Helm O'Reilly book](https://www.amazon.com/Learning-Helm-Managing-Apps-Kubernetes/dp/1492083658)
+  * [Awesome List For Helm](https://github.com/cdwv/awesome-helm)
+  * [My pinboard t:helm](https://pinboard.in/u:rwilcox/t:helm)
