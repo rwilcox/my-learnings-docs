@@ -30,7 +30,7 @@
                           #:page-number page-num
                           #:url [url ""]
                           #:original-highlight [highlight ""]
-                          . body) (begin (
+                          . body)
     (write-to-file
             #:title           title
             #:is-book?        is-book?
@@ -40,9 +40,9 @@
             #:highlight-lines highlight
             #:note-lines      body
             #:kind            "note")
-   ~> (add-highlight-and-info body title is-book? author page-num url highlight)
+   (~> (add-highlight-and-info body title is-book? author page-num url highlight)
       (flatten)
-      (short-str-join))))
+      (short-str-join)))
 
 
 (define (write-to-file #:title           title
@@ -50,31 +50,29 @@
                        #:author          author
                        #:page-number     page-num
                        #:kind            kind
-                       #:highlight-lines [body (list "")]
-                       #:note-lines      [notes (list "")]
+                       #:highlight-lines [body ""]
+                       #:note-lines      [notes ""]
                        #:url             [url ""]
                           )
-  (begin
+
     ;(define out (open-output-file "extracted-refs.txt" #:exists 'append #:mode 'text))
-    (display-lines-to-file 
-        (list (string-join (list "TITLE" title "")) 
+    (display-lines-to-file
+        (list (string-join (list "TITLE" title ""))
           (string-join (list "AUTHOR" author ""))
           (string-join (list "PAGE-NUMBER" (number->string page-num) ""))
           (string-join (list "KIND" kind ""))
           (string-join (list "URL" url ""))
           "HIGHLIGHT"
-          (string-join body "")
+         body
           ""
           "NOTES"
           ""
-          
-          (string-join notes "")
+          notes
           ""
-          "END OF ENTRY\n=============================================="
-          )
+          "END OF ENTRY\n==============================================")
+
         "extracted-refs.txt" #:exists 'append #:mode 'text))
-  )
-        
+
 
 
 (define (quote-highlight #:title title
@@ -92,7 +90,7 @@
             #:url             url
             #:highlight-lines body
             #:kind            "quote")
-        
+
         (~> (append-map (lambda (arg) (if (string=? arg "\n") (list arg) (list "> " arg))) body)
            (add-attribution title is-book? author page-num url)
            (flatten)
