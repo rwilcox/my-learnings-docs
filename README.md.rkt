@@ -12,7 +12,7 @@ Some files are preprocessed via [Racket's scribble library](https://docs.racket-
 
 # File Index
 
-Because with a README this is no longer auto-generated for me...
+Because while you see all the files listed above.... if you're on mobile you don't.
 
 @(define (display-file-list)
    (map
