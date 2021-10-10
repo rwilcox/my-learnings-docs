@@ -12,7 +12,6 @@ Some files are preprocessed via [Racket's scribble library](https://docs.racket-
 
 Because while you see all the files listed above.... if you're on mobile you don't.
 
-  * [.#synthesis_management_agile.md](https://github.com/rwilcox/my-learnings-docs/blob/master/.#synthesis_management_agile.md)
   * [README.md](https://github.com/rwilcox/my-learnings-docs/blob/master/README.md)
   * [book_notes_ask_your_developer.md](https://github.com/rwilcox/my-learnings-docs/blob/master/book_notes_ask_your_developer.md)
   * [book_notes_devops_handbook.md](https://github.com/rwilcox/my-learnings-docs/blob/master/book_notes_devops_handbook.md)
