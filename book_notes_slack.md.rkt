@@ -78,7 +78,7 @@ The people that set the schedule, not just the ones tht fail to meet it, need to
 	#:title       "Slack"
 	#:author      "Demarco, Tom"
 	#:page-number 194
-    #:original-highlight "A variation on the uncertainity-is-for-wimps model is the culture where managers are allowed to show a little bit, but not a lot, of uncertainity. The ammount of declarable uncertainity is typically on the order of 5 percent... All that would be fine if the company" {
+    #:original-highlight "A variation on the uncertainity-is-for-wimps model is the culture where managers are allowed to show a little bit, but not a lot, of uncertainity. The ammount of declarable uncertainity is typically on the order of 5 percent... All that would be fine if the company"] {
     Think about it this way: 20% is a good _tip_ at a diner. Or another way: 5 percent is less than sales tax. Real world examples - or prices - typically have a variant from published to what you actually pay, of > 5 percent!!!
 }
 
