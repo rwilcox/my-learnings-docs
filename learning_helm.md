@@ -112,7 +112,32 @@ Vs changing these one by one in k8s pods
 
 # Hooks
 
+possibilities:
 
+  * preinstall
+  * post-install
+  * pre-delete 
+  * post-delete
+  * pre-upgrade
+  * post-upgrade
+  * pre-rollback
+  * post-rollback
+
+just a yaml file with
+
+    metadata:
+        annotations:
+            "helm.sh/hook": "pre-install"
+            
+Hooks can be a part of deployments in addition to having the same lifecycle for Kubernetes Jobs (See Kubernetes_Jobs).
+
+You can _also_ do multiple jobs associated with a hook! Just use weight to make sure to set the `hook-weight` annotation to different values to control which goes first.
+
+## See also
+
+  * K8s_Init_Containers
+  *
+  
 # Templates
 
 can run values through various operations, like quote and upper.
