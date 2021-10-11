@@ -6,6 +6,12 @@ path: "/book_notes/ask_your_developer"
 title: "Book Notes: Ask Your Developer"
 ---
 
+# Table Of Contents
+
+<!-- toc -->
+
+# Notes
+
 @quote-highlight[
 	#:title       "Ask Your Developer"
 	#:author      "Lawson"

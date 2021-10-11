@@ -1,7 +1,39 @@
 ---
-path: "/book_notes/slack"
-title: "Book Notes: Slack"
+path: /book_notes/slack
+title: 'Book Notes: Slack'
 ---
+# Table Of Contents
+
+<!-- toc -->
+
+- [My Notes](#my-notes)
+- [On Schedules and deadlines](#on-schedules-and-deadlines)
+- [On Deadlines](#on-deadlines)
+  * [on facing up to uncertainty](#on-facing-up-to-uncertainty)
+- [On Overtime](#on-overtime)
+- [On Management](#on-management)
+  * [On Management By Objectives](#on-management-by-objectives)
+  * [and growth and trust](#and-growth-and-trust)
+  * [as change agents](#as-change-agents)
+  * [on slack](#on-slack)
+  * [on management "training"](#on-management-training)
+  * [What is a team?](#what-is-a-team)
+- [Processes](#processes)
+  * [Process change](#process-change)
+  * [Process ownership](#process-ownership)
+  * [... and star workers](#-and-star-workers)
+  * [And standarizing knowledge work](#and-standarizing-knowledge-work)
+- [On star workers](#on-star-workers)
+- [On Leadership](#on-leadership)
+- [On Change and Growth](#on-change-and-growth)
+  * [and culture](#and-culture)
+  * [and slack](#and-slack)
+  * [on creating advantages to change](#on-creating-advantages-to-change)
+  * [on training](#on-training)
+
+<!-- tocstop -->
+
+# My Notes
 
 
 > An increasingly common bit of our organizational folklore holds that pressure improves performance and that maximizing performance an occur only in the pressence of maximum pressure
@@ -268,3 +300,4 @@ Contrary-wise, if there is no room (or budget or slack or runway) for failure th
 > There is no training without an extended period of practicing at a much slower than expert rate. In today's Hurry Up corporation that usually means there is no training.
 > 
 > - From Slack by Demarco, Tom on page 179 ()
+

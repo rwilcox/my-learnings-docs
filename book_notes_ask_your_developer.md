@@ -1,7 +1,16 @@
 ---
-path: "/book_notes/ask_your_developer"
-title: "Book Notes: Ask Your Developer"
+path: /book_notes/ask_your_developer
+title: 'Book Notes: Ask Your Developer'
 ---
+# Table Of Contents
+
+<!-- toc -->
+
+- [Notes](#notes)
+
+<!-- tocstop -->
+
+# Notes
 
 
 > Once you've divided and subdivided the business into small teams that specialize in particular areas, offering microservices for each other to use, with well documented interfaces and pricing that represents the true costs of delivering those services - well, why develop all those microservices internally? Why develop your own development to microservices that you coud instead buy from other companies?
@@ -101,3 +110,4 @@ Potentially part of autonomy, but theoretical & practical autonomy == very diffe
 > ... Instead of [a service taking 40 days to develop+deploy] Instead Jason grabbed two platform engineers, and they automated a bunch of steps in our deployment process. Their work slashed development time in half - from 40 days to 20 days.
 > 
 > - From Ask Your Developer by Lawson on page 266 ()
+

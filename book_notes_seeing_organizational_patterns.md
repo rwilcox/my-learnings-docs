@@ -1,7 +1,16 @@
 ---
-path: "/book_notes/seeing_organizational_patterns"
-title: "Book Notes: Seeing Organizational Patterns"
+path: /book_notes/seeing_organizational_patterns
+title: 'Book Notes: Seeing Organizational Patterns'
 ---
+# Table Of Contents
+
+<!-- toc -->
+
+- [My Notes](#my-notes)
+
+<!-- tocstop -->
+
+# My Notes
 
 [Seeing Organizational Patterns](https://www.amazon.com/Seeing-Organizational-Patterns-Robert-Keidel-dp-1881052656/dp/1881052656/ref=mt_other?_encoding=UTF8&me=&qid=1631037159)
 
@@ -20,3 +29,4 @@ title: "Book Notes: Seeing Organizational Patterns"
 > Organizations are inherently triadick because there are only three ways in which people can related, without conflict, to each other - patterns that correspond to the three code design variables identified above: autonomy, control and cooperation.
 > 
 > - From Seeing Organizational Patterns by Keidel on page 6 ()
+

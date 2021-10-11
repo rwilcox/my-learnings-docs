@@ -6,6 +6,10 @@ path: "/book_notes/phoenix_project"
 title: "Book Notes: Phoenix Project"
 ---
 
+# Table Of Contents
+
+<!-- toc -->
+
 # On Management
 
   * removing barriers that rob people of pride of ownership (see Deming, _Out Of The Crisis_ page 77)

@@ -6,6 +6,12 @@ path: "/book_notes/slack"
 title: "Book Notes: Slack"
 ---
 
+# Table Of Contents
+
+<!-- toc -->
+
+# My Notes
+
 @quote-note[
 	#:title       "Slack"
 	#:author      "Demarco, Tom"

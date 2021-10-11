@@ -6,6 +6,12 @@ path: "/book_notes/devops_handbook"
 title: "Book Notes: DevOps Handbook"
 ---
 
+# Table Of Contents
+
+<!-- toc -->
+
+# My Notes
+
 @quote-highlight[
 	#:title       "DevOps Handbook"
 	#:author      "Kim, Humble, Debois, Willis"

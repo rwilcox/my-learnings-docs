@@ -1,7 +1,16 @@
 ---
-path: "/book_notes/devops_handbook"
-title: "Book Notes: DevOps Handbook"
+path: /book_notes/devops_handbook
+title: 'Book Notes: DevOps Handbook'
 ---
+# Table Of Contents
+
+<!-- toc -->
+
+- [My Notes](#my-notes)
+
+<!-- tocstop -->
+
+# My Notes
 
 
 > High performers deployed code thirty times more frequently, and the time required to go from “code committed” to “successfully running in production” was two hundred times faster— high performers had lead times measured in minutes or hours, while low performers had lead times measured in weeks, months, or even quarters.
@@ -38,3 +47,4 @@ title: "Book Notes: DevOps Handbook"
 > - From DevOps Handbook by Kim, Humble, Debois, Willis on page 666 ()
 
         pArt 2 where to start
+

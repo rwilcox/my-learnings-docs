@@ -1,7 +1,38 @@
 ---
-path: "/book_notes/phoenix_project"
-title: "Book Notes: Phoenix Project"
+path: /book_notes/phoenix_project
+title: 'Book Notes: Phoenix Project'
 ---
+# Table Of Contents
+
+<!-- toc -->
+
+- [On Management](#on-management)
+  * [And Risk Management](#and-risk-management)
+  * [By Firefighting](#by-firefighting)
+    + [See also](#see-also)
+  * [See also](#see-also-1)
+- [On Brent](#on-brent)
+- [On Process / Work](#on-process--work)
+  * [On constraints](#on-constraints)
+  * [On mananging constraints >](#on-mananging-constraints-)
+    + [See also](#see-also-2)
+  * [On a "Change"](#on-a-change)
+  * [On "IT Operations"](#on-it-operations)
+  * [On categories of work](#on-categories-of-work)
+  * [On Size of a Change](#on-size-of-a-change)
+  * [See also](#see-also-3)
+- [On Agile](#on-agile)
+  * [See also](#see-also-4)
+- [Three Ways](#three-ways)
+  * [Digging into First Way](#digging-into-first-way)
+    + [See also](#see-also-5)
+- [On Incidents](#on-incidents)
+  * [See also](#see-also-6)
+- [On DevOps](#on-devops)
+  * [Getting to 10 deploys a day](#getting-to-10-deploys-a-day)
+    + [See also](#see-also-7)
+
+<!-- tocstop -->
 
 # On Management
 
@@ -162,3 +193,4 @@ My thoughts: Need the following things:
 
   * Juran, _Juran on Quality_, p 257
   * Deming, _Out of Crisis_, p 88 (Stewhart Improvement cycle ??)
+
