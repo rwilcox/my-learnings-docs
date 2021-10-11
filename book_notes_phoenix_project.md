@@ -1,9 +1,6 @@
-#lang scribble/text
-@(require "scribble-utils.rkt")
-
 ---
 path: "/book_notes/phoenix_project"
-title: Book Notes: Phoenix Project"
+title: "Book Notes: Phoenix Project"
 ---
 
 # On Management
@@ -38,28 +35,20 @@ if everything is a high priority management screaming email then (a) nothing is 
 
 ## On constraints
 
-@quote-highlight[
-	#:title       "The Pheonix Project"
-	#:author      "Kim, Behr, Spafford"
-	#:page-number 71
-	] {
-How can we manage production if we don't know what the demand, priorities, status of work in process, and resource availability are?
-}
+
+> How can we manage production if we don't know what the demand, priorities, status of work in process, and resource availability are?
+> 
+> - From The Pheonix Project by Kim, Behr, Spafford on page 71 ()
 
 ## On mananging constraints <<Book_Notes_Phoenix_Constraints>>
 
-@quote-highlight[
-	#:title       "The Pheonix Project"
-	#:author      "Kim, Behr, Spafford"
-	#:page-number 162
-	] {
 
-There is a very small number of resources (people, machines or materials) that dictate the output of the entire system.
-
-  1. Identify the constraint
-  2. Exploit the constraint (make sure that your constraint is now allowed to waste any time)
-  3. Subordinate the constraint (_Theory of Constraints_)
-}
+> There is a very small number of resources (people, machines or materials) that dictate the output of the entire system.
+> 1. Identify the constraint
+> 2. Exploit the constraint (make sure that your constraint is now allowed to waste any time)
+> 3. Subordinate the constraint (_Theory of Constraints_)
+> 
+> - From The Pheonix Project by Kim, Behr, Spafford on page 162 ()
 
 ### See also
 
@@ -68,51 +57,38 @@ There is a very small number of resources (people, machines or materials) that d
 
 ## On a "Change"
 
-@quote-highlight[
-	#:title       "The Pheonix Project"
-	#:author      "Kim, Behr, Spafford"
-	#:page-number 81
-	] {
-a 'change' is any activity that is physical, logical or virtual to applications, databases, OSes, networks, or hardware that could impact services being delivered.
-}
+
+> a 'change' is any activity that is physical, logical or virtual to applications, databases, OSes, networks, or hardware that could impact services being delivered.
+> 
+> - From The Pheonix Project by Kim, Behr, Spafford on page 81 ()
 
 Also should only go _one_ way (towards Prod, not down from it!!!)!
 
 
 ## On "IT Operations"
 
-@quote-highlight[
-	#:title       "The Pheonix Project"
-	#:author      "Kim, Behr, Spafford"
-	#:page-number 91
-	] {
-Your job as VP of IT Operations is to ensure that fast, predictable, and uninterrupted flow of pallend work that delivers value to the business while minimizing the impact and disruption of unplanned work, so you can provide a stable, predictable and secure IT service.
-}
+
+> Your job as VP of IT Operations is to ensure that fast, predictable, and uninterrupted flow of pallend work that delivers value to the business while minimizing the impact and disruption of unplanned work, so you can provide a stable, predictable and secure IT service.
+> 
+> - From The Pheonix Project by Kim, Behr, Spafford on page 91 ()
 
 ## On categories of work
 
-@quote-highlight[
-	#:title       "The Pheonix Project"
-	#:author      "Kim, Behr, Spafford"
-	#:page-number 158
-	] {
-four categories of work:
 
-  1. business projects
-  2. internal projects
-  3. changes
-  4. unplanned work
-}
+> four categories of work:
+> 1. business projects
+> 2. internal projects
+> 3. changes
+> 4. unplanned work
+> 
+> - From The Pheonix Project by Kim, Behr, Spafford on page 158 ()
 
 ## On Size of a Change
 
-@quote-highlight[
-	#:title       "The Pheonix Project"
-	#:author      "Kim, Behr, Spafford"
-	#:page-number 285
-	] {
-In any system of work, the theoretical ideal is single-piece flow, which maximizes throughput and minimizes variance. You get there by continously reducing batch sizes
-}
+
+> In any system of work, the theoretical ideal is single-piece flow, which maximizes throughput and minimizes variance. You get there by continously reducing batch sizes
+> 
+> - From The Pheonix Project by Kim, Behr, Spafford on page 285 ()
 
 
 ## See also
@@ -127,42 +103,27 @@ In any system of work, the theoretical ideal is single-piece flow, which maximiz
 
 # Three Ways
 
-@quote-highlight[
-	#:title       "The Pheonix Project"
-	#:author      "Kim, Behr, Spafford"
-	#:page-number 91
-	] {
-The First Way helps us understand how to create fast flow of work as it moves from Dev into IT Ops, because that's what between the business and the customer.
 
-The Second Way shows us how to shorten and amplify feedback loops, so we can fix quality issues at the source and avoid rework.
-
-The Third Way show us how to create a culture that simultaneously fosters experimentation, learning towards failure, and understanding that repitition and practice are prerequisits towards mastery.
-}
+> The First Way helps us understand how to create fast flow of work as it moves from Dev into IT Ops, because that's what between the business and the customer.
+> The Second Way shows us how to shorten and amplify feedback loops, so we can fix quality issues at the source and avoid rework.
+> The Third Way show us how to create a culture that simultaneously fosters experimentation, learning towards failure, and understanding that repitition and practice are prerequisits towards mastery.
+> 
+> - From The Pheonix Project by Kim, Behr, Spafford on page 91 ()
 
 ## Digging into First Way
 
-@quote-highlight[
-	#:title       "The Pheonix Project"
-	#:author      "Kim, Behr, Spafford"
-	#:page-number 91
-	] {
 
-Jimmy's problem with the auditors shows he can't distinquish work that matters to the business vs what doesn't.
-
-Being able to take needless work out of the system is more important that being able to put more work into the system (sometimes).
-
-You need to know what matters to the acheivement of the business objectives, whether it's projects, operatios, strategy, compliance with laws, regulations, security or whatever.
-}
+> Jimmy's problem with the auditors shows he can't distinquish work that matters to the business vs what doesn't.
+> Being able to take needless work out of the system is more important that being able to put more work into the system (sometimes).
+> You need to know what matters to the acheivement of the business objectives, whether it's projects, operatios, strategy, compliance with laws, regulations, security or whatever.
+> 
+> - From The Pheonix Project by Kim, Behr, Spafford on page 91 ()
 
 
-@quote-highlight[
-	#:title       "The Pheonix Project"
-	#:author      "Kim, Behr, Spafford"
-	#:page-number 175
-	] {
 
-We are starting to master the First Way. We're curbing the handoffs of defects to downstream work centers, managing the flow of ork, setting the tempo by our constraints, and based on our results from audit and from [Sales?], we're understanding better than we even have what's important and what's not.
-}
+> We are starting to master the First Way. We're curbing the handoffs of defects to downstream work centers, managing the flow of ork, setting the tempo by our constraints, and based on our results from audit and from [Sales?], we're understanding better than we even have what's important and what's not.
+> 
+> - From The Pheonix Project by Kim, Behr, Spafford on page 175 ()
 
 ### See also
 
@@ -178,27 +139,24 @@ We are starting to master the First Way. We're curbing the handoffs of defects t
 
 ## Getting to 10 deploys a day
 
-@quote-note[
-	#:title       "The Pheonix Project"
-	#:author      "Kim, Behr, Spafford"
-	#:page-number 296
-	] {
 
-Need the following things:
+> 
+> - From The Pheonix Project by Kim, Behr, Spafford on page 296 ()
 
-  1. Ops Patterns:
-    - rolling restart deployments
-    - CD tooling (package up -> automatic or easy deploy to QA environment etc)
-    - quick reaction rollback tools
+My thoughts: Need the following things:
 
-  2. Identify constraints
-    - see Book_Notes_Phoenix_Constraints
-    - QA <-- if each deploy requires QA time to complete and team doesn't have dedicated QA resource...
-    - meta question: in which statedo your tickets spend the most time (where is the most cycle time?)
-    - Product signoff workflow required?
+1. Ops Patterns:
+  - rolling restart deployments
+  - CD tooling (package up -> automatic or easy deploy to QA environment etc)
+  - quick reaction rollback tools
 
-  3. If this seems impossible how about daily, nightly builds that QA can test first thing in the morning? Yourdon _Death March_ p 190. "Still far from goal but beats 'once a month' by 20x..."
-}
+2. Identify constraints
+  - see Book_Notes_Phoenix_Constraints
+  - QA <-- if each deploy requires QA time to complete and team doesn't have dedicated QA resource...
+  - meta question: in which statedo your tickets spend the most time (where is the most cycle time?)
+  - Product signoff workflow required?
+
+3. If this seems impossible how about daily, nightly builds that QA can test first thing in the morning? Yourdon _Death March_ p 190. "Still far from goal but beats 'once a month' by 20x..."
 
 ### See also
 
