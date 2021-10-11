@@ -5,3 +5,5 @@ for file in ./*.md.rkt; do
     racket "$file" > $(basename "$file" .rkt)
     # basename like this removes the $2 parameter from the name. Neat.
 done
+
+racket README.md.rkt > README.md  # second pass for index
