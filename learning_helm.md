@@ -1,7 +1,65 @@
 ---
-path: "/learnings/helm"
-title: "Learning Helm"
+path: /learnings/helm
+title: Learning Helm
 ---
+
+
+<!-- toc -->
+
+- [Intro / Why](#intro--why)
+  * [components](#components)
+    + [helm client / CLI interesting facts](#helm-client--cli-interesting-facts)
+  * [v2 Vs v3](#v2-vs-v3)
+    + [Differences in required supporting infrastructure](#differences-in-required-supporting-infrastructure)
+    + [User Facing Differences](#user-facing-differences)
+      - [Chart name >](#chart-name-)
+- [Helm chart storage (different types of repositories)](#helm-chart-storage-different-types-of-repositories)
+  * [using repositories from the CLI](#using-repositories-from-the-cli)
+  * [public access](#public-access)
+  * [A static site](#a-static-site)
+  * [nexus](#nexus)
+    + [ECR](#ecr)
+    + [chart museum](#chart-museum)
+- [Deployments](#deployments)
+  * [Attributes](#attributes)
+  * [environmental variables for a deployment](#environmental-variables-for-a-deployment)
+  * [Reverting a deploy](#reverting-a-deploy)
+  * [Removing a microservice completely from the cluster](#removing-a-microservice-completely-from-the-cluster)
+- [Hooks](#hooks)
+  * [See also](#see-also)
+- [Templates](#templates)
+  * [falsiness in template language](#falsiness-in-template-language)
+  * [template includes](#template-includes)
+    + [How you create a block you're going to include](#how-you-create-a-block-youre-going-to-include)
+    + [How you call it: with the template tag](#how-you-call-it-with-the-template-tag)
+    + [How you can call it: with the include tag](#how-you-can-call-it-with-the-include-tag)
+  * [Values / The Template Nature](#values--the-template-nature)
+  * [See also:](#see-also)
+- [Release](#release)
+- [Developing](#developing)
+  * [making a new chart](#making-a-new-chart)
+    + [interesting files](#interesting-files)
+  * [Making sure your template works (local machine development) >](#making-sure-your-template-works-local-machine-development--)
+  * [version numbering](#version-numbering)
+  * [manually creating a chart artifact](#manually-creating-a-chart-artifact)
+  * [deploying a chart](#deploying-a-chart)
+  * [tests??!!](#tests)
+- [Introspecting a repository](#introspecting-a-repository)
+  * [searching for an artifact / chart in a repository](#searching-for-an-artifact--chart-in-a-repository)
+  * [get previously stored template](#get-previously-stored-template)
+    + [Helm v2](#helm-v2)
+    + [Helm v3](#helm-v3)
+  * [Get K8s resources created by a chart](#get-k8s-resources-created-by-a-chart)
+    + [Helm 3](#helm-3)
+- [Operating](#operating)
+- [Charts that depend on other charts](#charts-that-depend-on-other-charts)
+  * [On Sub Charts](#on-sub-charts)
+    + [Global values and charts](#global-values-and-charts)
+  * [Dependent Charts](#dependent-charts)
+- [Helmfile](#helmfile)
+- [See also](#see-also-1)
+
+<!-- tocstop -->
 
 # Intro / Why
 
@@ -12,28 +70,28 @@ Templatize k8s resources, search and reuse templates
 ## components
 
   * helm client (CLI)
-  * charts — application configuration definitions 
+  * charts — application configuration definitions
   * repositories — where charts are stored
   * release — chart instances loaded into k8s
-  
+
 ### helm client / CLI interesting facts
 
 Can be extended with plugins
 
 
 ## v2 Vs v3
-  
+
 ### Differences in required supporting infrastructure
 
   V2: Helm -> Tiller pod -> k8s cluster
-  
+
   V3: helm -> k8s cluster via role based access controls
-  
+
 ### User Facing Differences
 
 #### Chart name <<Helm_Name_Differences_In_V2_V3>>
 
-In Helm 2: unless you provided a `--name` parameter, Helm created adjective-noun names for releases. 
+In Helm 2: unless you provided a `--name` parameter, Helm created adjective-noun names for releases.
 
 In Helm 3 this now uses the name of the chart, or what you override with `--name-template`_OR_ `--generate-name`
 
@@ -87,9 +145,9 @@ OCI compatible ?
 
 # Deployments
 
-Can see these via helm ls. 
+Can see these via helm ls.
 
-When a Helm chart is installed becomes a release (this is a Helm standard object type) 
+When a Helm chart is installed becomes a release (this is a Helm standard object type)
 
 ## Attributes
 
@@ -116,7 +174,7 @@ possibilities:
 
   * preinstall
   * post-install
-  * pre-delete 
+  * pre-delete
   * post-delete
   * pre-upgrade
   * post-upgrade
@@ -128,7 +186,7 @@ just a yaml file with
     metadata:
         annotations:
             "helm.sh/hook": "pre-install"
-            
+
 Hooks can be a part of deployments in addition to having the same lifecycle for Kubernetes Jobs (See Kubernetes_Jobs).
 
 You can _also_ do multiple jobs associated with a hook! Just use weight to make sure to set the `hook-weight` annotation to different values to control which goes first.
@@ -137,7 +195,7 @@ You can _also_ do multiple jobs associated with a hook! Just use weight to make 
 
   * K8s_Init_Containers
   *
-  
+
 # Templates
 
 can run values through various operations, like quote and upper.
@@ -155,9 +213,9 @@ Pipe character to send values into another function
 Can use "with" to drill into a nested values object without navigating the object graph every time in a certain scope (Pascal has a similar syntax feature)
 
 Variables are assigned by Pascal / Smalltalk assignment syntax
-       
+
     {{- $var := "foo" -}}
-    
+
 
 {{- — do not print the results from this
 -}} — do not print out a new line
@@ -167,20 +225,20 @@ Variables are assigned by Pascal / Smalltalk assignment syntax
 Falsely:
   * Boolean false
   * numeric zero
-  * empty string 
+  * empty string
   * nil
   * empty collection
-  
-  
+
+
 ## template includes
- 
+
  _filename.tpl — traditionally starts with underscore
- 
+
  ** but** using built in objects in these templates might not work like you expect! Need to pass root context at the template call site
 
 ### How you create a block you're going to include
 
-    {{- define "template_name" }} 
+    {{- define "template_name" }}
     foobar: baz
     {{- end }
     }
@@ -249,7 +307,7 @@ charts.yaml:
 
 `helm package chartName` <-- makes a .tar file for this with the correct version number appending.
 
-You could theoretically use `curl` to upload this to the chart repository (but you likely don't want to directly do that...)  
+You could theoretically use `curl` to upload this to the chart repository (but you likely don't want to directly do that...)
 
 ## deploying a chart
 
@@ -265,7 +323,7 @@ the Helm Push plugin is a good solution here. can run this after a helm package,
 ## searching for an artifact / chart in a repository
 
     helm search $repo/$artifactName
-    
+
 As Helm keeps a local cache of repositories, you may need to manually `helm repo update` before these queries return expected results...
 
 By default `helm search` only returns latest version of an artifact in the repository. Use `helm search -l` to list all artifact coordinates.
@@ -273,7 +331,7 @@ By default `helm search` only returns latest version of an artifact in the repos
 
 ## get previously stored template
 
-### Helm v2 
+### Helm v2
 
     helm fetch $repo/$artifactName --version=$arifactVersion --untar
 
@@ -281,8 +339,8 @@ By default `helm search` only returns latest version of an artifact in the repos
 ### Helm v3
 
 	helm pull $repo/$name --version=$artifactVersion --untar
-	
-	
+
+
 ## Get K8s resources created by a chart
 
 ### Helm 3
@@ -328,15 +386,16 @@ charts.yml file:
    Can deploy multiple charts in a herd.
 
    See [declaratively running helm charts using helmfile]([https://medium.com/swlh/how-to-declaratively-run-helm-charts-using-helmfile-ac78572e6088)
-   
+
    Can select various sections you want to act on with selectors
-   
+
    Can also use template helmfile subcommand to see rendered k8s charts
 
 
 # See also
 
-  * [waytoeasylearn tutorial on Helm](https://www.waytoeasylearn.com/learn/helm-introduction/) 
+  * [waytoeasylearn tutorial on Helm](https://www.waytoeasylearn.com/learn/helm-introduction/)
   * [learning Helm O'Reilly book](https://www.amazon.com/Learning-Helm-Managing-Apps-Kubernetes/dp/1492083658)
   * [Awesome List For Helm](https://github.com/cdwv/awesome-helm)
   * [My pinboard t:helm](https://pinboard.in/u:rwilcox/t:helm)
+
