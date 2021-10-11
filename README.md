@@ -10,7 +10,7 @@ Some files are preprocessed via [Racket's scribble library](https://docs.racket-
 
 # File Index
 
-Because while you see all the files listed above.... if you're on mobile you don't.
+Because if you're looking at the file list in Github, it's hard to know if a file is the (good to view / generated one) vs the Scribble pre-processed slightly messy original file. It looks like it shows up twice...
 
   * [README.md](https://github.com/rwilcox/my-learnings-docs/blob/master/README.md)
   * [book_notes_ask_your_developer.md](https://github.com/rwilcox/my-learnings-docs/blob/master/book_notes_ask_your_developer.md)
