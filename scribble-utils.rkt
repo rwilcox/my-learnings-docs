@@ -3,6 +3,7 @@
 (require threading) ; package threading-lib
 (require racket/format)
 (require racket/file)
+(require racket/pretty)
 
 (provide quote-highlight quote-note)
 
@@ -11,8 +12,9 @@
 
 
 (define (add-attribution strs-as-lists title is-book? author page-num url )
+  ; (pretty-print strs-as-lists)
   (append strs-as-lists
-          (~a "\n> \n" "> - From " title " by " author " on page " (number->string page-num)  " (" url ")" )
+          (~a "\n> \n> - From " title " by " author " on page " (number->string page-num)  " (" url ")" )
            ))
 
 
@@ -37,10 +39,12 @@
             #:author          author
             #:page-number     page-num
             #:url             url
-            #:highlight-lines highlight
+            #:highlight-lines (list highlight)
+            ; turn highlight into a list so there's no difference in object types between the content this way or from quote-highlight
+            ; (where semantically this is the same information: the highlighted text)
             #:note-lines      body
             #:kind            "note")
-   (~> (add-highlight-and-info body title is-book? author page-num url highlight)
+   (~> (add-highlight-and-info body title is-book? author page-num url (list highlight))
       (flatten)
       (short-str-join)))
 
@@ -63,7 +67,7 @@
           (string-join (list "KIND" kind ""))
           (string-join (list "URL" url ""))
           "HIGHLIGHT"
-         body
+         (string-join body "\n> ")
           ""
           "NOTES"
           ""
@@ -80,8 +84,9 @@
                          #:author author
                          #:page-number page-num
                          #:url [url ""]
-                         . body) (
-    begin
+                         . body-in)
+  (let ([body (if (string? body-in) (list body-in) body-in)])
+
         (write-to-file
             #:title           title
             #:is-book?        is-book?
@@ -91,7 +96,8 @@
             #:highlight-lines body
             #:kind            "quote")
 
-        (~> (append-map (lambda (arg) (if (string=? arg "\n") (list arg) (list "> " arg))) body)
+        ;(pretty-print body-in)
+        (~> (append-map (lambda (arg) (if (string=? arg "\n") (list "") (list "\n> " arg))) body)
            (add-attribution title is-book? author page-num url)
            (flatten)
            (short-str-join))))
