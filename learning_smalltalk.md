@@ -1,7 +1,39 @@
 ---
-path: "/learnings/smalltalk"
-title: "Learnings: Smalltalk"
+path: /learnings/smalltalk
+title: 'Learnings: Smalltalk'
 ---
+# Table Of Contents
+
+<!-- toc -->
+
+- [Slack Syntax on a postcard](#slack-syntax-on-a-postcard)
+  * [Explaination of that code block](#explaination-of-that-code-block)
+  * [1. `exampleWithNumber: x anotherParameter: z`](#1-examplewithnumber-x-anotherparameter-z)
+  * [2. ` `"A method that illustrates every part of Smalltalk method syntax..... "`](#2--a-method-that-illustrates-every-part-of-smalltalk-method-syntax-)
+  * [3. `| y |`](#3--y-)
+  * [4. `false ifFalse: `...](#4-false-iffalse-)
+  * [4. (continued) `ifFalse: [ 'hello' ]`](#4-continued-iffalse--hello-)
+  * [4. (continued): .](#4-continued-)
+  * [5. `y := self size + super size.`](#5-y--self-size--super-size)
+- [6. `#($a #a "a" 1 1.0).`](#6-%23a-%23a-a-1-10)
+  * [7. ` do: [:each | | localVariableInAClosure |`](#7--do-each---localvariableinaclosure-)
+  * [9. `^x < y`](#9--x--y)
+- [Smalltalk Philosophy](#smalltalk-philosophy)
+- [Fun things to see](#fun-things-to-see)
+  * [playground](#playground)
+    + [and the object inspector](#and-the-object-inspector)
+    + [GTInspector](#gtinspector)
+  * [Gofer](#gofer)
+- [Alternative implantations](#alternative-implantations)
+  * [GNU Smalltalk](#gnu-smalltalk)
+  * [Squeak](#squeak)
+  * [VA Smalltalk](#va-smalltalk)
+  * [Amber Smalltalk](#amber-smalltalk)
+- [Idioms](#idioms)
+  * [Complex things to a string](#complex-things-to-a-string)
+- [Learning Resources](#learning-resources)
+
+<!-- tocstop -->
 
 # Slack Syntax on a postcard
 
@@ -24,14 +56,14 @@ title: "Learnings: Smalltalk"
 
 ## Explaination of that code block
 
-## 1. `exampleWithNumber: x anotherParameter: z` 
+## 1. `exampleWithNumber: x anotherParameter: z`
 creates a new method, takes parameter x. Call it like:
 
 `exmpleWithNumber: 42 anotherParameter: 43.`
 
 “named keyword arguments” like Objective-C (Objective-C stole these from Smalltalk)
 
-## 2. ` `"A method that illustrates every part of Smalltalk method syntax..... "` 
+## 2. ` `"A method that illustrates every part of Smalltalk method syntax..... "`
 
 comments are in double quotes
 
@@ -39,7 +71,7 @@ comments are in double quotes
 
 declare local variables in the top of a section of code, in between pipe characters
 
-## 4. `false ifFalse: `... 
+## 4. `false ifFalse: `...
 
 very very few control structures in Smalltalk (even method definitions are actually method calls on objects!). For example, if statements are implemented as method calls on boolean
 
@@ -69,7 +101,7 @@ It looks kind of odd, but it *is* consistent...
 
 The results of the last statement in a closure is the return value of that closure.
 
-## 9.  `^x < y` 
+## 9.  `^x < y`
 
 unlike a block, methods need to explicitly return something. the `^` is the return statement
 
@@ -89,7 +121,7 @@ thus why I like it for a dev workbench - saving state is _cheap_, and everything
 
 ## Gofer
 
-## 
+##
 
 # Alternative implantations
 
@@ -125,3 +157,4 @@ Smalltalk image based... but on the web.
 
   * http://ceronio.net/2017/07/first-steps-with-pharo-smalltalk/
    * [Pharo by example](https://ci.inria.fr/pharo-contribution/job/UpdatedPharoByExample/lastSuccessfulBuild/artifact/book-result/PharoTour/PharoTour.html)
+

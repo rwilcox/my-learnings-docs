@@ -1,8 +1,18 @@
 ---
-path: "/learnings/javascript_typescript_configuring_language"
-title: "Learnings: Typescript: Configuring Language"
+path: /learnings/javascript_typescript_configuring_language
+title: 'Learnings: Typescript: Configuring Language'
 ---
+# Table Of Contents
 
+<!-- toc -->
+
+- [Configuring Language](#configuring-language)
+  * [And the CLI](#and-the-cli)
+    + [running individual files through the compiler (playground style)](#running-individual-files-through-the-compiler-playground-style)
+      - [a (bad) solution](#a-bad-solution)
+        * [making a bad solution slightly not so bad](#making-a-bad-solution-slightly-not-so-bad)
+
+<!-- tocstop -->
 
 # Configuring Language
 
@@ -10,7 +20,7 @@ Ways of configuring:
 
   * tsconfig.json
   * compile time parameters passed to `tsc`
-  * [triple-slash directives](https://www.typescriptlang.org/docs/handbook/triple-slash-directives.html): top of the file embed XML inside Javascript comments? But if you're doing this you're already in the weird... 
+  * [triple-slash directives](https://www.typescriptlang.org/docs/handbook/triple-slash-directives.html): top of the file embed XML inside Javascript comments? But if you're doing this you're already in the weird...
 
 ... but apparently the triple-slash directives aren't supported by everything? A bit confused here...
 
@@ -49,3 +59,4 @@ Because npm scripts, if called with parameters, pass those parameters on to the 
 simple.ts, record.ts etc are our scripts we want to play with.
 
 You need to use `--` so that npm doesn't swallow the arguments, but passes them along to the command.
+

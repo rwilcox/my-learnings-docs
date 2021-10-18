@@ -1,8 +1,27 @@
 ---
-path: "/synthesis/management_agile"
-title: "Synthesis: Management: Agile"
+path: /synthesis/management_agile
+title: 'Synthesis: Management: Agile'
 ---
+# Table Of Contents
 
+<!-- toc -->
+
+- [- [BOOKNOTES]: Managers Path On Team Lead](#--booknotes-managers-path-on-team-lead)
+- [On Processes](#on-processes)
+- [why a leader should write code >](#why-a-leader-should-write-code-)
+  * [see also](#see-also)
+- [empowerment model](#empowerment-model)
+  * [do I have the authority to do one of the following items with a decision in my team (that I need help with?? / thats in my bounded area of responsibility)](#do-i-have-the-authority-to-do-one-of-the-following-items-with-a-decision-in-my-team-that-i-need-help-with--thats-in-my--bounded-area-of-responsibility)
+  * [And how that affects leadership](#and-how-that-affects-leadership)
+- [team knowledge models](#team-knowledge-models)
+- [servant leadership](#servant-leadership)
+- [Your company is awesome (but is "Company Culture" a lie?) (http://www.confreaks.com/videos/4179-rmr2014-your-company-is-awesome-but-is-company-culture-a-lie)](#your-company-is-awesome-but-is-company-culture-a-lie-httpwwwconfreakscomvideos4179-rmr2014-your-company-is-awesome-but-is-company-culture-a-lie)
+- [-[BOOKNOTES]: Agile performance Holarchy](#-booknotes-agile-performance-holarchy)
+- [Retrospectives](#retrospectives)
+- [And things that actually take longer than a sprint](#and-things-that-actually-take-longer-than-a-sprint)
+  * [sprint themes](#sprint-themes)
+
+<!-- tocstop -->
 
 # - [BOOKNOTES]: Managers Path On Team Lead
 
@@ -37,10 +56,10 @@ As a new tech lead, be careful of relying on process to solve problems that are 
 # empowerment model
 
 employee empowerment model that includes three degrees of empowerment.3
-  1. The first level encourages employees to play a more active role in their work. 
+  1. The first level encourages employees to play a more active role in their work.
   2. The second level asks employees to become more involved with improving the way things are done
   3.. The third level enables employees to make bigger and better decisions without having to engage upper management. The third level is key for an Agile culture.
-  
+
 ## do I have the authority to do one of the following items with a decision in my team (that I need help with?? / thats in my  bounded area of responsibility)
 
 tell, sell, consult, agree, advise, inquire, and delegate.
@@ -60,10 +79,10 @@ tell, sell, consult, agree, advise, inquire, and delegate.
   * T shaped skills
   * lightning bolt (where teams / people have primary, secondary and tertiary skills)
   * paint drip skills
-  
+
 # servant leadership
 
-Servant Leadership, Robert K. Greenleaf and Larry C. Spears share ten attributes of servant leadership: listening, empathy, healing, awareness, persuasion, conceptualization, foresight, stewardship, commitment to grow people, and building community. 
+Servant Leadership, Robert K. Greenleaf and Larry C. Spears share ten attributes of servant leadership: listening, empathy, healing, awareness, persuasion, conceptualization, foresight, stewardship, commitment to grow people, and building community.
 
 Your company is awesome (but is "Company Culture" a lie?) (http://www.confreaks.com/videos/4179-rmr2014-your-company-is-awesome-but-is-company-culture-a-lie)
 ========================
@@ -75,7 +94,7 @@ Model for happiness (PERMA):
   * Relationships  <-- must have trust to have good relationships
   * Meaning
   * Achievement
-  
+
 Developers want to work on challenging, innovative projects that are complex but autonomous and finite (ideally with a clear relationship between work and reward)
 (hey look these can be categorized under the above categories!!)
 
@@ -90,7 +109,7 @@ Retrospective questions:
   * Does the PO follow, within reason, the process defined by the dev team?
   * Is the PO pleasant to work with in general?
   * Do we, as developers, have the resources needed to move the project forward?
-  
+
 By actively praising the values we want in the culture (helpfulness, etc) we shape company culture
 the inverse, by math properties: you get what you praise
 
@@ -106,7 +125,7 @@ the inverse, by math properties: you get what you praise
    * clarifying
 - Providing:
   * equipping
-  * contributing 
+  * contributing
   * partnering
 - Crafting:
   * solving
@@ -118,7 +137,7 @@ the inverse, by math properties: you get what you praise
   * governing
 - Affirming:
   * confirming
-  * understanding 
+  * understanding
 
 
 - From: The Big Agile
@@ -148,6 +167,7 @@ What I love using for my projects is a rotation of: feature, fix, harden.
 Each of the three representing an individual sprint so that the PO can show
 an actual roadmap to their business partners that has work prioritized
 around the theme itself. Predictable is good and that clarity helps teams
-organization around what to actually work on. 
+organization around what to actually work on.
 
 - A T H
+

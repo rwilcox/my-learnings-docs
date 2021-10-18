@@ -1,7 +1,30 @@
 ---
-path: "/learnings/systemd"
-title: "Learnings: Systemd"
+path: /learnings/systemd
+title: 'Learnings: Systemd'
 ---
+# Table Of Contents
+
+<!-- toc -->
+
+- [Systemd units >](#systemd-units-)
+- [Features](#features)
+- [CLI Cheatsheet >](#cli-cheatsheet-)
+  * [Listing units](#listing-units)
+- [Dependancies](#dependancies)
+  * [listing dependencies of a unit](#listing-dependencies-of-a-unit)
+  * [listing services started after a service (aka that might be depended on the service in question):](#listing-services-started-after-a-service-aka-that-might-be-depended-on-the-service-in-question)
+- [targets: scheduling a service when: a replacement for runlevels](#targets-scheduling-a-service-when-a-replacement-for-runlevels)
+- [Units](#units)
+  * [location of custom zzunits (probably)](#location-of-custom-zzunits-probably)
+  * [reload systemd so it sees new Files](#reload-systemd-so-it-sees-new-files)
+  * [unit file](#unit-file)
+    + [Useful [Service] declarations](#useful-service-declarations)
+    + [Customizing units](#customizing-units)
+      - [modifying existing unit files](#modifying-existing-unit-files)
+      - [overriding existing unit files](#overriding-existing-unit-files)
+      - [seeing what changed](#seeing-what-changed)
+
+<!-- tocstop -->
 
 Systemd units <<Learning_Systemd_Units>>
 ==================
@@ -12,7 +35,7 @@ Systemd units <<Learning_Systemd_Units>>
   * .socket
   * .swap
   * .timer
-  
+
 Features
 =========
 
@@ -22,20 +45,20 @@ CLI Cheatsheet <<Learning_Systemd_CLI_Cheatsheet>>
 ====================================================
 
     $ sudo systemctl status $SERVICE_NAME.service
-    
-    
+
+
     $ sudo systemctl start $SERVICE_NAME
-    
+
     $ systemctl list-units --type service --all
       # list status of all services
-      
+
     $ systemctl is-active name.service
-    
+
     $ systemctl try-restart name.service # may perform ie configuration checks for you before restarting into failure
-    
+
     $ systemctl enable service.service # enables service to start on boot
-   
-##   Listing units 
+
+##   Listing units
 
 By default list-units only lists active units.—all shows even disabled ones
 
@@ -44,17 +67,17 @@ By default list-units only lists active units.—all shows even disabled ones
 ## listing dependencies of a unit
 
     $ systemctl list-dependencies --after $SERVICE_NAME.service
-    
+
   ## listing services started after a service (aka that might be depended on the service in question):
-  
+
       $ systemctl list-dependencies --after $SERVICE_NAME.service
-      
-   
+
+
 
 # targets: scheduling a service when: a replacement for runlevels
 
     $ systemctl list-units --type target # lists all targets on system you can be a part of
-    
+
 # Units
 
 ## location of custom zzunits (probably)
@@ -64,7 +87,7 @@ By default list-units only lists active units.—all shows even disabled ones
 ## reload systemd so it sees new Files
 
     $ systemctl daemon-reload
-   
+
 ## unit file
 
 ### Useful [Service] declarations
@@ -73,7 +96,7 @@ By default list-units only lists active units.—all shows even disabled ones
   * ExecStartPre
   * ExecStart  — xxxxxxx
   * Environment - bash style ENV cars to set if you just have a couple
-  
+
 ### Customizing units
 #### modifying existing unit files
 
@@ -92,6 +115,4 @@ Make a copy of file and place in /etc/systemd/system/. this will override previo
 #### seeing what changed
 
     $ systemd-delta
-    
-  
- 
+

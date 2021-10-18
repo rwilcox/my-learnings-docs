@@ -1,8 +1,30 @@
 ---
-path: "/learnings/dmacs_shell_interactions"
-title: "Learnings: Emacs: Shell Interactions"
+path: /learnings/dmacs_shell_interactions
+title: 'Learnings: Emacs: Shell Interactions'
 ---
+# Table Of Contents
 
+<!-- toc -->
+
+- [EShell](#eshell)
+  * [Setting this up properly](#setting-this-up-properly)
+  * [Neat workflow thing: Plan 9 smart display](#neat-workflow-thing-plan-9-smart-display)
+  * [Implementing things I miss from BBEdit](#implementing-things-i-miss-from-bbedit)
+    + [Text Filters on selected text: running them through an arbritrary shell command](#text-filters-on-selected-text-running-them-through-an-arbritrary-shell-command)
+    + [Giving an arbitrary (elisp) shell command the region](#giving-an-arbitrary-elisp-shell-command-the-region)
+    + [Running an arbitrary (eshell) command](#running-an-arbitrary-eshell-command)
+    + [Variations on a theme: I'm already IN eshell](#variations-on-a-theme-im-already-in-eshell)
+  * [Windows support](#windows-support)
+    + [Calling Windows commands (aka Powershell)](#calling-windows-commands-aka-powershell)
+  * [Workflows](#workflows)
+    + [Sending results of a command to a elisp variable](#sending-results-of-a-command-to-a-elisp-variable)
+  * [See also](#see-also)
+- [ansi-term](#ansi-term)
+  * [you want to turn on line mode](#you-want-to-turn-on-line-mode)
+    + [alternatives](#alternatives)
+  * [Windows support](#windows-support-1)
+
+<!-- tocstop -->
 
 # EShell
 
@@ -86,7 +108,7 @@ Note: this only runs it through the shell shell, not eshell
 	(defun bb/script-eval-selected-in-eshell ()
 	  "Like BBEdit's script functionality, but (a) command is selected at runtime by looking at the region. Either switch to the eshell buffer OR use the fancy eshell redirection properties to get the output out."
 	  (interactive)
-	  (let ((oldbuff (current-buffer))) 
+	  (let ((oldbuff (current-buffer)))
 	    (run-this-in-eshell
 	     (buffer-substring-no-properties (region-beginning) (region-end)))
 	  ))
@@ -120,7 +142,7 @@ This sends the output to the buffer named.... (well, I was using the scratch buf
     	   "you're taken the output from a previus command, maybe typed some more but maybe not, and want to run it. Make that easy"
     	    (interactive)
 	    (run-this-in-eshell (rpw/current-region)))
-     
+
 ## Windows support
 
 Because it's lisp reimplementations of corebins, AND it doesn't do interactive TTY mode very well, it should actually work well on Windows!
@@ -151,7 +173,7 @@ You may want to do this - this could be a way to work around eshell not supporti
 
     echo "hi" > #'from_elisp
 	echo $from_elisp
-	
+
 
 ## See also
 
@@ -178,3 +200,4 @@ https://www.emacswiki.org/emacs/essh may take care of that, being able to send a
 ## Windows support
 
 term says no windows support (but eshell would work technically, although once you need to do a Powershekl command your may be messed)
+

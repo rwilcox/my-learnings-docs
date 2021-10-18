@@ -1,7 +1,44 @@
 ---
-path: "/learnings/ops_java"
-title: "Learnings: Ops: Java"
+path: /learnings/ops_java
+title: 'Learnings: Ops: Java'
 ---
+# Table Of Contents
+
+<!-- toc -->
+
+- [>](#)
+  * [Q: How do the JVM diagnostic tools work, really? >](#q-how-do-the-jvm-diagnostic-tools-work-really-)
+  * [Monitoring >](#monitoring-)
+    + [jstack](#jstack)
+    + [jstat](#jstat)
+    + [jmap](#jmap)
+    + [jConsole](#jconsole)
+    + [See also:](#see-also)
+- [Java on Docker >](#java-on-docker-)
+  * [Running in Docker Images >](#running-in-docker-images-)
+  * [Introspection / Debugging > . Or: looking for signs of epidemic in your herd of cattle](#introspection--debugging---or-looking-for-signs-of-epidemic-in-your-herd-of-cattle)
+- [JMX >](#jmx-)
+  * [And Docker >](#and-docker-)
+  * [Operational Problems:](#operational-problems)
+  * [Fixing operational problems:](#fixing-operational-problems)
+    + [Firewalls / opening broad RMI range of ports](#firewalls--opening-broad-rmi-range-of-ports)
+- [>](#)
+  * [See also:](#see-also-1)
+- [>](#)
+  * [>](#)
+    + [See Also](#see-also)
+- [Java 9: Unified Logging >](#java-9-unified-logging-)
+  * [See Also:](#see-also)
+- [Why might pause time? >](#why-might-pause-time-)
+  * [>](#)
+  * [>](#)
+- [>](#)
+  * [Giving threads names:](#giving-threads-names)
+  * [See also:](#see-also-2)
+- [>](#)
+- [See Also](#see-also-1)
+
+<!-- tocstop -->
 
 # <<Learning_Ops_SRE_Java>>
 
@@ -13,7 +50,7 @@ How / what the JVM uses to allow itself to be diagnosed:
   * JVM reacts to QUIT signal and looks in CWD for `.attach_pid$PID`. If exists will create a thread that:
     a) creates a UNIX domain socket in the CWD called `.jaa_pid$PID`
     b) listens to commands on that socket
-    
+
     ^^^^^ How jattach works !!! (jmap, jstack, jcmd work)!!!
 
   * JVMTI: allows an external .so to be loaded, attached and register for interesting events.
@@ -28,7 +65,7 @@ See also:
 
 "Hmmm, I should get an alert when my Java process is taking up too much RAM / growing out of control"
 
-  
+
 ### jstack
 
 [How to take a thread dump from a JVM](https://helpx.adobe.com/experience-manager/kb/TakeThreadDump.html)
@@ -51,12 +88,12 @@ Java memory map printer
 
 uses [jattach](https://github.com/apangin/jattach) under covers
 
-See also: 
+See also:
 
   * [Oracle: jMap](https://docs.oracle.com/javase/7/docs/technotes/tools/share/jmap.html)
   * [A Test Developer's Blog: jmap](https://shantonusarker.blogspot.com/2013/07/jmap-java-memory-map-printer.html)
   * [Interpretation of jstat heap memory to debug suspected java memory leak](http://www.technologist-work.com/2015/09/interpretation-of-jstat-heap-memory-to-suspect-java-memory-leak/)
-  
+
 <<Learning_Ops_SRE_Java_Memory_Leak_Debugging>>
 
 ### jConsole
@@ -108,12 +145,12 @@ Problems:
   * Multiple Java processes on same OS could port conflict their JMX / RMI ports
   * JMX also sends hostname back to client ????????
   * If really in Docker containers than:
-  
+
      * port mappings host -> container problems
      * Container may not know hostname
 
   * If Docker containers managed via a scheduler:
-  
+
   * how to get at a specific instance of that container - see also: `Pets_Not_Cattle_Service_Debugging_Questions_Strategy`
 
 
@@ -125,7 +162,7 @@ Set following -D options (must be -D options, can not be Spring application prop
 
     -Dcom.sun.management.jmxremote.rmi.port=1234
     -Dcom.sun.management.jmxremote.port=23454
-  
+
 May also need to set:
 
      -Djava.rmi.server.hostname=<your public hostname>
@@ -142,25 +179,25 @@ Maven Coordinates:
 
   groupId  : org.hdrhistogram
   artifact : HdrHistogram
-  
+
 TL;DR: separate out distribution of data into buckets, display those buckets + their values.
 
 ## See also:
 
   * Learning_Java_Memory_Performace_Debuggin_Pause_Time
-  
+
 # <<Learning_Ops_Java_Operational_Information_Flags>>
 
 ## <<Learning_Java_Operational_Information_Flags_JIT>>
 
   * -XX:+PrintCompilation — prints information about what HotSpot is JIT-ing
   * -XX:+LogCompilation with -XX:+UnlockDiagnosticVMOptions (will generate 100s of MB of XML, use JITWatch)
-  
-  
+
+
 ### See Also
 
   * https://jakubstransky.com/2018/02/03/jvm-code-friendly-to-jit-optimisation/ —- using JITWatch
- 
+
 # Java 9: Unified Logging <<Learning_Java_Ops_Unified_Logging>>
 
 **JAVA 9 intros new unified JVM internals log format**
@@ -177,7 +214,7 @@ See avail tags, etc: `java -Xlog:help`
 
 ## See Also:
 
-  * 
+  *
 
 # Why might pause time? <<Learning_Java_Ops_Stop_The_World_Pauses>>
 
@@ -189,11 +226,11 @@ See avail tags, etc: `java -Xlog:help`
   *
 - Source: https://stackoverflow.com/a/29673564/224334 , http://hg.openjdk.java.net/jdk8u/jdk8u/hotspot/file/fc3cd1db10e2/src/share/vm/runtime/vm_operations.hpp#l39
 
-To do STW operations requires threads to be at safe point. 
+To do STW operations requires threads to be at safe point.
 
 ## <<Learning_Ops_Java_Safepoint_Requirements>>
 
-Activities requiring a Safepoint: 
+Activities requiring a Safepoint:
 * creating heap dump
 * method deoptimization
 * revoking biased lock
@@ -202,9 +239,9 @@ Activities requiring a Safepoint:
 BUT Safepoints happen when:
   * method return
   * loop back branch
-  
+
   Loop unrolling etc may mean Safepoints are further away than normal! - source: Optimized Java
-  
+
 You can print information about mean time to Safepoint.
 
 See also:
@@ -242,3 +279,4 @@ Will contain name, priority, ID, status and current callstack.
 # See Also
 
   * Optimizing Java !!!
+

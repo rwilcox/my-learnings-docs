@@ -1,7 +1,14 @@
 ---
-path: "/learnings/javascript_flow_generics"
-title: "Learning Javascript: Flow: Generics"
+path: /learnings/javascript_flow_generics
+title: 'Learning Javascript: Flow: Generics'
 ---
+# Table Of Contents
+
+<!-- toc -->
+
+- [Generics Experiments](#generics-experiments)
+
+<!-- tocstop -->
 
 # Generics Experiments
 
@@ -22,7 +29,7 @@ function yo<T>( name: T): T {
 }
 
 function yoma<T>( name: T): T {
-  return "hi"  
+  return "hi"
 }
 
 console.log(yo("Bobby"))
@@ -30,7 +37,7 @@ console.log( yoma("Ryan") )
 
 // compiles (!!!!!)
 function three<T>(first: T, second: T) {
-  console.log(first, second)  
+  console.log(first, second)
 }
 
 three("world", 34)
@@ -42,3 +49,4 @@ function four<T>(first: T, second: T): T {
 
 four("world", 34)
 ```
+

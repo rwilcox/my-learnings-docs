@@ -1,7 +1,27 @@
 ---
-path: "/learnings/graph_databases_janusgraph"
-title: "Learnings: Graph Databases: JanusGraph"
+path: /learnings/graph_databases_janusgraph
+title: 'Learnings: Graph Databases: JanusGraph'
 ---
+# Table Of Contents
+
+<!-- toc -->
+
+- [Learning Graph Database: JanusGraph >](#learning-graph-database-janusgraph-)
+  * [And Vertex IDs >](#and-vertex-ids--)
+    + [Why not??](#why-not)
+  * [Configuration >](#configuration-)
+    + [Cassandra](#cassandra)
+    + [indexes, buildIndex, and multiple index stores](#indexes-buildindex-and-multiple-index-stores)
+  * [Indexing >](#indexing--)
+    + [Composite Indexes](#composite-indexes)
+    + [Mixed Indexes](#mixed-indexes)
+    + [Vertex Centric Indexes](#vertex-centric-indexes)
+    + [Indexing and (Index free) adjacency](#indexing-and-index-free-adjacency)
+  * [Data Model and how it affects speed of queries >](#data-model-and-how-it-affects-speed-of-queries-)
+  * [See Also:](#see-also)
+- [Book Recommendations](#book-recommendations)
+
+<!-- tocstop -->
 
 # Learning Graph Database: JanusGraph <<Learning_GraphDatabase_JanusGraph>>
 
@@ -35,7 +55,7 @@ Config file
 
     storage.backend=cassandra <--- can a
     storage.cassandra.keyspace=mykeyspacename  <---- defaults to janusgraph
-  
+
 ### indexes, buildIndex, and multiple index stores
 
 NOTE:
@@ -58,14 +78,14 @@ Both Composite and Mixed Indexes require reindexing if a new index is working on
   * Do not require external indexes (ie Elasticsearch)
   * CAN be used to enforce uniqueness
   * ALL keys in the index MUST be found in the traversal for this to work
-    
+
 ### Mixed Indexes
 
   * support full text search, range search, geo search
   * some indexing options dependent on backend
   * can restrict index to particular vertex or label edge ("don't index ALL the name properties of vertices, just ones that match this label")
   * can speed up order().by() queries
-  
+
 ### Vertex Centric Indexes
 
 > local indexes built individually per vertex
@@ -75,7 +95,7 @@ IE a vertex can have an index for all its edges, thus if you have a supernode ty
 Multiple vertex centric indexes can be built for same edge label to support different traversals.
 Traversals can be answered with vertex centric indexes if order key watches the key of the index and the requested order is the same as the one defined by the index.
 
-> JanusGraph automatically builds vertex-centric indexes per edge label and property key. That means, even with thousands of incident battled edges, queries 
+> JanusGraph automatically builds vertex-centric indexes per edge label and property key. That means, even with thousands of incident battled edges, queries
 > like g.V(h).out('mother') or g.V(h).values('age') are efficiently answered by the local index.
 
 ### Indexing and (Index free) adjacency
@@ -95,7 +115,7 @@ Property cells contain key id property id and property value
 
 Each edge / property are stored in one cell of its adjacent vertices.
 
-If storage backend supports key order JanusGraph 
+If storage backend supports key order JanusGraph
 
 ## See Also:
 
@@ -104,3 +124,4 @@ If storage backend supports key order JanusGraph
 # Book Recommendations
 
   * [Graph Databases](https://www.amazon.com/Graph-Databases-Opportunities-Connected-Data-ebook/dp/B00ZGRS4VY/ref=as_li_ss_tl?keywords=graph+databases&qid=1555869731&s=books&sr=1-3&linkCode=ll1&tag=wilcodevelsol-20&linkId=4ddb985cd5493c0c1dffcc8941ed11ac&language=en_US)
+

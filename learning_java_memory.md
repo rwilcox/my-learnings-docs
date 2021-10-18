@@ -1,7 +1,37 @@
 ---
-path: "/learnings/java_memory"
-title: "Learnings: Java: Memory"
+path: /learnings/java_memory
+title: 'Learnings: Java: Memory'
 ---
+# Table Of Contents
+
+<!-- toc -->
+
+- [>](#)
+  * [>](#)
+    + [>](#)
+      - [- [REVIEW]: So if you're cookie-cuttering based purely on Java heap `-Xmx` settings, you're underestimating the actual memory required by your process? (in addition to missing the overhead of ie the `cdata` section of Unix process memory ????](#--review-so-if-youre-cookie-cuttering-based-purely-on-java-heap--xmx-settings-youre-underestimating-the-actual-memory-required-by-your-process-in-addition-to-missing-the-overhead-of-ie-the-cdata-section-of-unix-process-memory-)
+      - [>](#)
+    + [>](#)
+      - [- [BOOKQUOTE]:](#--bookquote)
+      - [>](#)
+        * [- [BOOKQUOTE]:](#--bookquote-1)
+      - [See also:](#see-also)
+    + [>](#)
+      - [Concurrent Mark and Sweep (CMS): >](#concurrent-mark-and-sweep-cms-)
+      - [G1: Garbage First >](#g1-garbage-first--)
+      - [>](#)
+- [>](#)
+  * [See also:](#see-also-1)
+  * [Performance stats](#performance-stats)
+    + [tentured item promotion](#tentured-item-promotion)
+    + [Pause time >](#pause-time-)
+  * [heap fragmentation >](#heap-fragmentation-)
+    + [and concurrent mark and sweep collector](#and-concurrent-mark-and-sweep-collector)
+      - [see also](#see-also)
+  * [See also](#see-also)
+- [Book Recommendations](#book-recommendations)
+
+<!-- tocstop -->
 
 # <<Learning_Java_Memory>>
 
@@ -49,7 +79,7 @@ Uses "card table" to keep track of old objects pointing at new object
 _NOTE:_ G1, not this old and young memory zones, default in Java 9+.
 
 
-#### - [BOOKQUOTE]: 
+#### - [BOOKQUOTE]:
 
 > A typical pause time for a young collection on a 2G heap (with default sizing) on modern heap might well be just a few milliseconds, very frequently under 10ms.
 
@@ -63,7 +93,7 @@ pre-allocated eden space from heap divvyed up for each app thread: called thread
 (TLABs can grow if a thread needs it).
 
 
-##### - [BOOKQUOTE]: 
+##### - [BOOKQUOTE]:
 
 > veral techniques to minimize space wastage due to the use of TLABs are employed. For example, TLABs are sized by the allocator to waste less than 1% of Eden, on average. The combination of the use of TLABs and linear allocations using the bump-the-pointer technique enables each allocation to be efficient, only requiring around 10 native instructions.
 
@@ -72,8 +102,8 @@ pre-allocated eden space from heap divvyed up for each app thread: called thread
 #### See also:
 
   * [Sun: Memory Management in Hotspot Virtual Machine](http://www.oracle.com/technetwork/java/javase/memorymanagement-whitepaper-150215.pdf)
-  
-  
+
+
 ### <<Learning_Java_Hotspot_Garbage_Collector_Type>>
 
 #### Concurrent Mark and Sweep (CMS): <<Learning_Java_Garbage_Collector_Concurrent_Mark_And_Sweep>>
@@ -84,7 +114,7 @@ Phases:
   2. concurrent marking phase
   3. Concurrent Preclean
   3. remark (Stop the World)
-  4. concurrent sweep 
+  4. concurrent sweep
   6. Concurrent Reset
 
 *Only collector that is not compacting*. Memory fragmentation problems, requiring time by CMS allocator to plan for / break or join blocks to deal with (See: Sun: Memory Management in Hotspot Virtual Machine)
@@ -130,7 +160,7 @@ G1 based around pause goals.
 
   * If TLAB is full but thread needs to have yet more memory
   *
-  
+
 # <<Learning_Java_GC>>
 
 Can set flags to enable GC logs (at ~0 cost: asynchronous log writer).
@@ -141,14 +171,14 @@ Can set flags to enable GC logs (at ~0 cost: asynchronous log writer).
 Bad:
   * (the JVM < 1.9 version): will send to log _file_, not just stdlog (this may be a good thing)
   * log format NOT standarized: your parser may super break if you add another option _>> use Censum or GCViewer
-  
+
 Good:
   * more metrics than (say) JMX
 
 ## See also:
 
   * https://dzone.com/articles/disruptive-changes-to-gc-logging-in-java-9
- 
+
 ## Performance stats
 ### tentured item promotion
 
@@ -157,16 +187,16 @@ Too low? Could have more of that in Eden..
 
 ### Pause time <<Learning_Java_Memory_Performace_Debuggin_Pause_Time>>
  > One useful heuristic for pause time tuning is to divide applications into three broad bands. These bands are based on the application’s need for responsiveness, expressed as the pause time that the application can tolerate. They are:
-> 
+>
 > >1s: Can tolerate over 1s of pause
-> 
+>
 > 1s - 100ms: Can tolerate more that 200ms but less than 1s of pause
-> 
+>
 > < 100ms: Cannot tolerate 100ms of pause.
  - Optimizing Java
- 
+
  Can also use https://github.com/giltene/jHiccup to see pause times due to memory or just when you have a ns-scale application requirements and need to see profile.
- 
+
 
 
 ## heap fragmentation <<Learning_Java_Memory_Heap_Fragmentation>>
@@ -186,7 +216,8 @@ Java jargon: concurrent Mode Failures
 ## See also
 
   * Learning_Ops_Java_JMX_GC_Debugging
-  
+
 # Book Recommendations
 
   * [Optimizing Java](https://www.amazon.com/Optimizing-Java-Techniques-Application-Performance-dp-1492025798/dp/1492025798/ref=as_li_ss_tl?_encoding=UTF8&me=&qid=1555870760&linkCode=ll1&tag=wilcodevelsol-20&linkId=be039084b39d61a72afb9e6fa0be2a37&language=en_US)
+

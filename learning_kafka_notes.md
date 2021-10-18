@@ -1,9 +1,45 @@
 ---
-path: "/learnings/kafka"
-title: "Learnings: Kafka"
+path: /learnings/kafka
+title: 'Learnings: Kafka'
 ---
+# Table Of Contents
 
-<<Learning_Kafka>>
+<!-- toc -->
+
+- [>](#)
+- [Distributes running, limited, commit log](#distributes-running-limited-commit-log)
+  * [File format](#file-format)
+  * [Uniqueness in Kafka:](#uniqueness-in-kafka)
+  * [Ordering in Kafka](#ordering-in-kafka)
+    + [Interleaved messages: ie plays for multiple simultaneous games getting written to the same parition](#interleaved-messages-ie-plays-for-multiple-simultaneous-games-getting-written-to-the-same-parition)
+      - [See also:](#see-also)
+  * [Replication notes (producer side) >](#replication-notes-producer-side-)
+- [Network Model](#network-model)
+  * [Followers / Replication](#followers--replication)
+  * [Consumer Features](#consumer-features)
+    + [Idempotency and consumers](#idempotency-and-consumers)
+  * [Brokers](#brokers)
+  * [and configuration](#and-configuration)
+    + [and ops](#and-ops)
+  * [Producer client (Java)](#producer-client-java)
+- [Kafka In Practice](#kafka-in-practice)
+  * [Producers](#producers)
+  * [Consumers](#consumers)
+- [Kafka and CAP theorem](#kafka-and-cap-theorem)
+  * [Kafka processing and local storage](#kafka-processing-and-local-storage)
+  * [Kafka and exactly once delivery (explicit and implicit architecture)](#kafka-and-exactly-once-delivery-explicit-and-implicit-architecture)
+- [Topic Schemas](#topic-schemas)
+  * [Schema Registry](#schema-registry)
+- [KStreams](#kstreams)
+  * [And Error Handling >](#and-error-handling-)
+    + [On Producers](#on-producers)
+    + [On Consumers](#on-consumers)
+    + [See also:](#see-also-1)
+- [Book Recommendations](#book-recommendations)
+
+<!-- tocstop -->
+
+# <<Learning_Kafka>>
 
 # Distributes running, limited, commit log
 
@@ -21,16 +57,16 @@ Not that on disk the messages are stored in the same format as from the producer
 
 
 ## Uniqueness in Kafka:
-  
+
     Topic(/partition) + [key]
- 
- 
+
+
 (Destination partition may be set up to be determined by message key)
- 
+
 ## Ordering in Kafka
 
   * preserves insert order of messages within a partition
-  * 
+  *
 
 ### Interleaved messages: ie plays for multiple simultaneous games getting written to the same parition
 
@@ -43,7 +79,7 @@ Consumer notes:
   * always commit back the offset you were processing, not the last one you read (esp in multi threaded situations)
   * Kafka commits offsets, not individual messages. thus, if you failed processing record 30 but record 31 succeeded (multi-threaded) you have a problet (you can't set the offset because the previous one didnMt work).
    * DON'T BLOCK THE POLL EVENT LOOP!!
-   
+
 #### See also:
 
   * Learning_Ops_Kafka_Poll_Interval
@@ -74,15 +110,15 @@ Can also couple this with a timeout, "at least 10K OR just give up if you don't 
 (Kafka Definitive Guide, 2017)
 
 
-## Brokers 
+## Brokers
 
 Brokers store partitions on disk for each topic stored, and may contain replicas of partitions that need replication per replication prefs.
 
 ## and configuration
 
-`bootstrap.servers`: 
+`bootstrap.servers`:
 
-> This list should be in the form host1:port1,host2:port2,.... Since these servers are just used for the initial 
+> This list should be in the form host1:port1,host2:port2,.... Since these servers are just used for the initial
 > connection to discover the full cluster membership (which may change dynamically), this list need not contain the full
 > set of servers (you may want more than one, though, in case a server is down).
 
@@ -120,7 +156,7 @@ Implicit: [Kafka versions > 0.11 have a feature for exactly once delivery](https
 
 Woh, super magic!!
 
-Explicit: 
+Explicit:
 
 > Theoretically you should design your pipeline to be idempotent: that
 > multiple applications of the same change message should only affect the
@@ -130,7 +166,7 @@ Explicit:
 > for, regardless of whatever once only delivery CAP Theorem bending magic
 > KIP-98 does. (And if you don't get why this super magic well here's a
 > homework topic :) )
-> 
+>
 > Let's say your input data is posts about users. If your posted data
 > includes some kind of updated_at date you could create a transaction log
 > Kafka topic. Set the key to be the user ID and the values to be all the
@@ -138,7 +174,7 @@ Explicit:
 > HTTP Post look up the user in a local KTable for that topic, examine if
 > your post has already been recorded. If it's already recorded then don't
 > produce the change into Kafka.
-> 
+>
 > Even without the updated_at field you could save the user document in
 > the KTable. If Kafka is a stream of transaction log data (the database
 > inside out) then KTables are the streams right side out: a database
@@ -170,8 +206,9 @@ Set via `props.put( "schema.registry.url", "HOSTNAME1,HOSTNAME2" )`
   * [Kstreams data storage internals](https://cwiki.apache.org/confluence/display/KAFKA/Kafka+Streams+Internal+Data+Management)
   * [Kstreams error handling consumer property](https://stackoverflow.com/a/50040737/224334) (actual answer unrelated to the posted question)
   * [Producers can implement a ProductionExceptionHandler interface to deal with errors](https://stackoverflow.com/a/1299739/224334)
-  
+
 # Book Recommendations
 
   * [Kafka the Definative Guide](https://www.amazon.com/Kafka-Definitive-Real-Time-Stream-Processing-ebook/dp/B0758ZYVVN/ref=as_li_ss_tl?keywords=kafka+streams&qid=1555895652&s=books&sr=1-3&linkCode=ll1&tag=wilcodevelsol-20&linkId=cbdb9f829202e66239afeead1b9b493e&language=en_US)
   * [kafka Streams in Action](https://www.amazon.com/Kafka-Streams-Action-Real-time-microservices/dp/1617294470/ref=as_li_ss_tl?keywords=kafka+streams&qid=1555895652&s=books&sr=1-1&linkCode=ll1&tag=wilcodevelsol-20&linkId=b58791097db02cea2815d0c6b38dba40&language=en_US)
+

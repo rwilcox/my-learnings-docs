@@ -1,7 +1,31 @@
 ---
-path: "/learnings/docker"
-title: "Learnings: Docker"
+path: /learnings/docker
+title: 'Learnings: Docker'
 ---
+# Table Of Contents
+
+<!-- toc -->
+
+- [>](#)
+  * [Parts](#parts)
+  * [Docker Storage >](#docker-storage-)
+    + [Docker Storage / Overlay Mount Types >](#docker-storage--overlay-mount-types-)
+    + [Writing Data in your container for state >](#writing-data-in-your-container-for-state-)
+      - [Where everything is stored on the Docker host >](#where-everything-is-stored-on-the-docker-host--)
+        * [Using a folder not `/var/lib/docker`](#using-a-folder-not-varlibdocker)
+  * [Docker Networking >](#docker-networking-)
+    + [And Using Docker Networks to join two Docker Compose Clusters >](#and-using-docker-networks-to-join-two-docker-compose-clusters-)
+- [>](#)
+  * [Using Init flag: >](#using-init-flag-)
+- [>](#)
+  * [>](#)
+    + [>](#)
+- [>](#)
+  * [>](#)
+    + [>](#)
+- [Book Recommendations](#book-recommendations)
+
+<!-- tocstop -->
 
 # <<Learning_Docker>>
 
@@ -31,7 +55,7 @@ Remember:
   * Data written here will go away when container restarted - only store re-creatable data or state here
   * Could [docker commit](https://docs.docker.com/engine/reference/commandline/commit/#options) to save these changes into a new, read-only later.
 
-> The major difference between a container and an image is the top writable layer. All writes to the container that add new or modify existing data are stored in this writable layer. When the container is deleted, the writable layer is also deleted. 
+> The major difference between a container and an image is the top writable layer. All writes to the container that add new or modify existing data are stored in this writable layer. When the container is deleted, the writable layer is also deleted.
 
 - [Source](https://docs.docker.com/storage/storagedriver/#images-and-layers)
 
@@ -59,7 +83,7 @@ This Docker host uses overlay2 as a storage driver, so layers will be in `/var/l
 
 See also:
 
-  * Q: "So... what volume does /var/lib/docker live on?" 
+  * Q: "So... what volume does /var/lib/docker live on?"
     A: See Learning_Ops_Unix_Mount_Points
 
 ##### Using a folder not `/var/lib/docker`
@@ -69,7 +93,7 @@ you can use `docker daemon -g` / the [graph parameter in daemon.json](https://do
 See also:
 
   * [Stackoverflow: How to change the docker image installation directory](https://stackoverflow.com/questions/24309526/how-to-change-the-docker-image-installation-directory)
-  
+
 
 ## Docker Networking <<Learning_Docker_Networking>>
 
@@ -132,7 +156,7 @@ Dockerfile snippet
 Building this on the CLI
 
     $ docker build -t my_image --build-arg 'ROOT_IMAGE=scratch'
-    
+
 # <<Learning_Docker_Windows>>
 
 Windows 10 (or Win Server 2016)? Use the new Docker (HyperV)
@@ -164,4 +188,5 @@ Preprovisioned VMs:
 # Book Recommendations
 
   * [Docker in Practice](https://www.amazon.com/Docker-Practice-Ian-Miell/dp/1617294802/ref=as_li_ss_tl?keywords=Docker&qid=1555869261&s=books&sr=1-5&linkCode=ll1&tag=wilcodevelsol-20&linkId=e2f6ba7ace4ad2c5813bb39743c050a0&language=en_US)
-  * 
+  *
+

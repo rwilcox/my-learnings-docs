@@ -1,8 +1,14 @@
 ---
-path: "/learnings/ops_unix_m4"
-title: "Learnings: Ops: Unix: M4"
+path: /learnings/ops_unix_m4
+title: 'Learnings: Ops: Unix: M4'
 ---
+# Table Of Contents
 
+<!-- toc -->
+
+- [Defining a variable then using it elsewhere multiple times in the file](#defining-a-variable-then-using-it-elsewhere-multiple-times-in-the-file)
+
+<!-- tocstop -->
 
 # Defining a variable then using it elsewhere multiple times in the file
 
@@ -16,6 +22,7 @@ title: "Learnings: Ops: Unix: M4"
 
 	USER_STRUCTURE
 	USER_STRUCTURE
-	
-	
+
+
 Would give us that `+ email` thing TWICE
+

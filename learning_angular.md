@@ -1,7 +1,60 @@
 ---
-path: "/learnings/learning_angular"
-title: "Learnings: Angular"
+path: /learnings/learning_angular
+title: 'Learnings: Angular'
 ---
+# Table Of Contents
+
+<!-- toc -->
+
+- [General Angular Information](#general-angular-information)
+  * [async patterns](#async-patterns)
+    + [asyncpipe - `{{ blahblah | async}}`](#asyncpipe----blahblah--async)
+  * [async as](#async-as)
+  * [order of callbacks:](#order-of-callbacks)
+- [Architecture / Organization](#architecture--organization)
+  * [Style Guides](#style-guides)
+  * [Ways to talk to each other](#ways-to-talk-to-each-other)
+    + [EventEmitter](#eventemitter)
+      - [NOTE: Angular doesn’t offer an API to support event bubbling. (Have to use native DOM events for that)](#note-angular-doesnt-offer-an-api-to-support-event-bubbling-have-to-use-native-dom-events-for-that)
+    + [@Input, @Output](#input-output)
+  * [Actually making loosely coupled components: Mediator pattern](#actually-making-loosely-coupled-components-mediator-pattern)
+    + [or just seriously use >](#or-just-seriously-use--)
+      - [Main concepts](#main-concepts)
+  * [and routes](#and-routes)
+  * [and pulling DI provider items from component / library modules in the main app](#and-pulling-di-provider-items-from-component--library-modules-in-the-main-app)
+  * [Network communication](#network-communication)
+- [Directives](#directives)
+- [RxJS](#rxjs)
+  * [Using DI in Angular](#using-di-in-angular)
+    + [See also](#see-also)
+    + [Example @Component](#example-component)
+  * [gotchas](#gotchas)
+    + [can not use a Typescript interface as a DI type for the provided parameter](#can-not-use-a-typescript-interface-as-a-di-type-for-the-provided-parameter)
+- [Testing Angular Applications](#testing-angular-applications)
+  * [Configuring Karma for CI servers](#configuring-karma-for-ci-servers)
+    + [Using headless Chrome with Karma](#using-headless-chrome-with-karma)
+    + [Actually running it...](#actually-running-it)
+  * [Unit Tests](#unit-tests)
+    + [Shahow Tests](#shahow-tests)
+    + [selecting DOM elements](#selecting-dom-elements)
+    + [routing tests](#routing-tests)
+    + [Overriding DI](#overriding-di)
+      - [See also](#see-also-1)
+    + [Testing Async code / network requests](#testing-async-code--network-requests)
+      - [Faking tests to seem sync](#faking-tests-to-seem-sync)
+      - [Using `HttpClientTestingModule`](#using-httpclienttestingmodule)
+- [End To End / Integration Tests](#end-to-end--integration-tests)
+  * [Using Headless Chrome with Protractor](#using-headless-chrome-with-protractor)
+  * [Questions](#questions)
+    + ["Can we run this on Jenkins etc?"](#can-we-run-this-on-jenkins-etc)
+    + [Open questions:](#open-questions)
+      - [Docker image with Protractor](#docker-image-with-protractor)
+    + [Q: Can you use Selenium and/or Selenium Grid to run protractor created tests?](#q-can-you-use-selenium-andor-selenium-grid-to-run-protractor-created-tests)
+    + [can I run multiple browsers in my test?](#can-i-run-multiple-browsers-in-my-test)
+  * [Using Pupetter With Protractor](#using-pupetter-with-protractor)
+    + [See also:](#see-also)
+
+<!-- tocstop -->
 
 # General Angular Information
 
@@ -79,7 +132,7 @@ And this time with RxJS backing it - subscribe the the store.
 4. (The Store)
 5. Selectors
 
-#### Main concepts 
+#### Main concepts
 ## and routes
 
 Routes are defined on a component / module level. export routes with `forChild` to do this.
@@ -140,7 +193,7 @@ Because types son’t really exist / are removed by the compiler. use abstract c
 
 # Testing Angular Applications
 
-First: tools: 
+First: tools:
   * unittests: jasmine / Karma
   * integration tests: Protractor
 
@@ -157,7 +210,7 @@ add karma-chrome-launcher to devDependencies
 
 `$ npm run karma run`
 
-### 
+###
 
 ## Unit Tests
 
@@ -186,9 +239,9 @@ tost component one level deep: don't render child componets
         ],
         // ^^^^ array of modules that the component you are testing requires
 
-        providers: [{provide: ContactService, useValue: contactServiceStub}] 
+        providers: [{provide: ContactService, useValue: contactServiceStub}]
         // ^^^ override DI. (here we inject a mock - using the same provider mechansim as our component declared
-    }); 
+    });
 
 #### See also
 
@@ -226,8 +279,8 @@ Firefox and and Chrome can support direct connections, without going though Sele
 
   * does Protractor end to end tests require the angular server running? (would potentially require a backend running) <-- how to replicate that???
   * if it does, how to have port isolation to allow multiple end to end tests to run on the same Jenkins build agent (assume no build agent in separate Docker container isolation fanciness)
-  * 
-  
+  *
+
 #### Docker image with Protractor
 
 Because you need Firefox, Protractor, etc.
@@ -243,16 +296,16 @@ also points to their headless chrome container they use
 A: It seems so:
 
   * [instructions from TestingBot on how to do that](https://testingbot.com/support/getting-started/protractor.html)
-  
+
 ### can I run multiple browsers in my test?
 
   A: yes. set multiCapabilities
-  
+
 ## Using Pupetter With Protractor
-  
+
   Very easy: just point protractor towards the exec path from Puppetter?
-  
+
 ### See also:
-  
+
   * https://medium.com/@danharris_io/how-to-setup-angular-e2e-tests-on-vsts-ci-be0872f9dc31
-  
+

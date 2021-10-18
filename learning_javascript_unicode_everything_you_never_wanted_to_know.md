@@ -1,7 +1,17 @@
 ---
-path: "/learnings/javascript_unicode_everything_you_never_wanted_to_know"
-title: "Learnings: Javascript: Unicode Everything you never wanted to know"
+path: /learnings/javascript_unicode_everything_you_never_wanted_to_know
+title: 'Learnings: Javascript: Unicode Everything you never wanted to know'
 ---
+# Table Of Contents
+
+<!-- toc -->
+
+- [>](#)
+  * [Getting real length of a string in Node](#getting-real-length-of-a-string-in-node)
+  * [See also](#see-also)
+- [More fun: Emojis and modifiers and other wildness](#more-fun-emojis-and-modifiers-and-other-wildness)
+
+<!-- tocstop -->
 
 <<Learning_Javascript_Unicode>>
 =======================================
@@ -40,3 +50,4 @@ Key words:
 
   * https://eng.getwisdom.io/emoji-modifiers-and-sequence-combinations/
   * https://thekevinscott.com/emojis-in-javascript/
+

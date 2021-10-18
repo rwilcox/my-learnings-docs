@@ -1,7 +1,15 @@
 ---
-path: "/learnings/gatsbyjs"
-title: "Learnings: Gatsby.js"
+path: /learnings/gatsbyjs
+title: 'Learnings: Gatsby.js'
 ---
+# Table Of Contents
+
+<!-- toc -->
+
+- [And layouts](#and-layouts)
+- [With Markdown / remark >](#with-markdown--remark-)
+
+<!-- tocstop -->
 
 # And layouts
 
@@ -20,5 +28,4 @@ Given the following structure:
     /src/pages/markdown_documents/learning_gatsby.md
 
 And a path for that document at `/learning/gatsby`, the rendered path will be `curl http://localhost:9000/learnings/gatsby/index.html`
-
 

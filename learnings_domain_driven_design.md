@@ -1,7 +1,22 @@
 ---
-path: "/learnings/domain_driven_design"
-title: "Learnings: Domain Driven Design"
+path: /learnings/domain_driven_design
+title: 'Learnings: Domain Driven Design'
 ---
+# Table Of Contents
+
+<!-- toc -->
+
+- [Info](#info)
+- [Bounded Contexts >](#bounded-contexts-)
+- [Domains](#domains)
+  * [problem space](#problem-space)
+    + [steering questions](#steering-questions)
+  * [solution space](#solution-space)
+    + [steering questions](#steering-questions-1)
+
+<!-- tocstop -->
+
+# Info
 
 DDD tactical patterns: Aggregates, Services, Value Objects, Events Domains, Subdomains, Bounded Contexts
 
@@ -24,7 +39,7 @@ Only single team should work on a bounded context (ie don't try to split the bou
 
 Generic Subdomain: captures nothing special to the business but is required for the overall business solution
 
-Supporting subdomain: 
+Supporting subdomain:
 
 Ideally want to align subdomains with bounded contexts
 
@@ -60,3 +75,4 @@ maybe problem space of the domain is "login / auth" and the solution space is, "
   9. How are shared teams and/or overlapping concepts mapped and translated between Bounded Contexts?
   10. Which bounded context contains the concepts that address the core domain and which of the tactical patterns will be used to model it?
   - Implementing domain-driven design
+

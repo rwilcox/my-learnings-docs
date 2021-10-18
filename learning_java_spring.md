@@ -1,7 +1,59 @@
 ---
-path: "/learnings/java_spring"
-title: "Learnings: Java: Spring"
+path: /learnings/java_spring
+title: 'Learnings: Java: Spring'
 ---
+# Table Of Contents
+
+<!-- toc -->
+
+- [Spring Boot](#spring-boot)
+  * [Getting Started](#getting-started)
+    + [and Groovy](#and-groovy)
+  * [and routes that map for URLs-> methods](#and-routes-that--map-for-urls--methods)
+    + [with CLI](#with-cli)
+    + [pretty dashboard](#pretty-dashboard)
+  * [... But security!?](#-but-security)
+  * [making it an init.d / systemd thing /](#making-it-an-initd--systemd-thing-)
+- [Actuators >](#actuators--)
+  * [Port number / path location](#port-number--path-location)
+  * [Useful Endpoints](#useful-endpoints)
+    + [/bean](#bean)
+    + [/env](#env)
+    + [/metrics](#metrics)
+    + [/health >](#health-)
+      - [Health Endpoint and interactions with management.port](#health-endpoint-and-interactions-with-managementport)
+      - [And Reactive WebFlux stuff](#and-reactive-webflux-stuff)
+    + [/git](#git)
+    + [/threaddump](#threaddump)
+  * [JMX](#jmx)
+  * [Often Used Properties:](#often-used-properties)
+- [Reactive Spring Stack / Spring Web Flux](#reactive-spring-stack--spring-web-flux)
+- [using Pivotal Reactor](#using-pivotal-reactor)
+  * [cold flux](#cold-flux)
+  * [hot flux](#hot-flux)
+- [Profiles](#profiles)
+  * [and testing](#and-testing)
+- [Mutliple qualifiers on beans](#mutliple-qualifiers-on-beans)
+- [>](#)
+  * [Classes for testing Spring MVC:](#classes-for-testing-spring-mvc)
+  * [Stand alone Spring config and Junit](#stand-alone-spring-config-and-junit)
+  * [Example](#example)
+  * [Testing controllers with mock objects](#testing-controllers-with-mock-objects)
+- [Spring Components](#spring-components)
+  * [Spring Roo: Rails Generate, (Rails Console)(???) for Spring](#spring-roo-rails-generate-rails-console-for-spring)
+  * [Spring Framework (DI / IoC related highlights):](#spring-framework-di--ioc-related-highlights)
+- [Spring Core Container notes](#spring-core-container-notes)
+  * [@Bean declaration bean names](#bean-declaration-bean-names)
+  * [scanning mutliple bases packages with @ComponentScan](#scanning-mutliple-bases-packages-with-componentscan)
+- [Spring Cloud Stream](#spring-cloud-stream)
+  * [Speing Cloud Data Flow](#speing-cloud-data-flow)
+  * [Speing Cloud Contract](#speing-cloud-contract)
+- [HTTP Requests With Spring](#http-requests-with-spring)
+  * [Spring 5: WebClient:](#spring-5-webclient)
+  * [Spring 4:](#spring-4)
+- [Book Recommendations](#book-recommendations)
+
+<!-- tocstop -->
 
 # Spring Boot
 
@@ -36,7 +88,7 @@ https://github.com/codecentric/spring-boot-admin
 
 Can secure spring actuator routes with Spring Security
 
-## making it an init.d / systemd thing / 
+## making it an init.d / systemd thing /
 
 <Configuration><executable>true</executable></configuration> <---- does that Bash thing where it prefixes the jar file with some Bash script (useful if you're not wrapping with Baliista or Docker or something....) <--- so can put this in /etc/services (??)
 
@@ -53,7 +105,7 @@ Enable:
 See also:
 
   * Learning_Ops_Java_Spring
-  
+
 ## Port number / path location
 
 Set Spring Actuator to a different port with property value like so:
@@ -95,7 +147,7 @@ Gives list of following built in metrics:
   * Tomcat session info
   * HTTP
   * etc etc
-  
+
 Can fetch only one metric by adding it to the URL: /metrics/gc.free <-- or whatever
 
 ### /health <<Spring_Actuators_Health>>
@@ -144,7 +196,7 @@ See also:
 
 ## Often Used Properties:
 
-| Property Name                          | Description / Notes                                                                                                | 
+| Property Name                          | Description / Notes                                                                                                |
 |:-------------------------------------- |:------------------------------------------------------------------------------------------------------------------ |
 | management.security.enabled            | NOTE: do NOT turn this off without a management port: your actuators etc are then EXPOSED TO PUBLIC INTERNET!!!    |
 | management.port                        | explicitly specify where management.port is (usually server.port + 1)                                              |
@@ -182,7 +234,7 @@ Uses http://projectreactor.io/
 ## cold flux
 
 Deosn't publish until subscriber connected
-When connected, sub gets all events from beginning 
+When connected, sub gets all events from beginning
 
 ## hot flux
 
@@ -202,18 +254,18 @@ To select which implementation of a bean you want in which environment
     		return "dev";
     	}
     }
-    
-    
+
+
     @Configuration
     @Profile("production")
     public class ProdConfig() {
-    
+
     	@Bean
     	public String EnvName() {
     		return( "production - build {}".... )
     	}
     }
-    
+
 Control active profile:
 
   * context parameters on web service
@@ -222,7 +274,7 @@ Control active profile:
   * set `spring.profiles.active` property
   * set `spring.profiles.default` property
   * set `@ActiveProfile` annotation on integration test case
-  
+
 ## and testing
 
 # Mutliple qualifiers on beans
@@ -241,7 +293,7 @@ public @interface MyOrderQualifier {
 public @interface MyUrlQualifier {
 }
 
-See: 
+See:
 # <<Java_JUnit_SpringMVCTest>>
 
 IF TESTING NON SPRING-BOOT SPRING:
@@ -255,7 +307,7 @@ IF TESTING NON SPRING-BOOT SPRING:
 
 IF TESTING SPRING BOOT:
 
-	`spring-boot-starter-test` 
+	`spring-boot-starter-test`
 
 
 ## Classes for testing Spring MVC:
@@ -265,12 +317,12 @@ IF TESTING SPRING BOOT:
   * MockMvcRequestBuilders <-- builds you HTTP "requests" that are sent to the tested controller
      - MockHttpServletRequestBuilder   <--- simple requests
      - MockMultipartHttpServletRequestBuilder   <--- multipart requests
-     
+
   * MockMvcResultHandlers  <--- provides asserts etc for checking HTTP response from controller
-  
+
 ## Stand alone Spring config and Junit
 
->  If we want to use the web application context based configuration, we have to run our unit tests by using the SpringJUnit4ClassRunner class. 
+>  If we want to use the web application context based configuration, we have to run our unit tests by using the SpringJUnit4ClassRunner class.
 
 
 ## Example
@@ -279,16 +331,16 @@ Lesson Link: https://www.testwithspring.com/lesson/configuring-the-system-under-
 
 		@Category(UnitTest.class)
 		public class HelloControllerTest {
- 
+
 			private MockMvc mockMvc;
- 
+
 			@Before
 			public void configureSystemUnderTest() {
 				mockMvc = MockMvcBuilders.standaloneSetup(new HelloController())
 						.build();
 			}
 		}
-		
+
 standaloneSetup will register one or more @Controller instances and configure the Spring MVC infrastructure programmatically
 
 ## Testing controllers with mock objects
@@ -297,7 +349,7 @@ See `StandaloneMockMvcBuilder` to specify intercepters, placeholderValues, local
 
 but probably should be minimal with these
 
-> 
+>
 >    I configure the used ExceptionResolver if my application has error views that are rendered when a controller method throws an exception.
 >    I specify the used LocaleResolver if a Locale object is injected into a method of the tested controller as a method parameter.
 >    I specify the used ViewResolver if I don’t want that my unit tests use the InternalViewResolver that is used by the Spring MVC Test framework if no view resolver is configured.
@@ -306,9 +358,9 @@ but probably should be minimal with these
 
 ## Spring Roo: Rails Generate, (Rails Console)(???) for Spring
 ## Spring Framework (DI / IoC related highlights):
-  
+
     See ~/Writing/whitepapers/SpringJustDependencyInjection.ooutline
-      
+
     - AoC
     - Spring Security
     - Data Access
@@ -316,29 +368,29 @@ but probably should be minimal with these
     - IoC
 
   * Spring Test:
-  
+
     - Sub Components:
-    
-      * 
-    
+
+      *
+
     - Important Classes / Annotations:
-    
+
       * [@ContextConfiguration](https://docs.spring.io/spring/docs/current/spring-framework-reference/html/integration-testing.html#testcontext-ctx-management-javaconfig) < --- does NOT set up logging or properties file
       * @MockEnvironment
       * @MockPropertySource
       * @ContextHierarchy
       * [@TestPropertySource](http://docs.spring.io/spring/docs/4.3.x/javadoc-api/org/springframework/test/context/TestPropertySource.html)
       * [ApplicationContextAware superclass](https://docs.spring.io/spring/docs/current/spring-framework-reference/html/integration-testing.html#testcontext-ctx-management)
-          "an alternative is to inject the application context into your test class via @Autowired..."          
+          "an alternative is to inject the application context into your test class via @Autowired..."
       * ReflectionTestUtils
-    
+
     - With Spring Boot:
       "https://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-testing.html"
-      
+
       * [@MockBean](http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#boot-features-testing-spring-boot-applications-mocking-beans)
       * [@SpringBootTest](https://docs.spring.io/spring-boot/docs/current/api/org/springframework/boot/test/context/SpringBootTest.html)
           "technically in springframework.boot.test.context < -- sets up logging, config etc etc"
-      
+
 # Spring Core Container notes
 
 ## @Bean declaration bean names
@@ -368,10 +420,11 @@ Sec/test/resources/contracts GROOVY scripts / DSL that specify request and respo
 
 Built on netty. reactor
 
-## Spring 4: 
+## Spring 4:
 
 # Book Recommendations
 
   * [Spring Microservices In Action](https://www.amazon.com/Spring-Microservices-Action-John-Carnell/dp/1617293989/ref=as_li_ss_tl?keywords=java+spring&qid=1555871507&s=books&sr=1-4&linkCode=ll1&tag=wilcodevelsol-20&linkId=72ddcc91801c95bb172803105e355bdc&language=en_US)
   * [Learning Spring Boot 2.0](https://www.amazon.com/Learning-Spring-Boot-2-0-microservices-ebook/dp/B01LPRN0Z8/ref=as_li_ss_tl?keywords=java+spring&qid=1555871688&s=books&sr=1-17&linkCode=ll1&tag=wilcodevelsol-20&linkId=2f1106b0575349d07228145f76f9f34d&language=en_US)
   * [Spring In Action](https://www.amazon.com/Spring-Action-Craig-Walls/dp/1617294942/ref=as_li_ss_tl?keywords=spring+in+action&qid=1555871830&s=books&sr=1-1&linkCode=ll1&tag=wilcodevelsol-20&linkId=3a21bd2dfb793cc04610ad8d750ee14b&language=en_US)
+

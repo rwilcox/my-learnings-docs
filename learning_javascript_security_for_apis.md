@@ -1,7 +1,69 @@
 ---
-path: "/learnings/javascript_security_for_apis"
-title: "Learnings: Javascript: Security: For APIs"
+path: /learnings/javascript_security_for_apis
+title: 'Learnings: Javascript: Security: For APIs'
 ---
+# Table Of Contents
+
+<!-- toc -->
+
+- [About / The Basics](#about--the-basics)
+  * [OWASP Top Ten](#owasp-top-ten)
+  * [Node Specific documentation](#node-specific-documentation)
+- [Injection](#injection)
+  * [Null Character >](#null-character-)
+    + [Passing null characters, unaware, outside of Javascript world](#passing-null-characters-unaware-outside-of-javascript-world)
+    + [See also](#see-also)
+    + [Next, understanding where the attack is](#next-understanding-where-the-attack-is)
+    + [See Also](#see-also)
+  * [Unicode fun](#unicode-fun)
+    + [Ok great what does that mean for API security? >](#ok-great-what-does-that-mean-for-api-security-)
+    + [See also](#see-also-1)
+  * [Sql / NoSQL Injection](#sql--nosql-injection)
+    + [See also](#see-also-2)
+  * [Node source code injection](#node-source-code-injection)
+    + [See also](#see-also-3)
+  * [Javascript Prototype poisoning](#javascript-prototype-poisoning)
+    + [@hapi/bourne](#hapibourne)
+    + [Using a reviver function](#using-a-reviver-function)
+    + [Using a middleware to plug bourne into the process](#using-a-middleware-to-plug-bourne-into-the-process)
+    + [See also:](#see-also)
+  * [Query Parameter attacks](#query-parameter-attacks)
+    + [See also](#see-also-4)
+  * [Command / Server Side Includes (SSI) Injection](#command--server-side-includes-ssi-injection)
+    + [See also](#see-also-5)
+  * [Cross-site scripting (XSS) /](#cross-site-scripting-xss-)
+    + [XSS: Injection that grabs cookies](#xss-injection-that-grabs-cookies)
+    + [See also](#see-also-6)
+- [JSON: Validation that you have JSON in your request body (and not a bunch of PHP...)](#json-validation-that-you-have-json-in-your-request-body-and-not-a-bunch-of-php)
+  * [Your users are uploading images or something and you want to detect it's valid per your list of supported types](#your-users-are-uploading-images-or-something-and-you-want-to-detect-its-valid-per-your-list-of-supported-types)
+  * ["Is this request body JSON? Because this is an API endpoint and we don't support anything else"](#is-this-request-body-json-because-this-is-an-api-endpoint-and-we-dont-support-anything-else)
+  * [Is It Really JSON and not just an x86 binary?](#is-it-really-json-and-not-just-an-x86-binary)
+  * [Or is it a JSON version of a Node Buffer?](#or-is-it-a-json-version-of-a-node-buffer)
+  * [Does it really follow the rules (ie escapes correctly, JSON rules around high order characters) or not?](#does-it-really-follow-the-rules-ie-escapes-correctly-json-rules-around-high-order-characters-or-not)
+    + [Character encoding: provided by body-parser](#character-encoding-provided-by-body-parser)
+    + [See also](#see-also-7)
+  * [Might it be a zip bomb?](#might-it-be-a-zip-bomb)
+  * [buffer size mismatching: give a wrong content-type and try to crash it that way / make the socket hang forever](#buffer-size-mismatching-give-a-wrong-content-type-and-try-to-crash-it-that-way--make-the-socket-hang-forever)
+  * [crashing Node's buffer size limitsFrom Fastly's work on this (aka: passing in a HUGE payload):](#crashing-nodes-buffer-size-limitsfrom-fastlys-work-on-this-aka-passing-in-a-huge-payload)
+    + [See Also](#see-also-1)
+  * [Q: How good is Node's json parser](#q-how-good-is-nodes-json-parser)
+  * [See also:](#see-also-1)
+- [Schema Validation: ("I know I have good JSON or XML, is it the right shape?")](#schema-validation-i-know-i-have-good-json-or-xml-is-it-the-right-shape)
+- [XML: Validation that you have XML in your request body (and not a bunch of PHP...)](#xml-validation-that-you-have-xml-in-your-request-body-and-not-a-bunch-of-php)
+  * [Is it really XML and not just an x86 binary?](#is-it-really-xml-and-not-just-an-x86-binary)
+  * [Does it really follow the rules (ie escapes correctly, high order character rules), etc](#does-it-really-follow-the-rules-ie-escapes-correctly-high-order-character-rules-etc)
+  * [Might to be zip bomb?](#might-to-be-zip-bomb)
+  * [Might it be a [billion lols](https://en.wikipedia.org/wiki/Billion_laughs_attack) ?](#might-it-be-a-billion-lolshttpsenwikipediaorgwikibillion_laughs_attack-)
+  * [buffer size mismatching: give a wrong content-type and try to crash it that way / make the socket hang forever](#buffer-size-mismatching-give-a-wrong-content-type-and-try-to-crash-it-that-way--make-the-socket-hang-forever-1)
+- [Potentially Useful middeware](#potentially-useful-middeware)
+  * [helmet](#helmet)
+    + [Useful if you use is directly hitting site](#useful-if-you-use-is-directly-hitting-site)
+    + [If you only sere APIs that serve the user](#if-you-only-sere-apis-that-serve-the-user)
+    + [all useful](#all-useful)
+  * [Rate Limiting / DDOS protection](#rate-limiting--ddos-protection)
+- [See Also](#see-also-2)
+
+<!-- tocstop -->
 
 # About / The Basics
 
@@ -47,7 +109,7 @@ Remember C/Unix doesn't deal with null bytes very well, so you'll likely want to
 
 ### See also
 
-  * Learning_Javascript_Unicode 
+  * Learning_Javascript_Unicode
   * Learning_Javascript_Security_For_Apis_JSON_Unicode_Considerations
 
 ### Next, understanding where the attack is
@@ -74,7 +136,7 @@ So:
 The [JSON spec](https://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf) says:
 
 > A string is a sequence of Unicode code points wrapped with quotation marks (U+0022). All code points
-> may be  placed  within  the  quotation  marks  except  for  the code  points that  must  be  escaped:  
+> may be  placed  within  the  quotation  marks  except  for  the code  points that  must  be  escaped:
 > quotation  mark (U+0022), reverse solidus (U+005C), and the control characters U+0000 to U+001F.
 > There are two-character escape sequence representations of some characters.
 > \" represents the quotation mark character (U+0022).
@@ -85,7 +147,7 @@ The [JSON spec](https://www.ecma-international.org/publications/files/ECMA-ST/EC
 > \nrepresents the line feed character (U+000A).
 > \rrepresents the carriage return character (U+000D).
 > \trepresents the character tabulation character (U+0009).
-> So, for example, a string containing only a single reverse solidus character may be represented as "\\".Any code point may be represented as a hexadecimal escape sequence. The meaning ofsuch a hexadecimal number is determined by ISO/IEC 10646. If the code point is in the Basic Multilingual Plane (U+0000 through U+FFFF),  then  it  may  be  represented  as  a  six-character  sequence:  a  reverse  solidus,  followed  by  the lowercase letter u, followedby four hexadecimal digits that encode the code point. Hexadecimal digits can be 
+> So, for example, a string containing only a single reverse solidus character may be represented as "\\".Any code point may be represented as a hexadecimal escape sequence. The meaning ofsuch a hexadecimal number is determined by ISO/IEC 10646. If the code point is in the Basic Multilingual Plane (U+0000 through U+FFFF),  then  it  may  be  represented  as  a  six-character  sequence:  a  reverse  solidus,  followed  by  the lowercase letter u, followedby four hexadecimal digits that encode the code point. Hexadecimal digits can be
 > 5digits  (U+0030  through  U+0039)  or  the  hexadecimal  letters Athrough Fin  uppercase  (U+0041  through U+0046)  or  lowercase (U+0061 through U+0066). So, for  example, a string containing only  a single reverse solidus character may be represented as "\u005C".The following four cases all produce the same result:"\u002F""\u002f""\/""/"To  escape  a  code  point  that  is  not  in  the  Basic  Multilingual  Plane,  the  character  may  be  represented  as  a twelve-character  sequence,  encoding  the  UTF-16  surrogate  pair  corresponding  to  the  code  point.  So  for example, a string containing only the G clef character (U+1D11E) may be represented as "\uD834\uDD1E".However, whether a processor of JSON texts interprets such a surrogate pair as a single code point or as an explicit surrogate pair is a semantic decision that is determined by the specific processor
 
 Essentially: really hope you read that part about Unicode in Javascript.
@@ -96,7 +158,7 @@ But, in general: trust the v8 parser, everyone does and seemingly nobody does an
 
 ### See also
 
-  * Learning_Javascript_Unicode 
+  * Learning_Javascript_Unicode
   * [OWASP page on unicode encoding bugs](https://owasp.org/www-community/attacks/Unicode_Encoding)
 
 ## Sql / NoSQL Injection
@@ -194,7 +256,7 @@ ie if you have a downloads endpoint don't just accept anything passed in: maybe 
 
   * [OWAPS on SSI injection](https://wiki.owasp.org/index.php/Testing_for_SSI_Injection_(OTG-INPVAL-009))
 
-## Cross-site scripting (XSS) / 
+## Cross-site scripting (XSS) /
 Server Side tomplate injection
 
 Couple different ways this can happen a couple different behaviors:
@@ -203,15 +265,15 @@ Couple different ways this can happen a couple different behaviors:
   2. Users may attempt to use various escape characters ie in a a URL that you hope the server parrots back to the user, then the attacker "has" the user (this is sometimes called "reflected XSS")
   3. Some clever red team people can put Javascript in JPEGs. Best way to avoid this is to host uploaded images in a different domain and ensure the domain is not set for script execution (via CORS controls), and/or remove JPG header comments.
   4. [Injection that grabs cookies](https://blog.codinghorror.com/protecting-your-cookies-httponly/)
-  
+
 ### XSS: Injection that grabs cookies
 
 If you have something you've set that you JUST ON THE SERVER SIDE are going to read later, set this as an HttpOnly cokie (which really means "server only" by the following)
 
     response.setHeader('Set-Cookie', 'foo=bar; HttpOnly')
-    
+
 This will prevent client side fiddling with the cookie in JS
-  
+
 ### See also
 
   * [Cross Site Scripting](https://owasp.org/www-community/attacks/xss/)
@@ -244,7 +306,7 @@ Checks body parser does (in order):
   1. It reads and puts the entire stream in memory _after_ it uses [type-is](https://www.npmjs.com/package/type-is) to see if the request body actually is JSON. (which works on examining at most the first 16kb from the request to identify the kind of content).
   2. checks charset per RFC 7159 sec 8.1
   3. very simple checks like "is the first character a { or [" because that's a good initial test.
-  
+
 ONLY THEN does it JSON.parse()
 
 Can also pass bodyParser.json a verify functor, which will be called with the stream of the request, if you want extra checks (abort the request by throwing an error, bodyParser catches it). [source](https://github.com/expressjs/body-parser/blob/master/lib/read.js#L101)
@@ -290,7 +352,7 @@ So character strings that don't make sense are thrown away.
 
 ## buffer size mismatching: give a wrong content-type and try to crash it that way / make the socket hang forever
 
-bodyParser uses the length of the stream (not the content size in the header) to talk to [raw-body](https://www.npmjs.com/package/raw-body). If you pass `limit` to the bodyParser json middleware constructor it'll pass `limit` passed through to raw-body. 
+bodyParser uses the length of the stream (not the content size in the header) to talk to [raw-body](https://www.npmjs.com/package/raw-body). If you pass `limit` to the bodyParser json middleware constructor it'll pass `limit` passed through to raw-body.
 
 
 ## crashing Node's buffer size limitsFrom Fastly's work on this (aka: passing in a HUGE payload):
@@ -314,7 +376,7 @@ Potential solutions:
   * https://stackoverflow.com/questions/51876427/node-js-implementation-of-json-parse#comment91512375_51877188
   * [source code for json-parser in v8](https://github.com/v8/v8/blob/4b9b23521e6fd42373ebbcb20ebe03bf445494f9/src/torque/ls/json-parser.cc)
 
-  
+
 ## See also:
 
   * Learning_Javascript_Security_For_Apis_JSON_Unicode_Considerations
@@ -391,3 +453,4 @@ Middleware that provides following services, mostly by setting headers corectly.
   * [Patterns in Node Package Vulnerabilities](https://learning.oreilly.com/library/view/patterns-in-node/9781491999981/)
   * [AirBnB publishes an analysis of their security findings - touching on many of the above issues](https://buer.haus/2017/03/08/airbnb-when-bypassing-json-encoding-xss-filter-waf-csp-and-auditor-turns-into-eight-vulnerabilities/)
   * [Node.js anatomy of an HTTP request](https://nodejs.org/en/docs/guides/anatomy-of-an-http-transaction/)
+

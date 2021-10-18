@@ -1,7 +1,39 @@
 ---
-path: "/learnings/emacs_cheatsheet"
-title: "Learnings: Emacs: Cheatsheet"
+path: /learnings/emacs_cheatsheet
+title: 'Learnings: Emacs: Cheatsheet'
 ---
+# Table Of Contents
+
+<!-- toc -->
+
+- [Getting things done (without keyboard shortcuts)](#getting-things-done-without-keyboard-shortcuts)
+  * [M-x: calling interactive mode functions](#m-x-calling-interactive-mode-functions)
+  * [M-: calling elisp functions directly](#m--calling-elisp-functions-directly)
+- [Going to top of buffer](#going-to-top-of-buffer)
+- [delete whole line](#delete-whole-line)
+- [delete from here to end of line](#delete-from-here-to-end-of-line)
+- [Buffers](#buffers)
+  * [Renaming buffers](#renaming-buffers)
+  * [What path is the current buffer?](#what-path-is-the-current-buffer)
+- [line numbers](#line-numbers)
+  * [In the current window open a buffer by name](#in-the-current-window-open-a-buffer-by-name)
+- [Zoom](#zoom)
+- [Filtering Lines](#filtering-lines)
+  * [I know what I want to KEEP](#i-know-what-i-want-to-keep)
+  * [I know what I want to DELETE](#i-know-what-i-want-to-delete)
+- [Splits](#splits)
+  * [Deleting sprits](#deleting-sprits)
+- [Switching languages and mode](#switching-languages-and-mode)
+- [Column / rectangle selection](#column--rectangle-selection)
+  * [without CUDA mode being on](#without-cuda-mode-being-on)
+  * [with CUDA mode](#with-cuda-mode)
+- [Deleting duplicate lines](#deleting-duplicate-lines)
+- [Parans](#parans)
+- [Typing commands](#typing-commands)
+  * [Interactive Commands](#interactive-commands)
+  * [Quickly call random lisp code](#quickly-call-random-lisp-code)
+
+<!-- tocstop -->
 
 # Getting things done (without keyboard shortcuts)
 

@@ -1,7 +1,29 @@
 ---
-path: "/learnings/ops_kafka"
-title: "Learnings: Ops: Kafka"
+path: /learnings/ops_kafka
+title: 'Learnings: Ops: Kafka'
 ---
+# Table Of Contents
+
+<!-- toc -->
+
+- [`>`](#)
+  * [Documentation](#documentation)
+  * [`>`](#)
+  * [Memory use](#memory-use)
+    + [How much memory Kafka is using](#how-much-memory-kafka-is-using)
+    + [See also:](#see-also)
+  * [File Descriptor Use >](#file-descriptor-use-)
+    + [See also:](#see-also-1)
+  * [And Flush >](#and-flush-)
+      - [See also:](#see-also-2)
+  * [Heartbeats > >](#heartbeats--)
+    + [and racing against `flush` >](#and-racing-against-flush--)
+    + [and request timeout](#and-request-timeout)
+  * [MirrorMaker >](#mirrormaker-)
+    + [See also:](#see-also-3)
+- [See also:](#see-also-4)
+
+<!-- tocstop -->
 
 # `<<Learning_Ops_Kafka>>`
 
@@ -9,11 +31,11 @@ title: "Learnings: Ops: Kafka"
 
   * [Confluent Whitepaper: Optimizing Your Apache Kafka Deployment](https://www.confluent.io/white-paper/optimizing-your-apache-kafka-deployment/)
   * [Confluent Whitepaper: Monitoring your Apache Kafka Deployment End-To-End](https://de.confluent.io/monitoring-your-apache-kafka-deployment)
-  
+
 ## `<<ListingAllBrokersInCluster>>`
 
     import org.apache.zookeeper.Zookeeper;
-    
+
     public class KafkaBrokerInfoFetcher {
 
         public static void main(String[] args) throws Exception {
@@ -102,5 +124,4 @@ Topics **must** exist on the destination also (either through manual creation or
 
   * [my Kafka_ops tag on pinboard](https://pinboard.in/u:rwilcox/t:kafka_ops)
   * Learning_Ops_Kafka_Viewing_Adjusting_Consumer_Offsets
-  
 

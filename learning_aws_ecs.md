@@ -1,7 +1,38 @@
 ---
-path: "/learnings/aws_ecs"
-title: "Learning AWS: ECS"
+path: /learnings/aws_ecs
+title: 'Learning AWS: ECS'
 ---
+# Table Of Contents
+
+<!-- toc -->
+
+- [>](#)
+    + [ECS Components](#ecs-components)
+  * [Service:](#service)
+      - [Task placement >](#task-placement-)
+    + [ECS and Deployment/Operations >](#ecs-and-deploymentoperations--)
+      - [ECS Deployment and command line](#ecs-deployment-and-command-line)
+      - [and Docker Compose >](#and-docker-compose-)
+        * [ECS Tasks vs ECS Services](#ecs-tasks-vs-ecs-services)
+        * [Basic Shell Script To Do This](#basic-shell-script-to-do-this)
+    + [ECS Launch Types](#ecs-launch-types)
+    + [Declaring resources required by your task](#declaring-resources-required-by-your-task)
+      - [Memory](#memory)
+      - [CPU](#cpu)
+    + [Scaling ECS Clusters](#scaling-ecs-clusters)
+      - [Autoscaling](#autoscaling)
+      - [Deploying a task that will over-subscribe your ECS cluster >](#deploying-a-task-that-will-over-subscribe-your-ecs-cluster-)
+  * [And Docker Considerations](#and-docker-considerations)
+    + [docker run --init support >](#docker-run---init-support-)
+  * [And Environmental Variables / Instance Data](#and-environmental-variables--instance-data)
+    + [Reading Data (Environmental Variables, instance information, etc) from host >](#reading-data-environmental-variables-instance-information-etc-from-host-)
+      - [See also:](#see-also)
+  * [Secrets configuration management](#secrets-configuration-management)
+  * [And Disk Space / Stateful Services > >](#and-disk-space--stateful-services---)
+    + [Disk storage](#disk-storage)
+  * [Docker Volume Management](#docker-volume-management)
+
+<!-- tocstop -->
 
 # <<Learning_AWS_ECS>>
 
@@ -22,11 +53,11 @@ ECS somewhat like Google Container Service, in GCloud
     - Can mix and match instance types
     - instances can not join multiple clusters
 
-  * Container Agent: background app running on container instance: connects container instance to container cluster, 
+  * Container Agent: background app running on container instance: connects container instance to container cluster,
   * Container Instances: EC2 instance that is part of a cluster
     - can be totally Amazon AMI based, or can be your own AMIs (Amazon open sources this tool. Have docker images etc in addition to bare instance tools)
     - container instances can do a startup script: in that startup script you could copy over the ECS config file from your bucket and configure the VM
-    - 
+    -
 
   * Task definition: how the Dockerfiles in your cluster should be run. JSON file, sort of like Docker Compose file +++:
     - controls one or more containers with optional volumes
@@ -37,21 +68,21 @@ ECS somewhat like Google Container Service, in GCloud
     - if you're using ECR, use the ECR repository path in the image location (defaults to Docker Hub)
     - ... but are short running _unless_ you put them in a service(???)
     - Useful CLI commands:
-    
+
       * `aws ecs register-task-definition --cli-input-json file://my_task_definition.json`
       * `aws ecs run-task --cluster wherever --task-definition my_task_definition --count=1`
-      
+
     - TL; DR:
-    
+
       * can contain many docker processes in itself (called `ContainerDefinitions` )
-      * is union of container definitions + resource configurations for that group of 
-    
+      * is union of container definitions + resource configurations for that group of
+
   * Service:
-    - 
+    -
     -
     -
     - TL; DR:
-    
+
       * only have one task definition
       * but can scale that task definition multiple times
       * union of task + count + load balancers + network config + ECS cluster name
@@ -60,15 +91,15 @@ ECS somewhat like Google Container Service, in GCloud
     - 3 ways to schedule a task
     - can use third party scheduler
     - can hook up with an ELB
-    
+
     - Running vs Starting Tasks:
-    
+
       * `StartTask` lets you pick where to run a task <-- maybe when you have a task that requires high CPU and you have a high CPU instance in your cluster just for high CPU services
       * `StartTask` lets you bring your own scheduler <--- OSS tutorials point to using Mesos / Marathon
       *
-    
-    
-  * ECS CLI: 
+
+
+  * ECS CLI:
 	- can generate configuration template you could check into SCM and then play back later:
 	  ` $ aws ecs create-service --generate-cl-skeleton > myclusterconfig.json.tmpl`
 	  to play back:
@@ -81,13 +112,13 @@ Can be bin packed based on memory, spread evenly, or random dist
 ECS is also smart enough to not place multiple instances on the same host if your ECS Tasks have [static host port maps defined](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/create-service.html#basic-service-params).
 
 ### ECS and Deployment/Operations  <<AWS_ECS_Deployment>>
-  
+
 #### ECS Deployment and command line
 
 
 
 #### and Docker Compose <<AWS_ECS_Docker_Compose>>
-  
+
 Can use ecs-cli compose -file to specify cluster using only Docker compose file(??) - *Spring in Action*
 
 [YES](http://docs.aws.amazon.com/AmazonECS/latest/developerguide/cmd-ecs-cli-compose.html)
@@ -106,15 +137,15 @@ ECS Services: managed via `ecs-cli compose ... service ...`
 
     ecs-cli up --keypair $AWS_KEY_PAIR --capability-iam --size 2 --instance-type t2.micro --vpc vpc-xxxxxxx --subnets subnet-123abc,subnet-321cba
     # ^^^^^^^ will create the ECS Cluster if it doesn't already exist!!!
-    
+
     ecs-cli compose --file api/docker-compose.yml service up \
                     --target-group-arn $PROD_TARGET_GROUP_ARN \
                     --container-name api \
                     --container-port 8080 \
                     --role ecsServiceRole \
-    # will create *ECS Services* from Docker Compose files             
+    # will create *ECS Services* from Docker Compose files
     # ^^^^^^^^ will shut down copies of old containers automatically!!! See screenshotted logs from: https://serradev.wordpress.com/2017/05/11/cluster-of-docker-containers-in-aws-ecs-via-gitlab-pipelines/
-    	
+
     ecs-cli compose --file api/docker-compose.yml service scale 2
 
 ### ECS Launch Types
@@ -138,9 +169,9 @@ ie  `memoryReservation` is soft limit and `memory` is hard limit.
 
 Declared in one of:
 
-  * CloudFormation task declaration 
+  * CloudFormation task declaration
   * [CPU](http://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_ContainerDefinition.html#ECS-Type-ContainerDefinition-cpu)
-  
+
 Units formula: `vCPU cores for instance type * 1024`.
 
 So 256 = 1/4th of one CPU core. 1024 = 1 CPU core, etc etc.
@@ -149,11 +180,11 @@ So 256 = 1/4th of one CPU core. 1024 = 1 CPU core, etc etc.
 
 #### Autoscaling
 
-Read blog article: 
+Read blog article:
   * [AWS Tutorial: (Scaling) Container Instances with Cloudwatch Alerts](http://docs.aws.amazon.com/AmazonECS/latest/developerguide/cloudwatch_alarm_autoscaling.html)
   * [Application Auto Scaling with Amazon ECS](https://stelligent.com/2017/09/26/application-auto-scaling-with-amazon-ecs/)
   * [Scale your cluster automatically](http://garbe.io/blog/2016/10/17/docker-on-ecs-scale-your-ecs-cluster-automatically/)
-  * 
+  *
 
 #### Deploying a task that will over-subscribe your ECS cluster <<Learning_AWS_ECS_Oversubscribing_Your_Cluster>>
 
@@ -187,7 +218,7 @@ Additional provided metadata comes in via the `userdata` block of creating an EC
 #### See also:
 
   * [Example code showing how to use the AWS Java API directly to get this instance metadata like ip address, hostname etc](https://github.com/spring-cloud/spring-cloud-netflix/issues/432#issuecomment-135327850)
-  
+
 ## Secrets configuration management
 
   * [aws-secrets](https://www.promptworks.com/blog/cli-for-managing-secrets-for-amazon-ec2-container-service-based-applications-with-amazon-kms-and-docker)
@@ -208,7 +239,8 @@ See also:
   * [AWS Documentation on ECS storage](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-ami-storage-config.html)
   * [Github bug on aws-ecs-client that TL;DRs this documentation](https://github.com/aws/amazon-ecs-agent/issues/312)
 
-  
+
 ## Docker Volume Management
 
 Q: [10 GB limit for Docker volumes on ECS???](https://aws.amazon.com/premiumsupport/knowledge-center/increase-default-ecs-docker-limit/)
+

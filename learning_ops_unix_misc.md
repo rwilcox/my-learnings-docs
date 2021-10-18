@@ -1,7 +1,20 @@
 ---
-path: "/learnings/ops_unix_misc"
-title: "Learnings: Unix: Misc"
+path: /learnings/ops_unix_misc
+title: 'Learnings: Unix: Misc'
 ---
+# Table Of Contents
+
+<!-- toc -->
+
+- [Unix (Misc)](#unix-misc)
+  * [Getting Information about running processes ( > )](#getting-information-about-running-processes---)
+    + [where the running process lives on the file system](#where-the-running-process-lives-on-the-file-system)
+    + [the entire command issued](#the-entire-command-issued)
+  * [Debugging what's going on with your kernel](#debugging-whats-going-on-with-your-kernel)
+  * [Examining mount points >](#examining-mount-points-)
+  * [File Handle Limits >](#file-handle-limits-)
+
+<!-- tocstop -->
 
 # Unix (Misc)
 
@@ -17,7 +30,7 @@ See: `/proc/$PID/`
 
 `cat proc/$PID/cmdline`  # <-- it's a file containing the command
 
-## Debugging what's going on with your kernel 
+## Debugging what's going on with your kernel
 
 https://github.com/iovisor/bcc <-- toolkit for creating kernel tracing programs. Also serves as an awesome list for programs written
 
@@ -37,3 +50,4 @@ Configuring mounts
 [RHEL / Centos Ulimit / max number of open files](https://tuxgen.blogspot.com/2014/01/centosrhel-ulimit-and-maximum-number-of.html)
 
 [Ubuntu: setting file limits for all users (or not)](https://serverfault.com/a/570560/91037)
+

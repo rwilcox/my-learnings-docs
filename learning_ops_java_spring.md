@@ -1,15 +1,39 @@
 ---
-path: "/learnings/ops_java_spring"
-title: "Learnings: Ops: Java: Spring"
+path: /learnings/ops_java_spring
+title: 'Learnings: Ops: Java: Spring'
 ---
+# Table Of Contents
 
+<!-- toc -->
+
+- [>](#)
+  * [Jolokia Spring endpoint "built in"](#jolokia-spring-endpoint-built-in)
+  * [Changing log level on the fly using HTTP](#changing-log-level-on-the-fly-using-http)
+  * [Reporting JMX to Metric Collection Tools](#reporting-jmx-to-metric-collection-tools)
+  * [Debugging what metrics are / should be sent](#debugging-what-metrics-are--should-be-sent)
+    + [Viewing metric related to Max JVM non heap memory](#viewing-metric-related-to-max-jvm-non-heap-memory)
+  * [Getting Heapdumps](#getting-heapdumps)
+  * [Getting threaddump](#getting-threaddump)
+- [> , >](#--)
+- [>](#)
+  * [See also:](#see-also)
+- [>](#)
+- [>](#)
+  * [About the Tomcat connection thread pool:](#about-the-tomcat-connection-thread-pool)
+  * [Setting the size of the Tomcat Connection Thread Pool](#setting-the-size-of-the-tomcat-connection-thread-pool)
+  * [>](#)
+  * [>](#)
+  * [See also:](#see-also-1)
+- [See also:](#see-also-2)
+
+<!-- tocstop -->
 
 # <<Learning_Ops_Java_Spring>>
 
-See also: 
+See also:
 
   * Spring_Actuators  (includes more complete list)
-  
+
 but here's ops scenarios you're probably running into...
 
 
@@ -96,7 +120,7 @@ Tomcat is a:
 
 Acceptor thread -> worker thread pool -> worker thread. Worker thread reads data from connection, does the thing and responds. [Source](https://medium.com/netflix-techblog/tuning-tomcat-for-a-high-throughput-fail-fast-system-e4d7b2fc163f).
 
-## Setting the size of the Tomcat Connection Thread Pool 
+## Setting the size of the Tomcat Connection Thread Pool
 
 See Learning_Ops_Java_Spring_Tomcat_Set_Thread
 
@@ -130,3 +154,4 @@ Useful metrics from Spring Boot 2.0:
 # See also:
 
   * https://spring.io/blog/2015/12/10/spring-boot-memory-performance
+

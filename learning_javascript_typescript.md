@@ -1,8 +1,65 @@
 ---
-path: "/learnings/javascript_typescript"
-title: "Learnings: Javascript: Typescript"
+path: /learnings/javascript_typescript
+title: 'Learnings: Javascript: Typescript'
 ---
+# Table Of Contents
 
+<!-- toc -->
+
+- [>](#)
+  * [Declaring Types](#declaring-types)
+    + [Variable Declarations](#variable-declarations)
+    + [Declaring your own types](#declaring-your-own-types)
+      - [When that variable is a higher order function](#when-that-variable-is-a-higher-order-function)
+      - [Creating a typedef / interface for your callback functions](#creating-a-typedef--interface-for-your-callback-functions)
+      - [Promises and types](#promises-and-types)
+        * [Typesafe Promises](#typesafe-promises)
+          + [See also](#see-also)
+      - [Declaring variables read only (not just `const`)](#declaring-variables-read-only-not-just-const)
+        * [readonly parameter vs ReadOnly<>](#readonly-parameter-vs-readonly)
+      - [Declaring variables null - or not](#declaring-variables-null---or-not)
+      - ["But this could be a string OR null ...."](#but-this-could-be-a-string-or-null-)
+      - [with the strictNullChecks tsconfig parameter turned on](#with-the-strictnullchecks-tsconfig-parameter-turned-on)
+      - [With the strictNullChecks tsconfig parameter turned off](#with-the-strictnullchecks-tsconfig-parameter-turned-off)
+        * [See also:](#see-also)
+      - [So, with strictNullChecks on.... string | null | undefined everywhere???](#so-with-strictnullchecks-on-string--null--undefined-everywhere)
+      - [Function Declarations](#function-declarations)
+      - [Optional Parameters](#optional-parameters)
+      - [Generic Types](#generic-types)
+      - [Union types](#union-types)
+        * [And interfaces](#and-interfaces)
+    + [Declaring Type Types](#declaring-type-types)
+      - [GENERICS???!!!](#generics)
+      - [Classes](#classes)
+        * [Interfaces](#interfaces)
+      - [Access control](#access-control)
+    + [Examples of places where we generate types](#examples-of-places-where-we-generate-types)
+  * [Enforcing compile time null checking >](#enforcing-compile-time-null-checking-)
+    + [See also:](#see-also-1)
+- [fancy type things](#fancy-type-things)
+  * [noting how much of your codebase is typed](#noting-how-much-of-your-codebase-is-typed)
+  * [casting](#casting)
+    + [FORCING THE COMPILER TO DO THE BIDDING](#forcing-the-compiler-to-do-the-bidding)
+  * [Type predicate if you have union types >](#type-predicate-if-you-have-union-types-)
+    + [if you don't want to do that](#if-you-dont-want-to-do-that)
+    + [See also](#see-also-1)
+- [swicth statment completion](#swicth-statment-completion)
+  * [Having the type system build types for you](#having-the-type-system-build-types-for-you)
+    + [Creating a more restrict type than what you currently have](#creating-a-more-restrict-type-than-what-you-currently-have)
+    + [See also](#see-also-2)
+- [Interesting additions to JS](#interesting-additions-to-js)
+- [Javascript -> Typescript](#javascript---typescript)
+  * [@ts-check and JSDocs](#ts-check-and-jsdocs)
+  * [allowJS](#allowjs)
+- [Interacting with Javascript](#interacting-with-javascript)
+  * [Places you can provide the types for](#places-you-can-provide-the-types-for)
+  * [Interacting with some JS Object (aka: you have parsed some JSON... but want to make it type safe)](#interacting-with-some-js-object-aka-you-have-parsed-some-json-but-want-to-make-it-type-safe)
+  * [See also](#see-also-3)
+  * [In Backend apps](#in-backend-apps)
+- [Type Checking > Clever Lint Rules](#type-checking--clever-lint-rules)
+- [Book Recommendations](#book-recommendations)
+
+<!-- tocstop -->
 
 # <<Learning_Javascript_Typescript>>
 
@@ -15,7 +72,7 @@ Typescript' [design goals ane enumerated on the Typescript Github](https://githu
     }
 
     console.log(concat("a", "b"))
-    console.log( concat(42, {"name": "Ryan"}) )  // will not compile 
+    console.log( concat(42, {"name": "Ryan"}) )  // will not compile
 
 Like Flow, which does this more drastically, Typescript splits the language into two:
 
@@ -28,7 +85,7 @@ But this also make things hard, especially in certain situations when you want t
 
 ## Declaring Types
 
-### Variable Declarations 
+### Variable Declarations
 
     let thing: string = 'John Doe'
 
@@ -208,7 +265,7 @@ Mostly like ES6, except
         }
     }
 
-#### Access control 
+#### Access control
 
 You can mark fields as private, protected, public, like so
 
@@ -332,7 +389,7 @@ You likely need the type here before going very far. Couple different ways to do
 ## See also
 
   * https://devblogs.microsoft.com/typescript/how-to-upgrade-to-typescript-without-anybody-noticing-part-1/
-  * 
+  *
 ## In Backend apps
 
 in tsconfig.json
@@ -352,3 +409,4 @@ in tsconfig.json
 # Book Recommendations
 
   * [Effective Typescript](https://www.amazon.com/Effective-TypeScript-Specific-Ways-Improve/dp/1492053740/ref=sr_1_1?keywords=effective+typescript&qid=1571345085&sr=8-1) <--  Effective Java/C++ style book
+

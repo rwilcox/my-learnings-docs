@@ -1,7 +1,16 @@
 ---
-path: "/learnings/gradle"
-title: "Learnings: Gradle"
+path: /learnings/gradle
+title: 'Learnings: Gradle'
 ---
+# Table Of Contents
+
+<!-- toc -->
+
+- [Using Gradle](#using-gradle)
+- [>](#)
+  * [Pull dependancies out of pom.xml and dynamically add them to the gradle build](#pull-dependancies-out-of-pomxml-and-dynamically-add-them-to-the-gradle-build)
+
+<!-- tocstop -->
 
 # Using Gradle
 
@@ -33,3 +42,4 @@ You can, however, get the best of both worlds through these hacks
             }
         }
     }
+

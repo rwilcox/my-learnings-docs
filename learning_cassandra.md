@@ -1,7 +1,114 @@
 ---
-path: "/learnings/cassandra"
-title: "Learnings: Cassandra"
+path: /learnings/cassandra
+title: 'Learnings: Cassandra'
 ---
+# Table Of Contents
+
+<!-- toc -->
+
+- [>](#)
+- [about](#about)
+  * [Cassandra and "data duplication"](#cassandra-and-data-duplication)
+    + [Other ways to ensure data consistency](#other-ways-to-ensure-data-consistency)
+- [indexes](#indexes)
+  * [TTL fields](#ttl-fields)
+- [tables](#tables)
+- [partitions](#partitions)
+  * ["primary key" statement in CQL: does NOT guarantee uniqueness, it is **ONLY** a partition key](#primary-key-statement-in-cql-does-not-guarantee-uniqueness-it-is-only-a-partition-key)
+    + [See also:](#see-also)
+  * [composite partition key](#composite-partition-key)
+  * [Partition sizing](#partition-sizing)
+  * [How partition key limits your query options](#how-partition-key-limits-your-query-options)
+    + [Thoughts around Java/$LANGUAGE programming patterns with these partition key limits](#thoughts-around-javalanguage-programming-patterns-with-these-partition-key-limits)
+    + [how that affects writes](#how-that-affects-writes)
+  * [Clustering Columns](#clustering-columns)
+  * [Primary Key: See Other:](#primary-key-see-other)
+- [tokens](#tokens)
+- [snitches](#snitches)
+- [replications](#replications)
+  * [Replication and data "I might not really care about" ie log entries](#replication-and-data-i-might-not-really-care-about-ie-log-entries)
+  * [Replication and partition size limits](#replication-and-partition-size-limits)
+- [Consistency](#consistency)
+  * [and network partitions](#and-network-partitions)
+  * [and transactions](#and-transactions)
+- [schemes](#schemes)
+  * [eventual considtancy of schema](#eventual-considtancy-of-schema)
+  * [creation / modification in Java](#creation--modification-in-java)
+- [and development](#and-development)
+  * [ccm tool to set up fake cluster on your machine](#ccm-tool-to-set-up-fake-cluster-on-your-machine)
+- [Keyspace](#keyspace)
+- [Field Types](#field-types)
+  * [Time UUID: UUID contains timestamp embedded in the UUID](#time-uuid-uuid-contains-timestamp-embedded-in-the-uuid)
+  * [Collection Columns](#collection-columns)
+  * [UDT](#udt)
+  * [COUNTER <-- not a guarantee of actual number - CAP theorm!! - will be approximately correct.](#counter----not-a-guarantee-of-actual-number---cap-theorm---will-be-approximately-correct)
+- [Handling Writes](#handling-writes)
+  * [Compaction and what that means for mutable primary keys >](#compaction-and-what-that-means-for-mutable-primary-keys--)
+- [Importing simple data into Cassandra](#importing-simple-data-into-cassandra)
+- [Data Modelling](#data-modelling)
+  * [Data Modelling: What fields appear in the x_by_y fields: Gotta think about access patterns](#data-modelling-what-fields-appear-in-the-x_by_y-fields-gotta-think-about-access-patterns)
+  * [Data Modelling Mapping: Rules](#data-modelling-mapping-rules)
+    + [Applying mapping rules:](#applying-mapping-rules)
+    + [Query driven methodology mapping patterns](#query-driven-methodology-mapping-patterns)
+  * [And it's implications on Disk usage](#and-its-implications-on-disk-usage)
+    + [Schema data consistency](#schema-data-consistency)
+- [Batches](#batches)
+- [Joins in Cassandra](#joins-in-cassandra)
+  * [Client side joins only](#client-side-joins-only)
+- [Transactions and ACID in Cassandra](#transactions-and-acid-in-cassandra)
+  * [Aggregations](#aggregations)
+- [Keys to success >](#keys-to-success--)
+- [Performance considerations / table optimizations >](#performance-considerations--table-optimizations-)
+  * [Concurrency notes:](#concurrency-notes)
+    + [... and lightweight transactions](#-and-lightweight-transactions)
+    + [Isolate computation by isolating data](#isolate-computation-by-isolating-data)
+- [Datastacks Enterprise Bundle >](#datastacks-enterprise-bundle----)
+- [Cassandra Operationally](#cassandra-operationally)
+  * [Configuration Location](#configuration-location)
+  * [Min properties:](#min-properties)
+  * [Java Properties settings](#java-properties-settings)
+- [Hinted Handoff](#hinted-handoff)
+  * [Cluster sizing](#cluster-sizing)
+- [Cassandra Stress](#cassandra-stress)
+- [Nodetool performance stat tool](#nodetool-performance-stat-tool)
+  * [nodetool tablestats -h <-- -h = human, else just hashes...](#nodetool-tablestats--h-----h--human-else-just-hashes)
+  * [nodetool tablehistogram KEYSPACE TABLE <-- table and keyspace must exist on node (as primary or as replication)](#nodetool-tablehistogram-keyspace-table----table-and-keyspace-must-exist-on-node-as-primary-or-as-replication)
+- [Large Partitions](#large-partitions)
+- [Monitoring](#monitoring)
+- [Adding nodes:](#adding-nodes)
+- [Removing nodes:](#removing-nodes)
+- [Seed node thoughts >](#seed-node-thoughts-)
+- [cqlsh commands](#cqlsh-commands)
+- [Care and feeding of Cassey Clusters](#care-and-feeding-of-cassey-clusters)
+- [Compaction](#compaction)
+  * [Leveled compaction](#leveled-compaction)
+  * [Size tier compaction](#size-tier-compaction)
+    + [chooses hotest tier to compact first](#chooses-hotest-tier-to-compact-first)
+  * [Time Windowed compaction](#time-windowed-compaction)
+  * [Compaction requirements](#compaction-requirements)
+  * [Compactions and tombstones](#compactions-and-tombstones)
+- [Repair](#repair)
+- [SSTable Tools](#sstable-tools)
+  * [SSTableSplit](#sstablesplit)
+  * [SSTableDump](#sstabledump)
+  * [SSTableLoader](#sstableloader)
+- ["Data center"](#data-center)
+- [Snapshot](#snapshot)
+  * [Restoring](#restoring)
+- [JVM Settings](#jvm-settings)
+- [Profiling](#profiling)
+  * [nodetool tpstats](#nodetool-tpstats)
+- [Hardware Selection](#hardware-selection)
+  * [Memory](#memory)
+  * [CPU](#cpu)
+  * [Network](#network)
+  * [On The Cloud](#on-the-cloud)
+- [Hadoop style nodes: Big Fat Nodes](#hadoop-style-nodes-big-fat-nodes)
+- [Authentication / Authorization](#authentication--authorization)
+  * [GRANT Abilities](#grant-abilities)
+- [Book Recommendations](#book-recommendations)
+
+<!-- tocstop -->
 
 # <<Learning_Cassandra>>
 
@@ -16,7 +123,7 @@ Why? Model a Group table . easy / idiomatic way to do this is to have columns fo
 If you have a bunch of tables that have "duplicated data", Cassandra is smart about using pointers to already existing data on disk, not necessarily duplicating the actual bytes (unless it has to).
 
 Digging in questions:
-  
+
   * Q: Is this helped because it's technically a column store, not a row store?
   * A:
   * Q: Are these pointers copy on write? What about if I propagate a name change across multiple tables because I'm updating a name, will this cause a ripple up then eventually ripple down in data storage needs? Or is this part of compaction????
@@ -61,11 +168,11 @@ PRIMARY KEY = PARTITION KEY + CLUSTERING COLUMNS
 first column in the primary key class is a partition key. Second items are clustering columns
 
     PRIMARY KEY state, city
-    
-best practice: use 
+
+best practice: use
 
     PRIMARY KEY ( (state), city )
-    
+
 ### See also:
 
   * Cassandra_Primary_Key_Considerations
@@ -101,18 +208,18 @@ A way of organizing the data in incrementing or decrementing sort order.
 comes after the partitioning key in the primary key class
 
     PRIMARY KEY( (year), name, last_name )  <-- YEAR is the primary key, sorted by name or last name
-    
+
 Note: best to have clustering columns where the columns don't move much
 
 Clustering columns increase disk space requirements.
 
 ## Primary Key: See Other:
-  
+
   * Cassandra_Queries_Primary_Keys_Immutable_Concerns
   * Cassandra_Partition_Key_And_UDT_Thoughts
   * [Data Partitioning In Cassandra](https://docs.datastax.com/en/archived/cassandra/1.1/docs/cluster_architecture/partitioning.html#data-distribution-in-the-ring)
 
-# tokens 
+# tokens
 
 When inserting data into Cassey, will hash primary key. This value will be 0 -> 2^127.
 
@@ -156,9 +263,9 @@ Partition record size is about 2B values (remember, _column store__!).
 
 Note: these partition size limits are talking about theoretical limitations of Cassey, not about disk space!
 
-# Consistency 
+# Consistency
 
-> Consistency is tuneable in Cassandra because clients can specify the desired consistency level on both reads and writes. 
+> Consistency is tuneable in Cassandra because clients can specify the desired consistency level on both reads and writes.
 
 ## and network partitions
 
@@ -170,7 +277,7 @@ Cassandra does have lightweight transactions but these are slightly expensive as
 
 # schemes
 
-## eventual considtancy of schema 
+## eventual considtancy of schema
 
 > schema information is itself stored using Cassandra, it is also eventually consistent, and as a result it is possible for different nodes to have different versions of the schema
 
@@ -198,7 +305,7 @@ Q: How to eyeball the difference between UUID and TimeUUID?
     28442f00-2e98-11e2-0000-89a3a6fab5ef
 
                   ^ -----if the first number of the third chunk is 4(??) then it's a timeuuid, not a UUID
-  
+
 See also:
 
   * https://docs.datastax.com/en/cql/3.3/cql/cql_reference/timeuuid_functions_r.html
@@ -211,7 +318,7 @@ Notes:
   * entire column is read
   * Can not nest a collection inside a collection
 
-Types:  
+Types:
   * Set
   * List
   * Map
@@ -232,7 +339,7 @@ What stages a cassandra writes go into:
   3. SSTABLE <-- immutable records / file. Thus updated records will be stored multiple times in SSTABLE
   4. Compaction <-- looks at timestamp, tombstones, etc of SSTable and gets most up to date version of the "record"
     compaction only happens in a node itself
-    
+
 ## Compaction and what that means for mutable primary keys  <<Cassandra_Queries_Primary_Keys_Immutable_Concerns>>
 
 if you have a record where the primary key could be changing: ie you have a Person column with mailing state. When a person moves, then this record will be on two nodes: because records are "immutable" in Cassandra then the SSTable will be on one node, and then the modification will force that record to be on another node (most likely, assuming the partitioning scheme forces it to be out of a node).
@@ -244,11 +351,11 @@ If your data model needs to guarantee a record is a singleton in your system, th
 # Importing simple data into Cassandra
 
     COPY TABLE_NAME FROM 'videos'by_title_year' WITH HEADER=true;
-    
+
 If your CSV column names don't match the column names in your table:
 
     COPY bad_videos_by_tag_year (tag, added_year, video_id, added_date, description, title, user_id) FROM 'videos_by_tag_year.csv' WITH HEADER=true;
-    
+
 # Data Modelling #
 
 Table naming best practice: `$NOUN_by_$SEARCH_NOUN` : `users_by_email`, etc etc.
@@ -265,7 +372,7 @@ UML :
   + <>                      <-- collection column: map
   + **                      <-- UDT
   + ()                      <-- tuple column
-  
+
 <<Cassandra_And_Table_Modelling_Implications_For_ORMs>>
 In Relational Model, all tables are entities themselves, and they are associated by queries / joins. In Cassandra the tables are (the result of a query).
 
@@ -288,24 +395,24 @@ But you can not use a partition key inside a UDT: you would need to pull out you
   * Partition+ per query <-- acceptable, but not ideal. Partition is so big that the data doesn't fit on only one node. Thus a couple nodes are required to get complete data set
   * Table scan <-- anti-pattern
   * multi table <-- anti pattern
-  
+
 ## Data Modelling Mapping: Rules
 These rules are also found in a paper: http://www.cs.wayne.edu/andrey/papers/bigdata2015.pdf
 
   * Rule 1: Entities and relationships:
-  
+
     - Entities and relationship types map to tables
     - Entities and relationships map to partitions and row
     - Partition may have data about one or more entities and relationships
     - Attributes are represented by columns
-    
+
   * Rule 2: Equality search attributes:
-  
+
     - primary key is an ordered set of columns, made up of partition key and clustering columns
     - A partition key is formed by one or more of the leading primary key columns
     - Supported queries must include all partition key columns in the query
     - NOTE: equality should come first (set these as your partition key: this finds the node the partition lives on) THEN can do inequality searches
-    
+
   * Rule 3: Inequality Search Attributes
     - Inequality search attributes become clustering columns
     - Clustering columns follow partition key columns in a primary key
@@ -327,7 +434,7 @@ These rules are also found in a paper: http://www.cs.wayne.edu/andrey/papers/big
 
   * Create table schema for the conceptional model and for each query
   * Apply the mapping rules in order
-  
+
 ### Query driven methodology mapping patterns
 
 Nine different patterns to use
@@ -355,7 +462,7 @@ latex
   * logged batches were built for maintaining consistency
   * document, assume people churn.
 
-  
+
 # Batches
 
 https://docs.datastax.com/en/cql/3.3/cql/cql_reference/cqlBatch.html
@@ -370,7 +477,7 @@ Facts on Batch:
   * not _really_ meant for data load: will not increase performance
   * might overwork coordinator
   * no ordering: all writes are executed with the same timestamp
-  
+
 # Joins in Cassandra
 
 ## Client side joins only
@@ -386,11 +493,11 @@ Cassandra WILL create caches or temporary like tables where's it notices you're 
   * Tunable consistency for data replicated to nodes, but does not handle application integrity constraints
   * INSERT INTO.... IF NOT EXISTS statements. "Lightweight transactions"...
 
-## Aggregations 
+## Aggregations
 
   * SUM, AVG, COUNT, MIN, MAX supported in super latest version of Cassandra. Supported in partition / node only.
   * ... or use counter type, aggregation in client side, use Spark or Solr.
-  
+
 
 # Keys to success  <<Cassandra_Primary_Key_Considerations>>
 
@@ -405,20 +512,20 @@ Fixing the problem:
     - add another column to partition key (either use an existing column or create an artifical column)
     - idea: fewer rows per partition
     - ... or introduce a bucket number and artificially create a partitioner, Kafka style...
-    
+
   * Vertical Partitioning - speed:
     - some queries may perform faster
        No query profiler or optimizer to tell you if your queries are horrible given the data
-       
+
     - reverse of vertical partitioning: ma
     - table partitions become smaller
     - faster to retrieve and more of them can be cached.
-    
+
   * Merging partitions and tables - speed + eliminating duplication (+ reducing N+1 queries required):
   * Adding columns
     - like add an aggregation column, or denormalize data
     - ... or maybe avoid COUNTERs, as it will require a READ before doing a write
-  
+
 ## Concurrency notes:
 
 ### ... and lightweight transactions
@@ -449,21 +556,21 @@ Fixing the problem:
 Term:
 
   * data center: one ring in a cluster
-  * 
-  
+  *
+
 ## Configuration Location
 
 /etc/cassandra/conf/*.yml
 
 cassandra-env.sh <-- shell script that launches cassandra server. also sources jvm.options
 
-and jvm.options <-- lets tweak JVM 
+and jvm.options <-- lets tweak JVM
 
 Files per node
 
 ## Min properties:
 
-  * `cluster_name`    <-- should be the same across 
+  * `cluster_name`    <-- should be the same across
   * `listen_address`  <-- needs to be a real address, not 0.0.0.0, because this address is publicized and needs to be resolvable inside the node. Can be comma(?) delimited if multiple NICS
   * `seed_node`       <-- first point of contact
   * `rpc_address`     <-- This is the IP address that clients such as cqlsh will use to access this node
@@ -492,20 +599,20 @@ This is an estimation process. Things to consider:
       - rate of operation generation
       - size of operations (number of rows * row width)
       - operation mix (read/write ratio)
-      
+
   * growth rate: how fast does data capacity increase?:
     - how big must the cluster be just to hold the data?
     - Given write throughput we can calculate growth. NOTE: velocity of growth may change / spike over time (pre season, in season, big news, finals, big news during finals, off season)
     - what is the ideal replication factor?
     - additional headroom for operations
-    
+
   * latency: how quickly can the cluster respond?:
-  
+
     - calculating cluster size not enough
     - Understand SLAs!!!:
       - latency
       - throughput
-     
+
     -  Relevant factors:
       - IO rate
       - workload shape
@@ -514,12 +621,12 @@ This is an estimation process. Things to consider:
       - node profile (cores, memory, storage, storage kind/speed, network)
 
   * Cluster sizing:
-  
+
     - validate assumptions often
     - monitor for changes over time
     - plan for increasing cluster size before you need it
     - be ready to scale down when needed
-    
+
 # Cassandra Stress
 
 stress / performance tool for cluster
@@ -544,11 +651,11 @@ There is a command to know what/where tables reside in your cluster
 
   * uses slf4j
   * [configured via logback.xml file](https://docs.datastax.com/en/cassandra/2.1/cassandra/configuration/configLoggingLevels_r.html)
-  
+
 
 # Adding nodes:
 
-  * when space on node is > 50%  
+  * when space on node is > 50%
      Q: Why? Compaction uses disk space!! It requires a "file" copy operation, not just a move operation...
   * new nodes added will not be avail for read/write while join process is happening...
   * existing nodes will continue to handle requests, even if the new node should be handling
@@ -568,12 +675,12 @@ See also:
 
 # Seed node thoughts <<Cassandra_Seed_Node_Thoughts>>
 
-seed node values are read in the following situations:    
+seed node values are read in the following situations:
   + join of a totally new node (newly provisioned instance that you are adding back to a cluster)
   + Cassey dies on an existing node and a monitor has restarted the process
   + but do NOT set all nodes as a seed node: https://issues.apache.org/jira/browse/CASSANDRA-5836
 
-Petzel: 
+Petzel:
 > I haven't done it yet, but what you just asked about [seed nodes in an unstable, AWS situation] is a big concern I've had,
 > especially with churn over time you might eventually get all stale entries. You can provide your own seed provider (look in yaml)
 > `class_name: org.apache.cassandra.locator.SimpleSeedProvider` so I wanted to write a seed provider that inspect the
@@ -590,7 +697,7 @@ Petzel:
 
 		dse_security   system_auth  dse_leases  system_distributed  dse_perf
 		system_schema  system       stresscql   system_traces       dse_system
-    
+
 	 cqlsh> DESCRIBE KEYSPACE stresscql;
 
 		CREATE TABLE stresscql.user_by_email (
@@ -599,7 +706,7 @@ Petzel:
 		    user_id uuid
 		) WITH bloom_filter_fp_chance = 0.01
 		....
-		
+
 # Care and feeding of Cassey Clusters
 
 # Compaction
@@ -639,7 +746,7 @@ this is the default
   * good practice to use 50 SS tables:
     - 20 for active data
     - 30 for previous time series data
-    
+
 New in Cassey 3.0
 
 
@@ -649,24 +756,24 @@ Compacts tiers concurrently
 
 `concurrency_compactors`: default to smaller number of disks or number of cores, with a min of 2 and max of 8 per CPU core
    remember you need to balance user performance + snitches + replications + compaction!
-   
+
 ## Compactions and tombstones
 
   * compaction eliminates tombstones
   * largest SSTable choosen first
   * compaction ensures tombstones DO NOT overlay old records in other SSTables <-- ie old tombstones on other replications is deleted too
-  
+
 # Repair
 
 Repair = synchronizing replicas
 
 Happens:
   * 10% of time
-  * when detected by reads: something fails QUORUM 
+  * when detected by reads: something fails QUORUM
   * randomly with non quorum reads
   * `nodetool repair` <-- that node becomes inactive until repair finishes
   * happens in background of read request
-  
+
 Why?:
 
   * node may go down and miss writes
@@ -678,7 +785,7 @@ Notes:
   * primary node of partition / token the only node that repairs that data (Cassey will fan this out anyway, why have everyone do it???)
   * can also do sub range repairs: break it down into subrange if a lot of data needs to be repaired.
   * suggested manual repair "every so often", yay entropy. (can schedule this via OpsCenter and have it do rolling repairs)
-  
+
 # SSTable Tools
 
 ## SSTableSplit
@@ -697,7 +804,7 @@ A diagnostic tool to dump SSTable files to JSON so you can inspect them
 
 ## SSTableLoader
 
-Useful if you want to mirror or commission a new cluster 
+Useful if you want to mirror or commission a new cluster
 
 Loads streams a set of SSTable data files to a live cluster. It transfers the relevant parts of each node, etc
 
@@ -733,7 +840,7 @@ Delete current data files and copy snapshot and incremental files to the data di
 
   * schema must be already present
   * restart and repair the node after file copy done
-  
+
 Or use sstableloader:
 
   * great if you're loading into a diff size cluster
@@ -750,7 +857,7 @@ Or use sstableloader:
 
   * OpsCenter
   * JMX Clients
-  
+
 # Hardware Selection
 
 ## Memory
@@ -762,11 +869,11 @@ Development in non-load testing envs: min is 4
 
   * will take all processors (no recommendation to give the OS a CPU itself)
   * Current sweet spot: 16 core (dedicated), 8GB (vm)
-  
+
 ## Network
 
   * bind OS stuff to a separate NIC
-  
+
 ## On The Cloud
 
   * GPU or IO2 EBS if you can't get ephemerals
@@ -774,14 +881,14 @@ Development in non-load testing envs: min is 4
   * Since hyperthreading: don't get a CPU most of the time, tune accordingly
   * CPU steal / noisey neighbors
   * AWS: may want to turn on enhanced networking on some instance types to get performance
-  
+
 # Hadoop style nodes: Big Fat Nodes
 
   * fat nodes are hot nodes == bad idea
-  
+
 # Authentication / Authorization #
   * Cassey stores auth data in "system_auth" <-- when using this make sure you ALTER your keyspace to tweak the replication;
-  
+
   * system_auth.roles <-- roles etc just use this special Cassey table you need to define
 
         cql> select * from  system_auth.roles;
@@ -807,4 +914,5 @@ Permission 	CQL Statements
 # Book Recommendations
 
   * [Cassandra The Definative Guide](https://www.amazon.com/Cassandra-Definitive-Guide-Distributed-Scale-ebook/dp/B01HQTWMYO/ref=as_li_ss_tl?keywords=cassandra+nosql&qid=1555868794&s=gateway&sr=8-1&linkCode=ll1&tag=wilcodevelsol-20&linkId=b692016059d445fc9528e4f297b87090&language=en_US)
-  * 
+  *
+

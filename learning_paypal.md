@@ -1,3 +1,15 @@
+# Table Of Contents
+
+<!-- toc -->
+
+- [>](#)
+  * [Express Checkout with mostly server side rendered content](#express-checkout-with-mostly-server-side-rendered-content)
+    + [TL;DR steps (details below!):](#tldr-steps-details-below)
+    + [Requirements](#requirements)
+    + [The Details](#the-details)
+
+<!-- tocstop -->
+
 # <<Learning_Paypal>>
 
 ## Express Checkout with mostly server side rendered content
@@ -23,7 +35,7 @@ For mostly server side Paypal creation / execution you need:
   1. A script/route to create the payment object and return (some info about it) to front end. (Assumingely returning `Content-Type: application/json` ??)
   2. A script/route to execute the payment object and return info about it to front end. (Assumingely returning `Content-Type: application/json` ??)
   3. UI for success, error conditions
-  
+
 
 ### The Details
 
@@ -41,9 +53,9 @@ Server side method returns JSON at least with payment ID (which you'll return in
 
 4. ON FRONT END: User goes through Paypal dance, `onAuthorize` field/method called when user has logged in in lightbox and OKed purchase.
 
-WILL pass object containing `paymentID` and `payerID`. 
+WILL pass object containing `paymentID` and `payerID`.
 
-5. ON SERVER: script/route to execute the payment. 
+5. ON SERVER: script/route to execute the payment.
 
 Pass `paymentID`, `payerID` back to your server, where you call [execute API](https://developer.paypal.com/docs/api/payments/#payment_execute).
 

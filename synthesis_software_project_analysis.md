@@ -1,7 +1,17 @@
 ---
-path: "/learnings/synthesis_software_project_analysis"
-title: "Syntheisi: Project Analysis"
+path: /learnings/synthesis_software_project_analysis
+title: 'Syntheisi: Project Analysis'
 ---
+# Table Of Contents
+
+<!-- toc -->
+
+- [analysis of software in the repository itself](#analysis-of-software-in-the-repository-itself)
+- [analysis of software across microservice herd](#analysis-of-software-across-microservice-herd)
+- [Analysis of libraries in a project](#analysis-of-libraries-in-a-project)
+- [sources](#sources)
+
+<!-- tocstop -->
 
 # analysis of software in the repository itself
 
@@ -16,7 +26,7 @@ title: "Syntheisi: Project Analysis"
   * library dependencies (esp on other libraries)
   * class dependencies inside a service <-- not really soo soo much if it's <5k lines
   * required downstream services
-  * how many services need modification to implement a user story (aka: need to modify five services and get  another team involved will bring down your velocity and border on just having distributed spaghetti 
+  * how many services need modification to implement a user story (aka: need to modify five services and get  another team involved will bring down your velocity and border on just having distributed spaghetti
         -  jira tickets: to implement a feature how many jira tickets does it take? How long to complete all tickets? What repos / PRs were created as part of that whole change set?
   * technical sprawl
   * lines of code or indentation based complexity: where are the most complex files per repo, and per project? Doe these files move a lot, and why?
@@ -35,5 +45,6 @@ title: "Syntheisi: Project Analysis"
 
 # sources
 
-  * software design X-rays 
+  * software design X-rays
   * GToolkit
+

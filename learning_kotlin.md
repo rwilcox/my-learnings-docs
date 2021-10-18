@@ -1,7 +1,22 @@
 ---
-path: "/learnings/kotlin"
-title: "Learnings: Kotlin"
+path: /learnings/kotlin
+title: 'Learnings: Kotlin'
 ---
+# Table Of Contents
+
+<!-- toc -->
+
+- [Casts](#casts)
+  * [Auto casts](#auto-casts)
+  * [Unsafe cast](#unsafe-cast)
+  * [Safe / Nullable cast -- `dynamic_cast` alike](#safe--nullable-cast----dynamic_cast-alike)
+  * [When you need to cast to a generic thing](#when-you-need-to-cast-to-a-generic-thing)
+- [Generic Functions](#generic-functions)
+  * [And Type Erasure >](#and-type-erasure-)
+      - [- [TODO]: Add examples here?!!](#--todo-add-examples-here)
+- [Book Recommendations](#book-recommendations)
+
+<!-- tocstop -->
 
 Casts
 ====================
@@ -55,3 +70,4 @@ See also:
 # Book Recommendations
 
   * [Kotlin the Big Nerd Ranch Guide](https://www.amazon.com/Kotlin-Programming-Nerd-Ranch-Guide-ebook/dp/B07FXQ7SQN/ref=as_li_ss_tl?keywords=kotlin&qid=1555895959&s=books&sr=1-2&linkCode=ll1&tag=wilcodevelsol-20&linkId=5642a953da22d46844af6f200b112c91&language=en_US)
+

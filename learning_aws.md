@@ -1,7 +1,54 @@
 ---
-path: "/learnings/aws"
-title: "Learnings: AWS"
+path: /learnings/aws
+title: 'Learnings: AWS'
 ---
+# Table Of Contents
+
+<!-- toc -->
+
+- [>](#)
+  * [>](#)
+  * [>](#)
+    + [... and Memory Swap Space >](#-and-memory-swap-space-)
+      - [See also:](#see-also)
+    + [See also:](#see-also-1)
+  * [>](#)
+    + [Allows you to create auto DNS support (private and public names)](#allows-you-to-create-auto-dns-support-private-and-public-names)
+      - [... or not using this, because the suck: >](#-or-not-using-this-because-the-suck-)
+      - [Limits](#limits)
+    + [And AZs](#and-azs)
+  * [>](#)
+    + [Docker Deploys](#docker-deploys)
+    + [Non Docker Deploys](#non-docker-deploys)
+    + [General Deployment Information](#general-deployment-information)
+    + [Advanced Configuration](#advanced-configuration)
+      - [... and microservice flocks](#-and-microservice-flocks)
+    + [Logs](#logs)
+      - [Types of log files](#types-of-log-files)
+      - [Customizing log files](#customizing-log-files)
+      - [... with Cloudwatch Logs as a destination](#-with-cloudwatch-logs-as-a-destination)
+  * [>](#)
+  * [>](#)
+  * [>](#)
+  * [>](#)
+    + [Use Cases I like:](#use-cases-i-like)
+  * [>](#)
+    + [Neat Features](#neat-features)
+    + [Custom Docker Builds in AWS CodeBuild](#custom-docker-builds-in-aws-codebuild)
+    + [Limits:](#limits)
+    + [and full Github Integration](#and-full-github-integration)
+    + [Bitbucket Integration](#bitbucket-integration)
+    + [Use cases I like:](#use-cases-i-like)
+  * [>](#)
+    + [ELB](#elb)
+  * [>](#)
+    + [>](#)
+  * [>](#)
+    + [APIs on Amplify](#apis-on-amplify)
+      - [AWS also includes a FraphQL console to poke at the store using graphql queries / mutations](#aws-also-includes-a-fraphql-console-to-poke-at-the-store-using-graphql-queries--mutations)
+  * [>](#)
+
+<!-- tocstop -->
 
 # <<Learning_AWS>>
 
@@ -44,7 +91,7 @@ For better names:
   * [Chef: use Route53 (assumes OpsWorks, but is portable)](http://hipsterdevblog.com/blog/2014/06/23/automatic-dns-records-using-route53/)
   * [Use a userdata script](http://scraplab.net/custom-ec2-hostnames-and-dns-entries/)
 
-... or run your own bind server and create a Chef recipe to update that... 
+... or run your own bind server and create a Chef recipe to update that...
 
 #### Limits
 
@@ -65,7 +112,7 @@ AZs are presented to you called "Subnets". Note:
 
 Upload a .zip of application, < 512MB.
 
-Can use `eb deploy` to deploy current folder. Will always deploy latest commit, even if you have pending changes. 
+Can use `eb deploy` to deploy current folder. Will always deploy latest commit, even if you have pending changes.
 
 Extend ElasticSearch configuration by .ebextensions folder.
 
@@ -80,7 +127,7 @@ Supported Types:
   * Rolling
   * Rolling with additional batch <-- rolls a new N instances so you don't lose N capacity as you deploy the new version to those N instances
   * Immutable
- 
+
 ### Advanced Configuration
 
 Can use menu in AWS console to Save Configuration (or use `eb config`)
@@ -137,10 +184,10 @@ Drawbacks / things need to worry about before using ECR:
       - Docker Registry: Docker Hub
       - Docker Repository: A collection of images with the same name but different tags (aka https://hub.docker.com/r/library/python/tags/ is a Repository)
       - Thus ECR Image Repository = Docker Repository
-  
+
     ... the documentation _seems to_ imply differently, but experience seems to be one repository = one docker image ???
   * IAM roles apply on the repository level (only that granular)
-  
+
 Neat commands:
 
   * `aws ecr describe-repositories`
@@ -168,7 +215,7 @@ Inputs:
   * AWS S3
   * AWS CodeCommit
 
-CodePipeline can trigger AWS CodeBuild as part of its steps. 
+CodePipeline can trigger AWS CodeBuild as part of its steps.
 
 NOTE: CodePipeline does __not__ support Bitbucket
 
@@ -208,7 +255,7 @@ Two deployment types:
   * blue / green — requires EC2 instances with auto scale groups / and configured IAM (dynamic???)
 
   Requirements:
-  
+
      * must have CodeDeploy agent installed
 
   During deploy CodeDeploy agent on box reads AppSpec.yml and executes instructions
@@ -229,16 +276,16 @@ Takes files in (github, bitbucket, s3) and (optionally) copies the file result o
 
 Thus if your build process produces *artifacts*, you could use this to build/produce them. (Or if your pipeline tests and then produces Docker artifacts???)
 
-Tracking Code Build step results: http://docs.aws.amazon.com/codebuild/latest/userguide/view-build-details.html 
+Tracking Code Build step results: http://docs.aws.amazon.com/codebuild/latest/userguide/view-build-details.html
 
 ### Neat Features
 
   * "serverless"
-  * per minute billing 
+  * per minute billing
   * can listen to Github, Bitbucket, S3 repos
   * Docker features (can build your app in the service's custom Docker image)
   * 5 minute build costs ~ 3cents
- 
+
 ### Custom Docker Builds in AWS CodeBuild
 
 if CodeBuild doesn't have version of language etc you need, can use own Docker image.
@@ -249,7 +296,7 @@ Can also use docker-in-docker - have used this to install docker compose and bri
 
   * AWS CodeBuild projects: 1,000
   * Max number of concurrent builds: 20 (varies based on instance size, but most are 20)
- 
+
 
 ### and full Github Integration
 
@@ -274,7 +321,7 @@ CodeBuild does this, even for Bitbucket or Bitbucket Cloud. AKA: Bitbucket fully
   1. Early early stage startups (5 cents a build, no $10-60/month min)
 
 
-## <<Learning_AWS_LoadBalancers>> 
+## <<Learning_AWS_LoadBalancers>>
 
 Default ( < 10-30ish????? minutes ) of requests seem to be rate limited at 6K rps / 800-ishMB/second
 
@@ -293,18 +340,18 @@ Allows SSL termination on chosen instance, not just at load balancer level
   1. `$ sudo yum install java-1.8.0-openjdk-devel`
   2. `sudo alternatives --config java`
   3. `sudo yum remove java-1.7.0-openjdk-devel`
-  
+
 ## <<Learning_AWS_Amplify>>
 
 ### APIs on Amplify
 
 For graphql APIs can auto generate your code for you to talk back to AWS AppSync. Start with the graphql schema and it will generate :
-  * CRUD queries,  mutations and subscriptions 
+  * CRUD queries,  mutations and subscriptions
   * provision databases with amplify push
-  
+
   Can generate in javascript, typescript or Flow
  Can also use Cognito to create application specific users for your app. Including, for react, widgets for sign up and sign in.
- 
+
 #### AWS also includes a FraphQL console to poke at the store using graphql queries / mutations
 
 

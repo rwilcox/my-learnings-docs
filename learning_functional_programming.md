@@ -1,7 +1,16 @@
 ---
-path: "/learnings/functional_programm"
-title: "Learnings: Functional Programming"
+path: /learnings/functional_programm
+title: 'Learnings: Functional Programming'
 ---
+# Table Of Contents
+
+<!-- toc -->
+
+- [Monad](#monad)
+  * [what makes a monad a monad?](#what-makes-a-monad-a-monad)
+- [See also](#see-also)
+
+<!-- tocstop -->
 
 # Monad
 
@@ -17,3 +26,4 @@ Monad laws:
 # See also
 
   * https://curiosity-driven.org/monads-in-javascript
+
