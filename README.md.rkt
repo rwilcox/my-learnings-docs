@@ -10,6 +10,12 @@ The first approach for this site is to use Github as a (decent!) markdown render
 
 Some files are preprocessed via [Racket's scribble library](https://docs.racket-lang.org/scribble/index.html) documentation tool. Then I checkin / commit the generated files so they are viewed via its rendered Github generated markdown
 
+# TODO:
+
+- [x] generate ToCs for those super long pages...
+- [ ] my refenence backlink stuff doesn't work with markdown-toc <-- ends up coming out as `>` in the reference. Boo.
+
+
 # File Index
 
 Because if you're looking at the file list in Github, it's hard to know if a file is the (good to view / generated one) vs the Scribble pre-processed slightly messy original file. It looks like it shows up twice...
