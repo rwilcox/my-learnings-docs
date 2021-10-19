@@ -29,3 +29,5 @@ Given the following structure:
 
 And a path for that document at `/learning/gatsby`, the rendered path will be `curl http://localhost:9000/learnings/gatsby/index.html`
 
+
+

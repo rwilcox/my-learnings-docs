@@ -105,3 +105,5 @@ Concepts from _Principle Based Enterprise Architecture: A systematic approach to
   1. What happens when you try, have to do a re-try, but then the system gets around to handling your original request?
     ie: are your services idempotent enough?? See LanguageOfTheSystem
 
+
+

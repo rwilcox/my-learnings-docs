@@ -916,3 +916,5 @@ Permission 	CQL Statements
   * [Cassandra The Definative Guide](https://www.amazon.com/Cassandra-Definitive-Guide-Distributed-Scale-ebook/dp/B01HQTWMYO/ref=as_li_ss_tl?keywords=cassandra+nosql&qid=1555868794&s=gateway&sr=8-1&linkCode=ll1&tag=wilcodevelsol-20&linkId=b692016059d445fc9528e4f297b87090&language=en_US)
   *
 
+
+

@@ -1,7 +1,21 @@
 ---
-path: "/learnings/java_concurrency"
-title: "Learnings: Java: Concurrency"
+path: /learnings/java_concurrency
+title: 'Learnings: Java: Concurrency'
 ---
+# Table Of Contents
+
+<!-- toc -->
+
+- [>](#)
+  * [>](#)
+  * [>](#)
+  * [>](#)
+  * [>](#)
+    + [and volatile keyword](#and-volatile-keyword)
+      - [avoiding volatile](#avoiding-volatile)
+    + [and fairness](#and-fairness)
+
+<!-- tocstop -->
 
 # <<Java_Concurrency>>
 
@@ -11,7 +25,7 @@ title: "Learnings: Java: Concurrency"
 See also:
 
   * Learning_Java_Hotspot_Memory_Zones_And_Threads
-  
+
 ## <<Java_Concurrency_Load>>
 
 Q: how much are any one particular thread or executioner group actually using the CPU, vs waiting for sync IO/network? Profile this: this will tell you how much you can cheat WRT CPU core count...
@@ -30,7 +44,7 @@ Can also do it as a block in a method
             Myclass.a += i;
             }
         }
-        
+
 ## <<Learning_Java_Concurrency_TROUBLE>>
 
 ### and volatile keyword
@@ -42,10 +56,11 @@ OS may cache value of a variable shared across threads. volatile will make sure 
 
   *Atomic... classes for adding stuff
   * ComcurrentHahMap, ArrayList, etc —- more efficient than wrapping self
-  
-  
+
+
 ### and fairness
 
 Manually creating / waiting on a lock ReentrantLock can pass "fair" flag, which will make sure to give priority access to longest waiting requestor.
+
 
 

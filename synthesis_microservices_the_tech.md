@@ -1,8 +1,7 @@
 ---
-path: "/synthesis/microservices_the_tech"
-title: "Synthesis: Microservices: The Tech"
+path: /synthesis/microservices_the_tech
+title: 'Synthesis: Microservices: The Tech'
 ---
-
 # Problems with microservices
 
 ## Service Discovery
@@ -49,5 +48,9 @@ One way monolyths grow: when getting a servicer instance to split this thing int
 Fractals are cool
 
 ## sometimes: shut up and hear how things are really being run
+
+
+
+
 
 

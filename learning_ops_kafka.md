@@ -125,3 +125,5 @@ Topics **must** exist on the destination also (either through manual creation or
   * [my Kafka_ops tag on pinboard](https://pinboard.in/u:rwilcox/t:kafka_ops)
   * Learning_Ops_Kafka_Viewing_Adjusting_Consumer_Offsets
 
+
+

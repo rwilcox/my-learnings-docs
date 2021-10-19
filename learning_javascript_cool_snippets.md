@@ -16,3 +16,5 @@ title: Learning Javascript Cool Snippets
         let [,, ...goodThings] = a
         console.log(goodThings)  // will be ['thing one', 'thing two']
 
+
+

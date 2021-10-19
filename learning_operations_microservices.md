@@ -200,3 +200,5 @@ GREAT TERM: SHADOW IT:
 
   teams going off and doing their own thing on a variety of providers b/c no guidance, or Politics or ??
 
+
+

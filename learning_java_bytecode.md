@@ -34,3 +34,5 @@ In general JITed things are moved into JIT "code cache"
 
 [OpenJDK code cache implementation](http://openjdk.java.net/jeps/197): (they separate it into 3 parts)
 
+
+

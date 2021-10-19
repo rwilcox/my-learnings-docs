@@ -1,8 +1,7 @@
 ---
-path: "/learnings/unix_i_forget"
-title: "Learning: Unix: Commands I forget"
+path: /learnings/unix_i_forget
+title: 'Learning: Unix: Commands I forget'
 ---
-
 This is a list of unix commands that are fairly simple, but I always forget how to construct them.
 
 # Soft Link
@@ -58,3 +57,7 @@ This is a list of unix commands that are fairly simple, but I always forget how 
 # How many lines are in this folder of text files??
 
     find . -name '*.md' | xargs wc -l
+
+
+
+

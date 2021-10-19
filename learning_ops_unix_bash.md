@@ -72,3 +72,5 @@ Q: what if you need to pipe the STDOUT of multiple commands? or send the output 
 
   * [The Linux Programming Interface](https://www.amazon.com/Linux-Programming-Interface-System-Handbook-ebook/dp/B004OEJMZM/ref=as_li_ss_tl?crid=22DZRQ0BQORP1&keywords=the+linux+programming+interface+2nd+edition&qid=1555896803&s=books&sprefix=the+linux+programming+inter,stripbooks,343&sr=1-1&linkCode=ll1&tag=wilcodevelsol-20&linkId=412000e8f684ee3cb4b728e72aa2cfb7&language=en_US)
 
+
+

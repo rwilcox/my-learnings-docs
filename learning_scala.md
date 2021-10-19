@@ -503,3 +503,5 @@ with shapeless you can use / implement `cast` method, which gives you more power
   * [Functional Programming in Scala](https://www.amazon.com/Functional-Programming-Scala-Paul-Chiusano/dp/1617290653/ref=as_li_ss_tl?keywords=scala&qid=1555896987&s=books&sr=1-4&linkCode=ll1&tag=wilcodevelsol-20&linkId=43ba5d9668e75d1aca4c02de6ae1b990&language=en_US)
   * [Programming Scala](https://www.amazon.com/Programming-Scala-Scalability-Functional-Objects-ebook/dp/B00QJDYKH6/ref=as_li_ss_tl?keywords=scala&qid=1555896987&s=books&sr=1-19&linkCode=ll1&tag=wilcodevelsol-20&linkId=aa957f77a0fdd45e946c3ea1a05a53db&language=en_US)
 
+
+

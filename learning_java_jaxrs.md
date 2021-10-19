@@ -37,3 +37,5 @@ Two solutions:
 
   * [RESTful Java with JAX-RS 2: Designing and Developing RESTful web services](https://www.amazon.com/RESTful-Java-JAX-RS-2-0-Distributed-dp-144936134X/dp/144936134X/ref=as_li_ss_tl?_encoding=UTF8&me=&qid=1555870170&linkCode=ll1&tag=wilcodevelsol-20&linkId=ac98b030764d862ef4332d2da42f8e46&language=en_US)
 
+
+
