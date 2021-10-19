@@ -1,7 +1,31 @@
 ---
-path: "/synthesis/managing_agile_teams"
-title: "Synthesis: Managing Agile Teams"
+path: /synthesis/managing_agile_teams
+title: 'Synthesis: Managing Agile Teams'
 ---
+# Table Of Contents
+
+<!-- toc -->
+
+- [Which Agile process is the best:](#which-agile-process-is-the-best)
+- [Developer Frustrations:](#developer-frustrations)
+- [Product Owner:](#product-owner)
+- [Management:](#management)
+- [Performance](#performance)
+- [Customer Frustrations:](#customer-frustrations)
+- [Team Size >](#team-size-)
+  * [Problems with too small of a team](#problems-with-too-small-of-a-team)
+  * [See also:](#see-also)
+- [dual people roles](#dual-people-roles)
+  * [dual roles that might work](#dual-roles-that-might-work)
+    + [developers that are architects](#developers-that-are-architects)
+    + [managers that write code sometimes](#managers-that-write-code-sometimes)
+  * [dual roles that don’t work](#dual-roles-that-dont-work)
+    + [Tech leads that are scrum masters or even coaches >](#tech-leads-that-are-scrum-masters-or-even-coaches-)
+      - [See also](#see-also)
+    + [People managers that are architects](#people-managers-that-are-architects)
+- [Additional Reading -](#additional-reading--)
+
+<!-- tocstop -->
 
 # Which Agile process is the best:
 
@@ -18,7 +42,7 @@ title: "Synthesis: Managing Agile Teams"
   * Behavior driven development creates artifacts for the whole team, not just developers (it's not just about "stupid developers and their stupid tests that take so much time"): <http://rwilcox.tumblr.com/post/14165991970>
   * On giving your programmers context for the system/functionality piece they are working on (as much context as you have): <http://blog.wilcoxd.com/blog/2011/02/01/lesson-from-w-edward-deming-on-software/>
   * The Always On smell and personal costs: `Agile_Smell_AlwaysOnAvailably_And_Weekday_Hours`
-  * Do your developers know what "core functionality" they are shipping this release?:  
+  * Do your developers know what "core functionality" they are shipping this release?:
   * Why your agile coach should not be a developer: Your_Agile_Coach_Should_Not_Be_A_Developer
   * Bugs: AgileAndBugFixing
   * Struggling: <http://rwilcox.tumblr.com/post/24090100242/struggling-or-working-to-avoid-blame>
@@ -27,10 +51,10 @@ title: "Synthesis: Managing Agile Teams"
 
   * Product owner should not have sole ownership over the backlog: <http://news.ycombinator.com/item?id=3047574>
   * Why one product owner is important: <http://rwilcox.tumblr.com/post/526968706>
-  * The product owner should not be the direct customer: 
+  * The product owner should not be the direct customer:
   * I want to measure velocity on a daily basis!: <http://www.quora.com/How-can-we-track-the-progress-of-development-on-a-daily-basis/answer/Ryan-Wilcox>
   * Using burndown charts effectively: <http://www.reddit.com/r/agile/comments/q4av3/burndown_charts_are_antiagile_because_working/c3uvn13>
-  
+
 # Management:
   * Metrics for Agile Teams: <http://www.quora.com/What-are-good-metrics-to-use-to-measure-the-performance-of-a-team-using-Agile-software-development-methodology/answer/Ryan-Wilcox>
   * Finding and keeping good people: <http://rwilcox.tumblr.com/post/15433814955/the-talent-crunch-not-where-you-expect-it>
@@ -41,9 +65,9 @@ title: "Synthesis: Managing Agile Teams"
   * On story points vs hourly estimates: <http://rwilcox.tumblr.com/post/20427889323>
   * Planning Poker: Resolving disperate point estimates
   * The date/scope debate (or: your entire agile team and the pateto principal): <http://blog.wilcoxd.com/blog/2010/07/12/the-datescope-debate/>
-  * The Mythical Man Month really does apply to you team: 
+  * The Mythical Man Month really does apply to you team:
   * Your business must have the mindset that it can adapt too, and not just come up with excuse after excuse why it can't. See this thread, where the guy seems to make every excuse in the book about why the org is how it is: <http://www.quora.com/Agile-Development/Whats-the-best-way-to-deal-with-performance-issues-in-an-agile-team>
-  
+
 # Performance
 
   * https://twitter.com/bcantrill/status/1216492121198215168?s=21 — what DO you ask if traditional quarterly / bi-yearly / yearly reviews are no good?
@@ -115,7 +139,7 @@ It's not a great, but compare the two teams when you include the SM/PO in the wo
 
 ### managers that write code sometimes
 
-boy howdy this is hard. In one way see Managers_Writing_Code. on the other hand, you can’t work on something critical path and you also can’t be inthe situation where people are afraid to code review your code as well as it should be because you’re the boss (power imbalance!!). 
+boy howdy this is hard. In one way see Managers_Writing_Code. on the other hand, you can’t work on something critical path and you also can’t be inthe situation where people are afraid to code review your code as well as it should be because you’re the boss (power imbalance!!).
 
 On the judging hand, a [Gemba walk](https://kanbanize.com/lean-management/improvement/gemba-walk/) is a thing. Or a Gemba pair programming session: let your developer drive and DON’T say anything. Or, don’t ask questions about the code / design, as questions around the environment they work on: the code is almost a discardable artifact in this type of scenario. (But it might not be enough? Or you may Peter Principle this(?) so careful(?). )
 
@@ -127,8 +151,8 @@ On the fourth hand, there’a a difference between managing 3 people and 7 peopl
 
 ### Tech leads that are scrum masters or even coaches <<Dual_Roles_That_Do_Not_Work_Dev_Coach>>
 
-  it may be hard for others outside the team to know if you are being a cranky developer or if you are representing a legit team complaint. 
-  
+  it may be hard for others outside the team to know if you are being a cranky developer or if you are representing a legit team complaint.
+
 
 ####  See also
 
@@ -136,7 +160,7 @@ On the fourth hand, there’a a difference between managing 3 people and 7 peopl
 
 ### People managers that are architects
 
-can be too far away from day to day code bits; means design could "win" by default; splits focus; might tramble on actual architects without org chart power if you say need > 1 for your team, or > 1 people manager for your team because team is so large ( / middle manager overconfidence). 
+can be too far away from day to day code bits; means design could "win" by default; splits focus; might tramble on actual architects without org chart power if you say need > 1 for your team, or > 1 people manager for your team because team is so large ( / middle manager overconfidence).
 
 Are you winning because your idea is the best / actually viable, or are people falling into trap of Highrst Paid Person’s Opinion?
 
@@ -146,3 +170,4 @@ Is your company addicted to urgency? <http://www.articledashboard.com/Article/Th
 How to manage brilliant people: <http://www.computerworld.com/s/article/317362/How_to_Manage_Brilliant_People>
 
 Dave bock wants to write forward (said on twitter feb 22)
+
