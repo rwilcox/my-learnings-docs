@@ -1,22 +1,29 @@
 #!/usr/bin/env bash
 
-MARKDOWN_TOC_BIN=~/.npm-packages/bin/markdown-toc
+
+# MARKDOWN_TOC_BIN=~/.npm-packages/bin/markdown-toc
+MARKDOWN_TOC_BIN=/opt/local/bin/markdown-toc
+RACKET_BIN=~/Applications/Racket_v8.2/bin/racket
+
+# TODO: make this dynamic
+# ^^^^^^^ npm install -g markdown-toc
+
 
 # Step 1: for files that need pre-processing, do that
 # ================================================
 for file in ./*.md.rkt; do
     echo "processing $file..."
-    racket "$file" > $(basename "$file" .rkt)
+    $RACKET_BIN "$file" > $(basename "$file" .rkt)
     # basename like this removes the $2 parameter from the name. Neat.
 done
 
-racket README.md.rkt > README.md  # second pass for index
+$RACKET_BIN README.md.rkt > README.md  # second pass for index
 
 
 # Step 2: Generate tables of contents
 # ===============================================
 
 for file in ./*.md; do
-    echo "  * $file"
+    echo "  * Generating TOC for: $file"
     $MARKDOWN_TOC_BIN -i $file
 done

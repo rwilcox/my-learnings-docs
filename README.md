@@ -8,6 +8,12 @@ The first approach for this site is to use Github as a (decent!) markdown render
 
 Some files are preprocessed via [Racket's scribble library](https://docs.racket-lang.org/scribble/index.html) documentation tool. Then I checkin / commit the generated files so they are viewed via its rendered Github generated markdown
 
+# TODO:
+
+- [x] generate ToCs for those super long pages...
+- [ ] my refenence backlink stuff doesn't work with markdown-toc <-- ends up coming out as `>` in the reference. Boo.
+
+
 # File Index
 
 Because if you're looking at the file list in Github, it's hard to know if a file is the (good to view / generated one) vs the Scribble pre-processed slightly messy original file. It looks like it shows up twice...
@@ -78,6 +84,8 @@ Because if you're looking at the file list in Github, it's hard to know if a fil
   * [learning_machine_learning.md](https://github.com/rwilcox/my-learnings-docs/blob/master/learning_machine_learning.md)
   * [learning_macports.md](https://github.com/rwilcox/my-learnings-docs/blob/master/learning_macports.md)
   * [learning_microservices_the_hard_parts_nfjs_training.md](https://github.com/rwilcox/my-learnings-docs/blob/master/learning_microservices_the_hard_parts_nfjs_training.md)
+  * [learning_mongo.md](https://github.com/rwilcox/my-learnings-docs/blob/master/learning_mongo.md)
+  * [learning_my_unix_tools.md](https://github.com/rwilcox/my-learnings-docs/blob/master/learning_my_unix_tools.md)
   * [learning_operations.md](https://github.com/rwilcox/my-learnings-docs/blob/master/learning_operations.md)
   * [learning_operations_microservices.md](https://github.com/rwilcox/my-learnings-docs/blob/master/learning_operations_microservices.md)
   * [learning_operations_sre.md](https://github.com/rwilcox/my-learnings-docs/blob/master/learning_operations_sre.md)
@@ -100,6 +108,7 @@ Because if you're looking at the file list in Github, it's hard to know if a fil
   * [learning_ops_zookeeper.md](https://github.com/rwilcox/my-learnings-docs/blob/master/learning_ops_zookeeper.md)
   * [learning_paypal.md](https://github.com/rwilcox/my-learnings-docs/blob/master/learning_paypal.md)
   * [learning_powershell.md](https://github.com/rwilcox/my-learnings-docs/blob/master/learning_powershell.md)
+  * [learning_python.md](https://github.com/rwilcox/my-learnings-docs/blob/master/learning_python.md)
   * [learning_rust.md](https://github.com/rwilcox/my-learnings-docs/blob/master/learning_rust.md)
   * [learning_sbt.md](https://github.com/rwilcox/my-learnings-docs/blob/master/learning_sbt.md)
   * [learning_scala.md](https://github.com/rwilcox/my-learnings-docs/blob/master/learning_scala.md)
@@ -113,11 +122,13 @@ Because if you're looking at the file list in Github, it's hard to know if a fil
   * [learning_vault.md](https://github.com/rwilcox/my-learnings-docs/blob/master/learning_vault.md)
   * [learning_vim.md](https://github.com/rwilcox/my-learnings-docs/blob/master/learning_vim.md)
   * [learning_vscode.md](https://github.com/rwilcox/my-learnings-docs/blob/master/learning_vscode.md)
+  * [learning_zsh_tricks.md](https://github.com/rwilcox/my-learnings-docs/blob/master/learning_zsh_tricks.md)
   * [learnings_domain_driven_design.md](https://github.com/rwilcox/my-learnings-docs/blob/master/learnings_domain_driven_design.md)
   * [learnings_gtoolkit.md](https://github.com/rwilcox/my-learnings-docs/blob/master/learnings_gtoolkit.md)
   * [synthesis_agile_in_the_enterprise.md](https://github.com/rwilcox/my-learnings-docs/blob/master/synthesis_agile_in_the_enterprise.md)
   * [synthesis_agile_teams.md](https://github.com/rwilcox/my-learnings-docs/blob/master/synthesis_agile_teams.md)
   * [synthesis_management_agile.md](https://github.com/rwilcox/my-learnings-docs/blob/master/synthesis_management_agile.md)
+  * [synthesis_managing_agile_teams.md](https://github.com/rwilcox/my-learnings-docs/blob/master/synthesis_managing_agile_teams.md)
   * [synthesis_microservices_in_the_enterprise.md](https://github.com/rwilcox/my-learnings-docs/blob/master/synthesis_microservices_in_the_enterprise.md)
   * [synthesis_microservices_the_tech.md](https://github.com/rwilcox/my-learnings-docs/blob/master/synthesis_microservices_the_tech.md)
   * [synthesis_site_reliability_engineering_sre.md](https://github.com/rwilcox/my-learnings-docs/blob/master/synthesis_site_reliability_engineering_sre.md)
