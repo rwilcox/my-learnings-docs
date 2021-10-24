@@ -13,6 +13,7 @@ title: 'Learnings: Unix: Misc'
   * [Debugging what's going on with your kernel](#debugging-whats-going-on-with-your-kernel)
   * [Examining mount points >](#examining-mount-points-)
   * [File Handle Limits >](#file-handle-limits-)
+  * [Buffering and stderr / stdout](#buffering-and-stderr--stdout)
 
 <!-- tocstop -->
 
@@ -50,6 +51,13 @@ Configuring mounts
 [RHEL / Centos Ulimit / max number of open files](https://tuxgen.blogspot.com/2014/01/centosrhel-ulimit-and-maximum-number-of.html)
 
 [Ubuntu: setting file limits for all users (or not)](https://serverfault.com/a/570560/91037)
+
+
+## Buffering and stderr / stdout
+
+stdout and stderr are (usually) buffered differently, so whereas you may need to fflush(stdout) to flush the output buffer, you never need call fflush(stderr)
+
+[source](https://twitter.com/importantshock/status/1446283570356555777)
 
 
 
