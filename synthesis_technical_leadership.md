@@ -1,7 +1,54 @@
 ---
-path: "/synthesis/technical_leadership"
-title: "Synthesis:Technical Leadership"
+path: /synthesis/technical_leadership
+title: 'Synthesis:Technical Leadership'
 ---
+# Table Of Contents
+
+<!-- toc -->
+
+- [Managing Smart People](#managing-smart-people)
+- [types of technical leadership](#types-of-technical-leadership)
+  * [technical leadership but you’re also a people manager ("officer")](#technical-leadership-but-youre-also-a-people-manager-officer)
+    + [of 1-2 direct reports](#of-1-2-direct-reports)
+    + [3-4 direct reports](#3-4-direct-reports)
+    + [6-7-+ direct reports](#6-7--direct-reports)
+    + [10+ directs](#10-directs)
+  * [technical leadership, you don’t have much technical skills, but the people you lead / manage have them](#technical-leadership-you-dont-have-much-technical-skills-but-the-people-you-lead--manage-have-them)
+  * [technical leadership and you have no direct reports ("enlisted man")](#technical-leadership-and-you-have-no-direct-reports-enlisted-man)
+    + [3-4 reports in a tight group / sub team. You’re the tech lead for a small team or potentially sub team of a larger effort](#3-4-reports-in-a-tight-group--sub-team-youre-the-tech-lead-for-a-small-team-or-potentially-sub-team-of-a-larger-effort)
+    + [4-6 reports in a tight group / sub team.](#4-6-reports-in-a-tight-group--sub-team)
+    + [across two teams](#across-two-teams)
+    + [across 4-6 teams](#across-4-6-teams)
+    + [across 7 plus teams](#across-7-plus-teams)
+    + [See also](#see-also)
+- [SDLC ROLES >](#sdlc-roles-)
+- [Types of SLA](#types-of-sla)
+- [SDLC and business partners](#sdlc-and-business-partners)
+- [Flowing Goals down](#flowing-goals-down)
+  * [Q: How much control after all??](#q-how-much-control-after-all)
+  * [your area of responsibility](#your-area-of-responsibility)
+    + [see also](#see-also)
+  * [pro tips](#pro-tips)
+    + [pie in the sky goals are good, and also try to measure them](#pie-in-the-sky-goals-are-good-and-also-try-to-measure-them)
+    + [Don't have too many people where you can't listen to them](#dont-have-too-many-people-where-you-cant-listen-to-them)
+    + [Gather people that know things you don't](#gather-people-that-know-things-you-dont)
+  * [Principals](#principals)
+    + [has many golden rules](#has-many-golden-rules)
+      - [has a set of stories / epic](#has-a-set-of-stories--epic)
+      - [has many body of evidence stories of why you want to follow it](#has-many-body-of-evidence-stories-of-why-you-want-to-follow-it)
+      - [has measures / acceptance criteria about if the rule has been followed](#has-measures--acceptance-criteria-about-if-the-rule-has-been-followed)
+- [importance of asset owners](#importance-of-asset-owners)
+- [See also](#see-also-1)
+- [MOI model of leadership](#moi-model-of-leadership)
+- [- [ BOOKQUOTE]: misc leaderahip](#---bookquote-misc-leaderahip)
+- [-[BOOKQUOTE]: Leadership time sucks](#-bookquote-leadership-time-sucks)
+  * [Make more time in the day](#make-more-time-in-the-day)
+- [Managing flow of ideas](#managing-flow-of-ideas)
+- [lessons form a task oriented style](#lessons-form-a-task-oriented-style)
+- [leadership considerations](#leadership-considerations)
+  * [Management and technical leadership should be seperate](#management-and-technical-leadership-should-be-seperate)
+
+<!-- tocstop -->
 
 # Managing Smart People
 
@@ -280,3 +327,4 @@ first job: esablizh a comfortzbld environment, which means geftinf acquanted wit
 
 your manager likely can not be a tech lead. Your tech lead likely can not be a manager. Or at least for long or for scale.
 Why? Both different temperment job AND those are both full time jobs at scale.
+

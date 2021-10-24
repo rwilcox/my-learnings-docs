@@ -6,6 +6,11 @@ path: "/synthesis/technical_leadership"
 title: "Synthesis:Technical Leadership"
 ---
 
+# Table Of Contents
+
+<!-- toc -->
+
+
 # Managing Smart People
 
   * leadership based on perception: knows what to do, tells others
