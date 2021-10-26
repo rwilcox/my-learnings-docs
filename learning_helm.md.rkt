@@ -9,61 +9,6 @@ title: Learning Helm
 
 <!-- toc -->
 
-- [Intro / Why](#intro--why)
-  * [components](#components)
-    + [helm client / CLI interesting facts](#helm-client--cli-interesting-facts)
-  * [v2 Vs v3](#v2-vs-v3)
-    + [Differences in required supporting infrastructure](#differences-in-required-supporting-infrastructure)
-    + [User Facing Differences](#user-facing-differences)
-      - [Chart name >](#chart-name-)
-- [Helm chart storage (different types of repositories)](#helm-chart-storage-different-types-of-repositories)
-  * [using repositories from the CLI](#using-repositories-from-the-cli)
-  * [public access](#public-access)
-  * [A static site](#a-static-site)
-  * [nexus](#nexus)
-    + [ECR](#ecr)
-    + [chart museum](#chart-museum)
-- [Deployments](#deployments)
-  * [Attributes](#attributes)
-  * [environmental variables for a deployment](#environmental-variables-for-a-deployment)
-  * [Reverting a deploy](#reverting-a-deploy)
-  * [Removing a microservice completely from the cluster](#removing-a-microservice-completely-from-the-cluster)
-- [Hooks](#hooks)
-  * [See also](#see-also)
-- [Templates](#templates)
-  * [falsiness in template language](#falsiness-in-template-language)
-  * [template includes](#template-includes)
-    + [How you create a block you're going to include](#how-you-create-a-block-youre-going-to-include)
-    + [How you call it: with the template tag](#how-you-call-it-with-the-template-tag)
-    + [How you can call it: with the include tag](#how-you-can-call-it-with-the-include-tag)
-  * [Values / The Template Nature](#values--the-template-nature)
-  * [See also:](#see-also)
-- [Release](#release)
-- [Developing](#developing)
-  * [making a new chart](#making-a-new-chart)
-    + [interesting files](#interesting-files)
-  * [Making sure your template works (local machine development) >](#making-sure-your-template-works-local-machine-development--)
-  * [version numbering](#version-numbering)
-  * [manually creating a chart artifact](#manually-creating-a-chart-artifact)
-  * [deploying a chart](#deploying-a-chart)
-  * [tests??!!](#tests)
-- [Introspecting a repository](#introspecting-a-repository)
-  * [searching for an artifact / chart in a repository](#searching-for-an-artifact--chart-in-a-repository)
-  * [get previously stored template](#get-previously-stored-template)
-    + [Helm v2](#helm-v2)
-    + [Helm v3](#helm-v3)
-  * [Get K8s resources created by a chart](#get-k8s-resources-created-by-a-chart)
-    + [Helm 3](#helm-3)
-- [Operating](#operating)
-- [Charts that depend on other charts](#charts-that-depend-on-other-charts)
-  * [On Sub Charts](#on-sub-charts)
-    + [Global values and charts](#global-values-and-charts)
-  * [Dependent Charts](#dependent-charts)
-- [Helmfile](#helmfile)
-- [See also](#see-also-1)
-
-<!-- tocstop -->
-
 # Intro / Why
 
 Automate Version handling, rollback, installation
@@ -425,7 +370,7 @@ See Helm plugin [helm-unittest](https://github.com/quintush/helm-unittest) where
 
 See also:
 
-  * [Builtin quality for Helm charts: unit testing to the rescue](https://medium.com/@gcavalcante8808/builtin-quality-for-helm-charts-unit-testing-to-the-rescue-2cb9d5c1ddc8)
+  * [Builtin quality for Helm charts: unit testing to the rescue](https://pinboard.in/u:rwilcox/b:1a1911796101)
 
 
 ### debugging WTF went wrong with your chart
@@ -493,7 +438,7 @@ By default `helm search` only returns latest version of an artifact in the repos
 ## Best Practices
 
 @quote-note[
-		#:original-highlight "the recommendation is to put in resource limits and then turn them into comments."	
+		#:original-highlight "the recommendation is to put in resource limits and then turn them into comments."
 	#:title "Learning Helm"
   #:author  "N/A"
   #:page-number 0]{Wait couldn’t you set them to (Dev machine minimum) and ??? have helm —set them on big boy targets (knowing that, practically speaking, QA resource allocations will != prod)}
