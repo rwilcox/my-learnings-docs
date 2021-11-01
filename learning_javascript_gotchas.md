@@ -1,5 +1,13 @@
 ---
-path: "/learnings/javascript_gotchas"
-title: "Learnings: Javascript: Gotchas"
+path: /learnings/javascript_gotchas
+title: 'Learnings: Javascript: Gotchas'
 ---
+
+
+
+
+
+
+
+
 

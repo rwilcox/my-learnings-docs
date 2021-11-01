@@ -1,7 +1,17 @@
 ---
-path: "/learnings/java_spring_security"
-title: "Learnings: Java: Spring: Security"
+path: /learnings/java_spring_security
+title: 'Learnings: Java: Spring: Security'
 ---
+# Table Of Contents
+
+<!-- toc -->
+
+- [Implementing your own Oauth server](#implementing-your-own-oauth-server)
+    + [You have your own `AuthorizationServerConfigurerAdapter` yah?](#you-have-your-own-authorizationserverconfigureradapter-yah)
+      - [I want to add a filter chain filter, to say capture a tracing header from a request](#i-want-to-add-a-filter-chain-filter-to-say-capture-a-tracing-header-from-a-request)
+  * [See also](#see-also)
+
+<!-- tocstop -->
 
 # Implementing your own Oauth server
 
@@ -22,8 +32,11 @@ NOTES:
 
 ## See also
 
-  * https://spring.io/guides/topicals/spring-security-architecture. Hints from that document:    
+  * https://spring.io/guides/topicals/spring-security-architecture. Hints from that document:
   * http://blog.florian-hopf.de/2017/08/spring-security.html (some hints about the acctuator exceptions)
   * https://projects.spring.io/spring-security-oauth/docs/oauth2.html
   * https://docs.spring.io/spring-security-oauth2-boot/docs/current-SNAPSHOT/reference/htmlsingle/
-  * 
+  *
+
+
+

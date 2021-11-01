@@ -1,7 +1,64 @@
 ---
-path: "/learnings/kubernetes"
-title: "Learnings: Kubernetes"
+path: /learnings/kubernetes
+title: 'Learnings: Kubernetes'
 ---
+# Table Of Contents
+
+<!-- toc -->
+
+- [Learning Kubertetes >](#learning-kubertetes--)
+  * [Components](#components)
+    + [Pods](#pods)
+  * [Built in Capabilities](#built-in-capabilities)
+    + [Service Discovery >](#service-discovery-)
+    + [Load Balancing](#load-balancing)
+    + [auto canery deploys](#auto-canery-deploys)
+  * [Minikube](#minikube)
+  * [Kubectl](#kubectl)
+    + [Operations with Kubectl](#operations-with-kubectl)
+    + [neat tips](#neat-tips)
+      - [give me a junk container to just do stuff](#give-me-a-junk-container-to-just-do-stuff)
+  * [API Server](#api-server)
+  * [Pods](#pods-1)
+    + [Volumes](#volumes)
+      - [Abstracting away implementation of long term data storage](#abstracting-away-implementation-of-long-term-data-storage)
+    + [And Service Discovery](#and-service-discovery)
+      - [Notes:](#notes)
+  * [Service Objects](#service-objects)
+    + [Service Object Types >:](#service-object-types-)
+    + [Jobs >](#jobs--)
+    + [LoadBalancer](#loadbalancer)
+      - [and Minikube](#and-minikube)
+      - [And load balancing HTTP 1.1](#and-load-balancing-http-11)
+      - [And your cluster (just) serving HTTP traffic](#and-your-cluster-just-serving-http-traffic)
+    + [Replication Controller](#replication-controller)
+    + [DaemonSets](#daemonsets)
+    + [Deployments >](#deployments--)
+    + [Services](#services)
+    + [StatefulSets](#statefulsets)
+    + [Nodes](#nodes)
+  * [Operational Concerns](#operational-concerns)
+    + [Application configuration](#application-configuration)
+      - [Environmental Variables](#environmental-variables)
+      - [ConfigMap](#configmap)
+        * [Secrets >](#secrets-)
+          + [>](#)
+      - [operationally seeing WTF is in your configmap](#operationally-seeing-wtf-is-in-your-configmap)
+    + [volume mounts](#volume-mounts)
+    + [Pre launch tasks ("Init Containers") >](#pre-launch-tasks-init-containers-)
+      - [Potential usage](#potential-usage)
+    + [>](#)
+      - [Operationally Debugging Init Containers](#operationally-debugging-init-containers)
+    + [>](#)
+    + [So how DOES the magic DNS stuff worked???](#so-how-does-the-magic-dns-stuff-worked)
+  * [Configuring](#configuring)
+  * [Health Checks](#health-checks)
+  * [Questions](#questions)
+  * [Service Catalog](#service-catalog)
+  * [Additional Tools](#additional-tools)
+- [Book Recommendations](#book-recommendations)
+
+<!-- tocstop -->
 
 Learning Kubertetes  <<Learning_Kubertetes>>
 ==========================
@@ -21,7 +78,7 @@ Pod <-- set of co-located containers. A worker instance runs many pods. List pod
 A **pod template** can define how many replica pods to create for a container(s).
 
 Seems like people conflate the word "pod" to mean, "pod template" and "pod instance" ????? The former is what you'd feed to ReplicationController / ReplicaSet, and the latter is what you get when you call `kubectl get pods`.
-  
+
 Built in Capabilities
 ------------------
 
@@ -77,8 +134,8 @@ kubectl has bash and zsh tab completions!!
 #### give me a junk container to just do stuff
 
     kubectl run -it—image=$SOMEDOCKERIMAGE—restart=never /bin/sh
-    
-  
+
+
   (But you will need to delete the pod when you exit the container, k8s will not do thst cleanup for you )
 
 API Server
@@ -116,7 +173,7 @@ it also knows about Amazon EBS and Azure's disk/file stuff too.
 #### Abstracting away implementation of long term data storage
 
 can use a `PersistentVolumeClaim` to use a `PersistentVolume` set up by your k8 cluster admin.
- 
+
 **NOTE**: the location etc of this volume is the same across all of the instances of that pod template. This may or may not be a good idea (databases).
 
 ### And Service Discovery
@@ -142,7 +199,7 @@ Service Objects
 
 ### Service Object Types <<Learning_Kubertetes_Service_Object_Types>>:
 
-### Jobs
+### Jobs  <<Kubernetes_Jobs>>
 
 Runs a pod but don't restart the container when the container quits success. (failure causes re-schedule).
 
@@ -160,7 +217,7 @@ AND/OR you want a consistent IP address for a pod - ie a single IP for your data
 
 #### and Minikube
 
-Creating load balancer will not create an external IP for you, but you can use `kubectl describe MY-LOAD-BALANCER-SERVICE` to get the port it's running on, then just use that port. 
+Creating load balancer will not create an external IP for you, but you can use `kubectl describe MY-LOAD-BALANCER-SERVICE` to get the port it's running on, then just use that port.
 
 MEANING: because Minikube doesn't support creating external IP addresses it WILL act like it's super class, NodePort.
 
@@ -269,7 +326,7 @@ Use a secret to do this! Builtin!
 
 
     kubectl get configmap $artifactName -o yaml
-    
+
 Without the -o yaml part you'll just see the name of the configmap, which is not super helpful.
 
 
@@ -305,13 +362,13 @@ Steps:
   1. use `kubectl get pods` to wait for a pod named YOUR-THING-init-ADJECTIVE-NOUN-NUMBERS-AND-LETTERS
 
   2. When that shows up use that name to do `kubectl describe pod`
-  
+
   3. `kubectl describe pod` will tell you what stage the container is in (ie downloading your docker image, booting the thing up, etc etc)
-  
+
   4. When it looks up, do `kubectl logs` on that name. Logs should spew forth from the container.
-  
+
   5. Eventually the init container will go away and be replaced with the non-init version of the container
-  
+
 ### <<Learning_Kubernetes_Container_Lifecyle_And_Your_Microservice>>
 
 Kubernetes shuts down your app with the following process:
@@ -365,8 +422,11 @@ Helm: (from the deis people): create a "chart" which gets turned into a pod (eer
 
 - [REVIEW]: worth looking into when thinking about making this stuff developer repeatable????
 
-  
+
 # Book Recommendations
 
   * [Kubernetes Up And Running](https://www.amazon.com/Kubernetes-Running-Dive-Future-Infrastructure/dp/1492046531/ref=as_li_ss_tl?crid=8VWERBMXPN5B&keywords=kubernetes+up+and+running&qid=1555896154&s=books&sprefix=kubernetes+up+and+run,stripbooks,216&sr=1-15&linkCode=ll1&tag=wilcodevelsol-20&linkId=35134f1cbb6bc4c334def2d531ea65d4&language=en_US)
   * [Managing Kubernetes](https://www.amazon.com/Managing-Kubernetes-Operating-Clusters-World-ebook/dp/B07KFQL927/ref=as_li_ss_tl?crid=8VWERBMXPN5B&keywords=kubernetes+up+and+running&qid=1555896248&s=books&sprefix=kubernetes+up+and+run,stripbooks,216&sr=1-7&linkCode=ll1&tag=wilcodevelsol-20&linkId=40cf4bfe3d369cb6810a23bc53d92b67&language=en_US)
+
+
+

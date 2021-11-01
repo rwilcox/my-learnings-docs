@@ -1,8 +1,26 @@
 ---
-path: "/learnings/javascript_typescript_compiler"
-title: "Learnings: Javascript: Typescript: Compiler"
+path: /learnings/javascript_typescript_compiler
+title: 'Learnings: Javascript: Typescript: Compiler'
 ---
+# Table Of Contents
 
+<!-- toc -->
+
+- [Typescript Compiler](#typescript-compiler)
+  * [compiler definition talk about typescript](#compiler-definition-talk-about-typescript)
+    + [Open vs closed types](#open-vs-closed-types)
+  * [Compiler Behavior and you](#compiler-behavior-and-you)
+    + [Runtime constructs vs Compile time constructs](#runtime-constructs-vs-compile-time-constructs)
+    + [Excess property checking](#excess-property-checking)
+  * [Places where the compiler can help you](#places-where-the-compiler-can-help-you)
+    + [reducing the amount of types you actually have to write](#reducing-the-amount-of-types-you-actually-have-to-write)
+      - [potential way to lint places where you don't have to write types](#potential-way-to-lint-places-where-you-dont-have-to-write-types)
+  * [Wrting code to give more hints to the compiler](#wrting-code-to-give-more-hints-to-the-compiler)
+    + [any vs unknown](#any-vs-unknown)
+    + [declare more variables as const](#declare-more-variables-as-const)
+    + [Always annotate return type](#always-annotate-return-type)
+
+<!-- tocstop -->
 
 # Typescript Compiler
 
@@ -35,7 +53,7 @@ title: "Learnings: Javascript: Typescript: Compiler"
 
 ## Places where the compiler can help you
 
-- [BOOKQUOTE]: 
+- [BOOKQUOTE]:
 > There are some situations where you can leave the type annotations off of function parameters, too. When there’s a default value, for example:
 - From: Effective Typescript
 
@@ -50,7 +68,7 @@ check out the eslint rule no-inferrable-types
 
 ### any vs unknown
 
-- [BOOKQUOTE]: 
+- [BOOKQUOTE]:
 > unknown is appropriate whenever you know that there will be a value but you don’t know its type
 - from: Effective Typescript
 
@@ -65,10 +83,13 @@ check out the eslint rule no-inferrable-types
 
 ### Always annotate return type
 
-- [BOOKQUOTE]: 
+- [BOOKQUOTE]:
 > When you annotate the return type, it keeps implementation errors from manifesting as errors in user code.
 - From: Effective Typescript
 
 - [BOOKQUOTE]:
 > This is a good reason to consider including explicit return type annotations, even when the return type can be inferred. It prevents an any type from “escaping.”
 - from: Effective Typescript
+
+
+

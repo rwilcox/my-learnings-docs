@@ -1,8 +1,7 @@
 ---
-path: "/learnings/my_unix_tools"
-title: "Learnings: My Unix Tools"
+path: /learnings/my_unix_tools
+title: 'Learnings: My Unix Tools'
 ---
-
 # <<Learning_My_Unix_Tools>>
 
 ## <<UnixEpochTimeUtilities>>
@@ -17,4 +16,5 @@ title: "Learnings: My Unix Tools"
 
     # convert seconds since epoch to Ruby DateTime objects...
     ruby -e 'require "date"; puts DateTime.strptime($*[0], "%s")' 1425048634
+
 

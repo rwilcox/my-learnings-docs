@@ -1,63 +1,125 @@
 ---
-path: "/learnings/scala"
-title: "Learnings: Scala"
+path: /learnings/scala
+title: 'Learnings: Scala'
 ---
+# Table Of Contents
+
+<!-- toc -->
+
+- [Scala](#scala)
+- [interactive REPL](#interactive-repl)
+- [Variables:](#variables)
+- [syntax](#syntax)
+  * [declarations](#declarations)
+  * [recommendation](#recommendation)
+- [Function](#function)
+  * [method syntax](#method-syntax)
+  * [lambda syntax](#lambda--syntax)
+    + [syntax (defining a function literal)](#syntax-defining-a-function-literal)
+    + [as closures](#as-closures)
+    + [named parameters](#named-parameters)
+    + [method references](#method-references)
+    + [calling methods](#calling-methods)
+- [Generics](#generics)
+- [Arrays](#arrays)
+- [operator silliness](#operator-silliness)
+  * [right vs left operators](#right-vs-left-operators)
+- [Nil](#nil)
+- [mutable CSS immutable data structures](#mutable-css-immutable-data-structures)
+- [Class](#class)
+  * [(Primary) constructor syntax:](#primary-constructor-syntax)
+  * [Auxiliary constructors](#auxiliary-constructors)
+- [main method in Scala](#main-method-in-scala)
+  * [Wait, what about getters / setters](#wait-what-about-getters--setters)
+    + [but I really need it for beans](#but-i-really-need-it-for-beans)
+  * [extending classes (even ones you don't own)](#extending-classes-even-ones-you-dont-own)
+  * [and mixins](#and-mixins)
+    + [on instatiation too!!](#on-instatiation-too)
+  * [Lazy Member Variables](#lazy-member-variables)
+  * [Case Classes](#case-classes)
+- [Pattern Matching](#pattern-matching)
+- [Implicits](#implicits)
+- [Tuples](#tuples)
+- [and the JVM](#and-the-jvm)
+- [literal types](#literal-types)
+  * [strings](#strings)
+    + [Special Prefixes](#special-prefixes)
+    + [and multi line strings when you want to indent but your output can't be](#and-multi-line-strings-when-you-want-to-indent-but-your-output-cant-be)
+  * [symbols](#symbols)
+  * [generator](#generator)
+    + [generator + filter](#generator--filter)
+- [Currying](#currying)
+  * [Equality](#equality)
+- [With Maven](#with-maven)
+  * [And runnable jars](#and-runnable-jars)
+  * [Neat maven tools](#neat-maven-tools)
+- [GENERICS](#generics)
+- [packages / importing code](#packages--importing-code)
+- [casts](#casts)
+  * [idomatic scala:](#idomatic-scala)
+  * [casts that are just conversions](#casts-that-are-just-conversions)
+  * [with third party libraries](#with-third-party-libraries)
+- [testing](#testing)
+- [TODO: to figure out](#todo-to-figure-out)
+- [Book Recommendations](#book-recommendations)
+
+<!-- tocstop -->
 
 # Scala
 
           var capital = Map("US" -> "Washington", "France" -> "Paris")
 
-   
+
        val x: HashMap[Int, String] = new HashMap[Int, String]()
- 
+
    Or
-   
+
        val x = new HashMap[Int, String]()
- 
+
 
 # interactive REPL
-  
+
       $ Scala
-      
+
      $ Scala demo.scala
- 
+
 #  Variables:
- 
+
    * Val - const
    * var - let ("ready for writing")
- 
+
 # syntax
    * semicolons optional (but rules about "semicolon inferience")
    * any method call can be used in "operator mode":
          j append myNewThing
          j appendTwo (myNewThing, secondThing)
-    * can leave off parens on empty method calls 
+    * can leave off parens on empty method calls
     * == checks for value equality, eq checks for references equality
- 
+
 ## declarations
 
      val msg3: String = "Hello yet again, world!"
-     
+
      Val msg3 = "hello again"
- 
- 
+
+
 ## recommendation
- 
+
    reach for immutability first
 
 # Function
- 
-   
+
+
        def max(x: Int, y: Int): Int = {
            if (x > y) x
            else y
          }
- 
+
   Notes:
     * variable: Type
     * implicit returns (most situations????)
     * can leave off return type if it's super obvious, also braces if it's one line
- 
+
 ## method syntax
 
 
@@ -69,29 +131,29 @@ title: "Learnings: Scala"
 ## lambda  syntax
 
     Arg1 => statement
-    
+
     (Arg1: String) => statement
- 
+
   _ can be parameter(s) "blank". you can use this to build up partially applied functions
-  
+
 
 ### syntax (defining a function literal)
 
     val r = ( a : Int )  => { "out" }
-    
-    
+
+
      val r : ( Int ) => String  = ( a ) => { "out" }
- 
- 
-    
+
+
+
 ### as closures
- 
+
   Vsriables csptured as references, thus readwrite in Swift pariance (but if outer reference reassigned variable in block still points to data)
- 
+
 ### named parameters
- 
+
   Csn use name of variable as keyword parameters
- 
+
 ### method references
 
 If statement takes one arg, and calls function that also only takes one arg, can do
@@ -103,12 +165,12 @@ If statement takes one arg, and calls function that also only takes one arg, can
 can leave off parens if =< 1 parameter
 
 # Generics
-  
+
   Array[String]
-  
+
 # Arrays
 
-MyArray(0) = "Yo" <--- not [], 
+MyArray(0) = "Yo" <--- not [],
 
 Technically Scala's Areay type overrides 'apply' to achieve this!
 
@@ -132,11 +194,11 @@ Just in different namespaces. so could write code like so
 
     Import Scala.collection.mutable
     Import Scala.collections.immutable
-    
+
     Val a = Mutable.Map()
-    
-    
-    
+
+
+
 # Class
 
 ## (Primary) constructor syntax:
@@ -158,7 +220,7 @@ Default access level is public (can use keyword private)
 Can not have static members
 If need static members this is "object". Read as "singleton object" .  class + (singleton) object = "companion object " (must be in same source file)
 
-Method parameters are const 
+Method parameters are const
 
 > The Scala compiler will compile any code you place in the main body of the class in the primary constructor
 
@@ -173,7 +235,7 @@ Auxiliary constructors created by def this(.....) [access primary constructor by
       def main(args: Array[String]) = {
       }
     }
- 
+
 ## Wait, what about getters / setters
 
 "Uniform access method" <-- accessing methods should look like fields, and vs versa.
@@ -201,30 +263,30 @@ but need to put this in another class or in a package.
 They're called traits
 
     Class mything extends String, MyTrait
-    
+
    OR
-   
+
      class mything extends String with MyTrait
-     
-   
+
+
    can define methods, keep state
-   
+
    traits gave a type hierarchy too: can define sub classes of a trait and override methods of supertrait or call supertrait implementairon of method
-   
+
 ### on instatiation too!!
-   
+
    Not just at class definition time, but if you decide some instance of this thing needs to have some trait mixed in "just this once" you CAN.
-   
-  
+
+
 ## Lazy Member Variables
 
 
     class DatabaseConnector( string dbURL ) {
-    
+
     	lazy var dbConnection = createDBConnection()
     	def createDBConnections(): DBConnection = {
     		//...
-    		
+
     		connection
     	}
     }
@@ -239,7 +301,7 @@ Features:
 Anti features:
 
   * can not be subclassed
-  
+
 # Pattern Matching
 
 like better switch/case statements : can also use for nil checks
@@ -282,7 +344,7 @@ Use strip margin and this syntax
 
 #iteration
 
-## generator 
+## generator
 
 > for (file <- filesHere)
 
@@ -301,18 +363,18 @@ Built in currying!!!
     }
 
 	 doThings("Ryan")("Wilcox")
-	 
-	 
+
+
 this matters for DSL creation
 
 
     def doThings( firstName : String) ( dynamicConstructor : ( string ) => bool ) = {
     	...
-    
+
     }
-    
+
     doThings("Ryan") { => "Wilcox " }
-    
+
 ## Equality
 
   * value types: numeric equality
@@ -357,7 +419,7 @@ this matters for DSL creation
         </configuration>
       </plugin>
     </plugins>
- 
+
 
 ## And runnable jars
 
@@ -393,7 +455,7 @@ Can be VARIABLES, not just static class path
 
     myEmployee.asInstanceOf[Person]
 
-coupled with 
+coupled with
 
     myEmployee.isInstanceOf(Employee)
 
@@ -424,9 +486,9 @@ with shapeless you can use / implement `cast` method, which gives you more power
         val ele = elem('x', 2, 3)
         ele.height should be (3)
       }
-      
+
   LOOKS AWESOME!!
-  also FeatureSpec that implemts given / when / then syntax 
+  also FeatureSpec that implemts given / when / then syntax
 
 # TODO: to figure out
 
@@ -440,3 +502,6 @@ with shapeless you can use / implement `cast` method, which gives you more power
   * [Programming in Scala](https://www.amazon.com/Programming-Scala-Comprehensive-Step-Step-ebook/dp/B01EX49FOU/ref=as_li_ss_tl?keywords=scala&qid=1555896987&s=books&sr=1-3&linkCode=ll1&tag=wilcodevelsol-20&linkId=c4788b692e7d71dcf32298243b9e7571&language=en_US)
   * [Functional Programming in Scala](https://www.amazon.com/Functional-Programming-Scala-Paul-Chiusano/dp/1617290653/ref=as_li_ss_tl?keywords=scala&qid=1555896987&s=books&sr=1-4&linkCode=ll1&tag=wilcodevelsol-20&linkId=43ba5d9668e75d1aca4c02de6ae1b990&language=en_US)
   * [Programming Scala](https://www.amazon.com/Programming-Scala-Scalability-Functional-Objects-ebook/dp/B00QJDYKH6/ref=as_li_ss_tl?keywords=scala&qid=1555896987&s=books&sr=1-19&linkCode=ll1&tag=wilcodevelsol-20&linkId=aa957f77a0fdd45e946c3ea1a05a53db&language=en_US)
+
+
+

@@ -1,7 +1,27 @@
 ---
-path: "/learnings/terraform"
-title: "Learnings: Terraform"
+path: /learnings/terraform
+title: 'Learnings: Terraform'
 ---
+# Table Of Contents
+
+<!-- toc -->
+
+- [Example](#example)
+  * [Variables](#variables)
+- [modules](#modules)
+- [Random Notes](#random-notes)
+- [CLI](#cli)
+- [String Interpolated Values](#string-interpolated-values)
+- [Getting data out of your stack](#getting-data-out-of-your-stack)
+- [Lifecycle blocks](#lifecycle-blocks)
+- [Storing terraform cluster state](#storing-terraform-cluster-state)
+- [Teams and Terraform](#teams-and-terraform)
+  * [PR Review](#pr-review)
+- [Questions](#questions)
+  * [- [REVIEW]: Q: How does immutable infrastructure play with mutable data stores (ie how do you make sure you don't lose the data in your RDS???)](#--review-q-how-does-immutable-infrastructure-play-with-mutable-data-stores-ie-how-do-you-make-sure-you-dont-lose-the-data-in-your-rds)
+- [Book Recommendations](#book-recommendations)
+
+<!-- tocstop -->
 
 # Example
 
@@ -16,7 +36,7 @@ title: "Learnings: Terraform"
         value = "${aws_instance.example.public_ip}"
         type = "A"
     }
-    
+
     variable "instance_size" {
         description = "what size of resource to create"
         type = "string"
@@ -26,7 +46,7 @@ title: "Learnings: Terraform"
 ## Variables
 
 If you din’t provide a default for a variable terraform will prompt you for one interactively **or** you can provide one by exporting end variblisbles follow pattern sampled here: TF_VAR_instance_size
-   
+
 # modules
 
 Can share code via modules, can also pass variables into these modules
@@ -37,14 +57,14 @@ Can share code via modules, can also pass variables into these modules
 
   * Terraform immutable infrastructure tool ????????
   * masterless
-  
+
 # CLI
 
     $ terraform plan    # <-- what's going to happen
     $ terraform apply   # <-- do it!
     $ terraform graph   # <-- what your dependency graph looks like (outputs in GraphViz format)
     $ terraform destroy # <-- destroys all resources terraform created
-    
+
 # String Interpolated Values
 
 These follow a namespace type path: `"${TYPE.NAME.ATTRIBUTE}"`
@@ -56,7 +76,7 @@ Creates an implicit dependency.
     output "public_ip" {
        value = "${aws_instance.example.public_ip}"
     }
-    
+
 
 Will be outputted at end of terraform apply, in own section. OR `terraform output $VARIABLE_NAME`.
 
@@ -100,3 +120,6 @@ Could use safety `lifecycle` value: `prevent_destroy`
 # Book Recommendations
 
   * [Terraform up and running](https://www.amazon.com/Terraform-Running-Writing-Infrastructure-Code-dp-1491977086/dp/1491977086/ref=as_li_ss_tl?_encoding=UTF8&me=&qid=1555897684&linkCode=ll1&tag=wilcodevelsol-20&linkId=4bccd7eb621e692a978599bfdf8302cc&language=en_US)
+
+
+

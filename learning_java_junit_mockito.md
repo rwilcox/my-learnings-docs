@@ -1,12 +1,36 @@
 ---
-path: "/learnings/java_junit_mockito"
-title: "Learnings: Java: jUnit: Mockito"
+path: /learnings/java_junit_mockito
+title: 'Learnings: Java: jUnit: Mockito'
 ---
+# Table Of Contents
+
+<!-- toc -->
+
+  * [>](#)
+    + [Mocks vs Stubs vs spys](#mocks-vs-stubs-vs-spys)
+      - [Stubs](#stubs)
+      - [Mocks](#mocks)
+      - [Spy](#spy)
+- [>](#)
+  * [Syntax Examples](#syntax-examples)
+  * [`Mockito.mock` information:](#mockitomock-information)
+  * [Easy @Mock Annotation](#easy-mock-annotation)
+  * [Dealing with methods that return null](#dealing-with-methods-that-return-null)
+    + [Null methods that we need to have a custom lambda implementation of...](#null-methods-that-we-need-to-have-a-custom-lambda-implementation-of)
+  * [methods where we don't care what the passed parameter is](#methods-where-we-dont-care-what-the-passed-parameter-is)
+  * [Mocking a class where you want all methods to themselves return mocks](#mocking-a-class-where-you-want-all-methods-to-themselves-return-mocks)
+    + [Mocking an entire method chain - aka you've super broken Demeter's Law](#mocking-an-entire-method-chain---aka-youve-super-broken-demeters-law)
+  * [Overriding implementation of specific methods](#overriding-implementation-of-specific-methods)
+    + [Overriding implementation of specific methods, of an instance](#overriding-implementation-of-specific-methods-of-an-instance)
+  * [Verifying mock methods called](#verifying-mock-methods-called)
+  * [Overriding implementation of specific method with custom code](#overriding-implementation-of-specific-method-with-custom-code)
+
+<!-- tocstop -->
 
 ## <<Java_JUnit_Stubs>>
 
   * must implement interface or subclass and override required methods of interface/class
-  
+
 ### Mocks vs Stubs vs spys
 
 > Stubs are useful when we want to control the behavior of the replaced dependencies.
@@ -91,7 +115,7 @@ NOTES:
 ## Dealing with methods that return null
 
     doNothing().when( myMock ).myMethod( ... )
-    
+
 ### Null methods that we need to have a custom lambda implementation of...
 
 		doAnswer( invocation -> this.count++).when( mock ).myMethod( ... );
@@ -102,13 +126,13 @@ NOTES:
 
 ## Mocking a class where you want all methods to themselves return mocks
 
-In case where you're mocking out a fluent API: 
+In case where you're mocking out a fluent API:
 
     myThing.someMethod(0).increment()
-    
+
 In test code:
 
-    Spaceship destiny = mock( Spaceship, 
+    Spaceship destiny = mock( Spaceship,
 
 ### Mocking an entire method chain - aka you've super broken Demeter's Law
 
@@ -138,18 +162,18 @@ Example that shows how deep stub works:
 			public void createStub() {
 				t = stub(TaskRepository.class);
 			}
-			
+
 			@Test
 			public void shouldReturnValue() {
 				given(t.count()).willReturn(1);
-				
+
 				// or make it throw an exception
 				given(t.findById(1L)).willThrow(new NotFoundException());
-				
+
 				assertThat( t.count() ).isEqualByComparingTo(1);
 			}
 		}
-		
+
 Can also use `willAnswer` API to provide custom implementations with a lambda.
 
 ### Overriding implementation of specific methods, of an instance
@@ -176,7 +200,7 @@ Use `spy`: this will only mock the methods you tell it about.
 			public void createStub() {
 				t = stub(TaskRepository.class);
 			}
-			
+
 			@Test
 			public void shouldReturnValue() {
 				verify(t).countMethod()
@@ -199,5 +223,6 @@ May need to use special maven dep:
         given(repository.count(1L)).willAnswer(invocation -> {
         	return 42;
         } );
-        
-        
+
+
+

@@ -1,8 +1,99 @@
 ---
-path: "/learnings/jenkins"
-title: "Learnings: Jenkins"
+path: /learnings/jenkins
+title: 'Learnings: Jenkins'
 ---
+# Table Of Contents
 
+<!-- toc -->
+
+- [Installing Jenkins on RHEL box](#installing-jenkins-on-rhel-box)
+  * [On Ubuntu box](#on-ubuntu-box)
+- [>](#)
+- [Jenkins server Operations >](#jenkins-server-operations-)
+  * [Configuration >](#configuration-)
+    + [Job configuration >](#job-configuration-)
+    + [... and secrets](#-and-secrets)
+  * [And Groovy Scripting >](#and-groovy-scripting-)
+      - [See also](#see-also)
+- [Jenkins Creating Plugins >](#jenkins-creating-plugins-)
+      - [but what about extending existing plugins?](#but-what-about-extending-existing-plugins)
+      - [Getting started](#getting-started)
+- [Jenkins Concepts](#jenkins-concepts)
+  * [Master Node](#master-node)
+  * [(Build) Agents (Nodes)](#build-agents-nodes)
+    + [Admin](#admin)
+  * [Executor](#executor)
+  * [>](#)
+    + [>](#)
+  * [Job Types >](#job-types-)
+    + [Freestyle](#freestyle)
+    + [Maven](#maven)
+    + [Pipeline](#pipeline)
+      - [And Security >](#and-security-)
+      - [Pipeline Libraries >](#pipeline-libraries-)
+    + [Multi configuration](#multi-configuration)
+    + [Folders](#folders)
+    + [Multibranch pipeline project](#multibranch-pipeline-project)
+    + [Github Organization](#github-organization)
+- [JenkinsFile](#jenkinsfile)
+  * [>](#)
+  * [Scripted Model](#scripted-model)
+  * [Declarative Model](#declarative-model)
+    + [See also:](#see-also)
+    + [Declarative mode code editing tools](#declarative-mode-code-editing-tools)
+    + [>](#)
+- [DSL](#dsl)
+  * [>](#)
+    + [>](#)
+      - [In `script` stage](#in-script-stage)
+      - [Free floating functions](#free-floating-functions)
+  * [>](#)
+    + [Specifying hard to know tools](#specifying-hard-to-know-tools)
+    + [>](#)
+  * [>](#)
+  * [>](#)
+    + [conditionals](#conditionals)
+    + [about `sh`](#about-sh)
+    + [`isUnix()`](#isunix)
+    + [`fileExists`](#fileexists)
+    + [>](#)
+- [Libraries and external code](#libraries-and-external-code)
+  * [>](#)
+  * [>](#)
+  * [>](#)
+    + [>](#)
+      - [Use the replay button in a build](#use-the-replay-button-in-a-build)
+      - [Commit your work to a branch in the shared library repo and have your target use that](#commit-your-work-to-a-branch-in-the-shared-library-repo-and-have-your-target-use-that)
+- [Jenkins Plugins I've used](#jenkins-plugins-ive-used)
+  * [>](#)
+    + [>](#)
+      - [Using this in a pipeline](#using-this-in-a-pipeline)
+    + [>](#)
+      - [Example](#example)
+- [>](#)
+  * [>](#)
+- [>](#)
+  * [>](#)
+    + [unable to fetch ref errors with pull requests](#unable-to-fetch-ref-errors-with-pull-requests)
+  * [>](#)
+  * [>](#)
+- [>](#)
+  * [>](#)
+    + [using libraries in init script](#using-libraries-in-init-script)
+    + [>](#)
+    + [>](#)
+    + [>](#)
+      - [Iterating through Tools >](#iterating-through-tools-)
+      - [Iterating through installations of Tools / Extensions](#iterating-through-installations-of-tools--extensions)
+      - [Installing tool with a hard coded path (Maven example) >](#installing-tool-with-a-hard-coded-path-maven-example-)
+      - [Installing tool with auto install (Ant example)](#installing-tool-with-auto-install-ant-example)
+    + [>](#)
+      - [Adding a custom tool](#adding-a-custom-tool)
+- [Source code systems and common questions](#source-code-systems-and-common-questions)
+  * [How do I get the current git commit?](#how-do-i-get-the-current-git-commit)
+- [Book Recommendations](#book-recommendations)
+
+<!-- tocstop -->
 
 # Installing Jenkins on RHEL box
 
@@ -114,7 +205,7 @@ How many concurrent jobs can be run on that (agent)
 [Jenkins Build tools](https://www.safaribooksonline.com/library/view/jenkins-the-definitive/9781449311155/ch04s06.html) are nifty ways admins can install tools your projects may require in order to be built.
 
 Some plugins add additional tool types.
-Tools can be dynamically 
+Tools can be dynamically
 
 Manage Jenkins -> Global Tool Configuration.
 
@@ -166,7 +257,7 @@ plugins called here need to support Pipelines
 
 Configuration page:
 
-  * Pipeline section: has two options: pipeline script; pipeline script from SCM. (LATTER one is what lets Jenkinsfiles be stored with the code repository.... 
+  * Pipeline section: has two options: pipeline script; pipeline script from SCM. (LATTER one is what lets Jenkinsfiles be stored with the code repository....
 
 Q: These details here is what Jenkins uses to do the auto check out of your project?
 A: YES! These are using in `checkout scm` step.
@@ -690,15 +781,15 @@ You use the values from this list and pass that into `getExtensionList` down bel
 
 #### Installing tool with a hard coded path (Maven example) <<Learning_Jenkins_Provisioning_Init_Script_Installing_Tools_Example>>
 
-    import jenkins.model.* 
+    import jenkins.model.*
 
     def looking_for_maven_install_named = "apache-maven-3.5.3"
     def maven_install_location          = "/usr/local/maven"
 
-    a=Jenkins.instance.getExtensionList(hudson.tasks.MavenInstallation.DescriptorImpl.class)[0]; 
+    a=Jenkins.instance.getExtensionList(hudson.tasks.MavenInstallation.DescriptorImpl.class)[0];
     // ^^^^ Q: where did we get that class name? Jenkins.instance.getExtensionList( hudson.tools.ToolDescriptor.class )
 
-    b=(a.installations as List); 
+    b=(a.installations as List);
     def found = false
     b.each {
       found = found || (it.name == looking_for_maven_install_named)
@@ -706,8 +797,8 @@ You use the values from this list and pass that into `getExtensionList` down bel
     if (found) {
       println "did have an installation of ${looking_for_maven_install_named}"
     } else {
-      b.add(new hudson.tasks.Maven.MavenInstallation(looking_for_maven_install_named, maven_install_location, [])); 
-      a.installations=b 
+      b.add(new hudson.tasks.Maven.MavenInstallation(looking_for_maven_install_named, maven_install_location, []));
+      a.installations=b
       a.save()
     }
 
@@ -721,7 +812,7 @@ You use the values from this list and pass that into `getExtensionList` down bel
 
     def antInstaller = new AntInstallation(ant_version)
     def ant_installations = desc_AntTool.getInstallations()
-    
+
     def installSourceProperty = new InstallSourceProperty([antInstaller])
     def ant_inst = new AntInstallation(
       "ADOP Ant", // Name
@@ -748,14 +839,14 @@ See also:
 
 #### Adding a custom tool
 
-    import jenkins.model.* 
+    import jenkins.model.*
     import com.cloudbees.jenkins.plugins.customtools.CustomTool;
     import com.synopsys.arc.jenkinsci.plugins.customtools.versions.ToolVersionConfig;
 
-    a=Jenkins.instance.getExtensionList(com.cloudbees.jenkins.plugins.customtools.CustomTool.DescriptorImpl.class)[0]; 
+    a=Jenkins.instance.getExtensionList(com.cloudbees.jenkins.plugins.customtools.CustomTool.DescriptorImpl.class)[0];
 
 	def installs = a.getInstallations()
-	def found = installs.find { 
+	def found = installs.find {
   		it.name == "gcc"
 	}
 
@@ -763,10 +854,10 @@ See also:
   		println "gcc is already installed"
     } else {
      	println "installing gcc tool"
-      
+
       	def newI = new CustomTool("gcc", "/usr/local/gcc/", null, "bin", null, ToolVersionConfig.DEFAULT, null)
 		installs += newI
-		a.setInstallations( (com.cloudbees.jenkins.plugins.customtools.CustomTool[])installs ); 
+		a.setInstallations( (com.cloudbees.jenkins.plugins.customtools.CustomTool[])installs );
     	a.save()
     }
 
@@ -795,4 +886,6 @@ do something like this instead
 # Book Recommendations
 
   * [Jenkins 2 Up and Running](https://www.amazon.com/Jenkins-Deployment-Pipeline-Generation-Automation-dp-1491979593/dp/1491979593/ref=as_li_ss_tl?_encoding=UTF8&me=&qid=1555872327&linkCode=ll1&tag=wilcodevelsol-20&linkId=b957401def3d0944e387cddbf5d4c5d6&language=en_US)
+
+
 

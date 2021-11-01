@@ -1,7 +1,41 @@
 ---
-path: "/learnings/java_rxjava"
-title: "Learnings: Java: RXJava"
+path: /learnings/java_rxjava
+title: 'Learnings: Java: RXJava'
 ---
+# Table Of Contents
+
+<!-- toc -->
+
+- [>](#)
+- [Interface Observable](#interface-observable)
+  * [Hot vs cold flux >](#hot-vs-cold-flux--)
+    + [Cold flux](#cold-flux)
+    + [Hot Flux](#hot-flux)
+- [Observable (producer) notes](#observable-producer-notes)
+- [RxJava and concurrency strategy >](#rxjava-and-concurrency-strategy-)
+  * [Schedulers](#schedulers)
+  * [Summary](#summary)
+- [Consumers and Producers in RxJava >](#consumers-and-producers-in-rxjava-)
+  * [Consumer Strategy (subscribe)](#consumer-strategy-subscribe)
+    + [the implicit concurrency in `flatmap`](#the-implicit-concurrency-in-flatmap)
+      - [why use `flatMap`](#why-use-flatmap)
+  * [Producer Strategy (onNext/onCompleted/onError)](#producer-strategy-onnextoncompletedonerror)
+- [Consumer Functional Interface](#consumer-functional-interface)
+  * [Interesting methods](#interesting-methods)
+  * [`subscribe`](#subscribe)
+  * [Customizing](#customizing)
+    + [creating own custom operators](#creating-own-custom-operators)
+      - [Tips](#tips)
+      - [See also:](#see-also)
+  * [How these operators actually work: `lift`](#how-these-operators-actually-work-lift)
+- [Outstanding Classes](#outstanding-classes)
+- [Backpressure](#backpressure)
+  * [RxJava 1](#rxjava-1)
+  * [RxJava 2](#rxjava-2)
+- [See also](#see-also)
+- [Book Recommendations](#book-recommendations)
+
+<!-- tocstop -->
 
 # <<Learning_Java_Rx>>
 
@@ -14,16 +48,16 @@ See also:
     interface Observable {
     	Subscription subscribe(Observer s)
     }
-    
+
     interface Observer<T> {
     	void onNext(T t)
     	void onError(Throwable t)		// <-- terminal event
     	void onCompleted()				// <-- terminal event
-    	
+
     	void unsubscribe()
     	void setProducer(Producer p)
     }
-    
+
 
 Observable operations are *synchronous*
 
@@ -38,12 +72,12 @@ Observable operations are *synchronous*
         })
     })
 
-    /* point b */    
-    
+    /* point b */
+
     someData.subscribe( /* T */ value -> {   /* Consumer functional interface that gives you the T type you passed */
         System.out.println( value )
     })
-    /* point c */ 
+    /* point c */
 
 Note: Observable will not start at point b here, it will start on subscription (so actually point c-ish).
 
@@ -82,7 +116,7 @@ Can switch observe on in the middle of a chain if you need to Ie switch threads 
 
 ## Summary
 
-With blocking Observables: 
+With blocking Observables:
 
   * Observable without any Scheduler works like single threaded blocking program
   * Observerable with single `subscribeOn` like doing work in background thread
@@ -104,7 +138,7 @@ With non blocking Observables: knowing how they are combined and when subscripti
 flatMap subscribes to those observables returned and quasi-joins that into a single output stream.
 
 Thus this provides easy wrappers for concurrent operations.
-  
+
 Can also use flatMap to apply backpressure on an operation.
 
 
@@ -119,7 +153,7 @@ Unless required by some operator RxJava doesn't implicitly run your code in any 
 
 Events can never be emitted concurrently. By this I mean you can not have multiple threads and emit to the same Subscription.
 
-Error handling strategy: let caller / RxJava chain creator worry about it 
+Error handling strategy: let caller / RxJava chain creator worry about it
 
 
 # Consumer Functional Interface
@@ -162,12 +196,12 @@ Use `Transformer`, really a `Functional< Observable<T>, Observabl<R> >`.0
     private <T, R> Transformer<T, R> onlyPickOdd() {
     	return new Transformer<T, R>() {
     		@Override
-    		
+
     		public Observable<R> call(Observable<T> observable) {
     			....
     		}
     	}
-    
+
     }
 
 or, with lambda syntax (but with less clarity...)
@@ -175,7 +209,7 @@ or, with lambda syntax (but with less clarity...)
     private <T, R> Transformer<T, R>  onlyPickOdd() {
     	return upstream -> upstream.zipWith(...).map(...)
     }
-    
+
 
 #### Tips
 
@@ -222,7 +256,7 @@ If really need can use SyncOnSubscribe class - this has useful methods re backpr
 
 Flowable — implements batching up events Iin slightly better way than RXJava 1
 
-Can create instances of this and set properties / strategies, then listen to your subscriber 
+Can create instances of this and set properties / strategies, then listen to your subscriber
 
 Flowable.generate lets you create backpressure respecting Observables. (Or higher level method, Flowable.fromIterator)
 
@@ -236,3 +270,6 @@ Processor — like an Subject, but for Flowables
 # Book Recommendations
 
   * [Reactive Programming with RxJava](https://www.amazon.com/Reactive-Programming-RxJava-Asynchronous-Applications-ebook/dp/B01LZQGIIC/ref=as_li_ss_tl?keywords=java+rxjava&qid=1555871313&s=books&sr=1-5-catcorr&linkCode=ll1&tag=wilcodevelsol-20&linkId=3c88549ab929ec56bdc3519c33959818&language=en_US)
+
+
+

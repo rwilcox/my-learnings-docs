@@ -1,7 +1,21 @@
 ---
-path: "/learnings/javascript_own_modules"
-title: "Learnings: Javascript: Publishing Own Modules"
+path: /learnings/javascript_own_modules
+title: 'Learnings: Javascript: Publishing Own Modules'
 ---
+# Table Of Contents
+
+<!-- toc -->
+
+- [>](#)
+  * [Doing stuff (only) before publishing it](#doing-stuff-only-before-publishing-it)
+  * [Doing (the same) stuff before publishing AND on package install](#doing-the-same-stuff-before-publishing-and-on-package-install)
+  * [Testing your script flow out](#testing-your-script-flow-out)
+- [`>`](#)
+  * [Making sure you don't publish a closed source package to a public registry](#making-sure-you-dont-publish-a-closed-source-package-to-a-public-registry)
+- [>](#)
+- [>](#)
+
+<!-- tocstop -->
 
 # <<NPM_Publish_Steps>>
 
@@ -31,17 +45,17 @@ You should use `prepublishOnly` or `preinstall` instead. If you actually want to
 `npm pack` <-- does everything but the sending to the repo.
 
 # `<<NPMPackageFieldsToSet>>`
- 
+
 ## Making sure you don't publish a closed source package to a public registry
 
 Two options: set `"private": true` OR specify the repo:
 
-    { 
+    {
       publishConfig: {
           registry: "https://MY.PRIVATE.REGISTRY.EXAMPLE.COM"
       }
     }
-    
+
 ( can also do `npm install --registry=....` or `npm config set registry https://MY.PRIVATE.REGISTRY.EXAMPLE.COM` )
 
 # <<NPM_Modules_And_Dependancies_Kinds>>
@@ -51,10 +65,10 @@ Three kinds of dependancies: regular dependancies, dev dependancies, and peer de
   * regular: Stuff your package uses but you don't expose that in interfaces to the outside world.
   * dev: Stuff you need for dev-ing your package (but not elsewhere)
   * peer: Stuff your packages uses **and exposes this dependancy to the rest of the world**
-  
+
 Peer dependancies often happen in libraries that implement common Express middleware, where you are modifying the Express application object. In this case, you want to make sure you're using the same version of Express as the application _you're_ being included into, because maybe you're modifying their `app` object. In this case you don't want to be using a different version (ie the internal object may look different from your perspective, etc ec).
 
-See also: 
+See also:
 
   * https://lexi-lambda.github.io/blog/2016/08/24/understanding-the-npm-dependency-model/
   * https://bytearcher.com/articles/loading_modules_with_require/
@@ -76,7 +90,7 @@ The following diagram is a pre NPM 3 version of how Node treated transative depe
                         index.js
                     +-----+ `const p = require("some_peer_dependency")`
       NOT HERE! UP! |          +
-                    +>         |    
+                    +>         |
                                |
             +------------------+
     found!  |
@@ -92,3 +106,6 @@ Because of this history / ability, transative dependancies are less of an issue 
 See also:
 
   * https://felixrieseberg.com/npm-v3-is-out-and-its-a-really-big-deal-for-windows/
+
+
+

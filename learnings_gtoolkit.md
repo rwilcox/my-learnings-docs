@@ -1,3 +1,11 @@
+# Table Of Contents
+
+<!-- toc -->
+
+- [Adding stuff to the leftmost menu thing](#adding-stuff-to-the-leftmost-menu-thing)
+
+<!-- tocstop -->
+
 # Adding stuff to the leftmost menu thing
 
 GtToolsMenu edit initializeElements.

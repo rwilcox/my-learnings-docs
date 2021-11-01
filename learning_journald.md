@@ -1,5 +1,13 @@
 ---
-path: "/learnings/journald"
-title: "Learnings: Systemd: Journald"
+path: /learnings/journald
+title: 'Learnings: Systemd: Journald'
 ---
+
+
+
+
+
+
+
+
 

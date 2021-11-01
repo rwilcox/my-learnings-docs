@@ -1,9 +1,7 @@
 ---
-path: "/learnings/ops_unix_apt"
-title: "Learnings: Ops: Unix: APT"
+path: /learnings/ops_unix_apt
+title: 'Learnings: Ops: Unix: APT'
 ---
-
-
 # And `apt-secure`
 
 Apt now does security checking at a couple different levels:
@@ -18,3 +16,6 @@ $ sudo apt-get -o Acquire::AllowInsecureRepositories=true update
 ## Setting apt config file to allow this
 
 See [a stackexchange answer on setting up /etc/apt/apt.conf](https://unix.stackexchange.com/a/317708/193798).
+
+
+

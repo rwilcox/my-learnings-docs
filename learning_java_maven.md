@@ -1,7 +1,20 @@
 ---
-path: "/learnings/java_maven"
-title: "Learnings: Java: Maven"
+path: /learnings/java_maven
+title: 'Learnings: Java: Maven'
 ---
+# Table Of Contents
+
+<!-- toc -->
+
+- [And Maven > >](#and-maven--)
+  * [And Dependencies >](#and-dependencies-)
+  * [And Debugging](#and-debugging)
+- [>](#)
+  * [Why you should just use the deploy plugin for this:](#why-you-should-just-use-the-deploy-plugin-for-this)
+  * [See also:](#see-also)
+- [Maven and Other Build Tools](#maven-and-other-build-tools)
+
+<!-- tocstop -->
 
 # And Maven <<Java_And_Maven>> <<Java_Maven>>
 

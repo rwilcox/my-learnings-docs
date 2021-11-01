@@ -1,7 +1,33 @@
 ---
-path: "/learnings/javascript_jsdoc"
-title: "Learnings: Javascript: JSDoc"
+path: /learnings/javascript_jsdoc
+title: 'Learnings: Javascript: JSDoc'
 ---
+# Table Of Contents
+
+<!-- toc -->
+
+- [Q: How can I link to a typedef in another file >](#q-how-can-i-link-to-a-typedef-in-another-file-)
+  * [The Good Way](#the-good-way)
+  * [and global modules / files not explicitly given a module](#and-global-modules--files-not-explicitly-given-a-module)
+  * [a work around to force a typedef to be a global even if it's inside a module](#a-work-around-to-force-a-typedef-to-be-a-global-even-if-its-inside-a-module)
+  * [Really forcing the issue with an identifier](#really-forcing-the-issue-with-an-identifier)
+- [>](#)
+  * [Good articles on this](#good-articles-on-this)
+  * [Components involved](#components-involved)
+    + [JSDoc >](#jsdoc-)
+      - [Using built in JSDocs ways of linking object declarations together](#using-built-in-jsdocs-ways-of-linking-object-declarations-together)
+        * [Even the global tricks like not namespacing things or making things global?](#even-the-global-tricks-like-not-namespacing-things-or-making-things-global)
+      - [Using Clever Typescript ways to create a type then import the typedef: They don't work (with pure jsdoc)](#using-clever-typescript-ways-to-create-a-type-then-import-the-typedef-they-dont-work-with-pure-jsdoc)
+        * [Github Issues / PRs around this:](#github-issues--prs-around-this)
+      - [A plugin to the rescue: jsdoc-plugin-typescript](#a-plugin-to-the-rescue-jsdoc-plugin-typescript)
+    + [ESLINT](#eslint)
+      - [ESLINT + JSDoc checking](#eslint--jsdoc-checking)
+    + [Micosoft Typescript / Javascript Language server](#micosoft-typescript--javascript-language-server)
+      - [Use a more recent version of TypeScript?](#use-a-more-recent-version-of-typescript)
+        * [Issues / PR that avoids the JSDoc import mess by doing it natively in TS](#issues--pr-that-avoids-the-jsdoc-import-mess-by-doing-it-natively-in-ts)
+  * [See also](#see-also)
+
+<!-- tocstop -->
 
 # Q: How can I link to a typedef in another file <<JSDoc_Linking_To_Typedefs_Or_Classes>>
 
@@ -82,7 +108,7 @@ This:
   1. Breaks running jsdoc, because it doesn't know what to do with the Typescript syntax in the middle of the declaration
   2. Looks kind of weird: you have to essentially stub every declaration from another file that you want to use.
 
-See a good explanation of the "import type" trick and where it breaks down: 
+See a good explanation of the "import type" trick and where it breaks down:
 
 ##### Github Issues / PRs around this:
 
@@ -108,7 +134,7 @@ It has only two (relatively minor problems):
 
   1. when it expands the typescript the type, in the rendered JS, is not hyperlinked anymore (but the type appears inline in the module page, not requiring people to go find it, so that's a win).
   2. Requires(?) jsdoc 3.6
-  3. requires typedef stubs. (Placing the typescript inline in the `@param` declaration doesn't seem to work) 
+  3. requires typedef stubs. (Placing the typescript inline in the `@param` declaration doesn't seem to work)
 
 But it has some major ADVANTAGES:
 
@@ -147,3 +173,6 @@ Because if TS had native support you would be able to do TS-like typechecking, e
 
   * Typescript_Typechecking_With_JsDoc_Annotations
   * https://stackoverflow.com/a/55767692/224334 <-- set up Visual Studio Code to include all the files.. but doesn't seem to work for typedefs?????
+
+
+

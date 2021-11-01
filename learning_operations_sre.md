@@ -1,7 +1,18 @@
 ---
-path: "/learnings/learning_operations_sre"
-title: "Learnings: Operations: SRE"
+path: /learnings/learning_operations_sre
+title: 'Learnings: Operations: SRE'
 ---
+# Table Of Contents
+
+<!-- toc -->
+
+- [what is SRE](#what-is-sre)
+- [Site Reliability Engineering Highlighted Passages](#site-reliability-engineering-highlighted-passages)
+- [Inventory / discovery of owners by operators / owner / SRE >](#inventory--discovery-of-owners-by-operators--owner--sre--)
+- [Failure Recovery](#failure-recovery)
+    + [Retries in the time of failure](#retries-in-the-time-of-failure)
+
+<!-- tocstop -->
 
 # what is SRE
 
@@ -88,8 +99,11 @@ Concepts from _Principle Based Enterprise Architecture: A systematic approach to
   1. Have you accounted for your services going down? (ie what if your user login service goes down, or your ID generation service??)
   2. Have you accounted for a service calling a service and THAT service fails? Needs to essentially unwind the stack and eventually report some kind of error to the end user
   3. If you stack up events waiting for a service to come back, how to you make sure you don't DDoS OTHER parts of your system when way higher than normal requests come in (as the previously down service comes back online)??
-  
+
 ### Retries in the time of failure
 
   1. What happens when you try, have to do a re-try, but then the system gets around to handling your original request?
     ie: are your services idempotent enough?? See LanguageOfTheSystem
+
+
+

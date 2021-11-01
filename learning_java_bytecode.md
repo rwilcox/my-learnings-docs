@@ -1,7 +1,16 @@
 ---
-path: "/learnings/java_bytecode"
-title: "Learnings: Java: Bytecode"
+path: /learnings/java_bytecode
+title: 'Learnings: Java: Bytecode'
 ---
+# Table Of Contents
+
+<!-- toc -->
+
+- [intro](#intro)
+- [>](#)
+- [>](#)
+
+<!-- tocstop -->
 
 # intro
 
@@ -24,3 +33,6 @@ invokevirtual bytecode must be emitted, even for "final" methods. (Aka: non virt
 In general JITed things are moved into JIT "code cache"
 
 [OpenJDK code cache implementation](http://openjdk.java.net/jeps/197): (they separate it into 3 parts)
+
+
+

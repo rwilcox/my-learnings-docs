@@ -1,8 +1,7 @@
 ---
-path: "/learnings/ops_pets_not_cattle"
-title: "Learnings: Ops: Pets Not Cattle (Thoughts)"
+path: /learnings/ops_pets_not_cattle
+title: 'Learnings: Ops: Pets Not Cattle (Thoughts)'
 ---
-
 # <<Pets_Not_Cattle_Container_Instances>>
 
 [History of Pets vs Cattle](https://cloudscaling.com/blog/cloud-computing/the-history-of-pets-vs-cattle/)
@@ -37,4 +36,5 @@ So, you may not want your container scheduler to kill a sick instance. You may w
 <<Pets_Not_Cattle_Epidemics>>
 
 Pets vs Cattle, sure, but a cattleman watches for epidemics that could / do affect their entire herd.
+
 

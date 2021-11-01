@@ -1,7 +1,16 @@
 ---
-path: "/learnings/rust"
-title: "Learnings :Rust"
+path: /learnings/rust
+title: 'Learnings :Rust'
 ---
+# Table Of Contents
+
+<!-- toc -->
+
+- [Learning Rust](#learning-rust)
+  * [closures](#closures)
+  * [Systems programming in Rust](#systems-programming-in-rust)
+
+<!-- tocstop -->
 
 # Learning Rust
 
@@ -27,3 +36,6 @@ Or as a function parameter:
   * easy cross-compilation
   * Can run Rust in "script" mode by using `run-cargo-script` ----> https://github.com/DanielKeep/cargo-script
      - can also embed Cargo manifests into program and run-cargo-script will find it.
+
+
+

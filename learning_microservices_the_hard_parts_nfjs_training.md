@@ -1,7 +1,37 @@
 ---
-path: "/learnings/microservice_the_hard_parts_nfjs_training"
-title: "Learnings: Microservices: The Hard Parts (NFJS)"
+path: /learnings/microservice_the_hard_parts_nfjs_training
+title: 'Learnings: Microservices: The Hard Parts (NFJS)'
 ---
+# Table Of Contents
+
+<!-- toc -->
+
+- [Misc Notes](#misc-notes)
+- [Dealing with code reuse](#dealing-with-code-reuse)
+  * [code replication](#code-replication)
+  * [Service consolidation](#service-consolidation)
+  * [shared library](#shared-library)
+    + [Best practices / approaches for communicating changes across teams:](#best-practices--approaches-for-communicating-changes-across-teams)
+      - [- [REVIEW]: think about this](#--review-think-about-this)
+    + [... how do you communicate the deprecations?](#-how-do-you-communicate-the-deprecations)
+  * [shared services](#shared-services)
+- [Microservice granularity](#microservice-granularity)
+  * [Granulatity drivers](#granulatity-drivers)
+  * [Granularity factors](#granularity-factors)
+- [data sharing](#data-sharing)
+- [what is the easiest way to communicate workflow](#what-is-the-easiest-way-to-communicate-workflow)
+- [Contracts](#contracts)
+- [microservice orchestrator pattern](#microservice-orchestrator-pattern)
+- [Scenarios](#scenarios)
+  * [1: Dealing with code reuse: where do you put authorization? In a service or a library? (there are some constraints in the workbook)](#1-dealing-with-code-reuse-where-do-you-put-authorization-in-a-service-or-a-library-there-are-some-constraints-in-the-workbook)
+  * [2: Service Granulatity: 4 methods of payment: should create a single payment service or seperate service for each payment type?](#2-service-granulatity-4-methods-of-payment-should-create-a-single-payment-service-or-seperate-service-for-each-payment-type)
+  * [3: Service Granularity (Notifications Service)](#3-service-granularity-notifications-service)
+- [4: Sharing distributed data (Gift card)](#4-sharing-distributed-data-gift-card)
+- [5: product catalog](#5-product-catalog)
+
+<!-- tocstop -->
+
+# Misc Notes
 
 You likely want to couple microservice approaches with Domain Driven Design.
 
@@ -17,7 +47,7 @@ Potential ways of dealing with this
   * removes any dependencies between services
   * BUT bad: code changes due to bugs or added functionality
   * difficult to expand
-  
+
 ## Service consolidation
 
 ... just make your microservices bigger if you have some small part of your herd that does the same things
@@ -62,8 +92,8 @@ developer in team A wants a change. Communicates to their service domain owner, 
   * BAD performance issues due to latency, security
   * BAD availability / fault tolerance issue
   * BAD greater chance of breaking things
-  
-  
+
+
 # Microservice granularity
 
 ## Granulatity drivers
@@ -72,7 +102,7 @@ developer in team A wants a change. Communicates to their service domain owner, 
   * code volatility  <-- maybe one part changes, but the others don't
   * scalability, throughput or mean time to start
   * fault tolerance
-  
+
 ## Granularity factors
 
   * database transaction requirements
@@ -83,7 +113,7 @@ developer in team A wants a change. Communicates to their service domain owner, 
   * performance due to latency
 
 iterate, look at drivers, map factors, look at dependencies
-  
+
 # data sharing
 
 Hmmmmm.... if you know the rules and maybe share a database table, maybe that's a smell that your services might actually be a single microservice that you've gone too far on.
@@ -98,7 +128,7 @@ stamp coupling: returning all the data, but your service really wants JUST that 
 
 could use a field filter,  <-- still have the contract, you're just not returning all the data
 
-use GraphQL to declare the fields / structure you want. 
+use GraphQL to declare the fields / structure you want.
 
 # Contracts
 
@@ -128,7 +158,7 @@ as service:
   * libraries mean you have a rolling deprecation schedule, not an instant "everyone is using the new thing"
   * .... but you DO have a built in circuit breaker to say Okta if your herd is so busy it starts to DDOS the provider / contract...
 
-  
+
 api library:
   * you only have two languages, potentially (depending on culture) this may be a thing that is constant (or maybe not). If culture has high number of languages, or it's very flexible with introducing new languages, this is hard.
   * reduce latency
@@ -156,7 +186,7 @@ I would fudge a bit: create a notification service that maybe does SMS and mail 
 
 OR make an "electronic notification" service, and have the letter one be the special one, as it requires CMS.
 
-If you have 
+If you have
 notification service, with email being a slightly seperate service.
 
 
@@ -172,4 +202,6 @@ Need data a notification (even SQS) to note that a gift card has happened, and t
 # 5: product catalog
 
 use of the services: you want to know how much the shipping will be on an item before you order it ("can I afford this item plus shipping?") and packing is done only on backend when order ends - after all the cart abandonment - so is much less traffic.
-  
+
+
+

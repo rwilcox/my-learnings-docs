@@ -1,7 +1,19 @@
 ---
-path: "/learnings/ops_java_jmx_jmxmp"
-title: "Learnings: Ops: Java: JMX: JMXMP"
+path: /learnings/ops_java_jmx_jmxmp
+title: 'Learnings: Ops: Java: JMX: JMXMP'
 ---
+# Table Of Contents
+
+<!-- toc -->
+
+- [>](#)
+  * [Background:](#background)
+- [JMX Over HTTP >](#jmx-over-http--)
+- [JMX And GC Debugging >](#jmx-and-gc-debugging-)
+  * [Why not](#why-not)
+- [>](#)
+
+<!-- tocstop -->
 
 # <<Learinng_Ops_Java_JMX>>
 
@@ -14,7 +26,7 @@ Traditional JMX / RMI works the following way:
   1. Client request goes into JMX port
   2. Server responds with port in RMI range
   3. Client connects on that port
-  
+
 See also:
 
   * Learning_Ops_Java_Docker_JMX_Considerations
@@ -32,11 +44,13 @@ See also:
 ## Why not
 
   * JMX usually uses sampling runtime, thus can not know when collector ran thus unknown state of before / after memory
-  * 
-  
+  *
+
 - Optimizing Java 8.1
 
 # <<Learning_Java_JMX_Useful_mbeans>>
 
   * thread information (ThreadMXBean)
-  
+
+
+

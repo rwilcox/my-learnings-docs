@@ -1,7 +1,27 @@
 ---
-path: "/learnings/ops_kafka_microservices"
-title: "Learnings: Ops: Kafka Microservices"
+path: /learnings/ops_kafka_microservices
+title: 'Learnings: Ops: Kafka Microservices'
 ---
+# Table Of Contents
+
+<!-- toc -->
+
+- [>](#)
+  * [Configuring Snappy C library location](#configuring-snappy-c-library-location)
+- [>](#)
+  * [Configuring RocksDB store location >](#configuring-rocksdb-store-location-)
+    + [really overriding default](#really-overriding-default)
+  * [Persistent vs ephemeral storage >](#persistent-vs-ephemeral-storage--)
+  * [KStreams Considerations on AWS >](#kstreams-considerations-on-aws-)
+  * [On Alpine Linux >](#on-alpine-linux-)
+- [>](#)
+  * [Viewing Consumer Group Info >](#viewing-consumer-group-info--)
+  * [Adjusting Offsets](#adjusting-offsets)
+- [>](#)
+  * [>](#)
+    + [KStreams](#kstreams)
+
+<!-- tocstop -->
 
 # <<Learning_Ops_Kafka_Microservices>>
 
@@ -13,7 +33,7 @@ Because it’s a C library it requires two things:
   1. A downloadable location that the current user can write to
   2. SELinux must be set to be permissive enough  to allow the C library to load, or for the jar to write files to the disk?? I forget which, but there was a fun issue here I think.
 
-Set download location 
+Set download location
 
 > -Dorg.xerial.snappy.tempdir=/some/writable/dir
 
@@ -36,7 +56,7 @@ Use the properties API to set `state.dir` to the directory you want.
 
 > Kafka Streams allows for stateful stream processing, i.e. operators that have an internal state. This internal state is managed in so-called state stores. A state store can be ephemeral (lost on failure) or fault-tolerant (restored after the failure). The default implementation used by Kafka Streams DSL is a fault-tolerant state store using 1. an internally created and compacted changelog topic (for fault-tolerance) and 2. one (or multiple) RocksDB instances (for cached key-value lookups).
 >...
-> Kafka Streams commit the current processing progress in regular intervals (parameter commit.interval.ms). 
+> Kafka Streams commit the current processing progress in regular intervals (parameter commit.interval.ms).
 > ...
 
 - [Kafka Streams Internal Data Management wiki page](https://cwiki.apache.org/confluence/display/KAFKA/Kafka+Streams+Internal+Data+Management)
@@ -45,7 +65,7 @@ TL;DR: KStream data is stored on disk, yes, but also a Kafka topic. Thus, in def
 
 ## KStreams Considerations on AWS <<Learning_Ops_Kafka_Microservices_KStreams_AWS>>
 
-> he AWS pricing model allocates a baseline read and write IOPS allowance to a volume, based on the volume size. Each volume also has an IOPS burst balance, to act as a buffer if the base limit is exceeded. Burst balance replenishes over time but as it gets used up the reading and writing to disks starts getting throttled to the baseline, leaving the application with an EBS that is very unresponsive. 
+> he AWS pricing model allocates a baseline read and write IOPS allowance to a volume, based on the volume size. Each volume also has an IOPS burst balance, to act as a buffer if the base limit is exceeded. Burst balance replenishes over time but as it gets used up the reading and writing to disks starts getting throttled to the baseline, leaving the application with an EBS that is very unresponsive.
 
 From: [Confluent: Running Kafka Streams on AWS](https://www.confluent.io/blog/running-kafka-streams-applications-aws/)
 
@@ -68,15 +88,15 @@ A: The group coordinator gets heart beats every 2 seconds, if no heartbeats rece
 ## Viewing Consumer Group Info  <<Learning_Ops_Kafka_Viewing_Adjusting_Consumer_Offsets>>
 
     $ kafka-consumer-groups --bootstrap-server $KB --list
-    
+
     $ kafka-consumer-groups --bootstrap-server $KB --group demo-group --describe
-    
+
 ## Adjusting Offsets
 
     $ $ kafka-consumer-groups --bootstrap-server $KB --group demo-group --reset-offsets --topic demo:3 --shift-by 1 --execute
-    
+
     $ kafka-consumer-groups --bootstrap-server $KB --group demo-group --reset-offsets --topic demo:6 --topic demo2:4 --shift-by -5 --execute
-    
+
 # <<Learning_Ops_Kafka_Monitoring>>
 
 ## <<Learning_Ops_Kafka_Monitoring_Applications>>
@@ -84,4 +104,6 @@ A: The group coordinator gets heart beats every 2 seconds, if no heartbeats rece
 ### KStreams
 
 [Add state listener](https://stackoverflow.com/a/51454631/224334) ???
+
+
 

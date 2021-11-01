@@ -1,7 +1,30 @@
 ---
-path: "/learnings/csharp"
-title: "Learnings: Csharp"
+path: /learnings/csharp
+title: 'Learnings: Csharp'
 ---
+# Table Of Contents
+
+<!-- toc -->
+
+- [variable declarations](#variable-declarations)
+  * ["pointers" in method declarations](#pointers-in-method-declarations)
+- [classes](#classes)
+  * [virtual methods](#virtual-methods)
+- [casts](#casts)
+- [Strings](#strings)
+- [properties](#properties)
+- [initializing objects](#initializing-objects)
+- [checked variables](#checked-variables)
+- [control flow](#control-flow)
+  * [foreach](#foreach)
+- [method syntax](#method-syntax)
+- [Null Handling](#null-handling)
+  * [null coalscing operator](#null-coalscing-operator)
+  * [null conditional](#null-conditional)
+- [TODO:](#todo)
+
+<!-- tocstop -->
+
 # variable declarations
 
     string thing
@@ -38,7 +61,7 @@ Features:
 
    * single inheritence
    *
- 
+
     public class Employee : Person {
 
     }
@@ -56,10 +79,10 @@ C style casts
 # Strings
 
     @"this is a literal string \ this will show up like a backslash not escape character"
-    
- 
+
+
     $"indicates that {variables} will be interpreted"
-    
+
 # properties
 
 > In other words, a property has the behavior of special methods called setters and getters, but the syntax for accessing that behavior is that of a field.
@@ -103,7 +126,7 @@ C# 6.0
 
 #preprocessors
 
-Yes, C# has them. 
+Yes, C# has them.
 
 Operations:
 
@@ -111,7 +134,7 @@ Operations:
   * #define
   * #error
   * #warning
-  * #pragma 
+  * #pragma
   * #line <-- override what line number is reported by the compiler in case or error or warning (!!!!!!)
 
 # TODO:
@@ -122,3 +145,6 @@ Q: Is the following how C# does annotations??
     public void message() {
         1 + 1
     }
+
+
+

@@ -1,9 +1,7 @@
 ---
-path: "/learnings/vim"
-title: "Learning: Vim"
+path: /learnings/vim
+title: 'Learning: Vim'
 ---
-
-
 Vim is pretty cool - we like it on the console.
 
 [An article on how to edit effectively in VIM](http://jmcpherson.org/editing.html)
@@ -36,3 +34,7 @@ To use these macros I need to visually select some text or lines and then perfor
 # Copy and Pasting Between Buffers
 
 [tricks and tips about copy and paste and multiple buffers](http://groups.google.com/group/VGLUG/browse_thread/thread/0c5387272a5c0e20)
+
+
+
+

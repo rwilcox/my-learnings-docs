@@ -1,7 +1,31 @@
 ---
-path: "/learnings/ops_docker"
-title: "Learnings: Ops: Docker"
+path: /learnings/ops_docker
+title: 'Learnings: Ops: Docker'
 ---
+# Table Of Contents
+
+<!-- toc -->
+
+- [>](#)
+- [`>`](#)
+  * [Container Composition](#container-composition)
+  * [Host configuration](#host-configuration)
+    + [Service Discovery](#service-discovery)
+  * [Operations Management](#operations-management)
+    + [Standarization](#standarization)
+- [And Java](#and-java)
+- [And Memory >](#and-memory-)
+  * [Kernel Memory on monolithic containers / kernels in images](#kernel-memory-on-monolithic-containers--kernels-in-images)
+  * [and guest and host both doing page caching >](#and-guest-and-host-both-doing-page-caching-)
+- [>](#)
+- [>](#)
+  * [>](#)
+  * [Dealing with PID1 under Docker](#dealing-with-pid1-under-docker)
+    + ["Just wrap it in bash" >](#just-wrap-it-in-bash-)
+    + ["Just use Docker's Native init system"](#just-use-dockers-native-init-system)
+      - [See also:](#see-also)
+
+<!-- tocstop -->
 
 # <<Learning_Ops_Docker>>
 
@@ -71,13 +95,13 @@ See:
 
 > Kernel memory constraints
 > Kernel memory is fundamentally different than user memory as kernel memory can’t be swapped out. The inability to swap makes it possible for the container to block system services by consuming too much kernel memory. Kernel memory includes：
-> 
+>
 > stack pages
 > slab pages
 > sockets memory pressure
 > tcp memory pressure
 > You can setup kernel memory limit to constrain these kinds of memory. For example, every process consumes some stack pages. By limiting kernel memory, you can prevent new processes from being created when the kernel memory usage is too high.
-> 
+>
 > Kernel memory is never completely independent of user memory. Instead, you limit kernel memory in the context of the user memory limit.
 
 - [Docker documentation on docker run](https://docs.docker.com/engine/reference/run/#kernel-memory-constraints)
@@ -125,3 +149,6 @@ NOPE. Bash doesn't know any more about those PID1 responsibilities than your pro
 
   * Learning_Ops_Docker_Init_And_Compose
   * Learning_AWS_ECS_Docker_Init_Support
+
+
+

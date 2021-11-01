@@ -1,7 +1,48 @@
 ---
-path: "/learnings/ops_linux_memory"
-title: "Learnings: Ops: Linux Memory"
+path: /learnings/ops_linux_memory
+title: 'Learnings: Ops: Linux Memory'
 ---
+# Table Of Contents
+
+<!-- toc -->
+
+- [Ops: Unix Virtual Memory >](#ops-unix-virtual-memory-)
+  * [How Virtual Memory Works](#how-virtual-memory-works)
+    + [Total Memory](#total-memory)
+- [Total Memory Calculations](#total-memory-calculations)
+  * [Recommended Swap Size](#recommended-swap-size)
+  * [Thus max size before the out-of-memory killer comes around](#thus-max-size-before-the-out-of-memory-killer-comes-around)
+  * [See also](#see-also)
+- [Knowing what your total memory actually is (Linux)](#knowing-what-your-total-memory-actually-is-linux)
+- [High vs Low Memory (mostly applicable to 32 bit)](#high-vs-low-memory-mostly-applicable-to-32-bit)
+  * [Q: Wait, how does 32bit Linux run on machines with >4GB memory? >](#q-wait-how-does-32bit-linux-run-on-machines-with-4gb-memory-)
+- [... and Physical Memory](#-and-physical-memory)
+  * [Finding](#finding)
+    + [When memory is too tight or fragmented >](#when-memory-is-too-tight-or-fragmented-)
+  * [Allocating](#allocating)
+  * [Freeing](#freeing)
+  * [Fragmentation](#fragmentation)
+    + [Fixing](#fixing)
+- [Page Sizes](#page-sizes)
+  * [See also](#see-also-1)
+  * [- [BOOKQUOTE]:](#--bookquote)
+  * [Debugging / getting stats about Linux Page Cache Hit Ratio >](#debugging--getting-stats-about-linux-page-cache-hit-ratio-)
+  * [Q: But what if you are writing a big file and you know that'll blow the page cache?](#q-but-what-if-you-are-writing-a-big-file-and-you-know-thatll-blow-the-page-cache)
+  * [See also:](#see-also)
+- [Slab Allocator](#slab-allocator)
+- [Large Allocations via `vmalloc`](#large-allocations-via-vmalloc)
+- [kswapd >](#kswapd--)
+- [Swap Management](#swap-management)
+    + [Controlling swap >](#controlling-swap-)
+- [Operator tools](#operator-tools)
+- [Questions to answer](#questions-to-answer)
+- [Operational case studies](#operational-case-studies)
+- [Tl;DR (reasonably sure this is accurate....)](#tldr-reasonably-sure-this-is-accurate)
+- [Vocab](#vocab)
+- [And Java >](#and-java-)
+- [See Also](#see-also)
+
+<!-- tocstop -->
 
 Ops: Unix Virtual Memory <<Learning_Unix_Memory>>
 =============================
@@ -17,7 +58,7 @@ From RHL7 Install Guide
 
 ### Total Memory
 
-Physical Memory + size in swap partition = Total Memory 
+Physical Memory + size in swap partition = Total Memory
 
 Total Memory Calculations
 ==========================
@@ -50,7 +91,7 @@ See also
 -----------------------
 
   * Learning_AWS_EC2_Swap
-  * 
+  *
 
 Knowing what your total memory actually is (Linux)
 ============================
@@ -58,12 +99,12 @@ Knowing what your total memory actually is (Linux)
     $ free -g
 	                total       used        free      shared      buff/cache   available
 	Mem:             31           9          17           1           4          19
-	Swap:             0           0           0    
-	
+	Swap:             0           0           0
+
 or
 
     $  cat /proc/meminfo
-    
+
 		MemTotal:       32518844 kB
 		MemFree:        18227276 kB
 		MemAvailable:   20657056 kB
@@ -107,8 +148,8 @@ or
 		Hugepagesize:       2048 kB
 		DirectMap4k:       98304 kB
 		DirectMap2M:     4096000 kB
-		DirectMap1G:    29360128 kB    
-	
+		DirectMap1G:    29360128 kB
+
 
 HugePages: a RedHat extension that allocates 2MB pages for anon use instead of 4K ones
 
@@ -120,10 +161,10 @@ In general, memory is split into zones:
   * `ZONE_DMA`     <-- low memory    (x86: first 16MB)
   * `ZONE_NORMAL`  <-- normal memory (x86: 16MB -> 896MB)
   * `ZONE_HIGHMEM` <-- high memory
-  
-  
+
+
 On 32bit systems, When low memory is low, oom-killer will start killing things regardless of highmem.
-Why? Because `struct page` has a cost of about 11MB memory / 1GB memory described. 
+Why? Because `struct page` has a cost of about 11MB memory / 1GB memory described.
 Eventually - around 16GB - this will fill up `ZONE_NORMAL` and thus trigger oom.
 
 
@@ -168,7 +209,7 @@ Internal fragmentation (large block had to be assigned to service small request)
 
   * serious failing of binary buddy system
   * frags expected to be 28% but could be in region of 60%
-  
+
 ### Fixing
 
 Slab allocator with buddy allocation - carves up pages into small blocks for memory
@@ -185,11 +226,11 @@ See also
 And OS File Page Cache   <<Learning_Ops_Unix_File_Cache>>
 =========================
 
-## - [BOOKQUOTE]: 
+## - [BOOKQUOTE]:
 
 > Pages read from a file or block device are generally added to the page cache to avoid further disk I/O
 > Types of pages that exist in the cache:
-> 
+>
 >   * One is pages that were faulted in as a result of reading a memory mapped file.
 >   * Blocks read from a block device or filesystem are packed into special pages called buffer pages. The number of blocks that may fit depends on the size of the block and the page size of the architecture.
 >   * Anonymous pages exist in a special aspect of the page cache called the swap cache when slots are allocated in the backing storage for page-out, which is discussed further in Chapter 11.
@@ -214,7 +255,7 @@ And OS File Page Cache   <<Learning_Ops_Unix_File_Cache>>
   * _Page/slab cache control in a virtualized environment_ (Singh) - IBM paper
   * [RedHat Solutions: how to control size of page cache in REHL (paid content)](https://access.redhat.com/solutions/32769)
   * [The strange details of st::string at Facebook](https://www.youtube.com/watch?v=kPR8h4-qZdk) <-- yes, the page cache is involved!
-  
+
 
 Slab Allocator
 =========================
@@ -237,7 +278,7 @@ Gorman, section 10.7
 
 kswapd: responsible for reclaiming/freeing pages when memory is low. Checks `need_balance` in `zone_t` to see if can (not) sleep
 
-kswapd for every memory node in system. 
+kswapd for every memory node in system.
 
 Called only when physician page allocator needs it.
 
@@ -262,8 +303,8 @@ Parameters `vm.swappiness` can be turned down to 0 to force VM to not happen.
 On Ubuntu:
 
     $ sysctl vm.swappiness=10
-    
-    
+
+
 See also:
 
   * [SO: Controlling Swappiness on Ubuntu](https://askubuntu.com/questions/103915/how-do-i-configure-swappiness#103916)
@@ -283,7 +324,7 @@ Q: When are inactive pages marked for swap?
 
 When you try to allocate memory and the allocation fails
 
-A: responsible function: refil_ inactive: moves pages from LRU list back to active if recently referenced. 
+A: responsible function: refil_ inactive: moves pages from LRU list back to active if recently referenced.
 
 And if not, defects page for active lost and adds to the inactive (LRU??) list
 
@@ -295,7 +336,7 @@ Operational case studies
 ======================
 
   * [https://engineering.linkedin.com/performance/optimizing-linux-memory-management-low-latency-high-throughput-databases](LinkedIn turns off zone reclaim and gets better performance for high memory cache systems)< — see also Gorman Chapter 10
-  
+
 Tl;DR (reasonably sure this is accurate....)
 =============
 
@@ -338,3 +379,6 @@ See Also
   * https://www.infoworld.com/article/2617623/linux/making-sense-of-memory-usage-on-linux.html
   * http://www.redaht.com/archives/redhat-list/2007-August/msg00060.html  <-- memory implementation of 32bit linux with lots of RAM
   * https://lwn.net/Articles/317814/ <-- thoughts etc on the Out Of Memory killer
+
+
+

@@ -1,7 +1,18 @@
 ---
-path: "/learnings/splunk"
-title: "Learnings: Splunk"
+path: /learnings/splunk
+title: 'Learnings: Splunk'
 ---
+# Table Of Contents
+
+<!-- toc -->
+
+- [Splunk Common Information Models](#splunk-common-information-models)
+  * [Parsing incoming data](#parsing-incoming-data)
+  * [See Also](#see-also)
+- [Data Extractions](#data-extractions)
+  * [See Also](#see-also-1)
+
+<!-- tocstop -->
 
 # Splunk Common Information Models
 
@@ -24,7 +35,7 @@ Has not good definitions around:
 
 See [CIM Manual: Validate your data against the data model](http://docs.splunk.com/Documentation/CIM/4.11.0/User/UsetheCIMtonormalizedataatsearchtime#6._Validate_your_data_against_the_data_model).
 
-Basically: 
+Basically:
 
   * data comes in
   * you can create aliases for field names that aren't quite right or whose data type is wrong
@@ -39,3 +50,6 @@ Basically:
 ## See Also
 
   * https://www.hurricanelabs.com/blog/splunk-case-study-indexed-extractions-vs-search-time-extractions
+
+
+

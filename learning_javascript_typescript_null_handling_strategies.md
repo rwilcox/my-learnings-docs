@@ -1,7 +1,23 @@
 ---
-path: "/learnings/javascript_typescript_null_handling_strategies"
-title: "Learnings: Javascript: Typescript: Null Handling Strategies"
+path: /learnings/javascript_typescript_null_handling_strategies
+title: 'Learnings: Javascript: Typescript: Null Handling Strategies'
 ---
+# Table Of Contents
+
+<!-- toc -->
+
+- [Introduction >](#introduction-)
+- [Write out the types](#write-out-the-types)
+  * [... this gets old](#-this-gets-old)
+- [Java heads are screaming: "This is an Optional!!!"](#java-heads-are-screaming-this-is-an-optional)
+- [The Typescript way](#the-typescript-way)
+  * [Using Type Guards >](#using-type-guards-)
+    + [A fancy *generic* type guard...](#a-fancy-generic-type-guard)
+  * [Using Refinments... type predicates >](#using-refinments-type-predicates-)
+    + [See also:](#see-also)
+- [Conclusion](#conclusion)
+
+<!-- tocstop -->
 
 # Introduction <<Learning_Typescript_Null_Handling_Strategies>>
 
@@ -95,3 +111,6 @@ Let's see this in action:
 # Conclusion
 
 Lots of different ways to handle `strict`'s tossing of nullability in your face... vs older programming languages letting you sweep it under the rug for the QA testers (or unit tests!) to find...
+
+
+
