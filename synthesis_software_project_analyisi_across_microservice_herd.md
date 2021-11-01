@@ -1,8 +1,7 @@
 ---
-path: "/learnings/synthesis_software_project_analyisi_across_microservice_herd"
-title: "Syntheisi: Project Analysis across herd"
+path: /learnings/synthesis_software_project_analyisi_across_microservice_herd
+title: 'Syntheisi: Project Analysis across herd'
 ---
-
 # analysis of software across microservice herd
 
   * library dependencies (esp on other libraries)
@@ -21,4 +20,5 @@ title: "Syntheisi: Project Analysis across herd"
 
 ## sources
 
-  * software design X-rays 
+  * software design X-rays
+

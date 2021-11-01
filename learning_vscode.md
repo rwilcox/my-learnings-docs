@@ -1,8 +1,7 @@
 ---
-path: "/learnings/vscode"
-title: "Learning: VSCode"
+path: /learnings/vscode
+title: 'Learning: VSCode'
 ---
-
 # Command Pallete
 
 no keyboad shortcuts
@@ -43,4 +42,4 @@ New Widow -> Interactive Playground
   * Python
   * REST Client
   * Vim
-  * 
+  *
