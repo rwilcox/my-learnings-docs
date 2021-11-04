@@ -143,6 +143,8 @@ This sends the output to the buffer named.... (well, I was using the scratch buf
     	    (interactive)
 	    (run-this-in-eshell (rpw/current-region)))
 
+Sometimes you can just hit return, if that input it’s on its own line, and thst will send it down to the input section and execute it
+
 ## Windows support
 
 Because it's lisp reimplementations of corebins, AND it doesn't do interactive TTY mode very well, it should actually work well on Windows!
@@ -174,6 +176,10 @@ You may want to do this - this could be a way to work around eshell not supporti
     echo "hi" > #'from_elisp
 	echo $from_elisp
 
+### history
+
+C-c C-l or eshell-list-history gives you a selectable buffer of your last commands
+
 
 ## See also
 
@@ -200,6 +206,5 @@ https://www.emacswiki.org/emacs/essh may take care of that, being able to send a
 ## Windows support
 
 term says no windows support (but eshell would work technically, although once you need to do a Powershekl command your may be messed)
-
 
 
