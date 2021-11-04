@@ -118,7 +118,11 @@ BUT these methods would likely well support a workflow where you **eschew semant
 
 ### Snapshot releases
 
+#### basic basic CLI
 
+    mvn version:set -DnewVersion=MY_ARTIFACT_VERSION_I_GOT_FROM_POM.XML_SOMEHOW-SNAPSHOT-SOME_UNIQUE_NUMBER
+    mvn deploy
+    mvn versions:revert
 
 
 ## See also:
