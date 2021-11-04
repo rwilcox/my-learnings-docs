@@ -93,3 +93,63 @@ Most corporate managers that I have observed percieve organizational design as l
 	#:author      "Keidel"
 	#:page-number 25]{
 Corporate planner Peter Schwartz explains why he favors triads when constructing future scenarios. "... people's minds can cope with only two or three possibilities. Two may not capture reality, so you can use thre. On rare occasions you might consider four. Any more choices will produce a hopeless muddle"}
+
+@quote-highlight[
+	#:title       "Seeing Organizational Patterns"
+	#:author      "Keidel"
+	#:page-number 29]{
+Note that matrix organization is depicted as stuck in the middle of the triangle. Matrix designs typically try to combine an input (control) bias and an output (autonomy) bias by requiring certain managers to report to both an input (for example, functional) boss and an output (product/market) boss. But to make this combination work, considerable volentary oooperation among all parties is essentian; without quesion, the absense of such cooperation has sunk many a matrix.}
+
+@quote-highlight[
+	#:title       "Seeing Organizational Patterns"
+	#:author      "Keidel"
+	#:page-number 29]{
+There are, to be sure, successful examples of matrix organizations and dual-reporting relationships can work so log as autonomy, control and cooperation are carefully prioritized. Still, maintaining a matrix is one tough act - especially long term.
+}
+
+@quote-highlight[
+	#:title       "Seeing Organizational Patterns"
+	#:author      "Keidel"
+	#:page-number 33]{In their classic book, _Organization and Envinonment_, Paul Lawernce and Jay Lorsch define _differentiation_ as "the difference in cognitive and emotional orientation amnong managers in different functional departments."}
+
+@quote-highlight[
+	#:title       "Seeing Organizational Patterns"
+	#:author      "Keidel"
+	#:page-number 43]{
+ At this point, I introduced a triad that had been useful in several other contexts; motivations for middle management change. I suggested that, initially, skeptical managers are likely to go along with change (to the extent that they do so at all) primarily for political reasons  because such behavior is "expected" by their boss (and pay the promotional opportunities may hang in the balance).After having come on board for political reasons, such individuals may later support organizational change initiatives for peformance reasons - because they have seen successful examples  and believe "it works". The third stage is to embrace cooperative change for personal reasons - because it "is right". the mistake a lot of senior management make is unrealistically to expect early commitment by thei subordinate managers for personal reasons. It is often sensible to start with political / performance postures and then encourage the humanistic aspect of change motivation to deevlop over time.}
+
+ ## Organizational strategy
+
+ @quote-highlight[
+	#:title       "Seeing Organizational Patterns"
+	#:author      "Keidel"
+	#:page-number 49]{
+ Organizational strategy answers three fundimental questions (1) _why_ an organization exists (2) _what_ it is (3) _how_ it competes.}
+
+ @quote-highlight[
+	#:title       "Seeing Organizational Patterns"
+	#:author      "Keidel"
+	#:page-number 52]{Character is defined in part by cultural bias - that is, by the overriding social values of the organization. It is also defined by mutal expectations; what the organization expects from its people, and what the people in turn expect from their organization. Finally character is expressed in terms of an organization's development pattern - the manner in which it grows, develops and renews itself}
+
+@quote-highlight[
+	#:title       "Seeing Organizational Patterns"
+	#:author      "Keidel"
+	#:page-number 52]{
+employees/cooperation
+shareholders/subsidizers (control)
+customers / clients (autonomy)
+}
+
+@quote-highlight[
+	#:title       "Seeing Organizational Patterns"
+	#:author      "Keidel"
+	#:page-number 59]{
+In the opinion of CalTech president Thomas E Everhart, "one outstandig scientist can do 100 or 1,000 times more good than someone who is almost as good"}
+
+@quote-highlight[
+	#:title       "Seeing Organizational Patterns"
+	#:author      "Keidel"
+	#:page-number 63]{
+A concluding note: _Organizational Strategy_ defines purpose, vision, mission, raison de d'etre. Although the framework presenter here is idealized - and therefore vasily oversimplified - it does enable serios dialog about choices. Too often, corporate purpose is dismissed as something like "the vision thing". But unless an organization periodically thinks through issues of consituencies, character and capabiliies - why we exist, how we exist and how we satisy customers - the odds are strong it will lose direction and flounder, no matter how rigorously it addreses atters of structure and systems.}
+
+## Organizational Structure
