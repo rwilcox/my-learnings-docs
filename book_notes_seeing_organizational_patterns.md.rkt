@@ -10,9 +10,21 @@ title: "Book Notes: Seeing Organizational Patterns"
 
 <!-- toc -->
 
+# Book summary
+
+The way an organization behaves can be broken into a []project mangement triangle](https://asana.com/resources/project-management-triangle) type set of constraints.
+
+These constraints are:
+
+  * cooperation
+  * control
+  * autonomy
+
+
 # My Notes
 
 [Seeing Organizational Patterns](https://www.amazon.com/Seeing-Organizational-Patterns-Robert-Keidel-dp-1881052656/dp/1881052656/ref=mt_other?_encoding=UTF8&me=&qid=1631037159)
+
 
 @quote-highlight[
 	#:title       "Seeing Organizational Patterns"

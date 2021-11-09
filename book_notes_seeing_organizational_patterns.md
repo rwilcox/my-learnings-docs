@@ -6,15 +6,28 @@ title: 'Book Notes: Seeing Organizational Patterns'
 
 <!-- toc -->
 
+- [Book summary](#book-summary)
 - [My Notes](#my-notes)
   * [Organizational strategy](#organizational-strategy)
   * [Organizational Structure](#organizational-structure)
 
 <!-- tocstop -->
 
+# Book summary
+
+The way an organization behaves can be broken into a []project mangement triangle](https://asana.com/resources/project-management-triangle) type set of constraints.
+
+These constraints are:
+
+  * cooperation
+  * control
+  * autonomy
+
+
 # My Notes
 
 [Seeing Organizational Patterns](https://www.amazon.com/Seeing-Organizational-Patterns-Robert-Keidel-dp-1881052656/dp/1881052656/ref=mt_other?_encoding=UTF8&me=&qid=1631037159)
+
 
 
 > [The director of training for a major industrial corporation was committed to helper move her firm from an authoritative style of decision making to one that was more collaborative] It soon become clear that certain issues were unresolvable except by fiat. At the same time, other decisions concerned individual matterns that had nothing to do with the department.
