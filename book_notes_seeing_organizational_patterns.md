@@ -15,7 +15,7 @@ title: 'Book Notes: Seeing Organizational Patterns'
 
 # Book summary
 
-The way an organization behaves can be broken into a []project mangement triangle](https://asana.com/resources/project-management-triangle) type set of constraints.
+The way an organization behaves can be broken into a [project mangement triangle](https://asana.com/resources/project-management-triangle) type set of constraints.
 
 These constraints are:
 
