@@ -10,8 +10,19 @@ title: 'Learnings: Java: Maven'
   * [And Dependencies >](#and-dependencies-)
   * [And Debugging](#and-debugging)
 - [>](#)
+  * [incrementing the major/minor/patch versions](#incrementing-the-majorminorpatch-versions)
+  * ["I know exactly what I'm going to set this to"](#i-know-exactly-what-im-going-to-set-this-to)
+- [>](#)
   * [Why you should just use the deploy plugin for this:](#why-you-should-just-use-the-deploy-plugin-for-this)
+  * [Different ways / scenarios to use the deploy plugin](#different-ways--scenarios-to-use-the-deploy-plugin)
+    + [Regular releases](#regular-releases)
+      - [Basic basic CLI](#basic-basic-cli)
+      - [with maven's built in release SDLC plugins](#with-mavens-built-in-release-sdlc-plugins)
+      - [Being more clever with Maven variables](#being-more-clever-with-maven-variables)
+    + [Snapshot releases](#snapshot-releases)
+      - [basic basic CLI](#basic-basic-cli)
   * [See also:](#see-also)
+- [Tooling around Maven for large / weird projects](#tooling-around-maven-for-large--weird-projects)
 - [Maven and Other Build Tools](#maven-and-other-build-tools)
 
 <!-- tocstop -->
@@ -140,3 +151,4 @@ Redhat's [PME - pom manipulation extension](https://release-engineering.github.i
 
   * Gradle_Interact_With_Maven
   * Scala_Interacting_With_Maven
+

@@ -18,6 +18,7 @@ title: 'Learnings: Emacs: Shell Interactions'
     + [Calling Windows commands (aka Powershell)](#calling-windows-commands-aka-powershell)
   * [Workflows](#workflows)
     + [Sending results of a command to a elisp variable](#sending-results-of-a-command-to-a-elisp-variable)
+    + [history](#history)
   * [See also](#see-also)
 - [ansi-term](#ansi-term)
   * [you want to turn on line mode](#you-want-to-turn-on-line-mode)
@@ -206,5 +207,6 @@ https://www.emacswiki.org/emacs/essh may take care of that, being able to send a
 ## Windows support
 
 term says no windows support (but eshell would work technically, although once you need to do a Powershekl command your may be messed)
+
 
 
