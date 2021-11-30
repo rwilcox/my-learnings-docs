@@ -14,6 +14,47 @@ title: 'Learnings: Gradle'
 
 # Using Gradle
 
+Listing tasks `gradle tasks`
+
+
+# Dependencies
+
+May vary based on what language plugin you're using Gradle with
+
+
+## Java project declaration typesDeclaring dependencies in Java projects with the Java Plugin
+
+[Documentation](https://docs.gradle.org/current/userguide/java_plugin.html#tab:configurations)
+
+Most important / useful configurations:
+
+| configuration name  | notes                             |
+|:--------------------|:----------------------------------|
+| `implementation`    | duh                               |
+| `compileOnly`       | duh, but compile phase _only_     |
+| `testImplementation`| only for tests                    |
+| `testCompileOnly`   | compileOnly but only for tests    |
+|
+
+
+# Configurations
+
+A configuration represents a group of artifacts and their dependencies.
+
+Both consuming and producing.
+
+# Tasks
+
+single automic piece of work for a build
+
+# in Kotlin mode
+
+
+
+## See also
+
+  * [compile vs compileOnly vs compileInclude](https://liferay.dev/blogs/-/blogs/gradle-compile-vs-compileonly-vs-compileinclude)
+
 
 
 # <<Gradle_Interact_With_Maven>>
@@ -42,6 +83,3 @@ You can, however, get the best of both worlds through these hacks
             }
         }
     }
-
-
-
