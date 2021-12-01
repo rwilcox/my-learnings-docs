@@ -18,6 +18,12 @@ title: 'Learnings: Kotlin'
 
 <!-- tocstop -->
 
+Release schedule
+===================
+
+1.x version once every 6 months
+
+
 Methods
 ===================
 
@@ -198,6 +204,20 @@ Be careful that your tests aren't accidentally using two different coroutine dis
 Do you really want to / need to test two dispatchers at a time, because coordinating some async events?
 
 [CoroutineTestDispatcher lets you pause and resume the dispatcher](https://medium.com/androiddevelopers/testing-two-consecutive-livedata-emissions-in-coroutines-5680b693cbf8)
+
+## using Coroutines with nensense from the rest of the Java ecosystem
+
+Coroutines provides integrations for a bunch of Reactive stuff, Java stuff Play, etc etc:
+
+  * [library integrations](https://github.com/Kotlin/kotlinx.coroutines/blob/master/integration/README.md).
+  * [reactive/stream integrations](https://github.com/Kotlin/kotlinx.coroutines/tree/master/reactive)
+
+
+### Using coroutines and RxJava 3, specifically
+
+See my RxJava specific notes: Learning_Java_Rx
+
+
 
 # Book Recommendations
 
