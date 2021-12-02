@@ -213,11 +213,35 @@ Coroutines provides integrations for a bunch of Reactive stuff, Java stuff Play,
   * [reactive/stream integrations](https://github.com/Kotlin/kotlinx.coroutines/tree/master/reactive)
 
 
-### Using coroutines and RxJava 3, specifically
+### Coroutines and other reactive type things in Java
+
+#### Java 8's Future, CompletableFuture etc
+
+
+[Kotlin jdk8 extensions over Future, Completablefuture etc](https://github.com/Kotlin/kotlinx.coroutines/blob/master/integration/kotlinx-coroutines-jdk8/src/future/Future.kt)
+
+interesting utilities here:
+
+  * Deferred / Job.asCompletableFuture()
+  * suspend CompletionStage.asDeferred()
+  * suspend CompletionStage.await()
+
+TODO: EXAMPLE / MORE INFO HERE
+
+See also:
+
+  * Java_Reactive_Builtins
+  * [jdk 9 specific support](https://github.com/Kotlin/kotlinx.coroutines/tree/master/reactive/kotlinx-coroutines-jdk9)
+
+#### Using coroutines and RxJava 3, specifically
 
 See my RxJava specific notes: Learning_Java_Rx
 
+[kotlin has a library about this](https://github.com/Kotlin/kotlinx.coroutines/tree/master/reactive/kotlinx-coroutines-rx3)
 
+## Book recommendations
+
+  * [Kotlin Coroutines book](https://leanpub.com/coroutines)
 
 # Book Recommendations
 
