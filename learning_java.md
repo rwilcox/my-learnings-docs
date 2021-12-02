@@ -160,6 +160,12 @@ Warnings can be set to warn on since, etc etc
 [Debugging Java in a Container via IntelliJ](https://www.jetbrains.com/help/idea/2017.2/debugging-a-java-app-in-a-container.html)
 
 
+# Java reactive / concurrency stuff <<Java_Reactive_Builtins>>
+
+java.concurrent.Future from Java 5
+
+CompletableFuture implements Future's interface, but using Java 8's streams and lambdas stuff.
+
 # See also:
 
   * Learning_Ops_Java_Docker
@@ -169,6 +175,3 @@ Warnings can be set to warn on since, etc etc
 
   * [Effective Java](https://www.amazon.com/Effective-Java-Joshua-Bloch-ebook/dp/B078H61SCH/ref=as_li_ss_tl?keywords=learning+java&qid=1555872017&s=books&sr=1-3&linkCode=ll1&tag=wilcodevelsol-20&linkId=f7467f209c4b04accb9e30edc2a9f6aa&language=en_US)
   * [Learning Java](https://www.amazon.com/Learning-Java-Bestselling-Hands-Tutorial-ebook/dp/B00DDZPC9I/ref=as_li_ss_tl?keywords=learning+java&qid=1555872183&s=books&sr=1-4&linkCode=ll1&tag=wilcodevelsol-20&linkId=7d67429d6cdacca154464214588452ae&language=en_US)
-
-
-
