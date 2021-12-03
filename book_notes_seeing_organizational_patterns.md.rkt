@@ -165,3 +165,157 @@ In the opinion of CalTech president Thomas E Everhart, "one outstandig scientist
 A concluding note: _Organizational Strategy_ defines purpose, vision, mission, raison de d'etre. Although the framework presenter here is idealized - and therefore vasily oversimplified - it does enable serios dialog about choices. Too often, corporate purpose is dismissed as something like "the vision thing". But unless an organization periodically thinks through issues of consituencies, character and capabiliies - why we exist, how we exist and how we satisy customers - the odds are strong it will lose direction and flounder, no matter how rigorously it addreses atters of structure and systems.}
 
 ## Organizational Structure
+
+@quote-highlight[
+	#:title       "Seeing Organizational Patterns"
+	#:author      "Keidel"
+	#:page-number 65]{
+"Whole persons aren't contained in the boxes on organizational charts. But managers forget that, which is why organizational charts are never the way things work - even though people invest enormous time in drawing, reviewing, pondering, and worrying over them.'
+-KARL E. WEICK,
+_The Social Psychology of Organizing_ Second Edition
+}
+
+@quote-highlight[
+	#:title       "Seeing Organizational Patterns"
+	#:author      "Keidel"
+	#:page-number 72]{
+A traffic circle is a space in which so many people interact so often that almost everyone becomes overwhelmed. The effect isa similar to that in an actual traffic circle (rotary), where there is no legal right of way: Cars and trucks continuously cut each other off as they enter and exit. Virtually any organizational unit can degenerate into a traffic circle-if it attracts enough commerce from enough directions. This pattern is particularly evident in departments (or locations) that are lodged between two or more other departments that need to work together closely; the in-between zone becomes inundated from both (all) ends.
+}
+
+
+@quote-highlight[
+	#:title       "Seeing Organizational Patterns"
+	#:author      "Keidel"
+	#:page-number 74]{
+With sequential interdependence, organizational parts interact in
+series; each renders an incremental but cumulative contribution to the
+whole.
+}
+
+@quote-highlight[
+	#:title       "Seeing Organizational Patterns"
+	#:author      "Keidel"
+	#:page-number 74]{
+With reciprocal interdependence, the parts interact in a back-and-forth manner and make joint contributions to the system
+}
+
+@quote-highlight[
+	#:title       "Seeing Organizational Patterns"
+	#:author      "Keidel"
+	#:page-number 74]{
+Spiral interferences defines a work flow that originates at one point, gradually goes away from this point , and eventually truths do it / but at a higher level
+}
+
+@quote-highlight[
+	#:title       "Seeing Organizational Patterns"
+	#:author      "Keidel"
+	#:page-number 74]
+Closed-loop interdependence describes a pattern in which adjacent* individuals or units interact with each other in a manner that ensures complete information exchange, or "coverage" of a work area.
+}
+
+@quote-highlight[
+	#:title       "Seeing Organizational Patterns"
+	#:author      "Keidel"
+	#:page-number 75]{
+Pivotal interdependence features one central individual or unit
+around whom (or which) others interact. It is exemplified by a classic
+offensive pattern in basketball, in which the center acts as a pivot by
+receiving the ball from, and passing it to, the other players as they cut
+toward the basket.
+}
+
+## Meetings
+
+@quote-highlight[
+	#:title       "Seeing Organizational Patterns"
+	#:author      "Keidel"
+	#:page-number 82]{
+Aside from education and training, there are three good reasons for group of people to meet at work:
+ 1. to create a forum
+ 2. to make decisions
+ 3. to build a team.
+}
+
+### Meeting Types
+
+@quote-highlight[
+	#:title       "Seeing Organizational Patterns"
+	#:author      "Keidel"
+	#:page-number 85]{
+The array of meeting types (excluding info-dumps) can be triangulated (exhibit 6-4).
+
+A soapbox is a meeting in which one or more individuals sound off or "grandstand."
+}
+
+@quote-highlight[
+	#:title       "Seeing Organizational Patterns"
+	#:author      "Keidel"
+	#:page-number 85]{
+A muster is a roll call in which attendance and obedience are the name of the game.
+
+The convener of such an assembly is more interested in displaying his or her power to force others to show up than in accomplishing anything.
+}
+
+@quote-highlight[
+	#:title       "Seeing Organizational Patterns"
+	#:author      "Keidel"
+	#:page-number 85]{
+A Lovin is a team building meeting in which concerns about people's feelings are allowed to overwhelm concerns about tasks
+}
+
+@quote-highlight[
+	#:title       "Seeing Organizational Patterns"
+	#:author      "Keidel"
+	#:page-number 86]{
+A meander is a random walk through various meeting types, both positive and negative. The meeting jumps from one pattern to another, without signal.
+}
+
+## Decisions and Decision Making Processes
+
+@quote-highlight[
+	#:title       "Seeing Organizational Patterns"
+	#:author      "Keidel"
+	#:page-number 87]{
+"Pure" Modes of Decision-Making
+
+There are six viable ways to make a decision-three "pure" and three mixed- and four nonviable modes. The "pure" patterns and their flawed extremes will be discussed first.
+
+To delegate a decision is to permit one or more subordinates to decide within boundaries set by the manager. Delegation is a form of empowerment that has three strengths:
+  1. It moves authority close to the action- real-time, real-place
+  2. it increases subordinates' ship of the decision; and
+  3. it frees up the delegator's time for more strategic decision-making.
+}
+
+@quote-highlight[
+	#:title       "Seeing Organizational Patterns"
+	#:author      "Keidel"
+	#:page-number 88]{
+To abdicate a decision is to wash one's hands of responsibility - a Pattern that [often(?) - RPW] amounts to abandonment rather than empowerment
+}
+
+@quote-highlight[
+	#:title       "Seeing Organizational Patterns"
+	#:author      "Keidel"
+	#:page-number 88]{
+To mandate a decision is to make the call unilaterally. When a manager mandates, she or he usually brings to bear a global perspective--the big picture. And mandating is easy to do since no one else is involved in the process.
+
+The downside of a global perspective is an insensitivity to local conditions the nitty-gritty. And the price of an easy decision-making process is that those left to implement the decision may lack energy. Few people feel ownership of a decision when they have played no part in arriving at that decision.
+
+To dictate is to impose orders what to do/how to do it-without explaining why, and without concern for subordinates' reactions.
+}
+
+@quote-highlight[
+	#:title       "Seeing Organizational Patterns"
+	#:author      "Keidel"
+	#:page-number 89]{
+To collaborate is to decide jointly with subordinates (and perhaps peers) through a consensual process
+}
+
+@quote-highlight[
+	#:title       "Seeing Organizational Patterns"
+	#:author      "Keidel"
+	#:page-number 90]{
+To placate is to pacify--to prevent or dampen discord and emotion.
+
+The process of decision-making becomes more important than the decisions at hand. In an effort to keep everyone happy, decisions are either avoided or made subject to unanimous approval.
+}
