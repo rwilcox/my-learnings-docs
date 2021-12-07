@@ -23,6 +23,15 @@ Release schedule
 
 1.x version once every 6 months
 
+Stupid Things I always forget
+===================
+
+val vs var
+------------
+
+  * var: mutable variable (can be reassigned)
+  * val: read only variable (not NOT be reassigned, like ES6's `const`, or `final` in Java)
+
 
 Methods
 ===================
@@ -119,6 +128,39 @@ See also:
   * https://kotlinlang.org/docs/reference/inline-functions.html#reified-type-parameters
   * https://stackoverflow.com/a/48960832/224334
 
+# Ughhh Kotlin makes me sad
+
+## RAII vs lazy
+
+if you _do_ use `by lazy` that means the value of the instance variable might be created _anytime_, creating somewhat hard to read stacktraces (or paying object initialization prices at _just_ the wrong time)
+
+TODO: think about this more here....
+
+## lateinit vs lazy
+
+### intro / questions
+
+Q: since you can, how do you un-init a `lateinit` property?
+
+TODO is this a correct summary?
+TODO: read Baeldug article
+
+### lateinit
+
+  * var properties initied later in constructor or any method
+  * fancy `isInitialized` method
+  * can not be a nullable type
+
+### lazy
+
+  * val properties initied when called later
+  * custom getter
+
+
+### See also
+
+  * [lateinit vs lazy property in Kotlin](https://agrawalsuneet.github.io/blogs/lateinit-vs-lazy-property-in-kotlin/)
+  * [Lazy initialization in Kotlin by Baeldung](https://www.baeldung.com/kotlin/lazy-initialization)
 
 # Coroutines and kotlinx-coroutines
 
