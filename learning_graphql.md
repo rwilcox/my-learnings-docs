@@ -1,8 +1,7 @@
 ---
-path: "/learnings/learning_graphql"
-title: "Learning GraphQL"
+path: /learnings/learning_graphql
+title: Learning GraphQL
 ---
-
 # how GraphQL APIs are set up
 
 The base of your GraphQL graph is a schema that holds the following things:
@@ -197,6 +196,4 @@ This will generate types for you, in this case in `graphql/Types.graphql.swift`
 #### See also
 
   * Graph.cool lets you extend the schema in the source code.  [Per](https://github.com/apollographql/apollo-cli/issues/344#issuecomment-371530068). 
-  * ["when a graphQL file contains no operation definitions types.swift is empty"](https://github.com/apollographql/apollo-cli/issues/211). 
-
-
+  * ["when a graphQL file contains no operation definitions types.swift is empty"](https://github.com/apollographql/apollo-cli/issues/211).

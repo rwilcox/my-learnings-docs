@@ -114,7 +114,3 @@ Ownership problems:
   1. What if team moves on to other responsibilites? Do they also take along their previous baggage (survey says: probably not)
   2. What if they are disbanded or layed off?
   3. What if they are so good at their jobs the number of microservices they own. Hopefully the older ones will be more stable than labile, so that the team can continue to function without have to accumulate bandwidth(team members?) at the same rate that it accumulates services...
-
-
-
-

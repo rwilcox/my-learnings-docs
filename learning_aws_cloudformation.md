@@ -281,6 +281,3 @@ In the documentation the sections of the CloudFormation templates may be documen
   * [rwilcox: Ansible / Cloudfomation Integration Treatise](https://github.com/rwilcox/ansible_cloudformation_integration_treatise)
 
 # Book Recommendations
-
-
-

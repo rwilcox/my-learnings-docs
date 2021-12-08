@@ -36,5 +36,3 @@ So, you may not want your container scheduler to kill a sick instance. You may w
 <<Pets_Not_Cattle_Epidemics>>
 
 Pets vs Cattle, sure, but a cattleman watches for epidemics that could / do affect their entire herd.
-
-

@@ -26,6 +26,3 @@ Monad laws:
 # See also
 
   * https://curiosity-driven.org/monads-in-javascript
-
-
-

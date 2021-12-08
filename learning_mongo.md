@@ -23,4 +23,3 @@ Indexing data:
 
   * 2dsphere index: $geoNear via GeoJson or coordinate pair
   * 2d       index: coordinate pair
-

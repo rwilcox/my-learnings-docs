@@ -51,6 +51,3 @@ See also:
 # <<Learning_Java_JMX_Useful_mbeans>>
 
   * thread information (ThreadMXBean)
-
-
-

@@ -120,6 +120,3 @@ Could use safety `lifecycle` value: `prevent_destroy`
 # Book Recommendations
 
   * [Terraform up and running](https://www.amazon.com/Terraform-Running-Writing-Infrastructure-Code-dp-1491977086/dp/1491977086/ref=as_li_ss_tl?_encoding=UTF8&me=&qid=1555897684&linkCode=ll1&tag=wilcodevelsol-20&linkId=4bccd7eb621e692a978599bfdf8302cc&language=en_US)
-
-
-

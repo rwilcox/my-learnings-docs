@@ -110,4 +110,3 @@ Potentially part of autonomy, but theoretical & practical autonomy == very diffe
 > ... Instead of [a service taking 40 days to develop+deploy] Instead Jason grabbed two platform engineers, and they automated a bunch of steps in our deployment process. Their work slashed development time in half - from 40 days to 20 days.
 > 
 > - From Ask Your Developer by Lawson on page 266 ()
-

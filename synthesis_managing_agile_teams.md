@@ -170,4 +170,3 @@ Is your company addicted to urgency? <http://www.articledashboard.com/Article/Th
 How to manage brilliant people: <http://www.computerworld.com/s/article/317362/How_to_Manage_Brilliant_People>
 
 Dave bock wants to write forward (said on twitter feb 22)
-

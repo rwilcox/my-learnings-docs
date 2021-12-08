@@ -47,4 +47,3 @@ title: 'Book Notes: DevOps Handbook'
 > - From DevOps Handbook by Kim, Humble, Debois, Willis on page 666 ()
 
         pArt 2 where to start
-

@@ -48,9 +48,3 @@ One way monolyths grow: when getting a servicer instance to split this thing int
 Fractals are cool
 
 ## sometimes: shut up and hear how things are really being run
-
-
-
-
-
-

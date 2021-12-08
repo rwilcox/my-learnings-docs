@@ -27,3 +27,8 @@ for file in ./*.md; do
     echo "  * Generating TOC for: $file"
     $MARKDOWN_TOC_BIN -i $file
 done
+
+# Ughh trailing whitespace for some reason...
+for file in ./*.md; do
+    sed -e :a -e '/^\n*$/{$d;N;ba' -e '}' -i '' $file
+done

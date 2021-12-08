@@ -652,4 +652,3 @@ charts.yml file:
   * [learning Helm O'Reilly book](https://www.amazon.com/Learning-Helm-Managing-Apps-Kubernetes/dp/1492083658)
   * [Awesome List For Helm](https://github.com/cdwv/awesome-helm)
   * [My pinboard t:helm](https://pinboard.in/u:rwilcox/t:helm)
-

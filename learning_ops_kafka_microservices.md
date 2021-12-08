@@ -104,6 +104,3 @@ A: The group coordinator gets heart beats every 2 seconds, if no heartbeats rece
 ### KStreams
 
 [Add state listener](https://stackoverflow.com/a/51454631/224334) ???
-
-
-

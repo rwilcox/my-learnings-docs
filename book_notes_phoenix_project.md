@@ -193,4 +193,3 @@ My thoughts: Need the following things:
 
   * Juran, _Juran on Quality_, p 257
   * Deming, _Out of Crisis_, p 88 (Stewhart Improvement cycle ??)
-

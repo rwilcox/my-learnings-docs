@@ -223,6 +223,3 @@ May need to use special maven dep:
         given(repository.count(1L)).willAnswer(invocation -> {
         	return 42;
         } );
-
-
-

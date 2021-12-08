@@ -409,6 +409,3 @@ in tsconfig.json
 # Book Recommendations
 
   * [Effective Typescript](https://www.amazon.com/Effective-TypeScript-Specific-Ways-Improve/dp/1492053740/ref=sr_1_1?keywords=effective+typescript&qid=1571345085&sr=8-1) <--  Effective Java/C++ style book
-
-
-

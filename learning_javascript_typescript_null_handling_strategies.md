@@ -111,6 +111,3 @@ Let's see this in action:
 # Conclusion
 
 Lots of different ways to handle `strict`'s tossing of nullability in your face... vs older programming languages letting you sweep it under the rug for the QA testers (or unit tests!) to find...
-
-
-

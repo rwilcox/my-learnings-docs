@@ -59,6 +59,3 @@ Because npm scripts, if called with parameters, pass those parameters on to the 
 simple.ts, record.ts etc are our scripts we want to play with.
 
 You need to use `--` so that npm doesn't swallow the arguments, but passes them along to the command.
-
-
-

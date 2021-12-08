@@ -179,4 +179,3 @@ My thoughts:
 > Ops is quickly turning into a platform team and internal consultants, with the goals of providing developers the infrastructure they need, complete with a vast army of experts who are there to help, looking for ways to make developers productive.
 > 
 > - From The Unicorn Project by Gene Kim on page 330 ()
-

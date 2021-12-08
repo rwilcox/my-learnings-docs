@@ -24,6 +24,3 @@ title: 'Learnings: Javascript: Typescript: Typechecking with JSDoc Annotations'
 Then solution proposed in Javascript_JsDocs_And_Typescript_For_Typechecking may work just fine for you!
 
 ## If you have to run `jsdoc` in addition to the Typescript checking
-
-
-

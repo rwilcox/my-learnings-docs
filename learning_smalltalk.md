@@ -157,6 +157,3 @@ Smalltalk image based... but on the web.
 
   * http://ceronio.net/2017/07/first-steps-with-pharo-smalltalk/
    * [Pharo by example](https://ci.inria.fr/pharo-contribution/job/UpdatedPharoByExample/lastSuccessfulBuild/artifact/book-result/PharoTour/PharoTour.html)
-
-
-

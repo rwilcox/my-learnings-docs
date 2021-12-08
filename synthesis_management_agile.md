@@ -170,4 +170,3 @@ around the theme itself. Predictable is good and that clarity helps teams
 organization around what to actually work on.
 
 - A T H
-

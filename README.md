@@ -41,6 +41,7 @@ Because if you're looking at the file list in Github, it's hard to know if a fil
   * [learning_functional_programming.md](https://github.com/rwilcox/my-learnings-docs/blob/master/learning_functional_programming.md)
   * [learning_gatsbyjs.md](https://github.com/rwilcox/my-learnings-docs/blob/master/learning_gatsbyjs.md)
   * [learning_git.md](https://github.com/rwilcox/my-learnings-docs/blob/master/learning_git.md)
+  * [learning_google_cloud.md](https://github.com/rwilcox/my-learnings-docs/blob/master/learning_google_cloud.md)
   * [learning_gradle.md](https://github.com/rwilcox/my-learnings-docs/blob/master/learning_gradle.md)
   * [learning_graph_database_gremlin_tinkerpop.md](https://github.com/rwilcox/my-learnings-docs/blob/master/learning_graph_database_gremlin_tinkerpop.md)
   * [learning_graph_database_janusgraph.md](https://github.com/rwilcox/my-learnings-docs/blob/master/learning_graph_database_janusgraph.md)
@@ -132,7 +133,7 @@ Because if you're looking at the file list in Github, it's hard to know if a fil
   * [synthesis_microservices_in_the_enterprise.md](https://github.com/rwilcox/my-learnings-docs/blob/master/synthesis_microservices_in_the_enterprise.md)
   * [synthesis_microservices_the_tech.md](https://github.com/rwilcox/my-learnings-docs/blob/master/synthesis_microservices_the_tech.md)
   * [synthesis_site_reliability_engineering_sre.md](https://github.com/rwilcox/my-learnings-docs/blob/master/synthesis_site_reliability_engineering_sre.md)
+  * [synthesis_software_project_analyisi_across_microservice_herd.md](https://github.com/rwilcox/my-learnings-docs/blob/master/synthesis_software_project_analyisi_across_microservice_herd.md)
   * [synthesis_software_project_analysis.md](https://github.com/rwilcox/my-learnings-docs/blob/master/synthesis_software_project_analysis.md)
   * [synthesis_technical_leadership.md](https://github.com/rwilcox/my-learnings-docs/blob/master/synthesis_technical_leadership.md)
   * [synthesis_technical_project_management_falacies.md](https://github.com/rwilcox/my-learnings-docs/blob/master/synthesis_technical_project_management_falacies.md)
-

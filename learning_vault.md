@@ -42,4 +42,3 @@ title: 'Learnings: Vault'
 ## See also
 
   * https://medium.com/qubit-engineering/kubernetes-up-integrated-secrets-configuration-5a15b9f5a6c6
-

@@ -235,4 +235,3 @@ Not an optimizing compiler (that fancy stuff runs on top of Turbofan)
 
   * https://blog.sessionstack.com/how-javascript-works-inside-the-v8-engine-5-tips-on-how-to-write-optimized-code-ac089e62b12e
   * https://github.com/thlorenz/v8-perf/blob/master/compiler.md
-
