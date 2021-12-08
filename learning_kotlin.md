@@ -319,6 +319,10 @@ See my RxJava specific notes: Learning_Java_Rx
 
 [kotlin has a library about this](https://github.com/Kotlin/kotlinx.coroutines/tree/master/reactive/kotlinx-coroutines-rx3)
 
+#### calling a `suspend` function from a non-suspend function
+
+?? use `runBlocking` ?
+
 ## Book recommendations
 
   * [Kotlin Coroutines book](https://leanpub.com/coroutines)
