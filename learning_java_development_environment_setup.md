@@ -1,3 +1,8 @@
+---
+path: /learnings/java_development_environment_setup
+title: 'Learnings: Java Development Environment Setup'
+---
+
 Tips tricks for managing Java development environments, especially if we're going to be running two Java versions (1.8 + current) for the rest of the '20s
 
 # Install / Select which version of Java to run now
