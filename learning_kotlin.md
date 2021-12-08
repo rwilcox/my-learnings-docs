@@ -74,6 +74,12 @@ Ways to declare a method
 
 this second one will figure out the return type of `foobar` and set the return type to the return type of that.
 
+NOTES: you can use these labels at the call site
+
+`methodName(parameterOne=ParameterType.FIRST_WHATEVER)`
+
+(means you can also pass parameters out of order if they are all labelled)
+
 Notes
 -------------
 
