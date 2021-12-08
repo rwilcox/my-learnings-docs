@@ -1,8 +1,7 @@
 ---
-path: "/learnings/screen"
-title: "Learnings: Screen"
+path: /learnings/screen
+title: 'Learnings: Screen'
 ---
-
 I have the biggest man-crush on screen.
 
 [Screen Survival Guide (SO)](http://stackoverflow.com/questions/70614/gnu-screen-survival-guide)

@@ -7,6 +7,12 @@ title: 'Learnings: Gradle'
 <!-- toc -->
 
 - [Using Gradle](#using-gradle)
+- [Dependencies](#dependencies)
+  * [Java project declaration typesDeclaring dependencies in Java projects with the Java Plugin](#java-project-declaration-typesdeclaring-dependencies-in-java-projects-with-the-java-plugin)
+- [Configurations](#configurations)
+- [Tasks](#tasks)
+- [in Kotlin mode](#in-kotlin-mode)
+  * [See also](#see-also)
 - [>](#)
   * [Pull dependancies out of pom.xml and dynamically add them to the gradle build](#pull-dependancies-out-of-pomxml-and-dynamically-add-them-to-the-gradle-build)
 
