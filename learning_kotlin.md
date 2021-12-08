@@ -200,6 +200,8 @@ TODO: read Baeldug article
 
 # Coroutines and kotlinx-coroutines
 
+Read [How Are Coroutines Different From Java's Thread Executor](https://stackoverflow.com/a/55645380/224334) either before, or after, because WOW. Then go read about what kotlinx.coroutines gives you.
+
 ## builders
 
 | Builder                  | Description                                                                        |
