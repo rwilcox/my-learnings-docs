@@ -2,7 +2,6 @@
 path: /learning_emacs_lsp_rust
 title: 'Learning Emacs: LSP: Rust'
 ---
-
 # My notes
 
 Need to use `M-x rustic-mode` or a hook to turn on the neat stuff.

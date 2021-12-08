@@ -2,10 +2,23 @@
 path: /learnings/learning_google_cloud
 title: Learning Google Cloud
 ---
-
 # Table of contents
 
 <!-- toc -->
+
+- [Basics](#basics)
+- [Cloud Console](#cloud-console)
+- [Cloud IAM](#cloud-iam)
+  * [Roles](#roles)
+  * [Service Accounts](#service-accounts)
+- [Cloud SDK](#cloud-sdk)
+- [Tools](#tools)
+- [Monitoring](#monitoring)
+  * [Billing](#billing)
+- [Networking](#networking)
+  * [VPC](#vpc)
+
+<!-- tocstop -->
 
 # Basics
 
