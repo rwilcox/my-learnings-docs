@@ -137,6 +137,3 @@ Then there is a solution here. It _is_ a lot of typing, so I'm not 100% sure abo
     let output: Promise<string> = new Promise( (resolve: PromiseResolveType<string>, reject: PromiseRejectType) => { ... } )
 
 This took a bit of looking, and in fact browsing the Flow open source code to figure out what the Promise type declaration
-
-
-

@@ -202,6 +202,3 @@ Need data a notification (even SQS) to note that a gift card has happened, and t
 # 5: product catalog
 
 use of the services: you want to know how much the shipping will be on an item before you order it ("can I afford this item plus shipping?") and packing is done only on backend when order ends - after all the cart abandonment - so is much less traffic.
-
-
-

@@ -21,4 +21,3 @@ title: 'Syntheisi: Project Analysis across herd'
 ## sources
 
   * software design X-rays
-

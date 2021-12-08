@@ -364,6 +364,3 @@ Can also use Google Auth time based one time passwords from the users auth app o
 Also [supports Sign In with Apple](https://aws.amazon.com/about-aws/whats-new/2019/11/amazon-cognito-now-supports-sign-in-with-apple/)
 
 Also lets people sign in with their Facebook or Google account
-
-
-

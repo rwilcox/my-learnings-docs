@@ -427,6 +427,3 @@ Helm: (from the deis people): create a "chart" which gets turned into a pod (eer
 
   * [Kubernetes Up And Running](https://www.amazon.com/Kubernetes-Running-Dive-Future-Infrastructure/dp/1492046531/ref=as_li_ss_tl?crid=8VWERBMXPN5B&keywords=kubernetes+up+and+running&qid=1555896154&s=books&sprefix=kubernetes+up+and+run,stripbooks,216&sr=1-15&linkCode=ll1&tag=wilcodevelsol-20&linkId=35134f1cbb6bc4c334def2d531ea65d4&language=en_US)
   * [Managing Kubernetes](https://www.amazon.com/Managing-Kubernetes-Operating-Clusters-World-ebook/dp/B07KFQL927/ref=as_li_ss_tl?crid=8VWERBMXPN5B&keywords=kubernetes+up+and+running&qid=1555896248&s=books&sprefix=kubernetes+up+and+run,stripbooks,216&sr=1-7&linkCode=ll1&tag=wilcodevelsol-20&linkId=40cf4bfe3d369cb6810a23bc53d92b67&language=en_US)
-
-
-

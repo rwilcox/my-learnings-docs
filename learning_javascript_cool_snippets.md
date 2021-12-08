@@ -15,6 +15,3 @@ title: Learning Javascript Cool Snippets
         let a = ['jun', 'junk', 'thing one', 'thing two']
         let [,, ...goodThings] = a
         console.log(goodThings)  // will be ['thing one', 'thing two']
-
-
-

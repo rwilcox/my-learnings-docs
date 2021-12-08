@@ -151,4 +151,3 @@ Redhat's [PME - pom manipulation extension](https://release-engineering.github.i
 
   * Gradle_Interact_With_Maven
   * Scala_Interacting_With_Maven
-

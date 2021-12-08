@@ -37,6 +37,3 @@ NOTES:
   * https://projects.spring.io/spring-security-oauth/docs/oauth2.html
   * https://docs.spring.io/spring-security-oauth2-boot/docs/current-SNAPSHOT/reference/htmlsingle/
   *
-
-
-

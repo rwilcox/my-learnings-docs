@@ -279,6 +279,3 @@ Will contain name, priority, ID, status and current callstack.
 # See Also
 
   * Optimizing Java !!!
-
-
-

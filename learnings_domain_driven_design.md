@@ -75,6 +75,3 @@ maybe problem space of the domain is "login / auth" and the solution space is, "
   9. How are shared teams and/or overlapping concepts mapped and translated between Bounded Contexts?
   10. Which bounded context contains the concepts that address the core domain and which of the tactical patterns will be used to model it?
   - Implementing domain-driven design
-
-
-

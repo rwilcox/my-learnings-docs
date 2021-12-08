@@ -26,6 +26,3 @@ Source:
   * https://stackoverflow.com/a/36056355/224334
 
 ## Not-Droid
-
-
-

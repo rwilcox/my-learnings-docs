@@ -300,4 +300,3 @@ Contrary-wise, if there is no room (or budget or slack or runway) for failure th
 > There is no training without an extended period of practicing at a much slower than expert rate. In today's Hurry Up corporation that usually means there is no training.
 > 
 > - From Slack by Demarco, Tom on page 179 ()
-

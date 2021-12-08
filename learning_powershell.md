@@ -73,6 +73,3 @@ But NOTE: this command will suffix color to everything, but you do **not** want 
 # Markdown
 
 `Show-Markdown -Path filename -UseBrowser`
-
-
-

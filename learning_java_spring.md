@@ -427,6 +427,3 @@ Built on netty. reactor
   * [Spring Microservices In Action](https://www.amazon.com/Spring-Microservices-Action-John-Carnell/dp/1617293989/ref=as_li_ss_tl?keywords=java+spring&qid=1555871507&s=books&sr=1-4&linkCode=ll1&tag=wilcodevelsol-20&linkId=72ddcc91801c95bb172803105e355bdc&language=en_US)
   * [Learning Spring Boot 2.0](https://www.amazon.com/Learning-Spring-Boot-2-0-microservices-ebook/dp/B01LPRN0Z8/ref=as_li_ss_tl?keywords=java+spring&qid=1555871688&s=books&sr=1-17&linkCode=ll1&tag=wilcodevelsol-20&linkId=2f1106b0575349d07228145f76f9f34d&language=en_US)
   * [Spring In Action](https://www.amazon.com/Spring-Action-Craig-Walls/dp/1617294942/ref=as_li_ss_tl?keywords=spring+in+action&qid=1555871830&s=books&sr=1-1&linkCode=ll1&tag=wilcodevelsol-20&linkId=3a21bd2dfb793cc04610ad8d750ee14b&language=en_US)
-
-
-

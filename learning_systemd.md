@@ -115,6 +115,3 @@ Make a copy of file and place in /etc/systemd/system/. this will override previo
 #### seeing what changed
 
     $ systemd-delta
-
-
-

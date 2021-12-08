@@ -40,6 +40,3 @@ It could be constructed a different way - having main handle only one file at a 
 
 # Information on using Applescript to Zip files ==
 [http://listserv.dartmouth.edu/scripts/wa.exe?A2=ind0805&L=MACSCRPT&T=0&F=&S=&P=4802 Use gzip tar instead of zip...]
-
-
-

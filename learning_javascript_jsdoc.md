@@ -173,6 +173,3 @@ Because if TS had native support you would be able to do TS-like typechecking, e
 
   * Typescript_Typechecking_With_JsDoc_Annotations
   * https://stackoverflow.com/a/55767692/224334 <-- set up Visual Studio Code to include all the files.. but doesn't seem to work for typedefs?????
-
-
-

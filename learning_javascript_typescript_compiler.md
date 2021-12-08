@@ -90,6 +90,3 @@ check out the eslint rule no-inferrable-types
 - [BOOKQUOTE]:
 > This is a good reason to consider including explicit return type annotations, even when the return type can be inferred. It prevents an any type from “escaping.”
 - from: Effective Typescript
-
-
-

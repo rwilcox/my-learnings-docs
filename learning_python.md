@@ -54,5 +54,3 @@ user:
     some.setting.you.set.in.this.file: "value"
     another.setting.you.set: "another value"
   ```
-
-

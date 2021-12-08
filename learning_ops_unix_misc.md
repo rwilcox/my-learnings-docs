@@ -58,6 +58,3 @@ Configuring mounts
 stdout and stderr are (usually) buffered differently, so whereas you may need to fflush(stdout) to flush the output buffer, you never need call fflush(stderr)
 
 [source](https://twitter.com/importantshock/status/1446283570356555777)
-
-
-

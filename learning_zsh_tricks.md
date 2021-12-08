@@ -28,5 +28,3 @@ In zsh `$PATH` is actually a representation of the `path` shell variable.
     path+=(~/.nvm/v0.8.23/bin/)
 
 Source: http://unix.stackexchange.com/questions/62579/is-there-a-way-to-add-a-directory-to-my-path-in-zsh-only-if-its-not-already-pre
-
-

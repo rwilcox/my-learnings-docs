@@ -19,6 +19,3 @@ title: 'Synthesis: Agile: In The Enterprise'
 Are they relatively stable and own a domain for a kind of "long term" perspective?
 
 Or are pods created on a needs basis and then destroyed when the need no longer exists. For example "increase reliability", "unify the pipelines", etc etc.
-
-
-

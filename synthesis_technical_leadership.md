@@ -327,4 +327,3 @@ first job: esablizh a comfortzbld environment, which means geftinf acquanted wit
 
 your manager likely can not be a tech lead. Your tech lead likely can not be a manager. Or at least for long or for scale.
 Why? Both different temperment job AND those are both full time jobs at scale.
-

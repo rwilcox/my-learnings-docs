@@ -326,6 +326,3 @@ as soon as you specify a directory of file for the commit, it ignores the partia
 See also:
 
   * [Safia Abdalla: learning more about commits are represented](https://blog.safia.rocks/post/172170673860/learning-more-about-how-commits-are-represented-in)
-
-
-

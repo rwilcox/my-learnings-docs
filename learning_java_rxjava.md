@@ -270,6 +270,3 @@ Processor — like an Subject, but for Flowables
 # Book Recommendations
 
   * [Reactive Programming with RxJava](https://www.amazon.com/Reactive-Programming-RxJava-Asynchronous-Applications-ebook/dp/B01LZQGIIC/ref=as_li_ss_tl?keywords=java+rxjava&qid=1555871313&s=books&sr=1-5-catcorr&linkCode=ll1&tag=wilcodevelsol-20&linkId=3c88549ab929ec56bdc3519c33959818&language=en_US)
-
-
-

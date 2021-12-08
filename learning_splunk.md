@@ -50,6 +50,3 @@ Basically:
 ## See Also
 
   * https://www.hurricanelabs.com/blog/splunk-case-study-indexed-extractions-vs-search-time-extractions
-
-
-

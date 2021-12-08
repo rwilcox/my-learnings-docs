@@ -49,6 +49,3 @@ function four<T>(first: T, second: T): T {
 
 four("world", 34)
 ```
-
-
-

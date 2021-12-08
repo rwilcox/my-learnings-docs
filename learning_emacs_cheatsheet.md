@@ -167,6 +167,3 @@ M-x
 ## Quickly call random lisp code
 
 M-:
-
-
-

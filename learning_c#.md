@@ -145,6 +145,3 @@ Q: Is the following how C# does annotations??
     public void message() {
         1 + 1
     }
-
-
-

@@ -124,4 +124,3 @@ If storage backend supports key order JanusGraph
 # Book Recommendations
 
   * [Graph Databases](https://www.amazon.com/Graph-Databases-Opportunities-Connected-Data-ebook/dp/B00ZGRS4VY/ref=as_li_ss_tl?keywords=graph+databases&qid=1555869731&s=books&sr=1-3&linkCode=ll1&tag=wilcodevelsol-20&linkId=4ddb985cd5493c0c1dffcc8941ed11ac&language=en_US)
-

@@ -47,4 +47,3 @@ title: 'Syntheisi: Project Analysis'
 
   * software design X-rays
   * GToolkit
-

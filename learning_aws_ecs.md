@@ -243,6 +243,3 @@ See also:
 ## Docker Volume Management
 
 Q: [10 GB limit for Docker volumes on ECS???](https://aws.amazon.com/premiumsupport/knowledge-center/increase-default-ecs-docker-limit/)
-
-
-

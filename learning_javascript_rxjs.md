@@ -367,6 +367,3 @@ You may be able to abuse `Subject` to do this. Interesting and maybe promising p
 # Book Recommendations
 
   * [RxJS In Action](https://www.amazon.com/RxJS-Action-Paul-P-Daniels/dp/1617293415/ref=as_li_ss_tl?keywords=RxJS+in+Action&qid=1570748058&sr=8-1&linkCode=ll1&tag=wilcodevelsol-20&linkId=929629a486c6ced551f7aeb7075e22be&language=en_UShttps://amzn.to/2nwrymm)
-
-
-

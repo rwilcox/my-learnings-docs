@@ -149,4 +149,3 @@ NOTE: HTTP / "REST" mode is not really RESTful
     Backend shorthand unknown: janusgraph.properties
 
 ^^^^^ means that it can not find the properties file you are pointing at. Try using a relative path or just the full path in your string.
-

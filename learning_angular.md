@@ -308,6 +308,3 @@ A: It seems so:
 ### See also:
 
   * https://medium.com/@danharris_io/how-to-setup-angular-e2e-tests-on-vsts-ci-be0872f9dc31
-
-
-

@@ -149,6 +149,3 @@ NOPE. Bash doesn't know any more about those PID1 responsibilities than your pro
 
   * Learning_Ops_Docker_Init_And_Compose
   * Learning_AWS_ECS_Docker_Init_Support
-
-
-

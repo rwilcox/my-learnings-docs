@@ -61,6 +61,3 @@ OS may cache value of a variable shared across threads. volatile will make sure 
 ### and fairness
 
 Manually creating / waiting on a lock ReentrantLock can pass "fair" flag, which will make sure to give priority access to longest waiting requestor.
-
-
-
