@@ -95,6 +95,40 @@ Elements:
 
 automode VPC - includes
 
+## Load Balancing
+
+
+
+## Cloud DNS
+
+Global scope only
+Public or private zones
+Private zones 1:1 with VPC network
+DNS peering for cross-network resolution
+Uses Cloud Domains for DNS registration
+
+# Compute Services
+
+## Compute Engine (GCE)
+
+Zonal resource
+
+Live migration - virtual machines moved to different hardware while running
+
+When you make one of these by clicking around you can copy the `gcloud` construction CLI parameters from the console!!!
+
+## Cloud Functions
+
+upload from web based editor, zip file upload, cloud source repository
+
+Has a testing tab so you can try to invoke the function directly.
+
+### Triggers
+
+# Storage
+
+
+
 # Pub Sub
 
 From [Cloud Pub/Sub Documentation](https://cloud.google.com/pubsub/docs/overview)
