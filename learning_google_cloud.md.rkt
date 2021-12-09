@@ -123,11 +123,148 @@ upload from web based editor, zip file upload, cloud source repository
 
 Has a testing tab so you can try to invoke the function directly.
 
+@quote-highlight[#:title "Programming Google Cloud"
+  #:author  "Rui Costa"
+  #:page-number 0]{Google Cloud Functions is a serverless compute solution that allows you to run event-based applications}
+
+
 ### Triggers
+
+
 
 # Storage
 
+@quote-highlight[#:title "Programming Google Cloud"
+  #:author  "Rui Costa"
+  #:page-number 0]{Cloud Storage. Google Cloud provides the following storage options:
 
+Zonal standard persistent disk and zonal SSD persistent disk
+
+Regional standard persistent disk and regional SSD persistent disk
+
+Local SSD for high-performance local block storage
+
+Cloud Storage buckets: Object storage.
+
+Filestore: High-performance file storage
+}
+
+## Object Storage
+
+Lots of different options here that balance price, access time and min retention policy.
+
+
+@quote-highlight[#:title "Programming Google Cloud"
+  #:author  "Rui Costa"
+  #:page-number 0]{object-based storage uses a flat namespace to store your data. The key functionality of the Cloud Console interface is that it translates this flat namespace to replicate a folder hierarchy. Cloud Storage has no notion of folders.
+}
+
+@quote-highlight[#:title "Programming Google Cloud"
+  #:author  "Rui Costa"
+  #:page-number 0]{object-based storage uses a flat namespace to store your data. The key functionality of the Cloud Console interface is that it translates this flat namespace to replicate a folder hierarchy. Cloud Storage has no notion of folders.
+}
+
+### and bucket set retention period
+
+@quote-highlight[#:title "Programming Google Cloud"
+  #:author  "Rui Costa"
+  #:page-number 0]{If you attempt to delete objects younger than the retention period it will result in a PERMISSION_DENIED error.}
+
+### and PII auditing
+
+@quote-highlight[#:title "Programming Google Cloud"
+  #:author  "Rui Costa"
+  #:page-number 0]{We can loop through all the buckets and objects, then scan them for PII information with the Google Cloud Data Loss Prevention API.}
+
+@quote-highight[
+#:title "Programming Google Cloud"
+ #:author  "Rui Costa"
+  #:page-number 0]{A bucket lock allows you to create a retention policy that locks the data preventing it from being deleted or overwritten. You can also lock a retention policy. Once it is locked you cannot unlock it; you will only be able to increase the retention period}
+
+### signed URLs
+
+@quote-highlight[#:title "Programming Google Cloud"
+  #:author  "Rui Costa"
+  #:page-number 0]{Signed URLs is a URL that provides access to users and applications for a limited time. The signed URL allows users to access the object without authentication.}
+
+# Cloud Dataflow
+
+@quote-highlight[#:title "Programming Google Cloud"
+  #:author  "Rui Costa"
+  #:page-number 0]{Apache Beam is a programming model that defines and executes the defined pipeline. The pipelines can be batch and streaming which are exposed to different runners as:
+
+Google Cloud Dataflow
+Apache Spark
+Apache Flink
+Apache Apex
+DirectRunner (a local runner for testing)}
+
+## Terms
+
+@quote-highlight[#:title "Programming Google Cloud"
+  #:author  "Rui Costa"
+  #:page-number 0]{A pipeline defines what steps the runner will execute on your data}
+
+
+@quote-highlight[#:title "Programming Google Cloud"
+  #:author  "Rui Costa"
+  #:page-number 0]{A PCollection defines the data on which your pipeline will operate on}
+
+@quote-highlight[#:title "Programming Google Cloud"
+  #:author  "Rui Costa"
+  #:page-number 0]{A transform is a function that you define that is performed on your data}
+
+@quote-highlight[#:title "Programming Google Cloud"
+  #:author  "Rui Costa"
+  #:page-number 0]{A ParDo is an Apache Beam transform operation. As outlined in the Transforms section, it performs a user defined operation on a collection of elements. The output of a ParDo can be a single element or many elements, however, it does not output a single output per input element. }
+
+@quote-highlight[#:title "Programming Google Cloud"
+  #:author  "Rui Costa"
+  #:page-number 0]{A Map is another transform operation available in Apache Beam. In the Framework you will be using the beam.Map as you will be performing a one-to-one mapping,}
+
+@quote-highlight[#:title "Programming Google Cloud"
+  #:author  "Rui Costa"
+  #:page-number 0]{Apache Beam I/O connectors let you read/write data into your pipeline as well as write output data}
+
+@quote-highlight[#:title "Programming Google Cloud"
+  #:author  "Rui Costa"
+  #:page-number 0]{As an example, the Framework you are working with has a source of Cloud Pub/Sub and a sink of BigQuery}
+
+@quote-highlight[#:title "Programming Google Cloud"
+  #:author  "Rui Costa"
+  #:page-number 0]{Aggregation is an operation that is performed on many elements to produce some grouped value from those respective elements.}
+
+@quote-highlight[#:title "Programming Google Cloud"
+  #:author  "Rui Costa"
+  #:page-number 0]{Apache Beam provides the following aggregation methods:
+CoGroupByKey
+CombineGlobally
+CombinePerKey
+CombineValues
+Count
+Distinct
+GroupByKey
+GroupBy
+GroupIntoBatches
+Latest
+Max
+Min
+Mean
+Sample
+Sum
+Top}
+
+@quote-highlight[#:title "Programming Google Cloud"
+  #:author  "Rui Costa"
+  #:page-number 0]{Runners are the software that accepts a pipeline and executes it.}
+
+@quote-highlight[#:title "Programming Google Cloud"
+  #:author  "Rui Costa"
+  #:page-number 0]{Windowing enables you to group operations over the unbounded data set by dividing the data set into windows of finite collections according to their timestamps of the individual elements. You set the following windows with the Apache Beam SDK or Dataflow SQL streaming extensions:
+Tumbling windows (called fixed windows in Apache Beam)
+Hopping windows (called sliding windows in Apache Beam)
+Session windows
+}
 
 # Pub Sub
 
