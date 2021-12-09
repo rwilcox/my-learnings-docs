@@ -17,6 +17,17 @@ title: Learning Google Cloud
   * [Billing](#billing)
 - [Networking](#networking)
   * [VPC](#vpc)
+- [Pub Sub](#pub-sub)
+  * [Core concepts](#core-concepts)
+    + [On Delivery methods](#on-delivery-methods)
+    + [On ACK](#on-ack)
+    + [On Topics, subscriptions](#on-topics-subscriptions)
+  * [Replayability](#replayability)
+  * [The Java SDK specifically](#the-java-sdk-specifically)
+    + [Subscribing to a pull topic](#subscribing-to-a-pull-topic)
+      - [the executor provider](#the-executor-provider)
+      - [See also:](#see-also)
+- [See Also](#see-also)
 
 <!-- tocstop -->
 
@@ -101,6 +112,9 @@ From [Cloud Pub/Sub Documentation](https://cloud.google.com/pubsub/docs/overview
 > Pub/Sub adopts from messaging middleware is per-message parallelism (rather than partition-based). Pub/Sub "leases" individual messages to subscriber clients, then keeps track of whether a given message has been successfully processed.
 
 
+> Pub/Sub does not guarantee the order of message delivery.
+> 
+> - From Programming Google Cloud by Rui Costa on page 0 ()
 
 ## Core concepts
 
@@ -112,10 +126,39 @@ From [Cloud Pub/Sub Documentation](https://cloud.google.com/pubsub/docs/overview
 
 Messages pushed out to all subscribers in Cloud Pub/Sub AT LEAST once. (aka: yes a subscriber does not pull from a consumer group / partition, essentially each subscription is its own stream)
 
-Delivery methods:
+### On Delivery methods
+
+Methods:
 
   * Push <-- each message goes to a subscriber defined endpoint
   * Pull <-- your application asks for next message
+
+### On ACK
+
+
+> Once a message has been acknowledged, the message is nt longer accessible to subscribers of a given subscription. In addition, the subscribers must process every message in a subscription—even if only a subset is needed.
+> 
+> - From Programming Google Cloud by Rui Costa on page 0 ()
+
+### On Topics, subscriptions
+
+
+> The way I like to define it is that a topic is not the holding bucket of the message, but rather the subscription is the holding bucket.
+> 
+> - From Programming Google Cloud by Rui Costa on page 0 ()
+
+## Replayability
+
+
+> Using the Seek feature allows you to recover from unexpected subscriber problems, perform acknowledgment on a backlog of messages that are no longer relevant, and deploy new code features without accidentally acknowledging messages.
+> 
+> - From Programming Google Cloud by Rui Costa on page 0 ()
+
+
+> Another way to replay messages that have been acknowledged is to seek to a timestamp.
+> 
+> - From Programming Google Cloud by Rui Costa on page 0 ()
+
 
 ## The Java SDK specifically
 
