@@ -73,6 +73,8 @@ Cloud Shell  <-- CLI and this is authed based on the project you're logged into.
 
 Can do billing data -> bigquery so can SQL QUERY FOR IT!!!!
 
+See GCP_BigQuery
+
 # Networking
 
 
@@ -97,7 +99,7 @@ automode VPC - includes
 
 ## Load Balancing
 
-
+Hooks up Backend configuration - allows you to create a Service entry and configure health checks for that service etc etc.
 
 ## Cloud DNS
 
@@ -116,20 +118,6 @@ Zonal resource
 Live migration - virtual machines moved to different hardware while running
 
 When you make one of these by clicking around you can copy the `gcloud` construction CLI parameters from the console!!!
-
-## Cloud Functions
-
-upload from web based editor, zip file upload, cloud source repository
-
-Has a testing tab so you can try to invoke the function directly.
-
-@quote-highlight[#:title "Programming Google Cloud"
-  #:author  "Rui Costa"
-  #:page-number 0]{Google Cloud Functions is a serverless compute solution that allows you to run event-based applications}
-
-
-### Triggers
-
 
 
 # Storage
@@ -151,7 +139,13 @@ Filestore: High-performance file storage
 
 ## Object Storage
 
-Lots of different options here that balance price, access time and min retention policy.
+Needs to be **globally** unique. Ideally workloads that are write once read many (as you have to replace objects to update them)
+
+Lots of different options here that balance price, access time and min retention policy:
+  * Standard
+  * Nealline
+  * Farline
+  * Archive
 
 
 @quote-highlight[#:title "Programming Google Cloud"
@@ -188,6 +182,8 @@ Lots of different options here that balance price, access time and min retention
   #:page-number 0]{Signed URLs is a URL that provides access to users and applications for a limited time. The signed URL allows users to access the object without authentication.}
 
 # Cloud Dataflow
+
+Managed Apache Beam
 
 @quote-highlight[#:title "Programming Google Cloud"
   #:author  "Rui Costa"
@@ -336,6 +332,129 @@ is of interface type `com.google.api.gax.core.ExecutorProvider` which seems to b
 #### See also:
 
   * Learning_Java_Thread_Exector
+
+# Data Stores
+
+## Cloud SQL
+
+Zonal or regional resource scope
+
+Managed relational DB service (mysql, postgres, SQL Server, Cloud Spanner)
+
+## Spanner
+
+regional or multi regional resource scope
+
+ACID compliant... but Google propretary engine.
+multiple write entry points
+
+Cloud Spanner one of those _basically_ breaking CAP theorum technologies.
+
+Much higher entry cost than regular Cloud SQL
+
+### See also
+
+  * [Google's Whitepapers on this tech](https://cloud.google.com/spanner/docs/whitepapers)
+
+## Cloud DataStore / Firestore
+
+NoSQL database with automatic scaling and cost based on data usage (costs scale to 0).
+
+This seems to be the new(?) name for the App Engine object store thing, or at least what it's using now. (Or is backwards compatible with that API).
+
+Document store
+
+ACID compliance
+
+## Big Table
+
+regional resource scope
+Managed NoSQL
+scalable but not serverless
+H-Base compatible
+
+great for many concurrent read/writes
+
+K/V pairs
+
+## Big Query
+
+<<GCP_BigQuery>>
+
+regional resource scope
+managed data warehouse
+relational
+SQL compliant (ANSI:2011)
+seperate compute and storage tiers
+
+pricing:
+  * amount of data in query
+  * amount of data in response
+  * data cost
+
+You _can_ ask for flate rate
+
+## See also
+
+  * [Google Cloud Database Comparison Page](https://cloud.google.com/products/databases)
+
+# GCP Application Deployment Options
+
+## Instance groups
+
+multiple GCE instances grouped together. Integration with auto scaling, LBs.
+
+Managed   <-- you upload an instance template and GCP manages the herd. Also has stateful option.
+unmanaged <-- you add pre-created VMs to the group
+
+## App Engine
+
+### Classic
+
+Scans to 0
+
+BUT with some severe limits.
+
+Languages: Python, Java, PHP, Ruby, Go, Node
+
+### Flexible
+
+min footprint - no scaling to zero here.
+
+## GKE
+
+likely this stuff will be on the test too!
+
+
+## Cloud Functions
+
+upload from web based editor, zip file upload, cloud source repository
+
+Has a testing tab so you can try to invoke the function directly.
+
+@quote-highlight[#:title "Programming Google Cloud"
+  #:author  "Rui Costa"
+  #:page-number 0]{Google Cloud Functions is a serverless compute solution that allows you to run event-based applications}
+
+
+### Triggers
+
+# Cloud Deployment Manager
+
+IaC
+
+... does not really have a dashboard
+
+Templates can lookup values from a Python (and others?) script
+
+Can also use DM Convert to export to K8s Resource Model or Terraform (!!!)
+
+can use `--preview` on CLI to see what resource types it's going to create
+
+# Cloud AutoML
+
+No service scope documented
+NLP, translation, video intelligence, vision, ?? audio transscriptions ??
 
 # See Also
 
