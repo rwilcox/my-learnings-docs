@@ -43,6 +43,7 @@ title: 'Learnings: Kotlin'
     + [Coroutines and other reactive type things in Java](#coroutines-and-other-reactive-type-things-in-java)
       - [Java 8's Future, CompletableFuture etc](#java-8s-future-completablefuture-etc)
       - [Using coroutines and RxJava 3, specifically](#using-coroutines-and-rxjava-3-specifically)
+      - [calling a `suspend` function from a non-suspend function](#calling-a-suspend-function-from-a-non-suspend-function)
   * [Book recommendations](#book-recommendations)
 - [Book Recommendations](#book-recommendations)
 

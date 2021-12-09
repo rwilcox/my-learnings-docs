@@ -17,6 +17,17 @@ title: Learning Google Cloud
   * [Billing](#billing)
 - [Networking](#networking)
   * [VPC](#vpc)
+  * [Load Balancing](#load-balancing)
+  * [Cloud DNS](#cloud-dns)
+- [Compute Services](#compute-services)
+  * [Compute Engine (GCE)](#compute-engine-gce)
+- [Storage](#storage)
+  * [Object Storage](#object-storage)
+    + [and bucket set retention period](#and-bucket-set-retention-period)
+    + [and PII auditing](#and-pii-auditing)
+    + [signed URLs](#signed-urls)
+- [Cloud Dataflow](#cloud-dataflow)
+  * [Terms](#terms)
 - [Pub Sub](#pub-sub)
   * [Core concepts](#core-concepts)
     + [On Delivery methods](#on-delivery-methods)
@@ -27,6 +38,24 @@ title: Learning Google Cloud
     + [Subscribing to a pull topic](#subscribing-to-a-pull-topic)
       - [the executor provider](#the-executor-provider)
       - [See also:](#see-also)
+- [Data Stores](#data-stores)
+  * [Cloud SQL](#cloud-sql)
+  * [Spanner](#spanner)
+    + [See also](#see-also)
+  * [Cloud DataStore / Firestore](#cloud-datastore--firestore)
+  * [Big Table](#big-table)
+  * [Big Query](#big-query)
+  * [See also](#see-also-1)
+- [GCP Application Deployment Options](#gcp-application-deployment-options)
+  * [Instance groups](#instance-groups)
+  * [App Engine](#app-engine)
+    + [Classic](#classic)
+    + [Flexible](#flexible)
+  * [GKE](#gke)
+  * [Cloud Functions](#cloud-functions)
+    + [Triggers](#triggers)
+- [Cloud Deployment Manager](#cloud-deployment-manager)
+- [Cloud AutoML](#cloud-automl)
 - [See Also](#see-also)
 
 <!-- tocstop -->
@@ -81,6 +110,8 @@ Cloud Shell  <-- CLI and this is authed based on the project you're logged into.
 
 Can do billing data -> bigquery so can SQL QUERY FOR IT!!!!
 
+See GCP_BigQuery
+
 # Networking
 
 
@@ -102,6 +133,179 @@ Elements:
 
 
 automode VPC - includes
+
+## Load Balancing
+
+Hooks up Backend configuration - allows you to create a Service entry and configure health checks for that service etc etc.
+
+## Cloud DNS
+
+Global scope only
+Public or private zones
+Private zones 1:1 with VPC network
+DNS peering for cross-network resolution
+Uses Cloud Domains for DNS registration
+
+# Compute Services
+
+## Compute Engine (GCE)
+
+Zonal resource
+
+Live migration - virtual machines moved to different hardware while running
+
+When you make one of these by clicking around you can copy the `gcloud` construction CLI parameters from the console!!!
+
+
+# Storage
+
+
+> Cloud Storage. Google Cloud provides the following storage options:
+> Zonal standard persistent disk and zonal SSD persistent disk
+> Regional standard persistent disk and regional SSD persistent disk
+> Local SSD for high-performance local block storage
+> Cloud Storage buckets: Object storage.
+> Filestore: High-performance file storage
+> 
+> - From Programming Google Cloud by Rui Costa on page 0 ()
+
+## Object Storage
+
+Needs to be **globally** unique. Ideally workloads that are write once read many (as you have to replace objects to update them)
+
+Lots of different options here that balance price, access time and min retention policy:
+  * Standard
+  * Nealline
+  * Farline
+  * Archive
+
+
+
+> object-based storage uses a flat namespace to store your data. The key functionality of the Cloud Console interface is that it translates this flat namespace to replicate a folder hierarchy. Cloud Storage has no notion of folders.
+> 
+> - From Programming Google Cloud by Rui Costa on page 0 ()
+
+
+> object-based storage uses a flat namespace to store your data. The key functionality of the Cloud Console interface is that it translates this flat namespace to replicate a folder hierarchy. Cloud Storage has no notion of folders.
+> 
+> - From Programming Google Cloud by Rui Costa on page 0 ()
+
+### and bucket set retention period
+
+
+> If you attempt to delete objects younger than the retention period it will result in a PERMISSION_DENIED error.
+> 
+> - From Programming Google Cloud by Rui Costa on page 0 ()
+
+### and PII auditing
+
+
+> We can loop through all the buckets and objects, then scan them for PII information with the Google Cloud Data Loss Prevention API.
+> 
+> - From Programming Google Cloud by Rui Costa on page 0 ()
+
+
+> A bucket lock allows you to create a retention policy that locks the data preventing it from being deleted or overwritten. You can also lock a retention policy. Once it is locked you cannot unlock it; you will only be able to increase the retention period
+> 
+> - From Programming Google Cloud by Rui Costa on page 0 ()
+
+### signed URLs
+
+
+> Signed URLs is a URL that provides access to users and applications for a limited time. The signed URL allows users to access the object without authentication.
+> 
+> - From Programming Google Cloud by Rui Costa on page 0 ()
+
+# Cloud Dataflow
+
+Managed Apache Beam
+
+
+> Apache Beam is a programming model that defines and executes the defined pipeline. The pipelines can be batch and streaming which are exposed to different runners as:
+> Google Cloud Dataflow
+> Apache Spark
+> Apache Flink
+> Apache Apex
+> DirectRunner (a local runner for testing)
+> 
+> - From Programming Google Cloud by Rui Costa on page 0 ()
+
+## Terms
+
+
+> A pipeline defines what steps the runner will execute on your data
+> 
+> - From Programming Google Cloud by Rui Costa on page 0 ()
+
+
+
+> A PCollection defines the data on which your pipeline will operate on
+> 
+> - From Programming Google Cloud by Rui Costa on page 0 ()
+
+
+> A transform is a function that you define that is performed on your data
+> 
+> - From Programming Google Cloud by Rui Costa on page 0 ()
+
+
+> A ParDo is an Apache Beam transform operation. As outlined in the Transforms section, it performs a user defined operation on a collection of elements. The output of a ParDo can be a single element or many elements, however, it does not output a single output per input element. 
+> 
+> - From Programming Google Cloud by Rui Costa on page 0 ()
+
+
+> A Map is another transform operation available in Apache Beam. In the Framework you will be using the beam.Map as you will be performing a one-to-one mapping,
+> 
+> - From Programming Google Cloud by Rui Costa on page 0 ()
+
+
+> Apache Beam I/O connectors let you read/write data into your pipeline as well as write output data
+> 
+> - From Programming Google Cloud by Rui Costa on page 0 ()
+
+
+> As an example, the Framework you are working with has a source of Cloud Pub/Sub and a sink of BigQuery
+> 
+> - From Programming Google Cloud by Rui Costa on page 0 ()
+
+
+> Aggregation is an operation that is performed on many elements to produce some grouped value from those respective elements.
+> 
+> - From Programming Google Cloud by Rui Costa on page 0 ()
+
+
+> Apache Beam provides the following aggregation methods:
+> CoGroupByKey
+> CombineGlobally
+> CombinePerKey
+> CombineValues
+> Count
+> Distinct
+> GroupByKey
+> GroupBy
+> GroupIntoBatches
+> Latest
+> Max
+> Min
+> Mean
+> Sample
+> Sum
+> Top
+> 
+> - From Programming Google Cloud by Rui Costa on page 0 ()
+
+
+> Runners are the software that accepts a pipeline and executes it.
+> 
+> - From Programming Google Cloud by Rui Costa on page 0 ()
+
+
+> Windowing enables you to group operations over the unbounded data set by dividing the data set into windows of finite collections according to their timestamps of the individual elements. You set the following windows with the Apache Beam SDK or Dataflow SQL streaming extensions:
+> Tumbling windows (called fixed windows in Apache Beam)
+> Hopping windows (called sliding windows in Apache Beam)
+> Session windows
+> 
+> - From Programming Google Cloud by Rui Costa on page 0 ()
 
 # Pub Sub
 
@@ -178,6 +382,130 @@ is of interface type `com.google.api.gax.core.ExecutorProvider` which seems to b
 #### See also:
 
   * Learning_Java_Thread_Exector
+
+# Data Stores
+
+## Cloud SQL
+
+Zonal or regional resource scope
+
+Managed relational DB service (mysql, postgres, SQL Server, Cloud Spanner)
+
+## Spanner
+
+regional or multi regional resource scope
+
+ACID compliant... but Google propretary engine.
+multiple write entry points
+
+Cloud Spanner one of those _basically_ breaking CAP theorum technologies.
+
+Much higher entry cost than regular Cloud SQL
+
+### See also
+
+  * [Google's Whitepapers on this tech](https://cloud.google.com/spanner/docs/whitepapers)
+
+## Cloud DataStore / Firestore
+
+NoSQL database with automatic scaling and cost based on data usage (costs scale to 0).
+
+This seems to be the new(?) name for the App Engine object store thing, or at least what it's using now. (Or is backwards compatible with that API).
+
+Document store
+
+ACID compliance
+
+## Big Table
+
+regional resource scope
+Managed NoSQL
+scalable but not serverless
+H-Base compatible
+
+great for many concurrent read/writes
+
+K/V pairs
+
+## Big Query
+
+<<GCP_BigQuery>>
+
+regional resource scope
+managed data warehouse
+relational
+SQL compliant (ANSI:2011)
+seperate compute and storage tiers
+
+pricing:
+  * amount of data in query
+  * amount of data in response
+  * data cost
+
+You _can_ ask for flate rate
+
+## See also
+
+  * [Google Cloud Database Comparison Page](https://cloud.google.com/products/databases)
+
+# GCP Application Deployment Options
+
+## Instance groups
+
+multiple GCE instances grouped together. Integration with auto scaling, LBs.
+
+Managed   <-- you upload an instance template and GCP manages the herd. Also has stateful option.
+unmanaged <-- you add pre-created VMs to the group
+
+## App Engine
+
+### Classic
+
+Scans to 0
+
+BUT with some severe limits.
+
+Languages: Python, Java, PHP, Ruby, Go, Node
+
+### Flexible
+
+min footprint - no scaling to zero here.
+
+## GKE
+
+likely this stuff will be on the test too!
+
+
+## Cloud Functions
+
+upload from web based editor, zip file upload, cloud source repository
+
+Has a testing tab so you can try to invoke the function directly.
+
+
+> Google Cloud Functions is a serverless compute solution that allows you to run event-based applications
+> 
+> - From Programming Google Cloud by Rui Costa on page 0 ()
+
+
+### Triggers
+
+# Cloud Deployment Manager
+
+IaC
+
+... does not really have a dashboard
+
+Templates can lookup values from a Python (and others?) script
+
+Can also use DM Convert to export to K8s Resource Model or Terraform (!!!)
+
+can use `--preview` on CLI to see what resource types it's going to create
+
+# Cloud AutoML
+
+No service scope documented
+NLP, translation, video intelligence, vision, ?? audio transscriptions ??
 
 # See Also
 

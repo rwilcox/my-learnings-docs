@@ -170,7 +170,7 @@ Lots of different options here that balance price, access time and min retention
   #:author  "Rui Costa"
   #:page-number 0]{We can loop through all the buckets and objects, then scan them for PII information with the Google Cloud Data Loss Prevention API.}
 
-@quote-highight[
+@quote-highlight[
 #:title "Programming Google Cloud"
  #:author  "Rui Costa"
   #:page-number 0]{A bucket lock allows you to create a retention policy that locks the data preventing it from being deleted or overwritten. You can also lock a retention policy. Once it is locked you cannot unlock it; you will only be able to increase the retention period}
