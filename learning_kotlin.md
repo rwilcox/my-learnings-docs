@@ -200,6 +200,8 @@ TODO: read Baeldug article
 
 # Coroutines and kotlinx-coroutines
 
+Read [How Are Coroutines Different From Java's Thread Executor](https://stackoverflow.com/a/55645380/224334) either before, or after, because WOW. Then go read about what kotlinx.coroutines gives you.
+
 ## builders
 
 | Builder                  | Description                                                                        |
@@ -316,6 +318,10 @@ See also:
 See my RxJava specific notes: Learning_Java_Rx
 
 [kotlin has a library about this](https://github.com/Kotlin/kotlinx.coroutines/tree/master/reactive/kotlinx-coroutines-rx3)
+
+#### calling a `suspend` function from a non-suspend function
+
+?? use `runBlocking` ?
 
 ## Book recommendations
 
