@@ -14,6 +14,12 @@ title: 'Learnings: Java: Concurrency'
     + [and volatile keyword](#and-volatile-keyword)
       - [avoiding volatile](#avoiding-volatile)
     + [and fairness](#and-fairness)
+  * [>](#)
+    + [Fun different types of executors](#fun-different-types-of-executors)
+- [Java reactive / concurrency stuff >](#java-reactive--concurrency-stuff-)
+  * [Futures](#futures)
+    + [Neat instance methods on CompletableFuture](#neat-instance-methods-on-completablefuture)
+    + [Wait huh I want to pass something into supplyAsync or whatever](#wait-huh-i-want-to-pass-something-into-supplyasync-or-whatever)
 
 <!-- tocstop -->
 

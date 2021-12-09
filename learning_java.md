@@ -26,11 +26,6 @@ title: 'Learnings: Java'
 - [Development Environment in Docker : >](#development-environment-in-docker--)
   * [Doing it yourself](#doing-it-yourself)
   * [IntelliJ Instructions on this](#intellij-instructions-on-this)
-- [Java reactive / concurrency stuff >](#java-reactive--concurrency-stuff-)
-  * [Fun different types of executors](#fun-different-types-of-executors)
-  * [Futures](#futures)
-    + [Neat instance methods on CompletableFuture](#neat-instance-methods-on-completablefuture)
-    + [Wait huh I want to pass something into supplyAsync or whatever](#wait-huh-i-want-to-pass-something-into-supplyasync-or-whatever)
 - [See also:](#see-also)
 - [Book Recommendations](#book-recommendations)
 
