@@ -425,6 +425,9 @@ min footprint - no scaling to zero here.
 
 likely this stuff will be on the test too!
 
+### Neat GKE operator hacks
+
+If you go into a pod in the toolbar / menu bar there is a `KUBECTL` dropdown. This will let you - in addition to other things - attach to the running pod in the Google Cloud Shell web thing.
 
 ## Cloud Functions
 
