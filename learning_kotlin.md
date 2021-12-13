@@ -92,6 +92,19 @@ Also, Unit is the default return type and declaring it is optional, therefore, t
 
 There is a `Nothing` type which _kinda_ works like null but with more type checking???!!!
 
+Classes, Objects and Instances
+================================
+
+## class FooBar
+
+Like Java BUT not the static part
+
+
+## object FooBar
+
+Declares a class AND ALSO it's a singleton
+
+
 Duration
 ====================
 
