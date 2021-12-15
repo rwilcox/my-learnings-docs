@@ -429,6 +429,33 @@ likely this stuff will be on the test too!
 
 If you go into a pod in the toolbar / menu bar there is a `KUBECTL` dropdown. This will let you - in addition to other things - attach to the running pod in the Google Cloud Shell web thing.
 
+### and specialized networking concerns
+
+> For example, in Google Cloud, any traffic to the internet must come from a VM's IP. When containers are used, as in Google Kubernetes Engine, the Pod IP will be rejected for egress. To avoid this, we must hide the Pod IP behind the VM's own IP address - generally known as "masquerade"
+
+Most IPs are masquerade-ed **EXCEPT** these CIDR blocks:
+
+  * 10.0.0.0/8
+  * 172.168.0.0/12
+  * 192.168.0.0/16
+
+[Source: IP-MASQ-AGENT](https://kubernetes.io/docs/tasks/administer-cluster/ip-masq-agent/)
+
+If you need to talk to IPs within these ranges - like for example you're talking to another Google hosted cloud solution via some kind of peer VPC thing - you may need to force a range ON.
+
+Ways to do this:
+
+  * [ip-masq-agent](https://github.com/kubernetes-sigs/ip-masq-agent) <-- 500 lines of Go code on top of IPTables
+  * [k8s-custom-iptables](https://github.com/bowei/k8s-custom-iptables) <-- 100 lines of Bash on top of IPTables
+
+This works at all because [kube-proxy currently uses iptables under the hood](https://itnext.io/kubernetes-service-load-balancing-kube-proxy-and-iptables-da3ebf1c802a). Which works on both incoming and outbound traffic.
+
+#### See Also
+
+  * [Configuring an IP masquerade agent](https://cloud.google.com/kubernetes-engine/docs/how-to/ip-masquerade-agent)
+  * [K8s Networking demystified: a brief guide](https://www.stackrox.io/blog/kubernetes-networking-demystified/)
+
+
 ## Cloud Functions
 
 upload from web based editor, zip file upload, cloud source repository
