@@ -423,6 +423,8 @@ min footprint - no scaling to zero here.
 
 ## GKE
 
+<<Google_Cloud_Platform_Kubernetes_Engine>>
+
 likely this stuff will be on the test too!
 
 ### Neat GKE operator hacks

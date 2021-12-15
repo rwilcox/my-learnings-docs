@@ -422,6 +422,10 @@ Helm: (from the deis people): create a "chart" which gets turned into a pod (eer
 
 - [REVIEW]: worth looking into when thinking about making this stuff developer repeatable????
 
+Networking
+------------------
+
+Are you on GCP? You might want to read Google_Cloud_Platform_Kubernetes_Engine
 
 # Book Recommendations
 
