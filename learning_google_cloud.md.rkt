@@ -306,7 +306,7 @@ Communication can be:
 > Multiple subscribers can make pull calls to the same "shared" subscription. Each subscriber will receive a subset of the messages.
 [Source](https://cloud.google.com/pubsub/docs/subscriber#push-subscription) see comparison table
 
-Q: Are you running small payloads?
+##### And H/A considerations
 
 > To effectively load-balance across all your subscribers when the message load is small, or to achieve the goal of never starving a subscriber when you have a small message load, I would recommend using synchronous pull. Here's an example,
 
