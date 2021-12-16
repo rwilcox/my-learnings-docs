@@ -276,13 +276,48 @@ From [Cloud Pub/Sub Documentation](https://cloud.google.com/pubsub/docs/overview
 
 ## Core concepts
 
+  * Publisher
   * Topic
-  * Subscription
+  * Subscription <-- A topic can have multiple subscriptions, but a given subscription belongs to a single topic.
+  * Subscriber <-- program or instance of listening to / consuming a subscription
   * Message
   * Message Attribute <-- Messages are k/v pairs a publisher can define
   * ACK <-- signal sent by a subscriber after it has successfully retrieved (? and processed?) the message
 
-Messages pushed out to all subscribers in Cloud Pub/Sub AT LEAST once. (aka: yes a subscriber does not pull from a consumer group / partition, essentially each subscription is its own stream)
+Messages pushed out to all subscriptions in Cloud Pub/Sub AT LEAST once. (aka: yes a subscriber does not pull from a consumer group / partition, essentially each subscription is its own stream)
+
+> Pub/Sub delivers each published message at least once for every subscription.
+
+[Source](https://cloud.google.com/pubsub/docs/subscriber) "at least once delivery section"
+
+
+Communication can be:
+
+  * one to many <-- fan out
+  * many to one
+  * many to many
+
+### Streaming data patterns and how to architect them
+
+#### Load balancing
+
+"Load balancing" processing: Create a subscription to a topic and have multiple subscribers subscribe to the same subscription
+
+> Multiple subscribers can make pull calls to the same "shared" subscription. Each subscriber will receive a subset of the messages.
+[Source](https://cloud.google.com/pubsub/docs/subscriber#push-subscription) see comparison table
+
+Q: Are you running small payloads?
+
+> To effectively load-balance across all your subscribers when the message load is small, or to achieve the goal of never starving a subscriber when you have a small message load, I would recommend using synchronous pull. Here's an example,
+
+[Source](https://github.com/googleapis/java-pubsub/issues/582#issuecomment-863603463)
+
+#### Fan out
+
+"Fan out" need to do N different things with this message in parallel: create N subscriptions, each with howevever many subscribers. Thus the message goes to every subscription. Say one subscription just cares about user notification, one subscription just cares about bookkeeping, etc.
+
+[Source](https://cloud.google.com/pubsub/architecture#the_basics_of_a_publishsubscribe_service)
+
 
 ### On Delivery methods
 
@@ -290,6 +325,7 @@ Methods:
 
   * Push <-- each message goes to a subscriber defined endpoint
   * Pull <-- your application asks for next message
+  * Synchronous pull <-- like pull but more like polling
 
 ### On ACK
 
@@ -332,6 +368,7 @@ is of interface type `com.google.api.gax.core.ExecutorProvider` which seems to b
 #### See also:
 
   * Learning_Java_Thread_Exector
+  * [Pub/Sub Made Easy Youtube playlist from Google](https://www.youtube.com/playlist?list=PLIivdWyY5sqKwVLe4BLJ-vlh9r9zCdOse)
 
 # Data Stores
 
@@ -433,7 +470,7 @@ If you go into a pod in the toolbar / menu bar there is a `KUBECTL` dropdown. Th
 
 ### and specialized networking concerns
 
-> For example, in Google Cloud, any traffic to the internet must come from a VM's IP. When containers are used, as in Google Kubernetes Engine, the Pod IP will be rejected for egress. To avoid this, we must hide the Pod IP behind the VM's own IP address - generally known as "masquerade"
+> For example, in Google Cloud, any traffic to the internet must come from a VM's IP. When containers are used, as in Google Kubernetes Engine, the Pod IP will be **rejected** for egress. To avoid this, we must hide the Pod IP behind the VM's own IP address - generally known as "masquerade"
 
 Most IPs are masquerade-ed **EXCEPT** these CIDR blocks:
 
