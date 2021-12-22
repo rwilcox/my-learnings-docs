@@ -56,6 +56,7 @@ title: 'Learnings: Kubernetes'
   * [Questions](#questions)
   * [Service Catalog](#service-catalog)
   * [Additional Tools](#additional-tools)
+  * [Networking](#networking)
 - [Book Recommendations](#book-recommendations)
 
 <!-- tocstop -->
