@@ -5,7 +5,9 @@
 (require racket/file)
 (require racket/pretty)
 
-(provide quote-highlight quote-note)
+(provide quote-highlight quote-note at-sign)
+
+(define (at-sign) "@")
 
 (define (short-str-join s)
   (string-join s ""))
