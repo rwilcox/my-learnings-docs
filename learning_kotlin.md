@@ -132,6 +132,20 @@ primary constructor has to have at least one parameter, parameters must be val/v
 
 Random Notes
 ======================
+methods are final by default
+
+### kinds of methods
+
+Overriding: need to BOTH add `override` in your subclasses declaration of a method AND add `open` to your declaration of the mehod in the super class
+
+abstract: (open by default)
+
+
+NOTE: that `override` also by default means _your_ methods are `open` too!
+
+
+Notes
+-------------
 
 By default, Java void is mapped to Unit type in Kotlin. This means that any method that returns void in Java when called from Kotlin will return Unit — for example the System.out.println() function.
 
@@ -140,6 +154,37 @@ Also, Unit is the default return type and declaring it is optional, therefore, t
 [Source](https://www.baeldung.com/kotlin/void-type)
 
 There is a `Nothing` type which _kinda_ works like null but with more type checking???!!!
+
+Classes, Objects and Instances
+================================
+
+Everything in Kotlin is `public final` by default
+
+So if you want an extendable class you need to use `open class MySuperClass`.
+`abstract` classes are open by default.
+
+
+## class FooBar
+
+Like Java BUT not the static part
+
+
+## object FooBar
+
+Declares a class AND ALSO it's a singleton
+
+## extension functions
+
+`fun Class.someMethod()`
+
+In this you can access all the public members in `Class`
+
+These can also be given access controls and thus only usable inside the method it was declared in. But to force it can do `final override fun foobar()` in declaration.
+
+## data classes
+
+can NOT be opened, inner, or abstract: are final no way around this. (They can _inherit_).
+
 
 Duration
 ====================
@@ -247,6 +292,41 @@ TODO: read Baeldug article
 
   * [lateinit vs lazy property in Kotlin](https://agrawalsuneet.github.io/blogs/lateinit-vs-lazy-property-in-kotlin/)
   * [Lazy initialization in Kotlin by Baeldung](https://www.baeldung.com/kotlin/lazy-initialization)
+
+
+# Build Tools and Kotlin
+
+Q: What version of Kotlin is my Gradle running?
+
+In your build.gradle.kt file - and this can be somewhat anywhere, do
+
+`println(embeddedKotlinVersion)`
+
+`gradle -version` will also tell you that number
+
+Q: Can I check for this in my Kotlin code?
+
+Sure, do something like this
+
+```kotlin
+
+@SinceKotlin("1.6")
+class IfIErrorThenCompilerIsNotKotlinOneSix {
+
+}
+
+
+fun main() {
+    IfIErrorThenCompilerIsNotKotlinOneSix()
+}
+
+```
+
+## and IntelliJ
+
+### Gradle
+
+Gradle Settings -> "Build and Run using Gradle" vs IntelliJ here.
 
 # Coroutines and kotlinx-coroutines
 
