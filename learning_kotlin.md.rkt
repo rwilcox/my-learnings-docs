@@ -1,3 +1,6 @@
+#lang scribble/text
+@(require "scribble-utils.rkt")
+
 ---
 path: /learnings/kotlin
 title: 'Learnings: Kotlin'
@@ -67,7 +70,7 @@ val vs var
 Methods
 ===================
 
-Ways to declare a method
+## Ways to declare a method
 
 `fun methodName(parameterOne: ParameterType): ReturnType {}`
 
@@ -81,15 +84,62 @@ NOTES: you can use these labels at the call site
 
 (means you can also pass parameters out of order if they are all labelled)
 
-Classes
-=======================
+## As Lambdas
 
-### Primary and secondary constructors
+@quote-highlight[#:title "The Joy of Kotlin"
+  #:author  "Pierre-Yves Saumont"
+  #:page-number 0]{Kotlin offers a simplified syntax for lambdas with a single parameter. This parameter is implicitly named it.}
+@quote-highlight[#:title "The Joy of Kotlin"
+  #:author  "Pierre-Yves Saumont"
+  #:page-number 0]{The value returned by the lambda is the value of the expression on the last line. }
+
+### Variables
+
+@quote-highlight[#:title "The Joy of Kotlin"
+  #:author  "Pierre-Yves Saumont"
+  #:page-number 0]{rd.map { it * 1.35 }
+Here the function { it * 2.35 } has no name. But you could give it a name in order to be able to reuse it:
+
+val ri: Result<Int> = ...
+val rd: Result<Double> = ri.flatMap(inverse)
+val function: (Double) -> Double = { it * 2.35 }
+val result = rd.map(function)}
+
+### More syntax shortcuts
+
+@quote-highlight[#:title "The Joy of Kotlin"
+  #:author  "Pierre-Yves Saumont"
+  #:page-number 0]{The { x } syntax is the simplest way to write any constant function returning x, whatever argument is used.}
+
+## Methods that take lambdas
+
+@quote-highlight[#:title "The Joy of Kotlin"
+  #:author  "Pierre-Yves Saumont"
+  #:page-number 0]{When the lambda is the last argument of a function, it can be put outside of the parentheses:}
+
+
+# Classes
+
+## Access control or visibility
+
+@quote-highlight[#:title "The Joy of Kotlin"
+  #:author  "Pierre-Yves Saumont"
+  #:page-number 0]{unlike Java, the enclosing class has no access to private inner or nested classes}
+
+@quote-highlight[#:title "The Joy of Kotlin"
+  #:author  "Pierre-Yves Saumont"
+  #:page-number 0]{Unlike Java, Kotlin has no package private visibility (the default visibility in Java). }
+
+@quote-highlight[#:title "The Joy of Kotlin"
+  #:author  "Pierre-Yves Saumont"
+  #:page-number 0]{An element can also be declared internal, meaning it’s only visible from inside the same module. A module is a set of files compiled together}
+
+## Primary and secondary constructors
 
 TODO: primary vs secondary constructors
 
 
-### Properties
+## Properties
 
 (auto generated) getters / setters of properties have to have the same or less than access permissions than their backing field
 
@@ -114,7 +164,7 @@ set(value) {
 }
 ```
 
-### data classes
+## data classes
 
 When you just want to store information about some state
 
@@ -130,11 +180,34 @@ based on parameters in primary constructor.
 
 primary constructor has to have at least one parameter, parameters must be val/var. Can't be abstract, sealed or inner class.
 
-Random Notes
-======================
+## operator overloading
+
+@quote-highlight[#:title "The Joy of Kotlin"
+  #:author  "Pierre-Yves Saumont"
+  #:page-number 0]{The invoke function declared with the keyword operator can be called as ClassName().}
+
+@quote-highlight[#:title "The Joy of Kotlin"
+  #:author  "Pierre-Yves Saumont"
+  #:page-number 0]{Note that you can’t use the List() syntax to call the invoke function without an argument. You must explicitly call it; otherwise, Kotlin thinks you’re calling a constructor}
+
+# Kotlin Standard Library
+
+@quote-highlight[#:title "The Joy of Kotlin"
+  #:author  "Pierre-Yves Saumont"
+  #:page-number 0]{MutableMap can’t be used in a multi-threaded environment without providing some protection mechanisms that are difficult to design correctly and to use. The Map type, on the other hand, is protected against these kind of problems}
+
+
+# Random Notes
+
 methods are final by default
 
-### kinds of methods
+## try with resources a like
+
+@quote-highlight[#:title "The Joy of Kotlin"
+  #:author  "Pierre-Yves Saumont"
+  #:page-number 0]{try with resource construct, provided these resources implement either Closable or AutoClosable. The main difference is that to achieve this, Kotlin offers the use function:}
+
+## kinds of methods
 
 Overriding: need to BOTH add `override` in your subclasses declaration of a method AND add `open` to your declaration of the mehod in the super class
 
@@ -144,8 +217,7 @@ abstract: (open by default)
 NOTE: that `override` also by default means _your_ methods are `open` too!
 
 
-Notes
--------------
+## Unit, null, void, and nothing
 
 By default, Java void is mapped to Unit type in Kotlin. This means that any method that returns void in Java when called from Kotlin will return Unit — for example the System.out.println() function.
 
@@ -241,11 +313,21 @@ When you need to cast to a generic thing
 			something.forEach { println(it) } // The items are typed as `Any?`
 		}
 
-Generic Functions
+Generics
 ======================
 
-And Type Erasure <<Kotlin_Type_Erasure>>
------------------------
+Genera Generics Information
+------------------------
+
+@quote-highlight[#:title "The Joy of Kotlin"
+  #:author  "Pierre-Yves Saumont"
+  #:page-number 0]{Comparable is contravariant on T, meaning that the type parameter T occurs only in the in position}
+
+
+Generic Functions
+--------------------------
+
+### And Type Erasure <<Kotlin_Type_Erasure>>
 
 CAN get around this by using inline functions and `reified` keyword
 
@@ -259,7 +341,28 @@ See also:
   * https://kotlinlang.org/docs/reference/inline-functions.html#reified-type-parameters
   * https://stackoverflow.com/a/48960832/224334
 
+# Delegates
+
+@quote-highlight[#:title "The Joy of Kotlin"
+  #:author  "Pierre-Yves Saumont"
+  #:page-number 0]{Kotlin also supplies standard delegates, among which Lazy can be used to implement laziness:}
+
+
+## Aka how as lay is implemented
+
+
 # Ughhh Kotlin makes me sad
+
+## tailrecursion support
+
+@quote-highlight[#:title "The Joy of Kotlin"
+  #:author  "Pierre-Yves Saumont"
+  #:page-number 0]{Kotlin implements Tail Call Elimination (TCE). This means that when a function call to itself is the last thing the function does (meaning that the result of this call isn’t used in a further computation), Kotlin eliminates this tail call. But it won’t do it without you asking for it, which you can do by prefixing the function declaration with the tailrec keyword:
+}
+@quote-highlight[#:title "The Joy of Kotlin"
+  #:author  "Pierre-Yves Saumont"
+  #:page-number 0]{if you indicate that your function has a tail-recursive implementation, Kotlin can check the function and let you know if you’ve made a mistake}
+
 
 ## RAII vs lazy
 
@@ -310,7 +413,7 @@ Sure, do something like this
 
 ```kotlin
 
-@SinceKotlin("1.6")
+@at-sign{}SinceKotlin("1.6")
 class IfIErrorThenCompilerIsNotKotlinOneSix {
 
 }
@@ -327,6 +430,33 @@ fun main() {
 ### Gradle
 
 Gradle Settings -> "Build and Run using Gradle" vs IntelliJ here.
+
+# Basic Language Concepts
+
+## String
+
+@quote-highlight[#:title "The Joy of Kotlin"
+  #:author  "Pierre-Yves Saumont"
+  #:page-number 0]{multi-line strings by using the triple-quoted string (""") with the trimMargin}
+
+## Equality
+
+@quote-highlight[#:title "The Joy of Kotlin"
+  #:author  "Pierre-Yves Saumont"
+  #:page-number 0]{Identity (also called referential equality) is tested with ===. Equality (sometimes called structural equality) is tested with ==, which is a shorthand for equals}
+
+## Casting
+
+@quote-highlight[#:title "The Joy of Kotlin"
+  #:author  "Pierre-Yves Saumont"
+  #:page-number 0]{val result: String = payload as String
+If the object isn’t of the right type, a ClassCastException is thrown}
+
+@quote-highlight[#:title "The Joy of Kotlin"
+  #:author  "Pierre-Yves Saumont"
+  #:page-number 0]{This is called a smart cast because in the first branch of the if function, Kotlin knows that payload is of type String, so it performs the cast automatically. You can also use smart casts with the when function:}
+
+
 
 # Coroutines and kotlinx-coroutines
 
@@ -456,6 +586,44 @@ See my RxJava specific notes: Learning_Java_Rx
 ## Book recommendations
 
   * [Kotlin Coroutines book](https://leanpub.com/coroutines)
+
+# and Java Interop
+<<Kotlin_Java_Interropt>>
+
+@quote-highlight[#:title "The Joy of Kotlin"
+  #:author  "Pierre-Yves Saumont"
+  #:page-number 0]{The Java way for dealing with a default value is through overloading. To make the function available as overloaded Java methods, use the JvmOverloads annotation}
+
+@quote-highlight[#:title "The Joy of Kotlin"
+  #:author  "Pierre-Yves Saumont"
+  #:page-number 0]{You can change the name by which a Kotlin function can be called from Java code. For this, you need to use the JvmName("newName") annotation on the Kotlin function}
+
+@quote-highlight[#:title "The Joy of Kotlin"
+  #:author  "Pierre-Yves Saumont"
+  #:page-number 0]{Kotlin public fields are exposed as Java properties (meaning with getters and setters). If you want to use them as Java fields, you have to annotate them in the Kotlin code like this: JvmField}
+
+@quote-highlight[#:title "The Joy of Kotlin"
+  #:author  "Pierre-Yves Saumont"
+  #:page-number 0]{Extension functions in Kotlin are compiled to static functions with the receiver as an additional parameter.}
+
+@quote-highlight[#:title "The Joy of Kotlin"
+  #:author  "Pierre-Yves Saumont"
+  #:page-number 0]{Unlike Kotlin, Java doesn’t have function types; functions are handled by converting lambdas into something that’s equivalent to a Single Abstract Method (or SAM) interface implementation. (It isn’t an implementation of the interface, but it acts as if it’s one.)
+
+Kotlin, on the other hand, has true function types, so no such conversion is needed. But when calling Java methods taking SAM interfaces as their parameters, Kotlin functions are automatically converted.}
+
+@quote-highlight[#:title "The Joy of Kotlin"
+  #:author  "Pierre-Yves Saumont"
+  #:page-number 0]{NOTE Kotlin supports the JSR-305 specification, so if you need more Java annotation support, refer to https://kotlinlang.org/docs/reference/java-interop.html.}
+
+@quote-highlight[#:title "The Joy of Kotlin"
+  #:author  "Pierre-Yves Saumont"
+  #:page-number 0]{standard Java assertions, which are available in Kotlin. But as assertions,can be disabled at runtime}
+
+@quote-highlight[#:title "The Joy of Kotlin"
+  #:author  "Pierre-Yves Saumont"
+  #:page-number 0]{You must use backticks to reference the in field of a Java System class because in is a reserved word in Kotlin.}
+
 
 # Book Recommendations
 

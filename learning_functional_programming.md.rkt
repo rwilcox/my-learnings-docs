@@ -1,3 +1,6 @@
+#lang scribble/text
+@(require "scribble-utils.rkt")
+
 ---
 path: /learnings/functional_programm
 title: 'Learnings: Functional Programming'
@@ -25,6 +28,12 @@ Monad laws:
 # Patterns in static typing languages
 
 Result, Either, Some types
+
+# Dictionaries, HashMaps, etc
+
+@quote-highlight[#:title "The Joy of Kotlin"
+  #:author  "Pierre-Yves Saumont"
+  #:page-number 0]{Associative collections are collections that can be viewed as a function. Given an object o, a function f(o) returns true or false according to whether this object belongs to the collection or no}
 
 # See also
 
