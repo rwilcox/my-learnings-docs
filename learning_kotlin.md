@@ -61,7 +61,7 @@ val vs var
 ------------
 
   * var: mutable variable (can be reassigned)
-  * val: read only variable (not NOT be reassigned, like ES6's `const`, or `final` in Java)
+  * val: read only variable (not NOT be reassigned, like ES6's `const`, or `final` in Java). Mneomnic: both fina**l** and va**l** end with "l".
 
 
 Methods
@@ -81,8 +81,57 @@ NOTES: you can use these labels at the call site
 
 (means you can also pass parameters out of order if they are all labelled)
 
-Notes
--------------
+Classes
+=======================
+
+### Primary and secondary constructors
+
+TODO: primary vs secondary constructors
+
+
+### Properties
+
+(auto generated) getters / setters of properties have to have the same or less than access permissions than their backing field
+
+technically access of a property is - in background - using its auto-generated setter/getter
+
+migrating a previously used accessor method to use a new backing field / implementation:
+
+Two places to declare properties:
+
+  * primary constructor
+  * inside the class
+
+```kotlin
+
+var fullTime = maybeParameterFromPrimaryConstructorOrNot
+get() {
+  something
+  return field  // ONLY place you can use this keyword!
+}
+set(value) {
+  field = value
+}
+```
+
+### data classes
+
+When you just want to store information about some state
+
+`data class MyClass(val name: String, val anotherThing: Int) {}`
+
+This gives us default values for:
+  * toString
+  * equals
+  * hashCopy
+  * copy
+
+based on parameters in primary constructor.
+
+primary constructor has to have at least one parameter, parameters must be val/var. Can't be abstract, sealed or inner class.
+
+Random Notes
+======================
 
 By default, Java void is mapped to Unit type in Kotlin. This means that any method that returns void in Java when called from Kotlin will return Unit — for example the System.out.println() function.
 
