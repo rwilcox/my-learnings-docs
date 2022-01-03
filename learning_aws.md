@@ -47,6 +47,18 @@ title: 'Learnings: AWS'
     + [APIs on Amplify](#apis-on-amplify)
       - [AWS also includes a FraphQL console to poke at the store using graphql queries / mutations](#aws-also-includes-a-fraphql-console-to-poke-at-the-store-using-graphql-queries--mutations)
   * [>](#)
+  * [Creating a No Code Backend with DynamoDB, Cognito, DynamoDB and AWS Gateway](#creating-a-no-code-backend-with-dynamodb-cognito-dynamodb-and-aws-gateway)
+    + [Notes on getting Dynomodb and API Gateway talking to each other](#notes-on-getting-dynomodb-and-api-gateway-talking-to-each-other)
+      - [Mapping documents](#mapping-documents)
+    + [API Gateway + Cognito and querying for user's documents](#api-gateway--cognito-and-querying-for-users-documents)
+      - [Integration Request Mapping template for index actions (with ownership)](#integration-request-mapping-template-for-index-actions-with-ownership)
+      - [Notes](#notes)
+      - [Integration Response Mapping Template for index actions](#integration-response-mapping-template-for-index-actions)
+      - [Creation / POST actions](#creation--post-actions)
+    + [Notes on exposing API Gateway to the rest of the world (likely through Route 53)](#notes-on-exposing-api-gateway-to-the-rest-of-the-world-likely-through-route-53)
+      - [And CORS](#and-cors)
+    + [Operations](#operations)
+    + [See also](#see-also)
 
 <!-- tocstop -->
 

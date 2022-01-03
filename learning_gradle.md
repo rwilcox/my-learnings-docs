@@ -15,6 +15,8 @@ title: 'Learnings: Gradle'
   * [See also](#see-also)
 - [>](#)
   * [Pull dependancies out of pom.xml and dynamically add them to the gradle build](#pull-dependancies-out-of-pomxml-and-dynamically-add-them-to-the-gradle-build)
+- [Making your own Gradle plugins (and or buildSrc)](#making-your-own-gradle-plugins-and-or-buildsrc)
+  * [And Kotlin version issues](#and-kotlin-version-issues)
 
 <!-- tocstop -->
 

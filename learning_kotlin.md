@@ -56,6 +56,7 @@ title: 'Learnings: Kotlin'
 - [Build Tools and Kotlin](#build-tools-and-kotlin)
   * [and IntelliJ](#and-intellij)
     + [Gradle](#gradle)
+      - [See also:](#see-also)
 - [Basic Language Concepts](#basic-language-concepts)
   * [String](#string)
   * [Equality](#equality)
@@ -474,6 +475,10 @@ fun main() {
 ### Gradle
 
 Gradle Settings -> "Build and Run using Gradle" vs IntelliJ here.
+
+#### See also:
+
+  * Kotlin_Gradle_BuildSrc
 
 # Basic Language Concepts
 
