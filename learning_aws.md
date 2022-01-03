@@ -364,3 +364,114 @@ Can also use Google Auth time based one time passwords from the users auth app o
 Also [supports Sign In with Apple](https://aws.amazon.com/about-aws/whats-new/2019/11/amazon-cognito-now-supports-sign-in-with-apple/)
 
 Also lets people sign in with their Facebook or Google account
+
+## Creating a No Code Backend with DynamoDB, Cognito, DynamoDB and AWS Gateway
+
+If your data model fits in a document database, you can
+
+Advantages:
+
+  * free
+  * good for startups where you're optimizing either cost or code
+  * API gateway can abstract away when you move to (a real full code solution) from having API gateway do all the transformation logic
+  * Ooops Just Mapping Code
+
+Concepts:
+
+Resource -> Stage has many resources -> custom domain names map resources + stages to a URL / path exposed to the Internet.
+
+
+### Notes on getting Dynomodb and API Gateway talking to each other
+
+[DynamoDB actions](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_Operations.html) (what you put in the Action section of the integration request)
+
+Remember regardless of what ACTION the request comes in as, you need to send POST requests into Dynamo.
+
+#### Mapping documents
+
+[Resolver mapping template utility reference](https://docs.aws.amazon.com/appsync/latest/devguide/resolver-util-reference.html) looks like it's about AppSync, but these functions also seem to be there for API Gateway mapping documents.
+
+[What's in the $context object anyway?](https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-mapping-template-reference.html)
+
+
+### API Gateway + Cognito and querying for user's documents
+
+#### Integration Request Mapping template for index actions (with ownership)
+
+Assumes that the DynamoDB document has a UserId field, which is populated with the Cognito username. You want to, on the "server side" ask for the documents (the logged in user) owns, for security reasons. Which involves some processing logic in the mapping document.
+
+Content-Type: `application/json`
+
+```json
+{
+  "TableName": PUT_YOUR_TABLE_NAME_HERE_AS_A_STRING,
+  "FilterExpression": "UserId = :val",
+  "ExpressionAttributeValues": { ":val": {"S": "$context.authorizer.claims['cognito:username']"} }
+}
+```
+
+(Yes, you need tho `{"S": ..}` stuff!)
+
+You need to specify action. [AWS DynamoDB Actions API reference](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_Operations.html)
+
+#### Notes
+
+I _had to_ **explicitly** set my request's Content-Type to `application/json` to get the mapper to pick up what I was trying to do.
+
+#### Integration Response Mapping Template for index actions
+
+You'll need to process DyamoDB's results to a better format, as it will return the attribute type where sterotypically REST apis would just return the value.
+
+So `"foobar": {"S": "baz"}`. Which is very odd. You'll need to map the DynamoDB results back to something useful
+
+In the Integration Response, the mapping template:
+
+`"foobar": "$elem.SomeField.S"`
+
+NOT returning the attribute type implementation detail will give us a more stereotypical API for our users (and if we rip up this endpoint with something less "no code").
+
+This does mean you'll need to transform every field from your data source. Setting up a Model for your object type (on the left sidebar) will at least give you hints about what fields you need to process.
+
+Since you'll need to loop over _multiple_ documents coming back from DynamoDB (it's an index page after all) you need to use a VTL loop. Putting these facts together...
+
+```json
+#set($inputRoot = $input.path('$'))
+{
+  "YOUR_OBJECT_TYPE_HERE": [
+    #foreach($elem in $inputRoot.Items) {
+      "user_id": "$elem.UserId.S",
+      "title": "$elem.title.S"
+    }
+    #end
+  ]
+}
+
+```
+
+#### Creation / POST actions
+
+Getting values from the post: `    "somefieldInDynamo": {"S": $input.json('$.someField')}`
+
+For documentId I cheated and just used `    "DocumentId": { "S": "$context.requestTimeEpoch" }`. The Dynamodb design documents say to **not** do this for partition keys but I don't have that much of a choice with regard to auto-generating keys.
+
+### Notes on exposing API Gateway to the rest of the world (likely through Route 53)
+
+Work through [Routing Traffic to an Amazon API Gateway API by using your domain name](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-to-api-gateway.html)
+
+In API Gateway under the custom domains, you can set up API mappings - mapping a URL with an API Gateway Resource you created.
+
+#### And CORS
+
+if you have an API gateway route you want to run locally, you'll likely just need to set the `Access-Control-Allow-Origin` header to `*` (not multiple domains, that doesn't seem to work, or I didn't know how to set it up correctly)
+
+### Operations
+
+Logging: the logging stuff, through to CloudWatch logs, is really good at seeing what your mapping documents are doing.
+
+You may need to set up the IAM permissions correctly, [In the global API gateway Settings](https://stackoverflow.com/a/59057471/224334).
+
+### See also
+
+  * [Noise.getoto.net: Using Amazon API Gateway As A Proxy For DynamoDB](https://noise.getoto.net/2016/02/26/using-amazon-api-gateway-as-a-proxy-for-dynamodb/)
+
+Yes, you can run all this stuff through the serverless application model infrastructure as code stuff, including uploading OpenAPI documents with API Gateway extensions for the mapping document. If I was doing this for a paying project I might just leave this in, created by hand, because it's not that hard to set up AND if the project is updating these mappings a lot - or really wanting more than Just Mapping Code - that's probably a good sign at you're going to need some real code (perhaps implemented via a lambda? Or maybe a real server-ful deployment somewhere...)
