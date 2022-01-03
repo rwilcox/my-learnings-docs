@@ -394,6 +394,8 @@ Methods:
 > 
 > - From Programming Google Cloud by Rui Costa on page 0 ()
 
+A topic has many subscriptions, and each subscription can have many subscribers
+
 ## Replayability
 
 
