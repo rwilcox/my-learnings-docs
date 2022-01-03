@@ -339,6 +339,8 @@ Methods:
   #:author  "Rui Costa"
   #:page-number 0]{The way I like to define it is that a topic is not the holding bucket of the message, but rather the subscription is the holding bucket.}
 
+A topic has many subscriptions, and each subscription can have many subscribers
+
 ## Replayability
 
 @quote-highlight[#:title "Programming Google Cloud"

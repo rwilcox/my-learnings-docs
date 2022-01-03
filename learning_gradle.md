@@ -89,3 +89,21 @@ You can, however, get the best of both worlds through these hacks
             }
         }
     }
+
+# Making your own Gradle plugins (and or buildSrc)
+
+## And Kotlin version issues
+
+<<Kotlin_Gradle_BuildSrc>>
+
+If you are [using buildSrc to abstract imperative logic](https://docs.gradle.org/current/userguide/organizing_gradle_projects.html)
+
+In [Gradle 7.3.3 Gradle plugins target Kotlin 1.4 for compatibility reasons](https://docs.gradle.org/7.3.3/userguide/compatibility.html).
+
+Except that version - since Kotlin 1.6 is out as of the time of this writing - is deprecated with a compiler warning (Which isn't good if you run -Wall)
+
+For now the best thing to do is to turn off -Wall in your buildSrc build.gradle.kt file, which hopefully shouldn't affect the rest of your project.
+
+Github issues in Gradle repo about this:
+  * ["Please remove fixed Kotlin runtime version limitation in Gradle"](https://github.com/gradle/gradle/issues/16345).
+  * ["Upgrade embedded Kotlin to 1.6.10"](https://github.com/gradle/gradle/issues/19308)
