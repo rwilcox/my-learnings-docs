@@ -371,6 +371,14 @@ Synchronous pull use cases:
  * if you have spikey loads of very small messages
  * languages without GRPC
 
+#### Message Control flow (needed aka when you have multiple replicas of a microservice who run the same consumer...)
+
+> It's possible that one client could have a backlog of messages because it doesn't have the capacity to process the volume of incoming messages, but another client on the network does have that capacity.
+
+[Source: Google PubSub documentation](https://cloud.google.com/pubsub/docs/pull#flow_control)
+
+In that case set up a [flow control builder](https://cloud.google.com/pubsub/docs/samples/pubsub-subscriber-flow-settings) and attach it to your subscriber.
+
 ### On ACK
 
 @quote-highlight[#:title "Programming Google Cloud"
