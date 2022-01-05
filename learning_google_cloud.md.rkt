@@ -274,6 +274,10 @@ From [Cloud Pub/Sub Documentation](https://cloud.google.com/pubsub/docs/overview
   #:author  "Rui Costa"
   #:page-number 0]{Pub/Sub does not guarantee the order of message delivery.}
 
+Can view the messages in the web console UI for debugging purposes. Can also ACK here tooo!
+
+Also PubSub Lite.
+
 ## Core concepts
 
   * Publisher
@@ -296,6 +300,36 @@ Communication can be:
   * one to many <-- fan out
   * many to one
   * many to many
+
+### Messages, sizes and quotas
+
+10 MB/s per open stream. This is not just a quota but the buffer between the service and client library.
+
+There also [may be a limit of 1,000 messages per pull](https://stackoverflow.com/a/58712547), regardless(??)
+
+> To understand the impact of this buffer on client library behavior, consider this example:
+> 
+> There is a backlog of 10,000 1KB messages on a subscription.
+> Each message takes 1 second to process sequentially, by a single-threaded client instance.
+> The first client instance to establish a StreamingPull connection to the service for that subscription will fill its buffer with all 10,000 messages.
+> It takes 10,000 seconds (almost 3 hours) to process the buffer.
+> In that time, some of the buffered messages exceed their acknowledgement deadline and are re-sent to the same client, resulting in duplicates.
+> When multiple client instances are running, the messages stuck in the one client's buffer will not be available to any client instances.
+> 
+> This would not occur if you are using Flow Control…
+
+[Source](https://cloud.google.com/pubsub/docs/pull#streamingpull_dealing_with_large_backlogs_of_small_messages)
+
+
+If you publish 10 500-byte messages in separate requests, your publisher quota usage will be 10,000 bytes. This is because messages that are smaller than 1000 bytes are automatically rounded up to the next 1000-byte increment.
+
+[Source](https://cloud.google.com/pubsub/quotas)
+
+So: Small messages (< 1K): 10,000 / second per stream
+
+> If/when the user runs out of throughput quota, the stream is suspended, but the connection is not broken. When there is sufficient throughput quota available again, the connection is resumed.
+
+[Source](https://cloud.google.com/pubsub/docs/pull)
 
 ### Streaming data patterns and how to architect them
 
@@ -324,8 +358,18 @@ Communication can be:
 Methods:
 
   * Push <-- each message goes to a subscriber defined endpoint
-  * Pull <-- your application asks for next message
-  * Synchronous pull <-- like pull but more like polling
+  * Pull (your application asks for next message):
+    * Synchronous pull <-- like pull but more like polling
+    * Streaming pull <— "pull" as in creating a socket and getting messages as they are available published down the socket 
+
+Push: needs to have a public HTTPS endpoint. More latent then pull
+
+Pull: Pull and Streaming Pull (default). 
+
+Synchronous pull use cases:
+  * precise cap on messages sent (streaming pull may oversubscribed for first little bit)
+ * if you have spikey loads of very small messages
+ * languages without GRPC
 
 ### On ACK
 
