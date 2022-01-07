@@ -308,14 +308,14 @@ Communication can be:
 There also [may be a limit of 1,000 messages per pull](https://stackoverflow.com/a/58712547), regardless(??)
 
 > To understand the impact of this buffer on client library behavior, consider this example:
-> 
+>
 > There is a backlog of 10,000 1KB messages on a subscription.
 > Each message takes 1 second to process sequentially, by a single-threaded client instance.
 > The first client instance to establish a StreamingPull connection to the service for that subscription will fill its buffer with all 10,000 messages.
 > It takes 10,000 seconds (almost 3 hours) to process the buffer.
 > In that time, some of the buffered messages exceed their acknowledgement deadline and are re-sent to the same client, resulting in duplicates.
 > When multiple client instances are running, the messages stuck in the one client's buffer will not be available to any client instances.
-> 
+>
 > This would not occur if you are using Flow Control…
 
 [Source](https://cloud.google.com/pubsub/docs/pull#streamingpull_dealing_with_large_backlogs_of_small_messages)
@@ -360,16 +360,16 @@ Methods:
   * Push <-- each message goes to a subscriber defined endpoint
   * Pull (your application asks for next message):
     * Synchronous pull <-- like pull but more like polling
-    * Streaming pull <— "pull" as in creating a socket and getting messages as they are available published down the socket 
+    * Streaming pull <— "pull" as in creating a socket and getting messages as they are available published down the socket
 
 Push: needs to have a public HTTPS endpoint. More latent then pull
 
-Pull: Pull and Streaming Pull (default). 
+Pull: Pull and Streaming Pull (default).
 
 Synchronous pull use cases:
   * precise cap on messages sent (streaming pull may oversubscribed for first little bit)
- * if you have spikey loads of very small messages
- * languages without GRPC
+  * if you have spikey loads of very small messages
+  * languages without GRPC
 
 #### Message Control flow (needed aka when you have multiple replicas of a microservice who run the same consumer...)
 
