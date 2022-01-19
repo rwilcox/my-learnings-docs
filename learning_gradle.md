@@ -38,11 +38,13 @@ Listing tasks `gradle tasks`
 
 `--console=plane` <-- assume a stupid TTY (ie like not clearing running task inventories via curses)
 
+-p can use this to override properties on CLi
+
 # Files
 
-build.grade(.kts) <-- delegate to org.gradle.api.Project. Is build script
-
-settings.gradle(.kts) <-- delegate to org.gradle.api.initializaton.Settings. Will run slightly before the build.gradle script aka some things can _only_ be modified here
+  * build.grade(.kts) <-- delegate to org.gradle.api.Project. Is build script
+  * settings.gradle(.kts) <-- delegate to org.gradle.api.initializaton.Settings. slightly before the build.gradle script aka some things can _only_ be modified here
+  * gradle.properties <— items defined in here can be accessed as properties by settings.gradle or build.gradle files. Can live in root of project or home dir
 
 # Dependencies
 
@@ -58,6 +60,20 @@ single automic piece of work for a build
 
 have groups, and dependencies (semantic relationship: A produces something, B consumes it)
 
+## Task Sample
+
+    task hi {dependsOn: ‘someOtherTask’} {
+      // can config ie task desc and group here
+      // dependsOn can be an array or a closure too (which must return a string or an array of tasks. Ie you have a filter task or dynamically created tasks…)…
+
+      doLast {
+        // stuff for execution can go here. Can have many doLasts or doFirsts
+      }.doLast {
+        // can chain these things too!!
+      }
+    }
+
+These get put into the project object so you can access it there
 
 
 # in Kotlin mode
@@ -172,22 +188,55 @@ Standard dist includes a bunch of plugins. For these you don't need to specify t
 https://plugins.gradle.org
 
 
+# Gradle Object mode
+
+  * Script
+  * Project
+  * Gradle
+  * Settings
+  * Task
+  * Action
+
+Project object provides an [.ext property](https://docs.gradle.org/current/dsl/org.gradle.api.plugins.ExtraPropertiesExtension.html) you can add arbitrary stuff to
+project
+
+## See also
+
+  * [Gradle Docs on these core types](https://docs.gradle.org/current/dsl/#N100CA)
 
 
 # Lifecycle
+
+These map to a (built in) Gradle build script
 
 ## Initialization:
 
   * configure environment (init.gradle, gradle.properties)
   * find projects and build scripts (settings.gradle too)
 
+### init.gradle and other init scripts
+
+Can contain enterprise wide servings ie where to download the enterprise’s plugins
+
+$GRADLE_HOME/init.d/
+
+Init.gradle In this lifecycle the script object has  (delegate of Gradle)
+Settings.gradle In this lifecycle the script object has  (delegate of settings)
 
 ## Configuration
 
-  * evaluate all build scripts.
+  * evaluate all build scripts (build.gradle)
   * this is where the task execution DAG is created
   * build object model
+
+Settings.gradle In this lifecycle the script object has  (delegate of Project)
 
 ## Execution
 
   * Execute (subset of) tasks
+
+  In this lifecycle the script object has  (delegate of Project)
+
+## See also
+
+  * [Gradle Documentation on Lifecycle](https://docs.gradle.org/current/userguide/build_lifecycle.html)
