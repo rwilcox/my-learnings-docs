@@ -38,7 +38,12 @@ Listing tasks `gradle tasks`
 
 `--console=plane` <-- assume a stupid TTY (ie like not clearing running task inventories via curses)
 
--p can use this to override properties on CLi
+-p can use this to override properties specified in gradle.properties files on CLi
+
+
+
+`--warning-mode all`  <-- turns on warnings for plugins etc for this task run (but potentially loud)
+
 
 # Files
 
@@ -50,12 +55,19 @@ Listing tasks `gradle tasks`
 
 May vary based on what language plugin you're using Gradle with
 
+Note: Gradle handles SNAPSHOT versions of libraries a different way than released libraries: they are marked as changed and only cached for a (defined or default) TTL.
+
 ## Dependency management
 
 Can manage dependencies for JVM languages, _plus_ Swift and C++ builds.
 
 ### and transitive dependency management
 
+TODO: add to this
+
+default: highest version number wins
+
+you can use rich version constraints to control that a bit
 
 ### and a version catalog
 
@@ -77,8 +89,10 @@ groovy-core = { module = "org.codehaus.groovy:groovy", version.ref = "groovy" }
 ```
 
 Use this like:
-
 ```
+  	implementation(libraries.groovy-core)
+```
+
 Versions can use a simple string or a Gradle [rich version](https://docs.gradle.org/current/userguide/rich_versions.html#rich-version-constraints)
 
 You can also import a TOML file from an external location ala file!!!!!!!!! (Practically this could let you reuse the catalog of the main build for `buildSrc` but also wonder if this would be useful in a multi repo/one microservice per repo/enterprise or org wide standard catalog somehow???
@@ -115,6 +129,18 @@ have groups, and dependencies (semantic relationship: A produces something, B co
 
 These get put into the project object so you can access it there
 
+### Notes about using doFirst and doLast
+
+> When declaring an ad-hoc task — one that doesn’t have an explicit type — you should use Task.doLast{} if you’re only declaring a single action.
+
+[Source](https://docs.gradle.org/current/userguide/authoring_maintainable_build_scripts.html#sec:declaring_tasks)
+
+
+
+## Tasks that depend on other tasks
+
+TODO: write me
+
 
 # in Kotlin mode
 
@@ -129,6 +155,8 @@ Built in Java plugin for this
 main and test conventions, jUnit and testNG, javaDocs.
 
 Other JVM languages usually inherit from Java plugin
+
+can set source and resources dir (uses the Maven defaults but [you _can_ customize this](https://docs.gradle.org/current/userguide/java_plugin.html#sec:changing_java_project_layout)).
 
 ## operability aspects
 
@@ -223,10 +251,27 @@ will be prompted, you can add something to your settings.gradle to automate acce
 
 # Plugins
 
+Plugins are reusable Gradle logic (libraries) that can provide their own tasks
+
 Standard dist includes a bunch of plugins. For these you don't need to specify the version of the plugin, because what Gradle ships with is what it ships with
 
 https://plugins.gradle.org
 
+## Writing your own
+
+### Task plugin
+
+```groovy
+
+class MyTask extends DefaultTask {
+  @TaskAction  // <-- the method that's called at Gradle execution time. DefaultTask has only ONE TaskAction method!
+  void sayHello() {
+
+  }
+
+}
+
+```
 
 # Gradle Object mode
 
@@ -271,12 +316,20 @@ Settings.gradle In this lifecycle the script object has  (delegate of settings)
 
 Settings.gradle In this lifecycle the script object has  (delegate of Project)
 
+Phase where dependencies are resolved
+
 ## Execution
 
   * Execute (subset of) tasks
 
   In this lifecycle the script object has  (delegate of Project)
 
+anything in a `doFirst` or `doLast` block happens HERE.
+
 ## See also
 
   * [Gradle Documentation on Lifecycle](https://docs.gradle.org/current/userguide/build_lifecycle.html)
+
+# Misc workflow / developer experience tips for people using your Gradle build scripts
+
+if you set something in gradle.properties and use that in your build script this means you could _override this on the command line_. (Vs having a hard coded value users can't easily change)
