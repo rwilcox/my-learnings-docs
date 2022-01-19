@@ -50,6 +50,46 @@ Listing tasks `gradle tasks`
 
 May vary based on what language plugin you're using Gradle with
 
+## Dependency management
+
+Can manage dependencies for JVM languages, _plus_ Swift and C++ builds.
+
+### and transitive dependency management
+
+
+### and a version catalog
+
+Instead of declaring a dependency using a string notation, can use a variable name.
+
+Really good when you have multiple projects in a build but they all - say - have common versions of common libraries.
+
+Can declare in code, in dependencyResolutionMangament.versionCatalogs OR in libs.versions.toml file.
+
+Example of syntax:
+
+```toml
+[versions]
+groovy = "3.0.5"
+
+[libraries]
+groovy-core = { module = "org.codehaus.groovy:groovy", version.ref = "groovy" }
+
+```
+
+Use this like:
+
+```
+Versions can use a simple string or a Gradle [rich version](https://docs.gradle.org/current/userguide/rich_versions.html#rich-version-constraints)
+
+You can also import a TOML file from an external location ala file!!!!!!!!! (Practically this could let you reuse the catalog of the main build for `buildSrc` but also wonder if this would be useful in a multi repo/one microservice per repo/enterprise or org wide standard catalog somehow???
+
+For the later you could create a custom [version catalog plugin](https://docs.gradle.org/current/javadoc/org/gradle/api/plugins/catalog/CatalogPluginExtension.html) and publish / use that in affected microservices.
+
+
+#### See also
+
+  * [Gradle documentation on [version catalogs](https://docs.gradle.org/current/userguide/platforms.html)
+
 ## Configurations
 
 configurations are also a way to label (and group) dependencies. Configuration types may be provided by plugins.
