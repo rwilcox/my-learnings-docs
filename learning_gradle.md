@@ -26,17 +26,22 @@ frequent releases: every 6-8 weeks
 
 # Using Gradle
 
-`gradlew` is the wrapper - recommended you use the wrapper (it makes sure everyone on the same project is using the same version of Gradle). It will automatically download the correct Gradle version if you don't have it.
-
-gradlew(.bat), `gradle` folders are both checked into source control (yes even the .jar) binary file
+gradle init will create a basic project for you after prompting you to ask some questions.
 
 Listing tasks `gradle tasks`
 
  Listing dependency tree: `gradle dependencies` (or `gradle dep`)
+ 
+## Gradle Wrapper
+
+`gradlew` is the wrapper - recommended you use the wrapper (it makes sure everyone on the same project is using the same version of Gradle). It will automatically download the correct Gradle version if you don't have it.
+
+gradlew(.bat), `gradle` folders are both checked into source control (yes even the .jar) binary file
+
 
 ## Neat command line flags
 
-`--console=plane` <-- assume a stupid TTY (ie like not clearing running task inventories via curses)
+`--console=plain` <-- assume a stupid TTY (ie like not clearing running task inventories via curses)
 
 -p can use this to override properties specified in gradle.properties files on CLi
 
@@ -57,17 +62,26 @@ May vary based on what language plugin you're using Gradle with
 
 Note: Gradle handles SNAPSHOT versions of libraries a different way than released libraries: they are marked as changed and only cached for a (defined or default) TTL.
 
+Can also depend on other projects ie in a multi project build `implementation project("mysubproject")` in the dependencies block
+
+
 ## Dependency management
 
 Can manage dependencies for JVM languages, _plus_ Swift and C++ builds.
 
-### and transitive dependency management
+Can also use the project dependencies plugin and have it output an HTML version of gradle deps
 
-TODO: add to this
+### and transitive dependency management
 
 default: highest version number wins
 
 you can use rich version constraints to control that a bit
+
+The dependency blocks are also closures too where you can exclude transitive deps if you need
+
+#### See also
+
+  * Gradle_Transitive_Deps_And_Implementation_Deps
 
 ### and a version catalog
 
@@ -137,11 +151,6 @@ These get put into the project object so you can access it there
 
 
 
-## Tasks that depend on other tasks
-
-TODO: write me
-
-
 # in Kotlin mode
 
 
@@ -160,7 +169,7 @@ can set source and resources dir (uses the Maven defaults but [you _can_ customi
 
 ## operability aspects
 
-[creating fat jars](https://imperceptiblethoughts.com/shadow/)
+[creating fat jars](https://imperceptiblethoughts.com/shadow/). You could also somewhat put this together yourself by setting the manifest in the jar task and copy in the dependencies files from the build folder.
 
 ## Java specific configuration types and transitioning thereof
 
@@ -170,8 +179,12 @@ api / implementation <-- different labels for dependancies given by plugins
 
 difference:
 
-  * api - does changing this version mean your CONSUMERS care (ie yes it's part of the API people need to care)
-  * implementation - private API detail
+  * api - does changing this version mean your CONSUMERS care (ie yes it's part of the API people need to care). ONLY supported when using the Java library plugin
+  * implementation - private API detail <—
+  
+  <<Gradle_Transitive_Deps_And_Implementation_Deps>>
+  
+ NOTE: using an implementation type this means transitive dependencies will NOT be shared if another project in a multi project build tries to include your project (they need to declare their own dependency on it!!!)
 
 Unless you're writing a library for public consumption, probably everything will be an `implementation`.
 
@@ -329,6 +342,18 @@ anything in a `doFirst` or `doLast` block happens HERE.
 ## See also
 
   * [Gradle Documentation on Lifecycle](https://docs.gradle.org/current/userguide/build_lifecycle.html)
+
+# Build Cache
+
+Backs Gradle’s incremental build functionality
+
+TODO: document me
+
+# Multi project builds with Gradle
+
+Sub projects can have dependencies on (sibling projects for example)
+
+Can configure  a project from any other project - cross project configuration 
 
 # Misc workflow / developer experience tips for people using your Gradle build scripts
 
