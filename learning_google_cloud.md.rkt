@@ -27,7 +27,9 @@ title: Learning Google Cloud
 
 Terms:
 
-  * Project -- can not create resources that span projects. In some cases you can create shared resource...
+  * Project -- can not create resources that span projects. In some cases you can create shared resource. DELETING PROJECT WILL DELETE ALL RESOURCES TO IT (aka: you've experimented and want to make sure you don't get billed for that huge GKE cluster? Just delete the project!)
+    - can be assigned to folders ("location" when creating the project)
+
   * Zone -- 2+ data centers co-located, likely closely enough. 1ms round trip. Independent failure domain
   * Region -- geographic area, 2 or more zones seperated by tens of miles. 5ms latency
   * Project ID -- globaly unique (Google will _make_ / preview this unique when you create a project name)
@@ -43,6 +45,14 @@ https://console.cloud.google.com
 domain / organization -> folders -> roles -> principles (the humans)
 
 includes default service accounts as starting point / best practice!
+
+## Policies
+
+policies are inherited from parents
+a less restricted parent policy will override a more restricted resource policy
+policies are set on a resource
+each policy contains a set of roles and members
+
 
 ## Roles
 
@@ -62,8 +72,17 @@ right there in the IAM sidebar
 
 # Tools
 
-Cloud Shell Editor <-- ?? "more like an IDE" ???
+## Cloud Shell / Cloud Shell Editor
+Cloud Shell Editor <-- VS Code running on the web
 Cloud Shell  <-- CLI and this is authed based on the project you're logged into. BUT is persistent!
+
+## CLI tools for managing GCP resources etc
+
+Avail through Cloud SDK.
+
+gcloud
+
+gsutil
 
 # Monitoring
 
@@ -80,7 +99,7 @@ See GCP_BigQuery
 
 ## VPC
 
-Global resource!!!!!
+Global resource!!!!! (not region based like AWS)
 
 Elements:
 
@@ -95,7 +114,7 @@ Elements:
   * shared VPC <-- lets you share VPCs with other project
 
 
-automode VPC - includes
+automode VPC - includes one subnet per region
 
 ## Load Balancing
 
@@ -578,6 +597,36 @@ can use `--preview` on CLI to see what resource types it's going to create
 
 No service scope documented
 NLP, translation, video intelligence, vision, ?? audio transscriptions ??
+
+# Certs
+
+## (1) Associate Cloud Engineer
+
+Implementation, Deployment and Management. [Exam guide](https://cloud.google.com/certification/guides/cloud-engineer?skip_cache=true) $125 and 2 hours. Multiple choice / multiple select.
+
+[training path](https://cloud.google.com/training/cloud-infrastructure?skip_cache=true#cloud-engineer-learning-path)
+
+## (2) Pro Cloud Architect
+
+Design, plan and optimize. Less hands on.
+
+2nd highest paying cert in industry
+
+## (3) Other stuff
+
+get more specific AFTER those two
+
+## Strategies
+
+  * do these two as the foundation (then maybe specialize if you want/need)
+  * Pace yourself
+  * Run through the easiest shortest question first then go back to the more complex question
+  * Focus on the business requirement if the question provides them
+  * No partial credit for multiple answer questions
+  * You can't take notes during the exam (must just use your head)
+  * During your prep study your weakest topics early and often
+  * There's a free online practice exam, so try that out
+
 
 # See Also
 
