@@ -116,6 +116,12 @@ Elements:
 
 automode VPC - includes one subnet per region
 
+### See also
+
+  * [VCP how-to guide](https://cloud.google.com/vpc/docs/how-to)
+
+
+
 ## Load Balancing
 
 Hooks up Backend configuration - allows you to create a Service entry and configure health checks for that service etc etc.
@@ -128,6 +134,9 @@ Private zones 1:1 with VPC network
 DNS peering for cross-network resolution
 Uses Cloud Domains for DNS registration
 
+## Firewalls
+
+
 # Compute Services
 
 ## Compute Engine (GCE)
@@ -138,6 +147,11 @@ Live migration - virtual machines moved to different hardware while running
 
 When you make one of these by clicking around you can copy the `gcloud` construction CLI parameters from the console!!!
 
+### administration
+
+Identify aware proxy: allows you to SSH into an instance without needing to open up SSH. So a cloud jumpbox. The best practice for connecting to your instance.
+
+(or you could open the port, but that's a slight security risk etc etc)
 
 # Storage
 
@@ -597,6 +611,12 @@ can use `--preview` on CLI to see what resource types it's going to create
 
 No service scope documented
 NLP, translation, video intelligence, vision, ?? audio transscriptions ??
+
+# Tags
+
+> A tag is a key-value pair that can be attached to an organization, folder, or project. You can use tags to conditionally allow or deny policies based on whether a resource has a specific tag. (ie permissions, firewall controls)
+
+[Source](https://cloud.google.com/resource-manager/docs/tags/tags-creating-and-managing)
 
 # Certs
 
