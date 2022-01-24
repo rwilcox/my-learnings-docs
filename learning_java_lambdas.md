@@ -27,6 +27,8 @@ Useful interfaces:
 Restrictions:
 -----------------------
 
+<<Java_Lambda_Outside_Variable_Restrictions>>
+
   1. Variables used in lambda must be final or effectively final - no reassigning values / no __block syntax
 
 # Book Recommendations
