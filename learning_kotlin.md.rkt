@@ -213,8 +213,8 @@ Easy example documented:
 ```kotlin
 
 fun foo() {
-    listOf(1, 2, 3, 4, 5).forEach lit@{
-        if (it == 3) return@lit // local return to the caller of the lambda - the forEach loop
+    listOf(1, 2, 3, 4, 5).forEach lit@at-sign{}{
+        if (it == 3) return@at-sign{}lit // local return to the caller of the lambda - the forEach loop
         print(it)
     }
     print(" done with explicit label")

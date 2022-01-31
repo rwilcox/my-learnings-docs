@@ -7,11 +7,10 @@ title: 'Learnings: Kotlin'
 <!-- toc -->
 
 - [Release schedule](#release-schedule)
+- [Lambdas](#lambdas)
 - [Stupid Things I always forget](#stupid-things-i-always-forget)
   * [val vs var](#val-vs-var)
-- [Methods](#methods)
   * [Ways to declare a method](#ways-to-declare-a-method)
-  * [As Lambdas](#as-lambdas)
     + [Variables](#variables)
     + [More syntax shortcuts](#more-syntax-shortcuts)
   * [Methods that take lambdas](#methods-that-take-lambdas)
@@ -22,6 +21,9 @@ title: 'Learnings: Kotlin'
   * [data classes](#data-classes)
   * [operator overloading](#operator-overloading)
 - [Kotlin Standard Library](#kotlin-standard-library)
+- [Flow Control](#flow-control)
+  * [labels](#labels)
+  * [Exception handling](#exception-handling)
 - [Random Notes](#random-notes)
   * [try with resources a like](#try-with-resources-a-like)
   * [kinds of methods](#kinds-of-methods)
@@ -31,6 +33,9 @@ title: 'Learnings: Kotlin'
   * [object FooBar](#object-foobar)
   * [extension functions](#extension-functions)
   * [data classes](#data-classes-1)
+- [Nullability](#nullability)
+  * [Kotlin patterns around nullability](#kotlin-patterns-around-nullability)
+    + [Let wrapping an nullable](#let-wrapping-an-nullable)
 - [Duration](#duration)
   * [In Kotlin 1.6](#in-kotlin-16)
 - [Casts](#casts)
@@ -44,7 +49,11 @@ title: 'Learnings: Kotlin'
     + [And Type Erasure >](#and-type-erasure-)
       - [- [TODO]: Add examples here?!!](#--todo-add-examples-here)
 - [Delegates](#delegates)
-  * [Aka how as lay is implemented](#aka-how-as-lay-is-implemented)
+  * [Aka how as lazy is implemented](#aka-how-as-lazy-is-implemented)
+  * [Where is Groovy's concept of Delegate?](#where-is-groovys-concept-of-delegate)
+- [DSL Stuff](#dsl-stuff)
+  * [Scope functions](#scope-functions)
+    + [See also](#see-also)
 - [Ughhh Kotlin makes me sad](#ughhh-kotlin-makes-me-sad)
   * [tailrecursion support](#tailrecursion-support)
   * [RAII vs lazy](#raii-vs-lazy)
@@ -52,7 +61,7 @@ title: 'Learnings: Kotlin'
     + [intro / questions](#intro--questions)
     + [lateinit](#lateinit)
     + [lazy](#lazy)
-    + [See also](#see-also)
+    + [See also](#see-also-1)
 - [Build Tools and Kotlin](#build-tools-and-kotlin)
   * [and IntelliJ](#and-intellij)
     + [Gradle](#gradle)
@@ -67,7 +76,7 @@ title: 'Learnings: Kotlin'
     + [Dispatchers](#dispatchers)
     + [Job](#job)
     + [How these interact](#how-these-interact)
-    + [See also](#see-also-1)
+    + [See also](#see-also-2)
   * [using coroutines](#using-coroutines)
     + [builder examples](#builder-examples)
     + [but _using_ those functions...](#but-_using_-those-functions)
@@ -88,6 +97,20 @@ Release schedule
 
 1.x version once every 6 months
 
+# Lambdas
+
+
+> Kotlin offers a simplified syntax for lambdas with a single parameter. This parameter is implicitly named it.
+> 
+> - From The Joy of Kotlin by Pierre-Yves Saumont on page 0 ()
+
+
+> The value returned by the lambda is the value of the expression on the last line. 
+> 
+> - From The Joy of Kotlin by Pierre-Yves Saumont on page 0 ()
+
+Variables that live outside the lambda/closure can be changed inside the closure (ie: unlike Java does not have to be `final`). See Java_Lambda_Outside_Variable_Restrictions for info on that restriction in Java.
+
 Stupid Things I always forget
 ===================
 
@@ -98,8 +121,6 @@ val vs var
   * val: read only variable (not NOT be reassigned, like ES6's `const`, or `final` in Java). Mneomnic: both fina**l** and va**l** end with "l".
 
 
-Methods
-===================
 
 ## Ways to declare a method
 
@@ -115,16 +136,6 @@ NOTES: you can use these labels at the call site
 
 (means you can also pass parameters out of order if they are all labelled)
 
-## As Lambdas
-
-
-> Kotlin offers a simplified syntax for lambdas with a single parameter. This parameter is implicitly named it.
-> 
-> - From The Joy of Kotlin by Pierre-Yves Saumont on page 0 ()
-
-> The value returned by the lambda is the value of the expression on the last line. 
-> 
-> - From The Joy of Kotlin by Pierre-Yves Saumont on page 0 ()
 
 ### Variables
 
@@ -237,6 +248,44 @@ primary constructor has to have at least one parameter, parameters must be val/v
 > 
 > - From The Joy of Kotlin by Pierre-Yves Saumont on page 0 ()
 
+# Flow Control
+
+## labels
+
+A label is a Java style annotation of any expression, but enables you to essentially reference that label - or the variable context around that label - ie to return out of a lambda without exiting its method, or to reference an above context when you are in a lower context.
+
+Easy example: you have a `for` inside a `for` and want the inner `for` to essentially do a `next` on that outer iteration.
+Medium example: you could use this to break out of collection/functional methods!!
+Hard example: use a label a couple lambdas deep to get at the context object passed into the parent (or grandparent!) lambda. (Turing help you, and you probably want to refactor things to _not_ do this, but.....)
+
+Easy example documented:
+
+```kotlin
+
+fun foo() {
+    listOf(1, 2, 3, 4, 5).forEach lit@{
+        if (it == 3) return@lit // local return to the caller of the lambda - the forEach loop
+        print(it)
+    }
+    print(" done with explicit label")
+}
+
+```
+
+having a plain `return` in that lambda would exit the `foo` function. But instead we just want to exit to the `forEach` block (we have some cleanup or something to do after the functional work).
+
+[Kotlin documentation on labels](https://kotlinlang.org/docs/returns.html#return-to-labels)
+
+## Exception handling
+
+like try/catch/finally in Java
+
+NOTES:
+
+  * can NOT return a function value in `finally` (will be ignored)
+  * `catch (t: Throwable)` > `catch(t: Exception)` . [See SO answer pointing to tweets by head Kotlin language designer](https://stackoverflow.com/a/64323675/224334)
+
+No such thing as checked exceptions
 
 # Random Notes
 
@@ -299,6 +348,30 @@ These can also be given access controls and thus only usable inside the method i
 
 can NOT be opened, inner, or abstract: are final no way around this. (They can _inherit_).
 
+# Nullability
+
+Kotlin type checks against nullable
+
+
+## Kotlin patterns around nullability
+
+### Let wrapping an nullable
+
+<<Kotlin_Let_Wrapping_An_Optional>>
+
+> let is often used for executing a code block only with non-null values. To perform actions on a non-null object, use the safe call operator ?. on it and call let with the actions in its lambda.
+
+```kotlin
+val str: String? = "Hello"
+//processNonNullString(str)       // compilation error: str can be null
+val length = str?.let {
+    println("let() called on $it")
+    processNonNullString(it)      // OK: 'it' is not null inside '?.let { }'
+    it.length
+}
+```
+
+For more information around `let`, see Kotlin_Scope_Functions
 
 Duration
 ====================
@@ -392,8 +465,46 @@ See also:
 > - From The Joy of Kotlin by Pierre-Yves Saumont on page 0 ()
 
 
-## Aka how as lay is implemented
+## Aka how as lazy is implemented
 
+## Where is Groovy's concept of Delegate?
+
+See Kotlin_Scope_Functions
+
+# DSL Stuff
+
+## Scope functions
+
+<<Kotlin_Scope_Functions>>
+
+AKA: Kotlin version of Gradles' Delegate object
+
+See [Kotlin Documentation: Scope functions](https://kotlinlang.org/docs/scope-functions.html)
+
+Inside the scope (lambda) of the function you'll be able to call methods of (the current scope object) without having to specify the variable name.
+
+```kotlin
+someVariableHere.let { it.methodThatWillActOnSomeVariableHere }
+```
+
+Without needing to provide the explicit `it`
+
+```kotlin
+someVariableHere.with {methodThatwillactonsomeVarariableHere} // can also be `run`
+```
+(You could also do `with(someVariableHere) {lambdaStuff}` but that may be showing off a bit...)
+
+Scope functions: `let`, `run`, `also`, `with`, `apply`
+
+From Kotlin documentation:
+
+> `run`, `with`, and `apply` refer to the context object as a lambda receiver - by keyword this.
+
+> In turn, `let` and `also` have the context object as a lambda argument. If the argument name is not specified, the object is accessed by the implicit default name it. it is shorter than this and expressions with it are usually easier for reading. However, when calling the object functions or properties you don't have the object available implicitly like this.
+
+### See also
+
+  * Kotlin_Let_Wrapping_An_Optional
 
 # Ughhh Kotlin makes me sad
 

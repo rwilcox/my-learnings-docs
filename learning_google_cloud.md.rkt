@@ -1377,7 +1377,7 @@ PREMIUM_1, which uses lots of workers and lots of parameter servers to coordinat
 
 @quote-highlight[#:title "Google Cloud Platform in Action"
   #:author  "Geewax, JJ"
-  #:page-number 0]{In this case, the @google-cloud/vision client library for Node.js is making some assumptions for you, saying “If the likelihood is LIKELY or VERY_LIKELY, then use true.”}
+  #:page-number 0]{In this case, the google-cloud/vision client library for Node.js is making some assumptions for you, saying “If the likelihood is LIKELY or VERY_LIKELY, then use true.”}
 
 
 # Tags
