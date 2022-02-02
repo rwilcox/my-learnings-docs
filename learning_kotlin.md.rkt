@@ -122,6 +122,18 @@ val result = rd.map(function)}
 
 # Classes
 
+## writing classes that you can destructure
+
+So you can assign multiple variables from attributes of a class on one line
+
+Create `operator` functions whose names are `componentN` where N is as high as you want to count.
+
+example: `operator fun component1() = myField`
+
+You do NOT need to do this for data classes.
+
+[Kotlin documentation on destructuring declarations](https://kotlinlang.org/docs/destructuring-declarations.html)
+
 ## Access control or visibility
 
 @quote-highlight[#:title "The Joy of Kotlin"
@@ -199,6 +211,25 @@ primary constructor has to have at least one parameter, parameters must be val/v
   #:page-number 0]{MutableMap can’t be used in a multi-threaded environment without providing some protection mechanisms that are difficult to design correctly and to use. The Map type, on the other hand, is protected against these kind of problems}
 
 # Flow Control
+
+## with functional programming / interfaces
+
+### streaming vs intermediate collections
+
+could use [Kotlin Sequences](https://kotlinlang.org/docs/sequences.html#construct) (yes kind of like Java's Streams API, but not limited to JVM)
+
+this is a lazy collection!
+
+(it does add some overhead, so may be less useful in small collections, but if you're here you likely have a big collection).
+
+two kinds of operations: intermediate, and terminal.
+
+```kotlin
+val l = listOf(1, 2, 3, 4)
+
+l.asSequence().filter { ... }.map { ... }
+println( l.toList() ) // terminal operation to get value of sequence
+```
 
 ## labels
 
@@ -380,13 +411,14 @@ When you need to cast to a generic thing
 Generics
 ======================
 
-Genera Generics Information
+General Generics Information
 ------------------------
 
 @quote-highlight[#:title "The Joy of Kotlin"
   #:author  "Pierre-Yves Saumont"
   #:page-number 0]{Comparable is contravariant on T, meaning that the type parameter T occurs only in the in position}
 
+[covariant vs contravariant](https://medium.com/kotlin-thursdays/introduction-to-kotlin-generics-9d18d3719e1d)
 
 Generic Functions
 --------------------------
