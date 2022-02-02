@@ -1094,9 +1094,7 @@ great for many concurrent read/writes
 
 K/V pairs
 
-@quote-highlight[#:title "Google Cloud Platform in Action"
-  #:author  "Geewax, JJ"
-  #:page-number 0]{authors of the research paper describing Bigtable called it “a sparse, distributed, persistent, multi-dimensional sorted map”}
+There does seem to be a per project limit at ??? 40-something? It didn't let me create clusters where the max node size would exceed this amount (project had multiple clusters)
 
 @quote-highlight[#:title "Google Cloud Platform in Action"
   #:author  "Geewax, JJ"
@@ -1104,7 +1102,14 @@ K/V pairs
 
 @quote-highlight[#:title "Google Cloud Platform in Action"
   #:author  "Geewax, JJ"
-  #:page-number 0]{the minimum size of an instance is three nodes, so the minimum hourly rate for any production instance is technically three times the per-node hourly rate.}
+  #:page-number 0]{Cloud Bigtable has no free tier and has a minimum cluster size of three nodes, which translates to about $1,400 per month as a minimum. This is quite a change from the $30 per month minimum for Cloud SQL.}
+
+### Data Architecture
+
+@quote-highlight[#:title "Google Cloud Platform in Action"
+  #:author  "Geewax, JJ"
+  #:page-number 0]{authors of the research paper describing Bigtable called it “a sparse, distributed, persistent, multi-dimensional sorted map”}
+
 
 @quote-highlight[#:title "Google Cloud Platform in Action"
   #:author  "Geewax, JJ"
@@ -1113,39 +1118,6 @@ K/V pairs
 @quote-highlight[#:title "Google Cloud Platform in Action"
   #:author  "Geewax, JJ"
   #:page-number 0]{Hadoop, as you may remember, is Apache’s open source version of Google MapReduce and is commonly used alongside HBase, Apache’s open source version of Bigtable. }
-
-@quote-highlight[#:title "Google Cloud Platform in Action"
-  #:author  "Geewax, JJ"
-  #:page-number 0]{most important thing you can do when using Bigtable is to choose row keys carefully so that they don’t concentrate traffic in a single spot. If you do that, Bigtable should do the right thing and perform well with your dataset}
-
-
-@quote-highlight[#:title "Google Cloud Platform in Action"
-  #:author  "Geewax, JJ"
-  #:page-number 0]{As mentioned earlier, choosing how to structure and format row keys is important for a few different reasons:
-
-Row keys are always unique. If you have collisions, you’ll overwrite data.
-Row keys are lexicographically sorted across the entire table. High traffic to lots of keys with the same prefix could result in serious performance problems.
-Row key prefixes and ranges can be used in queries to make the query more efficient. Poorly structured keys will require inefficient full-table scans of your data.}
-
-
-@quote-highlight[#:title "Google Cloud Platform in Action"
-  #:author  "Geewax, JJ"
-  #:page-number 0]{In Bigtable the keys of this map are called column qualifiers (sometimes shortened to columns), which are often dynamic pieces of data. Each of these belongs to a single family, which is a grouping that holds these column qualifiers and act much more like a static column in a relational database}
-
-
-@quote-highlight[#:title "Google Cloud Platform in Action"
-  #:author  "Geewax, JJ"
-  #:page-number 0]{each row stores only the data present in that row, so there’s no penalty for those empty spaces}
-
-
-@quote-highlight[#:title "Google Cloud Platform in Action"
-  #:author  "Geewax, JJ"
-  #:page-number 0]{Column families are helpful groupings that, in some ways, can be thought of as the keys pointing to maps of arbitrary maps of more data.}
-
-@quote-highlight[#:title "Google Cloud Platform in Action"
-  #:author  "Geewax, JJ"
-  #:page-number 0]{In scenarios like these, where a few hot tablets are colocated on a single node, Bigtable rebalances the cluster by shifting some of the less frequently accessed tablets to other nodes that have more capacity to ensure that each of the three nodes sees about one-third of the total traffic,}
-
 
 @quote-highlight[#:title "Google Cloud Platform in Action"
   #:author  "Geewax, JJ"
@@ -1160,13 +1132,41 @@ Row key prefixes and ranges can be used in queries to make the query more effici
   #:author  "Geewax, JJ"
   #:page-number 0]{It’s also possible that a single tablet could become too hot (it’s being written to or read from far too frequently). Moving the tablet as it is to another node doesn’t fix the problem. Instead, Bigtable may split this tablet in half and then rebalance the tablets as we saw earlier, shifting one of the halves to another node.}
 
+### Data Modelling
+
+@quote-highlight[#:title "Google Cloud Platform in Action"
+  #:author  "Geewax, JJ"
+  #:page-number 0]{most important thing you can do when using Bigtable is to choose row keys carefully so that they don’t concentrate traffic in a single spot. If you do that, Bigtable should do the right thing and perform well with your dataset}
+
+@quote-highlight[#:title "Google Cloud Platform in Action"
+  #:author  "Geewax, JJ"
+  #:page-number 0]{As mentioned earlier, choosing how to structure and format row keys is important for a few different reasons:
+
+Row keys are always unique. If you have collisions, you’ll overwrite data.
+Row keys are lexicographically sorted across the entire table. High traffic to lots of keys with the same prefix could result in serious performance problems.
+Row key prefixes and ranges can be used in queries to make the query more efficient. Poorly structured keys will require inefficient full-table scans of your data.}
+
+@quote-highlight[#:title "Google Cloud Platform in Action"
+  #:author  "Geewax, JJ"
+  #:page-number 0]{In Bigtable the keys of this map are called column qualifiers (sometimes shortened to columns), which are often dynamic pieces of data. Each of these belongs to a single family, which is a grouping that holds these column qualifiers and act much more like a static column in a relational database}
+
+@quote-highlight[#:title "Google Cloud Platform in Action"
+  #:author  "Geewax, JJ"
+  #:page-number 0]{each row stores only the data present in that row, so there’s no penalty for those empty spaces}
+
+
+@quote-highlight[#:title "Google Cloud Platform in Action"
+  #:author  "Geewax, JJ"
+  #:page-number 0]{Column families are helpful groupings that, in some ways, can be thought of as the keys pointing to maps of arbitrary maps of more data.}
+
+@quote-highlight[#:title "Google Cloud Platform in Action"
+  #:author  "Geewax, JJ"
+  #:page-number 0]{In scenarios like these, where a few hot tablets are colocated on a single node, Bigtable rebalances the cluster by shifting some of the less frequently accessed tablets to other nodes that have more capacity to ensure that each of the three nodes sees about one-third of the total traffic,}
+
 @quote-highlight[#:title "Google Cloud Platform in Action"
   #:author  "Geewax, JJ"
   #:page-number 0]{Bigtable can mimic the key-value querying by constructing a row key and asking for the data with that row key, but it allows you to do something critical that services like Memcache don’t: scan the key space.}
 
-@quote-highlight[#:title "Google Cloud Platform in Action"
-  #:author  "Geewax, JJ"
-  #:page-number 0]{Cloud Bigtable has no free tier and has a minimum cluster size of three nodes, which translates to about $1,400 per month as a minimum. This is quite a change from the $30 per month minimum for Cloud SQL.}
 
 @quote-highlight[#:title "Google Cloud Platform in Action"
   #:author  "Geewax, JJ"
@@ -1175,6 +1175,43 @@ Row key prefixes and ranges can be used in queries to make the query more effici
 @quote-highlight[#:title "Google Cloud Platform in Action"
   #:author  "Geewax, JJ"
   #:page-number 0]{You can do a prefix scan, which asks, “Who does the prefix follow?” but there’s no way to do a suffix scan, which asks, “Who follows the suffix?”}
+
+### Scaling / Pricing
+
+@quote-highlight[#:title "Google Cloud Platform in Action"
+  #:author  "Geewax, JJ"
+  #:page-number 0]{the minimum size of an instance is three nodes, so the minimum hourly rate for any production instance is technically three times the per-node hourly rate.}
+
+
+#### Autoscaling
+
+
+> You specify the CPU utilization target and the minimum and maximum number of nodes. Bigtable manages the storage utilization target.
+
+[Source: Bigtable Autoscaling Documentation](https://cloud.google.com/bigtable/docs/autoscaling#parameters)
+
+
+> Storage utilization target
+> The maximum number of bytes per node that you can store before Bigtable scales up. This target ensures that you always have enough nodes to handle fluctuations in the amount of data that you store. For SSD storage, the target is 2.5 TB per node, and for HDD storage, the target is 8 TB per node. You are not able to change this value.
+
+[Source: Autoscaling Documentation: parameters](https://cloud.google.com/bigtable/docs/autoscaling#parameters)
+
+SO this seems to mean is, for HDD targets, that BigTable will target and/or restrict nodes to only have 8TB of storage. Meaning if you have workloads of heavy data and less CPU the auto-scaler may likely constrain instances based on storage.
+
+When scaling it can take up to 20 minutes to see significant improvement in cluster performance ( [Source: BigTable Performance Troubleshooting](https://cloud.google.com/bigtable/docs/performance#slower-perf)
+
+> For latency-sensitive applications we recommend that you keep storage utilization per node below 60%. If your dataset grows, add more nodes to maintain low latency.
+
+[Source: Bigtable performance tradeoffs between usage and performance](https://cloud.google.com/bigtable/docs/performance#storage-performance)
+
+
+RE maximum number of nodes:
+
+> The value that you choose as the maximum number of nodes should be the number of nodes that the cluster needs to handle your workload's heaviest traffic, even if you don't expect to reach that volume most of the time. Bigtable never scales up to more nodes than it needs. You can also think of this number as the highest number of nodes that you are willing to pay for.
+>
+> The maximum number needs to allow for both the CPU utilization target set by you and the storage utilization target set by Bigtable.
+
+[Source: Bigtable Autoscaling Documentation](https://cloud.google.com/bigtable/docs/autoscaling)
 
 ## Big Query
 
