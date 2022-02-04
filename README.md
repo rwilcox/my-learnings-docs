@@ -129,6 +129,7 @@ Because if you're looking at the file list in Github, it's hard to know if a fil
   * [learnings_gtoolkit.md](https://github.com/rwilcox/my-learnings-docs/blob/master/learnings_gtoolkit.md)
   * [synthesis_agile_in_the_enterprise.md](https://github.com/rwilcox/my-learnings-docs/blob/master/synthesis_agile_in_the_enterprise.md)
   * [synthesis_agile_teams.md](https://github.com/rwilcox/my-learnings-docs/blob/master/synthesis_agile_teams.md)
+  * [synthesis_career_growth.md](https://github.com/rwilcox/my-learnings-docs/blob/master/synthesis_career_growth.md)
   * [synthesis_management_agile.md](https://github.com/rwilcox/my-learnings-docs/blob/master/synthesis_management_agile.md)
   * [synthesis_managing_agile_teams.md](https://github.com/rwilcox/my-learnings-docs/blob/master/synthesis_managing_agile_teams.md)
   * [synthesis_microservices_in_the_enterprise.md](https://github.com/rwilcox/my-learnings-docs/blob/master/synthesis_microservices_in_the_enterprise.md)

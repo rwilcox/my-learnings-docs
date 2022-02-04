@@ -15,6 +15,7 @@ title: 'Learnings: Kotlin'
     + [More syntax shortcuts](#more-syntax-shortcuts)
   * [Methods that take lambdas](#methods-that-take-lambdas)
 - [Classes](#classes)
+  * [writing classes that you can destructure](#writing-classes-that-you-can-destructure)
   * [Access control or visibility](#access-control-or-visibility)
   * [Primary and secondary constructors](#primary-and-secondary-constructors)
   * [Properties](#properties)
@@ -22,6 +23,8 @@ title: 'Learnings: Kotlin'
   * [operator overloading](#operator-overloading)
 - [Kotlin Standard Library](#kotlin-standard-library)
 - [Flow Control](#flow-control)
+  * [with functional programming / interfaces](#with-functional-programming--interfaces)
+    + [streaming vs intermediate collections](#streaming-vs-intermediate-collections)
   * [labels](#labels)
   * [Exception handling](#exception-handling)
 - [Random Notes](#random-notes)
@@ -44,7 +47,7 @@ title: 'Learnings: Kotlin'
   * [Safe / Nullable cast -- `dynamic_cast` alike](#safe--nullable-cast----dynamic_cast-alike)
   * [When you need to cast to a generic thing](#when-you-need-to-cast-to-a-generic-thing)
 - [Generics](#generics)
-  * [Genera Generics Information](#genera-generics-information)
+  * [General Generics Information](#general-generics-information)
   * [Generic Functions](#generic-functions)
     + [And Type Erasure >](#and-type-erasure-)
       - [- [TODO]: Add examples here?!!](#--todo-add-examples-here)
@@ -166,6 +169,18 @@ NOTES: you can use these labels at the call site
 
 # Classes
 
+## writing classes that you can destructure
+
+So you can assign multiple variables from attributes of a class on one line
+
+Create `operator` functions whose names are `componentN` where N is as high as you want to count.
+
+example: `operator fun component1() = myField`
+
+You do NOT need to do this for data classes.
+
+[Kotlin documentation on destructuring declarations](https://kotlinlang.org/docs/destructuring-declarations.html)
+
 ## Access control or visibility
 
 
@@ -249,6 +264,25 @@ primary constructor has to have at least one parameter, parameters must be val/v
 > - From The Joy of Kotlin by Pierre-Yves Saumont on page 0 ()
 
 # Flow Control
+
+## with functional programming / interfaces
+
+### streaming vs intermediate collections
+
+could use [Kotlin Sequences](https://kotlinlang.org/docs/sequences.html#construct) (yes kind of like Java's Streams API, but not limited to JVM)
+
+this is a lazy collection!
+
+(it does add some overhead, so may be less useful in small collections, but if you're here you likely have a big collection).
+
+two kinds of operations: intermediate, and terminal.
+
+```kotlin
+val l = listOf(1, 2, 3, 4)
+
+l.asSequence().filter { ... }.map { ... }
+println( l.toList() ) // terminal operation to get value of sequence
+```
 
 ## labels
 
@@ -431,7 +465,7 @@ When you need to cast to a generic thing
 Generics
 ======================
 
-Genera Generics Information
+General Generics Information
 ------------------------
 
 
@@ -439,6 +473,7 @@ Genera Generics Information
 > 
 > - From The Joy of Kotlin by Pierre-Yves Saumont on page 0 ()
 
+[covariant vs contravariant](https://medium.com/kotlin-thursdays/introduction-to-kotlin-generics-9d18d3719e1d)
 
 Generic Functions
 --------------------------
