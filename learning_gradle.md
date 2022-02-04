@@ -56,10 +56,10 @@ frequent releases: every 6-8 weeks
 
 gradle init will create a basic project for you after prompting you to ask some questions.
 
-Listing tasks `gradle tasks`
+Listing tasks `gradle tasks` . **BUT** see Gradle_Tasks_And_The_CLI_Task_List
 
- Listing dependency tree: `gradle dependencies` (or `gradle dep`)
- 
+Listing dependency tree: `gradle dependencies` (or `gradle dep`)
+
 ## Gradle Wrapper
 
 `gradlew` is the wrapper - recommended you use the wrapper (it makes sure everyone on the same project is using the same version of Gradle). It will automatically download the correct Gradle version if you don't have it.
@@ -152,9 +152,17 @@ configurations are also a way to label (and group) dependencies. Configuration t
 
 # Tasks
 
-single automic piece of work for a build
+single automic piece of work for a build, composed of actions.
 
 have groups, and dependencies (semantic relationship: A produces something, B consumes it)
+
+You can skip actions in a task by throwing a `StopExecutionException` which will skip further executions.
+
+You can also skip a Task - for example if you have tasks that normally depend on a list of tasks, you can skip some of those dependent task by doing `taskObject.enabled = false`.
+
+using `-x` on the command line will also disable various tasks.
+
+See [skip several tasks in Gradle quickly](https://medium.com/android-news/skip-several-tasks-in-gradle-quickly-dcd0a11c3487)
 
 ## Task Sample
 
@@ -177,7 +185,26 @@ These get put into the project object so you can access it there
 
 [Source](https://docs.gradle.org/current/userguide/authoring_maintainable_build_scripts.html#sec:declaring_tasks)
 
+## Displaying tasks in gradle task
 
+<<Gradle_Tasks_And_The_CLI_Task_List>>
+
+`gradle tasks` by default only shows you tasks assigned to a task group.
+
+**TO SEE ALL TASKS**: `gradle tasks --all` . [Source](https://docs.gradle.org/current/userguide/command_line_interface.html#sec:listing_tasks)
+
+**TO SEE A CUSTOM TASK IN GRADLE TASKS CLI LIST:**
+
+set `group` and you'll likely want to set `description`
+
+```
+task hi {dependsOn: ‘someOtherTask’} {
+  group 'MY_SUPER_BUILDING_GROUP'
+  description 'this is a human description of what this tasks does and will appear in gradle tasks list'
+}
+```
+
+[Baeldug: gradle custom task](https://www.baeldung.com/gradle-custom-task)
 
 # in Kotlin mode
 
@@ -209,9 +236,9 @@ difference:
 
   * api - does changing this version mean your CONSUMERS care (ie yes it's part of the API people need to care). ONLY supported when using the Java library plugin
   * implementation - private API detail <—
-  
+
   <<Gradle_Transitive_Deps_And_Implementation_Deps>>
-  
+
  NOTE: using an implementation type this means transitive dependencies will NOT be shared if another project in a multi project build tries to include your project (they need to declare their own dependency on it!!!)
 
 Unless you're writing a library for public consumption, probably everything will be an `implementation`.
@@ -381,7 +408,7 @@ TODO: document me
 
 Sub projects can have dependencies on (sibling projects for example)
 
-Can configure  a project from any other project - cross project configuration 
+Can configure  a project from any other project - cross project configuration
 
 # Misc workflow / developer experience tips for people using your Gradle build scripts
 
