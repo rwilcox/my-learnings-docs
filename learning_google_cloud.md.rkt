@@ -94,6 +94,11 @@ Can do billing data -> bigquery so can SQL QUERY FOR IT!!!!
 
 See GCP_BigQuery
 
+## Log Explorer
+
+[Log Explorer Query Syntax Language Guide](https://cloud.google.com/logging/docs/view/logging-query-language)
+
+
 # Networking
 
 
@@ -846,6 +851,12 @@ In that case set up a [flow control builder](https://cloud.google.com/pubsub/doc
 @quote-highlight[#:title "Programming Google Cloud"
   #:author  "Rui Costa"
   #:page-number 0]{Once a message has been acknowledged, the message is nt longer accessible to subscribers of a given subscription. In addition, the subscribers must process every message in a subscription—even if only a subset is needed.}
+
+Nacking a messages implies a later redelivery of such message. [Source](https://github.com/googleapis/java-pubsub/blob/main/google-cloud-pubsub/src/main/java/com/google/cloud/pubsub/v1/Subscriber.java#L65)
+
+Which means that you need to think about if an error is temporary, and could be resolved by just trying harder, or is just bad data that you should ACK anyway (put in some dead letter queue?) just to get out of your subscription).
+
+(but put metrics around where you are `nack`ing!!!!)
 
 ### On Topics, subscriptions
 
