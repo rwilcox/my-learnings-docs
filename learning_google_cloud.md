@@ -69,6 +69,10 @@ title: Learning Google Cloud
       - [the executor provider](#the-executor-provider)
       - [See also:](#see-also)
 - [Data Stores](#data-stores)
+  * [MemoryStore](#memorystore)
+    + [Redis](#redis)
+      - [Configuring MemoryStore Redis](#configuring-memorystore-redis)
+      - [Monitoring / Operating MemoryStore Redis](#monitoring--operating-memorystore-redis)
   * [Cloud SQL](#cloud-sql)
   * [Spanner](#spanner)
     + [See also](#see-also-1)
@@ -1050,6 +1054,37 @@ is of interface type `com.google.api.gax.core.ExecutorProvider` which seems to b
   * [Pub/Sub Made Easy Youtube playlist from Google](https://www.youtube.com/playlist?list=PLIivdWyY5sqKwVLe4BLJ-vlh9r9zCdOse)
 
 # Data Stores
+
+## MemoryStore
+
+### Redis
+
+Significant differences between [this and running your own Redis cluster](https://cloud.google.com/memorystore/docs/redis/redis-overview#differences_between_managed_and_open_source_redis):
+  * does not support Redis clustering mode. Your code should connect to the cluster IP address using the single server syntax.
+  * does not support persistence with every operation, just isolated snapshots
+
+#### Configuring MemoryStore Redis
+
+You can configure _some_ Redis configurations.
+
+On MemoryStore, the default Redis `maxmemory` policy is volatile-lru (when memory is low, only keys with expiration dates are evicted from store, based on their expiry dates). See [Redis configurations](https://cloud.google.com/memorystore/docs/redis/redis-configs)
+
+#### Monitoring / Operating MemoryStore Redis
+
+After simple decisions (HA or not) scale is determined by how much memory you need. CPU and network bandwidth is coupled with RAM, for ie CPU bound scenarios you need to ask for more memory too.
+
+See [pricing](https://cloud.google.com/memorystore/docs/redis/pricing) for some of this information, some is done via observational science.
+
+| Memory Size  | Instance Class Type   | Cloud Monitoring Max CPU utilization number  |
+|:-------------|:----------------------|:----------------------------------------------|
+| up to 4 GB   | [M1](https://cloud.google.com/compute/docs/memory-optimized-machines#m1_machine_types)  | 100%   |
+| 5-10 GB      | [M2](https://cloud.google.com/compute/docs/memory-optimized-machines#m1_machine_types)  | 100%   |
+| 11-35 GB     | M3                    | 300% ?  |
+| 36-100 GB    | M4                    | 600% |
+
+There seems to be no way to export the CPU utilizatation percentage to ie DataDog.
+
+Likewise, there is no description of what an M3 or M4 machine instance type is, this seems to be internal.
 
 ## Cloud SQL
 
