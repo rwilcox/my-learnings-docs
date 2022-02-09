@@ -921,7 +921,7 @@ See [pricing](https://cloud.google.com/memorystore/docs/redis/pricing) for some 
 
 | Memory Size  | Instance Class Type   | Cloud Monitoring Max CPU utilization number  |
 |:-------------|:----------------------|:----------------------------------------------|
-| up to 4 GB   | [M1](https://cloud.google.com/compute/docs/memory-optimized-machines#m1_machine_types)  | 100%   |
+| up to 4 GB   | [M1](https://cloud.google.com/compute/docs/memory-optimized-machines#m1_machine_types)  | 100% ?  |
 | 5-10 GB      | [M2](https://cloud.google.com/compute/docs/memory-optimized-machines#m1_machine_types)  | 100%   |
 | 11-35 GB     | M3                    | 300% ?  |
 | 36-100 GB    | M4                    | 600% |
