@@ -21,6 +21,7 @@ title: 'Learnings: Gradle'
 - [Tasks](#tasks)
   * [Task Sample](#task-sample)
     + [Notes about using doFirst and doLast](#notes-about-using-dofirst-and-dolast)
+  * [Displaying tasks in gradle task](#displaying-tasks-in-gradle-task)
 - [in Kotlin mode](#in-kotlin-mode)
 - [Gradle Interacting with Java](#gradle-interacting-with-java)
   * [operability aspects](#operability-aspects)
