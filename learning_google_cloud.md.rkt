@@ -913,6 +913,8 @@ You can configure _some_ Redis configurations.
 
 On MemoryStore, the default Redis `maxmemory` policy is volatile-lru (when memory is low, only keys with expiration dates are evicted from store, based on their expiry dates). See [Redis configurations](https://cloud.google.com/memorystore/docs/redis/redis-configs)
 
+If you do use a maxmemory policy make sure you set `maxmemory-gb` also to a value slightly lower than your instance allocation, so Redis doesn't eat _all_ the memory in the cluster/instance aka starving itself of memory to do any eviction work.
+
 #### Monitoring / Operating MemoryStore Redis
 
 After simple decisions (HA or not) scale is determined by how much memory you need. CPU and network bandwidth is coupled with RAM, for ie CPU bound scenarios you need to ask for more memory too.
@@ -929,6 +931,11 @@ See [pricing](https://cloud.google.com/memorystore/docs/redis/pricing) for some 
 There seems to be no way to export the CPU utilizatation percentage to ie DataDog.
 
 Likewise, there is no description of what an M3 or M4 machine instance type is, this seems to be internal.
+
+#### See also
+
+  * [Working with GCP MemoryStore](https://www.red-gate.com/simple-talk/blogs/working-with-gcp-memorystore/) lots of good advice here INCLUDING a small runbook of MemoryStore related operational incidents and solutions
+
 
 ## Cloud SQL
 
