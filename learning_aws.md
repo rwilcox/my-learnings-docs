@@ -482,6 +482,16 @@ Logging: the logging stuff, through to CloudWatch logs, is really good at seeing
 
 You may need to set up the IAM permissions correctly, [In the global API gateway Settings](https://stackoverflow.com/a/59057471/224334).
 
+### TODO BEFORE PUBLISHING
+
+Q: what does canary deploys do / how to use that? ie want to be able to test this thing on prod before sending all the traffic to that point. Can do that with canary, somehow although the interface is not good.
+
+A: turn on canary, then when you deploy a change and it lets you pick a stage. It will default to the canary version of that stage. When you are happy use promote in the canary's settings page.
+
+TODO: write me!!!
+
+[Canary deployments in API gateway blog entry from Amazon](https://docs.aws.amazon.com/apigateway/latest/developerguide/create-canary-deployment.html)
+
 ### See also
 
   * [Noise.getoto.net: Using Amazon API Gateway As A Proxy For DynamoDB](https://noise.getoto.net/2016/02/26/using-amazon-api-gateway-as-a-proxy-for-dynamodb/)
