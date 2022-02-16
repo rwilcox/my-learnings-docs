@@ -1392,6 +1392,12 @@ can use `--preview` on CLI to see what resource types it's going to create
 
 # Google Artifact Registry
 
+Create *one* artifact registry per artifact type: Docker, Maven, etc. Can be single region or multi-region.
+
+The full name of the docker tag to use is:
+
+    LOCATION-docker.pkg.dev/PROJECT-ID/REPOSITORY/IMAGE
+
 
 # Cloud AutoML
 
