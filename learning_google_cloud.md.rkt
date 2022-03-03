@@ -1404,7 +1404,7 @@ The full name of the docker tag to use is:
 
 run the following command locally to get what you need:
 
-`gcloud artifacts print-settings npm --scope=@$NPM_SCOPE_TO_USE --repository=$REPOSITORY_NAME --project=$GCP_PROJECT_THIS_REPO_LIVES_IN --repository=$REPOSITORY_NAME --location=$REGION`
+`gcloud artifacts print-settings npm --scope=@at-sign{}$NPM_SCOPE_TO_USE --repository=$REPOSITORY_NAME --project=$GCP_PROJECT_THIS_REPO_LIVES_IN --repository=$REPOSITORY_NAME --location=$REGION`
 
 See [NPM and scopes in GCP](https://cloud.google.com/artifact-registry/docs/nodejs#scopes)
 
@@ -1412,9 +1412,9 @@ TL;DR: for npm packages that use the scope, uploads will happen to the registry.
 
 Let's say we did:
 
-`gcloud artifacts print-settings npm --scope=@rwilcox-internal ...`
+`gcloud artifacts print-settings npm --scope=@at-sign{}rwilcox-internal ...`
 
-If we have a package whose name is `@rwilcox-internal/testing` then `npm publish` will target the artifact registry.
+If we have a package whose name is `@at-sign{}rwilcox-internal/testing` then `npm publish` will target the artifact registry.
 
 
 ## npm login

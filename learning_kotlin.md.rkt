@@ -764,7 +764,7 @@ Kotlin, on the other hand, has true function types, so no such conversion is nee
   #:author  "Pierre-Yves Saumont"
   #:page-number 0]{You must use backticks to reference the in field of a Java System class because in is a reserved word in Kotlin.}
 
-If you have a function that throws in Kotlin you'll likely need to annotate it with `@Throws(IOExceptionOrWhateverItIs::class)`
+If you have a function that throws in Kotlin you'll likely need to annotate it with `@at-sign{}Throws(IOExceptionOrWhateverItIs::class)`
 
 # Book Recommendations
 
