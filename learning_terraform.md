@@ -43,9 +43,22 @@ title: 'Learnings: Terraform'
         default = "t2.micro"   // <-- no default? terraform apply will ask you for value
     }
 
-## Variables
+# Variables
 
-If you din’t provide a default for a variable terraform will prompt you for one interactively **or** you can provide one by exporting end variblisbles follow pattern sampled here: TF_VAR_instance_size
+Ways to define this:
+
+  * variable block with default
+  * variable block BUT you didn’t provide a default for a variable, so terraform will prompt you for one interactively
+  * you have a variable block but the values of the variables are loaded from a variable definition file
+  * during `terraform` invocation, with the `-var` CLI parameter
+  * you can provide one by exporting env variables follow pattern sampled here: `TF_VAR_instance_size`
+
+# Lifecycles
+
+  * `create_before_destroy`
+  * `prevent_destroy`
+  * `ignore_changes`
+
 
 # modules
 
@@ -83,7 +96,6 @@ Will be outputted at end of terraform apply, in own section. OR `terraform outpu
 Can read previous / different runs by using remote state store to store these, and use "data ’terraform_remote_state’”  declarations to point to saved data store (can be on S3). **note** this is read only!!!
 
 
-
 # Lifecycle blocks
 
 Can use these to control how / when terraform destroys replaced resources
@@ -116,6 +128,10 @@ Review:
 ## - [REVIEW]: Q: How does immutable infrastructure play with mutable data stores (ie how do you make sure you don't lose the data in your RDS???)
 
 Could use safety `lifecycle` value: `prevent_destroy`
+
+# Build and Release Tools
+
+  * [tfschema](https://github.com/minamijoyo/tfschema) looks promising, but doesn't seem to interact with terragrunt correctly
 
 # Book Recommendations
 
