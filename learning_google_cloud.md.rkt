@@ -64,6 +64,8 @@ Owner <-- modify privs
 
 this is on the test!
 
+[BIG OLD LIST OF ROLES ACROSS ALL PRODUCTS](https://cloud.google.com/iam/docs/understanding-roles#cloud-domains-roles)
+
 ## Service Accounts
 
 right there in the IAM sidebar
@@ -1398,6 +1400,30 @@ The full name of the docker tag to use is:
 
     LOCATION-docker.pkg.dev/PROJECT-ID/REPOSITORY/IMAGE
 
+## Getting settings for NPM
+
+run the following command locally to get what you need:
+
+`gcloud artifacts print-settings npm --scope=@$NPM_SCOPE_TO_USE --repository=$REPOSITORY_NAME --project=$GCP_PROJECT_THIS_REPO_LIVES_IN --repository=$REPOSITORY_NAME --location=$REGION`
+
+See [NPM and scopes in GCP](https://cloud.google.com/artifact-registry/docs/nodejs#scopes)
+
+TL;DR: for npm packages that use the scope, uploads will happen to the registry.
+
+Let's say we did:
+
+`gcloud artifacts print-settings npm --scope=@rwilcox-internal ...`
+
+If we have a package whose name is `@rwilcox-internal/testing` then `npm publish` will target the artifact registry.
+
+
+## npm login
+
+Use this to login
+
+`npx google-artifactregistry-auth`
+
+THEN you can `npm upload`
 
 # Cloud AutoML
 
