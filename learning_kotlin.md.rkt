@@ -420,6 +420,8 @@ General Generics Information
 
 [covariant vs contravariant](https://medium.com/kotlin-thursdays/introduction-to-kotlin-generics-9d18d3719e1d)
 
+quick rundown: `out` keyword for covariant means can only use type T in ie function return places
+
 Generic Functions
 --------------------------
 
