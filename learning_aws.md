@@ -58,6 +58,7 @@ title: 'Learnings: AWS'
     + [Notes on exposing API Gateway to the rest of the world (likely through Route 53)](#notes-on-exposing-api-gateway-to-the-rest-of-the-world-likely-through-route-53)
       - [And CORS](#and-cors)
     + [Operations](#operations)
+    + [TODO BEFORE PUBLISHING](#todo-before-publishing)
     + [See also](#see-also)
 
 <!-- tocstop -->

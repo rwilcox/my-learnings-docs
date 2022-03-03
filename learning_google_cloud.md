@@ -73,9 +73,10 @@ title: Learning Google Cloud
     + [Redis](#redis)
       - [Configuring MemoryStore Redis](#configuring-memorystore-redis)
       - [Monitoring / Operating MemoryStore Redis](#monitoring--operating-memorystore-redis)
+      - [See also](#see-also-1)
   * [Cloud SQL](#cloud-sql)
   * [Spanner](#spanner)
-    + [See also](#see-also-1)
+    + [See also](#see-also-2)
   * [Cloud DataStore / Firestore](#cloud-datastore--firestore)
   * [Big Table](#big-table)
     + [Data Architecture](#data-architecture)
@@ -84,11 +85,13 @@ title: Learning Google Cloud
       - [Autoscaling](#autoscaling)
   * [Big Query](#big-query)
     + [Data Modelling](#data-modelling-1)
-  * [See also](#see-also-2)
+  * [See also](#see-also-3)
 - [Cloud Deployment Manager](#cloud-deployment-manager)
 - [Cloud Build](#cloud-build)
 - [Gogle Container Registry](#gogle-container-registry)
 - [Google Artifact Registry](#google-artifact-registry)
+  * [Getting settings for NPM](#getting-settings-for-npm)
+  * [npm login](#npm-login)
 - [Cloud AutoML](#cloud-automl)
   * [Cloud Speech](#cloud-speech)
   * [Cloud Vision](#cloud-vision)
@@ -142,6 +145,8 @@ Owner <-- modify privs
 (these are not great from a least priviledged aspect, but they're an AppEngine thing that came forward)
 
 this is on the test!
+
+[BIG OLD LIST OF ROLES ACROSS ALL PRODUCTS](https://cloud.google.com/iam/docs/understanding-roles#cloud-domains-roles)
 
 ## Service Accounts
 
@@ -1069,6 +1074,8 @@ You can configure _some_ Redis configurations.
 
 On MemoryStore, the default Redis `maxmemory` policy is volatile-lru (when memory is low, only keys with expiration dates are evicted from store, based on their expiry dates). See [Redis configurations](https://cloud.google.com/memorystore/docs/redis/redis-configs)
 
+If you do use a maxmemory policy make sure you set `maxmemory-gb` also to a value slightly lower than your instance allocation, so Redis doesn't eat _all_ the memory in the cluster/instance aka starving itself of memory to do any eviction work.
+
 #### Monitoring / Operating MemoryStore Redis
 
 After simple decisions (HA or not) scale is determined by how much memory you need. CPU and network bandwidth is coupled with RAM, for ie CPU bound scenarios you need to ask for more memory too.
@@ -1085,6 +1092,11 @@ See [pricing](https://cloud.google.com/memorystore/docs/redis/pricing) for some 
 There seems to be no way to export the CPU utilizatation percentage to ie DataDog.
 
 Likewise, there is no description of what an M3 or M4 machine instance type is, this seems to be internal.
+
+#### See also
+
+  * [Working with GCP MemoryStore](https://www.red-gate.com/simple-talk/blogs/working-with-gcp-memorystore/) lots of good advice here INCLUDING a small runbook of MemoryStore related operational incidents and solutions
+
 
 ## Cloud SQL
 
@@ -1605,6 +1617,36 @@ can use `--preview` on CLI to see what resource types it's going to create
 
 # Google Artifact Registry
 
+Create *one* artifact registry per artifact type: Docker, Maven, etc. Can be single region or multi-region.
+
+The full name of the docker tag to use is:
+
+    LOCATION-docker.pkg.dev/PROJECT-ID/REPOSITORY/IMAGE
+
+## Getting settings for NPM
+
+run the following command locally to get what you need:
+
+`gcloud artifacts print-settings npm --scope=@$NPM_SCOPE_TO_USE --repository=$REPOSITORY_NAME --project=$GCP_PROJECT_THIS_REPO_LIVES_IN --repository=$REPOSITORY_NAME --location=$REGION`
+
+See [NPM and scopes in GCP](https://cloud.google.com/artifact-registry/docs/nodejs#scopes)
+
+TL;DR: for npm packages that use the scope, uploads will happen to the registry.
+
+Let's say we did:
+
+`gcloud artifacts print-settings npm --scope=@rwilcox-internal ...`
+
+If we have a package whose name is `@rwilcox-internal/testing` then `npm publish` will target the artifact registry.
+
+
+## npm login
+
+Use this to login
+
+`npx google-artifactregistry-auth`
+
+THEN you can `npm upload`
 
 # Cloud AutoML
 

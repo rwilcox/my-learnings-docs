@@ -475,6 +475,8 @@ General Generics Information
 
 [covariant vs contravariant](https://medium.com/kotlin-thursdays/introduction-to-kotlin-generics-9d18d3719e1d)
 
+quick rundown: `out` keyword for covariant means can only use type T in ie function return places
+
 Generic Functions
 --------------------------
 
@@ -790,7 +792,7 @@ See my RxJava specific notes: Learning_Java_Rx
 <<Kotlin_Java_Interropt>>
 
 
-> The Java way for dealing with a default value is through overloading. To make the function available as overloaded Java methods, use the JvmOverloads annotation
+> The Java way for dealing with a default [parameter] value is through overloading. To make the function available as overloaded Java methods, use the JvmOverloads annotation
 > 
 > - From The Joy of Kotlin by Pierre-Yves Saumont on page 0 ()
 
@@ -830,6 +832,7 @@ See my RxJava specific notes: Learning_Java_Rx
 > 
 > - From The Joy of Kotlin by Pierre-Yves Saumont on page 0 ()
 
+If you have a function that throws in Kotlin you'll likely need to annotate it with `@Throws(IOExceptionOrWhateverItIs::class)`
 
 # Book Recommendations
 

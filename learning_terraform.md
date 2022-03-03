@@ -7,7 +7,8 @@ title: 'Learnings: Terraform'
 <!-- toc -->
 
 - [Example](#example)
-  * [Variables](#variables)
+- [Variables](#variables)
+- [Lifecycles](#lifecycles)
 - [modules](#modules)
 - [Random Notes](#random-notes)
 - [CLI](#cli)
@@ -19,6 +20,7 @@ title: 'Learnings: Terraform'
   * [PR Review](#pr-review)
 - [Questions](#questions)
   * [- [REVIEW]: Q: How does immutable infrastructure play with mutable data stores (ie how do you make sure you don't lose the data in your RDS???)](#--review-q-how-does-immutable-infrastructure-play-with-mutable-data-stores-ie-how-do-you-make-sure-you-dont-lose-the-data-in-your-rds)
+- [Build and Release Tools](#build-and-release-tools)
 - [Book Recommendations](#book-recommendations)
 
 <!-- tocstop -->
