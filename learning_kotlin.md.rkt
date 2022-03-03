@@ -730,7 +730,7 @@ See my RxJava specific notes: Learning_Java_Rx
 
 @quote-highlight[#:title "The Joy of Kotlin"
   #:author  "Pierre-Yves Saumont"
-  #:page-number 0]{The Java way for dealing with a default value is through overloading. To make the function available as overloaded Java methods, use the JvmOverloads annotation}
+  #:page-number 0]{The Java way for dealing with a default [parameter] value is through overloading. To make the function available as overloaded Java methods, use the JvmOverloads annotation}
 
 @quote-highlight[#:title "The Joy of Kotlin"
   #:author  "Pierre-Yves Saumont"
@@ -762,6 +762,7 @@ Kotlin, on the other hand, has true function types, so no such conversion is nee
   #:author  "Pierre-Yves Saumont"
   #:page-number 0]{You must use backticks to reference the in field of a Java System class because in is a reserved word in Kotlin.}
 
+If you have a function that throws in Kotlin you'll likely need to annotate it with `@Throws(IOExceptionOrWhateverItIs::class)`
 
 # Book Recommendations
 
