@@ -62,6 +62,25 @@ https://github.com/atomontage/xterm-color
 
 [Source](https://www.gnu.org/software/emacs/manual/html_mono/eshell.html#Dollars-Expansion)
 
+#### WTF behavior I need to figure out sometime
+
+```bash
+ $ export HELLO=world
+ $ echo HELLO
+HELLO
+ $ echo $HELLO
+world
+ $ export GREETING="hello $HELLO"
+ $ echo $GREETING
+hello world                       # <-- this is the thing I want
+ $ export GREETING="hello ${HELLO}"
+ $ echo $GREETING
+hello HELLO: command not found    # <-- nope very sad even though bash says this is the same thing
+ $ export GREETING="hello ${$HELLO}"
+ $ echo $GREETING
+hello world: command not found
+```
+
 ## Neat workflow thing: Plan 9 smart display
 
 enable by putting this in init.el
