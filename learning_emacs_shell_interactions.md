@@ -46,6 +46,21 @@ You'll likely want to install this package from MELPA, because something somewhe
 
 https://github.com/atomontage/xterm-color
 
+## Gotchas: eshell is NOT bash
+
+### `source` doesn't work the way you might expect (use `.`)
+
+`. some_file.sh` makes the actions of `some_file.sh` happen inside your current shell. `source some_file.sh` it happens in a subshell (environmental variables set here are lost)
+
+[Source](https://www.gnu.org/software/emacs/manual/html_mono/eshell.html#Scripts)
+
+### `$()` doesn't work the way you might expect (use `${}`)
+
+`$()` expands to the result of evaluating the S-EXPRESSION! No shell commands here, only lisp!
+
+`${}` stuff in here may be valid eshell commands, including expansions.
+
+[Source](https://www.gnu.org/software/emacs/manual/html_mono/eshell.html#Dollars-Expansion)
 
 ## Neat workflow thing: Plan 9 smart display
 
