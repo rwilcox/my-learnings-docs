@@ -66,8 +66,6 @@ https://github.com/atomontage/xterm-color
 
 ```bash
  $ export HELLO=world
- $ echo HELLO
-HELLO
  $ echo $HELLO
 world
  $ export GREETING="hello $HELLO"
