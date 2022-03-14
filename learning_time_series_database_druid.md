@@ -32,6 +32,12 @@ Can ingest from multiple data sources
 
 Can also apply ingest side filters, transforms and un-nestle data
 
+# Querying
+
+## Using console
+
+Can use the dot menu beside the Run option to translate Druid SQL to Native (JSON based) query syntax!
+
 # Watching
 
 ## Performance Tuning of Druid Cluster at High Scale @ ironSource
