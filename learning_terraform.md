@@ -55,12 +55,15 @@ Ways to define this:
   * during `terraform` invocation, with the `-var` CLI parameter
   * you can provide one by exporting env variables follow pattern sampled here: `TF_VAR_instance_size`
 
-# Lifecycles
+# Lifecycle blocks
 
   * `create_before_destroy`
   * `prevent_destroy`
-  * `ignore_changes`
+  * `ignore_changes`  <-- you can provide a list of FIELDS here that Terraform will ignore changes to the real infra, which may (in some resources!) trigger a replament event
 
+In most cases this is not required but could be because [your provider isn't round-tripping the values correctly](https://stackoverflow.com/q/68574608/224334) cough cough GCP cough cough
+
+[Documentation](https://www.terraform.io/language/meta-arguments/lifecycle)
 
 # modules
 
@@ -96,12 +99,6 @@ Creates an implicit dependency.
 Will be outputted at end of terraform apply, in own section. OR `terraform output $VARIABLE_NAME`.
 
 Can read previous / different runs by using remote state store to store these, and use "data ’terraform_remote_state’”  declarations to point to saved data store (can be on S3). **note** this is read only!!!
-
-
-# Lifecycle blocks
-
-Can use these to control how / when terraform destroys replaced resources
-(ie: `create_before_destroy`)
 
 
 # Storing terraform cluster state
