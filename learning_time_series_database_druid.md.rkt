@@ -12,13 +12,13 @@ title: Learning Druid
   #:page-number 0
   #:url  "https://druid.apache.org/docs/latest/design/architecture.html"]{
 Druid has several process types, briefly described below:
-  * Coordinator processes manage data availability on the cluster. The workload on the Coordinator process tends to increase with the number of segments in the cluster. They watch over the Historical processes on the Data servers. They are responsible for assigning segments to specific servers, and for ensuring segments are well-balanced across Historicals.
-  * Overlord processes control the assignment of data ingestion workloads. They watch over the MiddleManager processes on the Data servers and are the controllers of data ingestion into Druid. They are responsible for assigning ingestion tasks to MiddleManagers and for coordinating segment publishing.
-  * Broker processes handle queries from external clients.
-  * Router processes are optional; they route requests to Brokers, Coordinators, and Overlords.
-  * Historical processes store queryable data. They handle storage and querying on "historical" data (including any streaming data that has been in the system long enough to be committed). Historical processes download segments from deep storage and respond to queries about these segments. They don't accept writes.
-  * MiddleManager OR Indexer processes ingest data. Instead of forking separate JVM processes per-task, the Indexer runs tasks as individual threads within a single JVM process
-  * Supervisor if you are using a streaming ingest somewhere
+  * **Coordinator** processes manage data availability on the cluster. The workload on the Coordinator process tends to increase with the number of segments in the cluster. They watch over the Historical processes on the Data servers. They are responsible for assigning segments to specific servers, and for ensuring segments are well-balanced across Historicals.
+  * **Overlord** processes control the assignment of data ingestion workloads. They watch over the MiddleManager processes on the Data servers and are the controllers of data ingestion into Druid. They are responsible for assigning ingestion tasks to MiddleManagers and for coordinating segment publishing.
+  * **Broker** processes handle queries from external clients.
+  * **Router** processes are optional; they route requests to Brokers, Coordinators, and Overlords.
+  * **Historical** processes store queryable data. They handle storage and querying on "historical" data (including any streaming data that has been in the system long enough to be committed). Historical processes download segments from deep storage and respond to queries about these segments. They don't accept writes.
+  * **MiddleManager** OR **Indexer** processes ingest data. Instead of forking separate JVM processes per-task, the Indexer runs tasks as individual threads within a single JVM process
+  * **Supervisor** if you are using a streaming ingest somewhere
   }
 
 External Dependencies:
@@ -26,6 +26,10 @@ External Dependencies:
   * Zookeeper
   * ingestion method
   * long term storage for segments (DB, block storage or big data cluster)
+  * metadata storage
+
+- [TODO]: what kind of data stores for metadata storage?
+
 
 @quote-highlight[#:title "ZooKeeper · Apache Druid"
   #:author  "nil"
@@ -36,7 +40,10 @@ The operations that happen over ZK are:
   * Segment "publishing" protocol from Historical
   * Segment load/drop protocol between Coordinator and Historical
   * Overlord leader election
-  * Overlord/MiddleManager task management }
+  * Overlord/MiddleManager task management
+  * Overlord to Indexer taks management. (Note: generated tasks - ie perfect rollups - may get very large depending on number of segments or metric columns involved)
+  }
+
 
 # Design of Druid Data Structure
 
@@ -63,7 +70,7 @@ And that eventually the cardinality of that will increase as you group more and 
 (This is the granularity)
 
 
-> but yeah my understanding is that any time it’s creating a segment chunk it will kind of by nature merge any data with matching timestamp and dimensions
+> my understanding is that any time it’s creating a segment chunk it will kind of by nature merge any data with matching timestamp and dimensions
 
 - DG
 
@@ -72,10 +79,7 @@ And that eventually the cardinality of that will increase as you group more and 
   #:page-number 0
   #:url  "https://druid.apache.org/docs/latest/design/"]{Columnar storage format. Druid uses column-oriented storage }
 
-@quote-highlight[#:title "Design · Apache Druid"
-  #:author  "nil"
-  #:page-number 0
-  #:url  "https://druid.apache.org/docs/latest/design/architecture.html"]{Druid uses deep storage to store any data that has been ingested into the system. }
+
 
 ## Configuring the Supervisor for your datastore
 
@@ -163,10 +167,6 @@ Q: Is this only for Kafka, or for all?
   #:page-number 0
   #:url  "https://druid.apache.org/docs/latest/design/architecture.html"]{Each time range is called a chunk (for example, a single day, if your datasource is partitioned by day). Within a chunk, data is partitioned into one or more segments. Each segment is a single file, typically comprising up to a few million rows of data }
 
-@quote-highlight[#:title "Design · Apache Druid"
-  #:author  "nil"
-  #:page-number 0
-  #:url  "https://druid.apache.org/docs/latest/design/architecture.html"]{When the indexing task has finished reading data for the segment, it pushes it to deep storage and then publishes it by writing a record into the metadata store. }
 
 @quote-highlight[#:title "Segments · Apache Druid"
   #:author  "nil"
@@ -212,10 +212,6 @@ Can also apply ingest side filters, transforms and un-nestle data
   #:page-number 0
   #:url  "https://druid.apache.org/docs/latest/ingestion/index.html"]{Streaming ingestion uses an ongoing process called a supervisor that reads from the data stream to ingest data into Druid }
 
-@quote-highlight[#:title "Introduction to Apache Druid · Apache Druid"
-  #:author  "nil"
-  #:page-number 0
-  #:url  "https://druid.apache.org/docs/latest/design/"]{After ingestion, Druid safely stores a copy of your data in deep storage. Deep storage is typically cloud storage, HDFS, or a shared filesystem }
 
 @quote-highlight[#:title "Introduction to Apache Druid · Apache Druid"
   #:author  "nil"
@@ -260,6 +256,26 @@ Can also apply ingest side filters, transforms and un-nestle data
   #:author  "nil"
   #:page-number 0
   #:url  "https://druid.apache.org/docs/latest/development/extensions-core/kafka-ingestion.html"]{When you enable the Kafka indexing service, you can configure supervisors on the Overlord to manage the creation and lifetime of Kafka indexing tasks }
+
+# Storage after ingestion (Deep Storage)
+
+@quote-highlight[#:title "Design · Apache Druid"
+  #:author  "nil"
+  #:page-number 0
+  #:url  "https://druid.apache.org/docs/latest/design/architecture.html"]{Druid uses deep storage to store any data that has been ingested into the system. }
+
+
+@quote-highlight[#:title "Design · Apache Druid"
+  #:author  "nil"
+  #:page-number 0
+  #:url  "https://druid.apache.org/docs/latest/design/architecture.html"]{When the indexing task has finished reading data for the segment, it pushes it to deep storage and then publishes it by writing a record into the metadata store. }
+
+@quote-highlight[#:title "Introduction to Apache Druid · Apache Druid"
+  #:author  "nil"
+  #:page-number 0
+  #:url  "https://druid.apache.org/docs/latest/design/"]{Deep storage is typically cloud storage, HDFS, or a shared filesystem }
+
+- [TODO]: how long does a segment hang out on a historical before sending to deep storage?
 
 # Querying
 
