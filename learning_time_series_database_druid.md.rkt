@@ -228,7 +228,9 @@ Can also apply ingest side filters, transforms and un-nestle data
 @quote-highlight[#:title "Data rollup · Apache Druid"
   #:author  "nil"
   #:page-number 0
-  #:url  "https://druid.apache.org/docs/latest/ingestion/rollup.html"]{If you use a best-effort rollup ingestion configuration that does not guarantee perfect rollup, try one of the following:Switch to a guaranteed perfect rollup option.Reindex or compact your data in the background after initial ingestion. }
+  #:url  "https://druid.apache.org/docs/latest/ingestion/rollup.html"]{If you use a best-effort rollup ingestion configuration that does not guarantee perfect rollup, try one of the following:
+  * Switch to a guaranteed perfect rollup option
+  * Reindex or compact your data in the background after initial ingestion. }
 
 @quote-highlight[#:title "Data rollup · Apache Druid"
   #:author  "nil"
@@ -256,6 +258,15 @@ Can also apply ingest side filters, transforms and un-nestle data
   #:author  "nil"
   #:page-number 0
   #:url  "https://druid.apache.org/docs/latest/development/extensions-core/kafka-ingestion.html"]{When you enable the Kafka indexing service, you can configure supervisors on the Overlord to manage the creation and lifetime of Kafka indexing tasks }
+
+# Compaction
+
+Can configure Coordinator to perform automatic compaction, or can manually submit compaction jobs.
+
+## See also
+
+  * [Compaction](https://druid.apache.org/docs/latest/ingestion/compaction.html)
+
 
 # Storage after ingestion (Deep Storage)
 
