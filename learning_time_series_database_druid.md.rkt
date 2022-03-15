@@ -243,6 +243,8 @@ Can also apply ingest side filters, transforms and un-nestle data
   #:page-number 0
   #:url  "https://druid.apache.org/docs/latest/ingestion/rollup.html"]{Design your schema with fewer dimensions and lower cardinality dimensions to yield better rollup ratios. }
 
+- [TODO]: specs!??!!
+
 ## Streaming: From Kafka
 
 @quote-highlight[#:title "Partitioning · Apache Druid"
