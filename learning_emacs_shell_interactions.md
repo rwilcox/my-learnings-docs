@@ -8,6 +8,10 @@ title: 'Learnings: Emacs: Shell Interactions'
 
 - [EShell](#eshell)
   * [Setting this up properly](#setting-this-up-properly)
+  * [Gotchas: eshell is NOT bash](#gotchas-eshell-is-not-bash)
+    + [`source` doesn't work the way you might expect (use `.`)](#source-doesnt-work-the-way-you-might-expect-use-)
+    + [`$()` doesn't work the way you might expect (use `${}`)](#-doesnt-work-the-way-you-might-expect-use-)
+      - [WTF behavior I need to figure out sometime](#wtf-behavior-i-need-to-figure-out-sometime)
   * [Neat workflow thing: Plan 9 smart display](#neat-workflow-thing-plan-9-smart-display)
   * [Implementing things I miss from BBEdit](#implementing-things-i-miss-from-bbedit)
     + [Text Filters on selected text: running them through an arbritrary shell command](#text-filters-on-selected-text-running-them-through-an-arbritrary-shell-command)
