@@ -6,6 +6,10 @@ path: /learnings/learning_time_series_database_druid
 title: Learning Druid
 ---
 
+# Table Of Contents
+
+<!-- toc -->
+
 # Druid Setup
 
 @quote-highlight[#:title "Design · Apache Druid"
