@@ -1648,6 +1648,8 @@ Use this to login
 
 THEN you can `npm upload`
 
+It uses google's application default creds stuff so `GOOGLE_APPLICATION_CREDENTIALS` still works. see [authenticating with a credential helper](https://cloud.google.com/artifact-registry/docs/nodejs/authentication#auth-helper)
+
 # Cloud AutoML
 
 No service scope documented
