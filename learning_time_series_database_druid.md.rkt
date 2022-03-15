@@ -1,4 +1,5 @@
 #lang scribble/text
+@(require "scribble-utils.rkt")
 
 ---
 path: /learnings/learning_time_series_database_druid
@@ -216,7 +217,7 @@ Can also apply ingest side filters, transforms and un-nestle data
 @quote-highlight[#:title "Introduction to Apache Druid · Apache Druid"
   #:author  "nil"
   #:page-number 0
-  #url  "https://druid.apache.org/docs/latest/design/"]{Druid supports streaming inserts, but not streaming updates }
+  #:url  "https://druid.apache.org/docs/latest/design/"]{Druid supports streaming inserts, but not streaming updates }
 
 @quote-highlight[#:title "Design · Apache Druid"
   #:author  "nil"
@@ -362,7 +363,7 @@ Can use the dot menu beside the Run option to translate Druid SQL to Native (JSO
 
 # Watching
 
-## Performance Tuning of Druid Cluster at High Scale @ ironSource
+## Performance Tuning of Druid Cluster at High Scale at ironSource
 
 [video](https://www.youtube.com/watch?v=_co3nPOh7YM&t=1s)
 
