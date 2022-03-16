@@ -366,6 +366,10 @@ Can use the dot menu beside the Run option to translate Druid SQL to Native (JSO
   #:page-number 0
   #:url  "https://druid.apache.org/docs/latest/development/extensions-core/kafka-ingestion.html"]{The POST /druid/indexer/v1/supervisor/<supervisorId>/reset operation clears stored offsets, causing the supervisor to start reading offsets from either the earliest or latest offsets in Kafka (depending on the value of useEarliestOffset). After clearing stored offsets, the supervisor kills and recreates any active tasks, so that tasks begin reading from valid offsets. }
 
+# See also
+
+  * [Baeldug explains Druid](https://www.baeldung.com/apache-druid-event-driven-data) <-- this is REALLY good
+  * [My Druid Pinboard category](https://pinboard.in/u:rwilcox/t:apache_druid/)
 
 # Watching
 
