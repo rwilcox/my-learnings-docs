@@ -402,6 +402,12 @@ You can limit number of files by ingest task at a time:
 
 But these limit parallelism in big clusters..
 
+You can also set Zookeeper servers and clients to use the JAVA PROPERTY ONLY [jute.maxbuffer](https://zookeeper.apache.org/doc/r3.3.3/zookeeperAdmin.html) to make this bigger. note you can seemingly NOT set this in zook.cfg
+
+### See also
+
+  * [the generated specification is too big](https://github.com/apache/druid/issues/7597)
+
 ## metrics
 
 [Druid Metrics](https://druid.apache.org/docs/latest/operations/metrics.html)
