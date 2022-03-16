@@ -10,6 +10,10 @@ title: Learning Druid
 
 <!-- toc -->
 
+# What is Druid
+
+- [TODO]: write me
+
 # Druid Setup
 
 @quote-highlight[#:title "Design · Apache Druid"
