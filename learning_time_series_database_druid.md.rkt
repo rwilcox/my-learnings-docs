@@ -393,7 +393,6 @@ Lookups not monitored with Druid Metrics
 
 Druid.indexer.runner.maxZnkdeBytes
 
-- [TODO]: make better
 
 You can limit number of files by ingest task at a time:
 
