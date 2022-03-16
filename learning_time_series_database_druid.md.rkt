@@ -42,12 +42,13 @@ External Dependencies:
   #:url  "https://druid.apache.org/docs/latest/dependencies/zookeeper.html"]{
 The operations that happen over ZK are:
   * Coordinator leader election
-  * Segment "publishing" protocol from Historical
+  * Segment "publishing" protocol from Historical <— also called segment announcement, when the historical boots up and needs to tell broker what segments it can query
   * Segment load/drop protocol between Coordinator and Historical
   * Overlord leader election
   * Overlord/MiddleManager task management
   * Overlord to Indexer taks management. (Note: generated tasks - ie perfect rollups - may get very large depending on number of segments or metric columns involved)
   }
+
 
 
 # Design of Druid Data Structure
@@ -135,6 +136,7 @@ Q: Is this only for Kafka, or for all?
   #:page-number 0
   #:url  "https://druid.apache.org/docs/latest/ingestion/schema-design.html"]{In Druid, on the other hand, it is common to use totally flat datasources that do not require joins at query time }
 
+However, eventually wide columns potentially cause performed issues as segment size correlates with number of columns
 
 ### Nulls and Druid
 
@@ -159,6 +161,12 @@ Q: Is this only for Kafka, or for all?
   #:author  "nil"
   #:page-number 0
   #:url  "https://druid.apache.org/docs/latest/ingestion/data-model.html"]{Druid also uses the primary timestamp column for time-based data management operations such as dropping time chunks, overwriting time chunks, and time-based retention rules. }
+
+### Druid Specs
+
+Couples invest source to destination data source + transformations
+
+See [Tutorial: writing an ingestion spec](https://druid.apache.org/docs/latest/tutorials/tutorial-ingestion-spec.html)
 
 ## Segments
 
@@ -192,6 +200,9 @@ Q: Is this only for Kafka, or for all?
   #:author  "nil"
   #:page-number 0
   #:url  "https://druid.apache.org/docs/latest/design/segments.html"]{For Druid to operate well under heavy query load, it is important for the segment file size to be within the recommended range of 300MB-700MB. If your segment files are larger than this range, then consider either changing the granularity of the time interval or partitioning your data and tweaking the targetPartitionSize in your partitionsSpec (a good starting point for this parameter is 5 million rows). }
+
+Also note may have performance issues if too many segments in a chunk (slow metadata queries, slow coordinator load-drop)
+
 
 ## Data flowing through Druid
 
@@ -247,7 +258,6 @@ Can also apply ingest side filters, transforms and un-nestle data
   #:page-number 0
   #:url  "https://druid.apache.org/docs/latest/ingestion/rollup.html"]{Design your schema with fewer dimensions and lower cardinality dimensions to yield better rollup ratios. }
 
-- [TODO]: specs!??!!
 
 ## Streaming: From Kafka
 
@@ -366,17 +376,44 @@ Can use the dot menu beside the Run option to translate Druid SQL to Native (JSO
   #:page-number 0
   #:url  "https://druid.apache.org/docs/latest/development/extensions-core/kafka-ingestion.html"]{The POST /druid/indexer/v1/supervisor/<supervisorId>/reset operation clears stored offsets, causing the supervisor to start reading offsets from either the earliest or latest offsets in Kafka (depending on the value of useEarliestOffset). After clearing stored offsets, the supervisor kills and recreates any active tasks, so that tasks begin reading from valid offsets. }
 
+Broker is not horiz scalable and keeps metadata for all segments. Which takes heap.
+
+Very high number of segments may run into memory map or file descriptor limits on historical instances
+
+Coordinator is single threaded?
+- [TODO]: did I hear that right?
+
+Can tell broker to only watch certain segments, and seperate these out into tiers
+
+Lookup loading happens - by default - async so may need to watch logs to see if a lookup has failed to load.
+
+Lookups not monitored with Druid Metrics
+
+## and ZK interactions
+
+Druid.indexer.runner.maxZnkdeBytes
+
+- [TODO]: make better
+
+You can limit number of files by ingest task at a time:
+
+  * maxSplitSize - max num of bytes in a single subtask
+  * maxNumFiles - max number of input files to process in a single subtask
+
+But these limit parallelism in big clusters..
+
+## metrics
+
+[Druid Metrics](https://druid.apache.org/docs/latest/operations/metrics.html)
+
 # See also
 
   * [Baeldug explains Druid](https://www.baeldung.com/apache-druid-event-driven-data) <-- this is REALLY good
   * [My Druid Pinboard category](https://pinboard.in/u:rwilcox/t:apache_druid/)
 
+
 # Watching
 
 ## Performance Tuning of Druid Cluster at High Scale at ironSource
-
-[video](https://www.youtube.com/watch?v=_co3nPOh7YM&t=1s)
-
-## Operating Druid
 
 [video](https://www.youtube.com/watch?v=_co3nPOh7YM&t=1s)
