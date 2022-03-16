@@ -2,6 +2,45 @@
 path: /learnings/learning_time_series_database_druid
 title: Learning Druid
 ---
+# Table Of Contents
+
+<!-- toc -->
+
+- [What is Druid](#what-is-druid)
+- [Druid Setup](#druid-setup)
+- [Design of Druid Data Structure](#design-of-druid-data-structure)
+  * [Configuring the Supervisor for your datastore](#configuring-the-supervisor-for-your-datastore)
+  * [Your datastore schema](#your-datastore-schema)
+    + [General Schema Design](#general-schema-design)
+    + [Nulls and Druid](#nulls-and-druid)
+    + [Rollup](#rollup)
+    + [Druid Specs](#druid-specs)
+  * [Segments](#segments)
+  * [Data flowing through Druid](#data-flowing-through-druid)
+- [Ingest](#ingest)
+  * [And rollup](#and-rollup)
+  * [Streaming: From Kafka](#streaming-from-kafka)
+- [Compaction](#compaction)
+  * [See also](#see-also)
+- [Storage after ingestion (Deep Storage)](#storage-after-ingestion-deep-storage)
+- [Querying](#querying)
+  * [Druid SQL](#druid-sql)
+  * [Using console](#using-console)
+  * [Architecture](#architecture)
+- [Ops](#ops)
+  * [and ZK interactions](#and-zk-interactions)
+    + [See also](#see-also-1)
+  * [metrics](#metrics)
+- [See also](#see-also-2)
+- [Watching](#watching)
+  * [Performance Tuning of Druid Cluster at High Scale at ironSource](#performance-tuning-of-druid-cluster-at-high-scale-at-ironsource)
+
+<!-- tocstop -->
+
+# What is Druid
+
+- [TODO]: write me
+
 # Druid Setup
 
 
@@ -38,7 +77,7 @@ External Dependencies:
 >   
 > * Coordinator leader election
 >   
-> * Segment "publishing" protocol from Historical
+> * Segment "publishing" protocol from Historical <— also called segment announcement, when the historical boots up and needs to tell broker what segments it can query
 >   
 > * Segment load/drop protocol between Coordinator and Historical
 >   
@@ -49,6 +88,7 @@ External Dependencies:
 > * Overlord to Indexer taks management. (Note: generated tasks - ie perfect rollups - may get very large depending on number of segments or metric columns involved)
 > 
 > - From ZooKeeper · Apache Druid by nil on page 0 (https://druid.apache.org/docs/latest/dependencies/zookeeper.html)
+
 
 
 # Design of Druid Data Structure
@@ -134,6 +174,7 @@ And that eventually the cardinality of that will increase as you group more and 
 > 
 > - From Schema design tips · Apache Druid by nil on page 0 (https://druid.apache.org/docs/latest/ingestion/schema-design.html)
 
+However, eventually wide columns potentially cause performed issues as segment size correlates with number of columns
 
 ### Nulls and Druid
 
@@ -158,6 +199,12 @@ And that eventually the cardinality of that will increase as you group more and 
 > Druid also uses the primary timestamp column for time-based data management operations such as dropping time chunks, overwriting time chunks, and time-based retention rules. 
 > 
 > - From Druid data model · Apache Druid by nil on page 0 (https://druid.apache.org/docs/latest/ingestion/data-model.html)
+
+### Druid Specs
+
+Couples invest source to destination data source + transformations
+
+See [Tutorial: writing an ingestion spec](https://druid.apache.org/docs/latest/tutorials/tutorial-ingestion-spec.html)
 
 ## Segments
 
@@ -191,6 +238,9 @@ And that eventually the cardinality of that will increase as you group more and 
 > For Druid to operate well under heavy query load, it is important for the segment file size to be within the recommended range of 300MB-700MB. If your segment files are larger than this range, then consider either changing the granularity of the time interval or partitioning your data and tweaking the targetPartitionSize in your partitionsSpec (a good starting point for this parameter is 5 million rows). 
 > 
 > - From Segments · Apache Druid by nil on page 0 (https://druid.apache.org/docs/latest/design/segments.html)
+
+Also note may have performance issues if too many segments in a chunk (slow metadata queries, slow coordinator load-drop)
+
 
 ## Data flowing through Druid
 
@@ -245,6 +295,7 @@ Can also apply ingest side filters, transforms and un-nestle data
 > Design your schema with fewer dimensions and lower cardinality dimensions to yield better rollup ratios. 
 > 
 > - From Data rollup · Apache Druid by nil on page 0 (https://druid.apache.org/docs/latest/ingestion/rollup.html)
+
 
 ## Streaming: From Kafka
 
@@ -363,13 +414,49 @@ Can use the dot menu beside the Run option to translate Druid SQL to Native (JSO
 > 
 > - From Apache Kafka ingestion · Apache Druid by nil on page 0 (https://druid.apache.org/docs/latest/development/extensions-core/kafka-ingestion.html)
 
+Broker is not horiz scalable and keeps metadata for all segments. Which takes heap.
+
+Very high number of segments may run into memory map or file descriptor limits on historical instances
+
+Coordinator is single threaded?
+- [TODO]: did I hear that right?
+
+Can tell broker to only watch certain segments, and seperate these out into tiers
+
+Lookup loading happens - by default - async so may need to watch logs to see if a lookup has failed to load.
+
+Lookups not monitored with Druid Metrics
+
+## and ZK interactions
+
+Druid.indexer.runner.maxZnkdeBytes
+
+
+You can limit number of files by ingest task at a time:
+
+  * maxSplitSize - max num of bytes in a single subtask
+  * maxNumFiles - max number of input files to process in a single subtask
+
+But these limit parallelism in big clusters..
+
+You can also set Zookeeper servers and clients to use the JAVA PROPERTY ONLY [jute.maxbuffer](https://zookeeper.apache.org/doc/r3.3.3/zookeeperAdmin.html) to make this bigger. note you can seemingly NOT set this in zook.cfg
+
+### See also
+
+  * [the generated specification is too big](https://github.com/apache/druid/issues/7597)
+
+## metrics
+
+[Druid Metrics](https://druid.apache.org/docs/latest/operations/metrics.html)
+
+# See also
+
+  * [Baeldug explains Druid](https://www.baeldung.com/apache-druid-event-driven-data) <-- this is REALLY good
+  * [My Druid Pinboard category](https://pinboard.in/u:rwilcox/t:apache_druid/)
+
 
 # Watching
 
 ## Performance Tuning of Druid Cluster at High Scale at ironSource
-
-[video](https://www.youtube.com/watch?v=_co3nPOh7YM&t=1s)
-
-## Operating Druid
 
 [video](https://www.youtube.com/watch?v=_co3nPOh7YM&t=1s)
