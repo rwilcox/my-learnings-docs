@@ -18,10 +18,12 @@ title: Learning Druid
   * [Segments](#segments)
   * [Data flowing through Druid](#data-flowing-through-druid)
 - [Ingest](#ingest)
+  * [and specs](#and-specs)
   * [And rollup](#and-rollup)
+    + [See also](#see-also)
   * [Streaming: From Kafka](#streaming-from-kafka)
 - [Compaction](#compaction)
-  * [See also](#see-also)
+  * [See also](#see-also-1)
 - [Storage after ingestion (Deep Storage)](#storage-after-ingestion-deep-storage)
 - [Querying](#querying)
   * [Druid SQL](#druid-sql)
@@ -29,17 +31,17 @@ title: Learning Druid
   * [Architecture](#architecture)
 - [Ops](#ops)
   * [and ZK interactions](#and-zk-interactions)
-    + [See also](#see-also-1)
+  * [looking into running a Druid cluster on spot instances](#looking-into-running-a-druid-cluster-on-spot-instances)
+    + [See also](#see-also-2)
   * [metrics](#metrics)
-- [See also](#see-also-2)
+- [See also](#see-also-3)
 - [Watching](#watching)
-  * [Performance Tuning of Druid Cluster at High Scale at ironSource](#performance-tuning-of-druid-cluster-at-high-scale-at-ironsource)
 
 <!-- tocstop -->
 
 # What is Druid
 
-- [TODO]: write me
+Druid is a time series database that ingests data from various sources (files, streaming) which are controlled via spec files. Users can later query time series data using SQL or druid native query language (a JSON schema), or roll up data to be less granular.
 
 # Druid Setup
 
@@ -67,9 +69,8 @@ External Dependencies:
   * Zookeeper
   * ingestion method
   * long term storage for segments (DB, block storage or big data cluster)
-  * metadata storage
+  * metadata storage <-- usually in a mysql or Postgres database
 
-- [TODO]: what kind of data stores for metadata storage?
 
 
 
@@ -131,9 +132,10 @@ And that eventually the cardinality of that will increase as you group more and 
 
 
 > When a supervisor spec is submitted via the POST /druid/indexer/v1/supervisor endpoint, it is persisted in the configured metadata database. There can only be a single supervisor per dataSource, and submitting a second spec for the same dataSource will overwrite the previous one.
-> Q: Is this only for Kafka, or for all?
 > 
 > - From Apache Kafka ingestion · Apache Druid by nil on page 0 (https://druid.apache.org/docs/latest/development/extensions-core/kafka-ingestion.html)
+
+Q: Is this only for Kafka, or for all?
 
 ## Your datastore schema
 
@@ -277,6 +279,10 @@ Can also apply ingest side filters, transforms and un-nestle data
 > 
 > - From Design · Apache Druid by nil on page 0 (https://druid.apache.org/docs/latest/design/architecture.html)
 
+## and specs
+
+See [ingestion spec](https://druid.apache.org/docs/latest/ingestion/ingestion-spec.html)
+
 ## And rollup
 
 
@@ -296,6 +302,9 @@ Can also apply ingest side filters, transforms and un-nestle data
 > 
 > - From Data rollup · Apache Druid by nil on page 0 (https://druid.apache.org/docs/latest/ingestion/rollup.html)
 
+### See also
+
+  * [An explainer about rollup, cardinality, and segments from Netflix](https://imply.io/videos/a-explainer-about-druid-rollup-cardinality-and-segments-from-netflix/)
 
 ## Streaming: From Kafka
 
@@ -341,7 +350,7 @@ Can configure Coordinator to perform automatic compaction, or can manually submi
 > 
 > - From Introduction to Apache Druid · Apache Druid by nil on page 0 (https://druid.apache.org/docs/latest/design/)
 
-- [TODO]: how long does a segment hang out on a historical before sending to deep storage?
+While creating the segment (and the chunk files within that segment) the data lives in the middlemanager / indexer, then sends to deep storage once segement compacted, indexed etc. See [data ingestion in Druid](https://blog.knoldus.com/data-ingestion-in-druid-overview/)
 
 # Querying
 
@@ -418,8 +427,6 @@ Broker is not horiz scalable and keeps metadata for all segments. Which takes he
 
 Very high number of segments may run into memory map or file descriptor limits on historical instances
 
-Coordinator is single threaded?
-- [TODO]: did I hear that right?
 
 Can tell broker to only watch certain segments, and seperate these out into tiers
 
@@ -441,6 +448,10 @@ But these limit parallelism in big clusters..
 
 You can also set Zookeeper servers and clients to use the JAVA PROPERTY ONLY [jute.maxbuffer](https://zookeeper.apache.org/doc/r3.3.3/zookeeperAdmin.html) to make this bigger. note you can seemingly NOT set this in zook.cfg
 
+## looking into running a Druid cluster on spot instances
+
+See [Fyber engineering blog: running cost effective Druid cluster on Spot instances](https://www.fyber.com/engineering/running-a-cost-effective-druid-cluster-on-aws-spot-instances/)
+
 ### See also
 
   * [the generated specification is too big](https://github.com/apache/druid/issues/7597)
@@ -457,6 +468,6 @@ You can also set Zookeeper servers and clients to use the JAVA PROPERTY ONLY [ju
 
 # Watching
 
-## Performance Tuning of Druid Cluster at High Scale at ironSource
-
-[video](https://www.youtube.com/watch?v=_co3nPOh7YM&t=1s)
+Neat videos I should watch:
+  * [Performance Tuning of Druid Cluster at High Scale at ironSource](https://www.youtube.com/watch?v=_co3nPOh7YM&t=1s)
+  * [Inside Druid's storage and query engine](https://imply.io/videos/inside-apache-druids-storage-and-query-engine/)
