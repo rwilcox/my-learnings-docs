@@ -142,6 +142,9 @@ You can also import a TOML file from an external location ala file!!!!!!!!! (Pra
 
 For the later you could create a custom [version catalog plugin](https://docs.gradle.org/current/javadoc/org/gradle/api/plugins/catalog/CatalogPluginExtension.html) and publish / use that in affected microservices.
 
+#### Gotchas
+
+If your alias name has `-`, `_` and `.` these will be normalized to `.`. For example foo-bar as an alias is converted to foo.bar automatically. [Source](https://docs.gradle.org/current/userguide/platforms.html#sub:mapping-aliases-to-accessors)
 
 #### See also
 
@@ -209,6 +212,28 @@ task hi {dependsOn: ‘someOtherTask’} {
 
 # in Kotlin mode
 
+## setting properties of Tasks
+
+In Groovy could do
+
+```groovy
+
+frontend {
+    nodeVersion = '6.11.3'
+    cleanScript = 'run clean'
+}
+```
+
+This causes errors in Kotlin mode, like `Type mismatch: inferred type is String but Property<String!>! was expected`
+
+You need to use the `.set` method on those properties (no, it is not per JavaBean protocol)
+
+```kotlin
+frontend {
+    nodeVersion.set("6.11.3")
+    cleanScript.set("run clean")
+}
+```
 
 
 # Gradle Interacting with Java
