@@ -86,6 +86,10 @@ gcloud
 
 gsutil
 
+## How much of my resource quotas am I using?
+
+[IAM Quota tool](https://console.cloud.google.com/iam-admin/quotas)
+
 # Monitoring
 
 "Cloud Monitoring": formerly known as "StackDriver" (used to be a third party company, not acquired)
@@ -329,6 +333,11 @@ This works at all because [kube-proxy currently uses iptables under the hood](ht
 
   * [Configuring an IP masquerade agent](https://cloud.google.com/kubernetes-engine/docs/how-to/ip-masquerade-agent)
   * [K8s Networking demystified: a brief guide](https://www.stackrox.io/blog/kubernetes-networking-demystified/)
+
+### Monitoring / Operating
+
+Resource consumption monitoring: (in the TF plugin this defaults to `true`)
+
 
 
 ## Cloud Functions
