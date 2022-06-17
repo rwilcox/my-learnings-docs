@@ -123,10 +123,18 @@ kubectl has bash and zsh tab completions!!
 
 
 ### Operations with Kubectl
-
+    $ kubectl cluster-info # <-- information about the current default cluster / is a good configuration check
     $ kubectl get services # <-- gets the services aka the routing rules
     $ kubectl get pods     # <-- gets the deployed pods and information about them (for the services)
     $ kubectl logs $PODNAME # <-- logs from the thing
+
+### Multiple clusters with kubectl
+
+Q: What cluster is my default?
+
+A: `kubectl config view | grep current-context` will get you close / to the next part of the YAML to read
+
+
 
 ### neat tips
 

@@ -86,6 +86,27 @@ gcloud
 
 gsutil
 
+### awesome gcloud tricks
+
+#### configurations to manage multiple projects, etc
+
+Can use [configurations](https://cloud.google.com/sdk/docs/configurations) to jump frome one set of settings to another. AKA set the default project, etc.
+
+    $ gcloud config configurations create my-new-config
+    $ gcloud config set project my-latest-project     # will be configuration specific now!
+    $ gcloud config configurations list               # show all of what I have, including active or not information
+    $ gcloud config configurations activate default   # go back
+
+Can also have this set through environmental variable by setting `CLOUDSDK_ACTIVE_CONFIG_NAME` ie through `direnv` or something
+
+Super sloppy way to get just the name of the active config: ` gcloud config configurations list | grep True | cut -f 1 -d ' '`
+
+Then you may want to do things like `gcloud container clusters get-credentials` to set third party tools like `kubectl` correctly.
+
+##### See also
+
+  * GCP_GKE_Kubectl
+
 ## How much of my resource quotas am I using?
 
 [IAM Quota tool](https://console.cloud.google.com/iam-admin/quotas)
@@ -307,6 +328,10 @@ Optimize-utilization: This profile is very cost oriented and will try to keep th
 ### Neat GKE operator hacks
 
 If you go into a pod in the toolbar / menu bar there is a `KUBECTL` dropdown. This will let you - in addition to other things - attach to the running pod in the Google Cloud Shell web thing.
+
+### and kubectl <<GCP_GKE_Kubectl>>
+
+
 
 ### and specialized networking concerns
 

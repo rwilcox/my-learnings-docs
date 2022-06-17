@@ -120,6 +120,11 @@ Can point storage to S3, GCP, Azure Blob storage, local file system, etc.
 
 OCI compatible ?
 
+### Screw it, a folder on your local machine
+
+(great for writing charts, then seeing how it applies with an actual service)
+
+set your Chart.yaml 's dependencies `repository` field to `file://../in-development-charts-or-whatever/my-specific-chart-folder-yes-you-need-this/`
 
 # Deployments
 
@@ -289,6 +294,8 @@ creates the skeleton of what you need
   #:author  "N/A"
   #:page-number 0]{Helm provides the optional ability for each chart to provide its own schema for its values using JSON Schema. JSON Schema provides a vocabulary to describe JSON files. YAML is a superset of JSON, and you can transform content between the two file formats. This makes it possible to use a JSON Schema to validate the content of a YAML file.}
 
+[See excellent blog post on this](https://austindewey.com/2020/06/13/helm-tricks-input-validation-with-values-schema-json/)
+
 @quote-highlight[#:title "Learning Helm"
   #:author  "N/A"
   #:page-number 0]{When you run the commands helm install, helm upgrade, helm lint, and helm template, Helm will validate the values against what it finds in the values.schema.json file.}
@@ -299,6 +306,7 @@ creates the skeleton of what you need
   * `helm template` <-- renders the Helm chart as a k8s resource. You could use this to ensure you're telling k8s to do what you think you're telling it
   * `helm install --dry-run` <-- same as `helm template` (?)
   *
+
 
 ## version numbering
 
