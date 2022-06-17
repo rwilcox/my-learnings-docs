@@ -81,7 +81,11 @@ M-x display-lines-numbers-mode
 
 C-X b
 
+# Frames
 
+## Renaming Frames
+
+M-x set-frame-name RET your-name-here-whatever RET
 
 # Zoom
 
