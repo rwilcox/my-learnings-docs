@@ -303,6 +303,17 @@ can specify in three locations (precedence):
   #:author  "N/A"
   #:page-number 0]{Helm contains a template function that enables you to look up resources in the Kubernetes cluster. The lookup template function is able to return either an individual object or a list of objects}
 
+# CLI bits
+
+
+## Passing complex objects through --set
+
+
+an array where each element is a dictionary
+
+`-set 'mything.globals.myArrayOfDictionaries[0].myField=myValues' --set 'mything.globals.myArrayOfDictionaries[1].myField=myValueForArrayItemTwo' `
+
+[source of some of this documentation](https://newbedev.com/helm-passing-array-values-through-set)
 
 # Release
 
