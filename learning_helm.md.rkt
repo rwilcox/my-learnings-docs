@@ -212,6 +212,39 @@ Falsely:
   * nil
   * empty collection
 
+## Container Types in template language
+
+### Dealing with arrays with dictionaries inside them
+
+If you have a values.yaml objecting looking like this:
+```yaml
+
+myArrayOfDictionaries:
+  - nameOrWhateverTheValueIs: foobar
+  - nameOrWhateverTheValueIs: second item in the array
+```
+
+the following idiom is your friend
+
+```{{- with (first .Values.myArrayOfDictionaries) }}
+{{ .NameOrWhateverTheValueIs }}
+{{- end }}
+```
+
+You could also do `{{- with ( index .Values.myArrayOfDictionaries 3 ) }}` to get the fourth item in the dictiona
+
+
+## Object Traversal In Template language
+
+In deeply or optionally nested objects you may get a lot of `nil pointer evaluating interface {}.someField` messages. See [Helm issues about traversing deeply nested objects](https://github.com/helm/helm/issues/8026)
+
+The [empty](https://helm.sh/docs/chart_template_guide/function_list/#empty) function, for example, will error if something on the object path is nil. It may also error in _very_ odd places (I would have thought .Values.globals exists by default, but nope(?)).
+
+Two ways to handle this:
+
+`{{ empty (.Values.myDictionary | default dict).myField }}` <-- this will correctly not error and return empty for `myField` if the traversal fails.
+
+`dig "myDictionary" "myField" .Values)` ( [documentation](https://masterminds.github.io/sprig/dicts.html) ). **BUT** `dig` only works on Dictionary objects, it will not work on arbitrary objects that use the dot accessor for field access (aka: arbitrary objects)
 
 ## template includes
 
