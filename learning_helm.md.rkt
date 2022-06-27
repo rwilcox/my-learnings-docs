@@ -315,6 +315,8 @@ an array where each element is a dictionary
 
 [source of some of this documentation](https://newbedev.com/helm-passing-array-values-through-set)
 
+Alternative: maybe just [put the extra values in a seperate file and include them?](https://github.com/helm/helm/issues/4807#issuecomment-431447235)
+
 # Release
 
 This is a built in object you can refer to in the Jinja templates!
@@ -549,6 +551,18 @@ my-sub-dependency-chart:
 ### Global values and charts
 
 use the `global` key in the parents values.yml and the name will be the same everywhere, in the subcharts and the parent chart.
+
+### and Chart.yaml
+
+[can not read parent .Chart value from subchart](https://github.com/helm/helm/issues/3307)
+
+> A subchart is considered "stand-alone", which means a subchart can never explicitly depend on its parent chart.
+> For that reason, a subchart cannot access the values of its parent.
+
+[source](https://helm.sh/docs/chart_template_guide/subcharts_and_globals/)
+
+when I tried this in a template file I was only able to access fields on `.Chart` where they were in the (current) chart, ie not exported from the parent chart.
+
 
 ## Dependent Charts
 
