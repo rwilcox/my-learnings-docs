@@ -16,12 +16,16 @@ title: Learning Google Cloud
 - [Tools](#tools)
   * [Cloud Shell / Cloud Shell Editor](#cloud-shell--cloud-shell-editor)
   * [CLI tools for managing GCP resources etc](#cli-tools-for-managing-gcp-resources-etc)
+    + [awesome gcloud tricks](#awesome-gcloud-tricks)
+      - [configurations to manage multiple projects, etc](#configurations-to-manage-multiple-projects-etc)
+        * [See also](#see-also)
+  * [How much of my resource quotas am I using?](#how-much-of-my-resource-quotas-am-i-using)
 - [Monitoring](#monitoring)
   * [Billing](#billing)
   * [Log Explorer](#log-explorer)
 - [Networking](#networking)
   * [VPC](#vpc)
-    + [See also](#see-also)
+    + [See also](#see-also-1)
   * [Subnets](#subnets)
   * [Load Balancing](#load-balancing)
   * [Static IPs](#static-ips)
@@ -37,8 +41,10 @@ title: Learning Google Cloud
   * [GKE](#gke)
     + [scaling considerations](#scaling-considerations)
     + [Neat GKE operator hacks](#neat-gke-operator-hacks)
+    + [and kubectl >](#and-kubectl-)
     + [and specialized networking concerns](#and-specialized-networking-concerns)
       - [See Also](#see-also)
+    + [Monitoring / Operating](#monitoring--operating)
   * [Cloud Functions](#cloud-functions)
   * [App Engine](#app-engine)
     + [Classic](#classic)
@@ -73,10 +79,10 @@ title: Learning Google Cloud
     + [Redis](#redis)
       - [Configuring MemoryStore Redis](#configuring-memorystore-redis)
       - [Monitoring / Operating MemoryStore Redis](#monitoring--operating-memorystore-redis)
-      - [See also](#see-also-1)
+      - [See also](#see-also-2)
   * [Cloud SQL](#cloud-sql)
   * [Spanner](#spanner)
-    + [See also](#see-also-2)
+    + [See also](#see-also-3)
   * [Cloud DataStore / Firestore](#cloud-datastore--firestore)
   * [Big Table](#big-table)
     + [Data Architecture](#data-architecture)
@@ -85,7 +91,7 @@ title: Learning Google Cloud
       - [Autoscaling](#autoscaling)
   * [Big Query](#big-query)
     + [Data Modelling](#data-modelling-1)
-  * [See also](#see-also-3)
+  * [See also](#see-also-4)
 - [Cloud Deployment Manager](#cloud-deployment-manager)
 - [Cloud Build](#cloud-build)
 - [Gogle Container Registry](#gogle-container-registry)
@@ -167,6 +173,31 @@ Avail through Cloud SDK.
 gcloud
 
 gsutil
+
+### awesome gcloud tricks
+
+#### configurations to manage multiple projects, etc
+
+Can use [configurations](https://cloud.google.com/sdk/docs/configurations) to jump frome one set of settings to another. AKA set the default project, etc.
+
+    $ gcloud config configurations create my-new-config
+    $ gcloud config set project my-latest-project     # will be configuration specific now!
+    $ gcloud config configurations list               # show all of what I have, including active or not information
+    $ gcloud config configurations activate default   # go back
+
+Can also have this set through environmental variable by setting `CLOUDSDK_ACTIVE_CONFIG_NAME` ie through `direnv` or something
+
+Super sloppy way to get just the name of the active config: ` gcloud config configurations list | grep True | cut -f 1 -d ' '`
+
+Then you may want to do things like `gcloud container clusters get-credentials` to set third party tools like `kubectl` correctly.
+
+##### See also
+
+  * GCP_GKE_Kubectl
+
+## How much of my resource quotas am I using?
+
+[IAM Quota tool](https://console.cloud.google.com/iam-admin/quotas)
 
 # Monitoring
 
@@ -406,6 +437,10 @@ likely this stuff will be on the test too!
 
 If you go into a pod in the toolbar / menu bar there is a `KUBECTL` dropdown. This will let you - in addition to other things - attach to the running pod in the Google Cloud Shell web thing.
 
+### and kubectl <<GCP_GKE_Kubectl>>
+
+
+
 ### and specialized networking concerns
 
 > For example, in Google Cloud, any traffic to the internet must come from a VM's IP. When containers are used, as in Google Kubernetes Engine, the Pod IP will be **rejected** for egress. To avoid this, we must hide the Pod IP behind the VM's own IP address - generally known as "masquerade"
@@ -431,6 +466,11 @@ This works at all because [kube-proxy currently uses iptables under the hood](ht
 
   * [Configuring an IP masquerade agent](https://cloud.google.com/kubernetes-engine/docs/how-to/ip-masquerade-agent)
   * [K8s Networking demystified: a brief guide](https://www.stackrox.io/blog/kubernetes-networking-demystified/)
+
+### Monitoring / Operating
+
+Resource consumption monitoring: (in the TF plugin this defaults to `true`)
+
 
 
 ## Cloud Functions

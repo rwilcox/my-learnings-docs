@@ -17,6 +17,8 @@ title: 'Learnings: Emacs: Cheatsheet'
   * [What path is the current buffer?](#what-path-is-the-current-buffer)
 - [line numbers](#line-numbers)
   * [In the current window open a buffer by name](#in-the-current-window-open-a-buffer-by-name)
+- [Frames](#frames)
+  * [Renaming Frames](#renaming-frames)
 - [Zoom](#zoom)
 - [Filtering Lines](#filtering-lines)
   * [I know what I want to KEEP](#i-know-what-i-want-to-keep)

@@ -2,10 +2,16 @@
 path: /learnings/terraform_terragrunt.md
 title: 'Learnings: Terraform: Terragrunt'
 ---
-
 # Table Of Contents
 
 <!-- toc -->
+
+- [Linting etc](#linting-etc)
+  * [terragrunt files](#terragrunt-files)
+  * [formatting terraform files in a terragrunt project](#formatting-terraform-files-in-a-terragrunt-project)
+  * [with tflint](#with-tflint)
+
+<!-- tocstop -->
 
 # Linting etc
 

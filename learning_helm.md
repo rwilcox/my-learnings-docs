@@ -22,6 +22,7 @@ title: Learning Helm
   * [nexus](#nexus)
     + [ECR](#ecr)
     + [chart museum](#chart-museum)
+    + [Screw it, a folder on your local machine](#screw-it-a-folder-on-your-local-machine)
 - [Deployments](#deployments)
   * [Attributes](#attributes)
   * [environmental variables for a deployment](#environmental-variables-for-a-deployment)
@@ -31,6 +32,9 @@ title: Learning Helm
   * [See also](#see-also)
 - [Templates](#templates)
   * [falsiness in template language](#falsiness-in-template-language)
+  * [Container Types in template language](#container-types-in-template-language)
+    + [Dealing with arrays with dictionaries inside them](#dealing-with-arrays-with-dictionaries-inside-them)
+  * [Object Traversal In Template language](#object-traversal-in-template-language)
   * [template includes](#template-includes)
     + [How you create a block you're going to include](#how-you-create-a-block-youre-going-to-include)
     + [How you call it: with the template tag](#how-you-call-it-with-the-template-tag)
@@ -39,6 +43,8 @@ title: Learning Helm
   * [See also:](#see-also)
   * [Using Helm as a preprocessor for something else](#using-helm-as-a-preprocessor-for-something-else)
   * [Looking up very dynamic values from k8s](#looking-up-very-dynamic-values-from-k8s)
+- [CLI bits](#cli-bits)
+  * [Passing complex objects through --set](#passing-complex-objects-through---set)
 - [Release](#release)
 - [Developing](#developing)
   * [making a new chart](#making-a-new-chart)
@@ -67,6 +73,7 @@ title: Learning Helm
 - [Charts that depend on other charts](#charts-that-depend-on-other-charts)
   * [On Sub Charts](#on-sub-charts)
     + [Global values and charts](#global-values-and-charts)
+    + [and Chart.yaml](#and-chartyaml)
   * [Dependent Charts](#dependent-charts)
   * [Starters](#starters)
 - [Helmfile](#helmfile)
@@ -191,6 +198,11 @@ Can point storage to S3, GCP, Azure Blob storage, local file system, etc.
 
 OCI compatible ?
 
+### Screw it, a folder on your local machine
+
+(great for writing charts, then seeing how it applies with an actual service)
+
+set your Chart.yaml 's dependencies `repository` field to `file://../in-development-charts-or-whatever/my-specific-chart-folder-yes-you-need-this/`
 
 # Deployments
 
@@ -278,6 +290,39 @@ Falsely:
   * nil
   * empty collection
 
+## Container Types in template language
+
+### Dealing with arrays with dictionaries inside them
+
+If you have a values.yaml objecting looking like this:
+```yaml
+
+myArrayOfDictionaries:
+  - nameOrWhateverTheValueIs: foobar
+  - nameOrWhateverTheValueIs: second item in the array
+```
+
+the following idiom is your friend
+
+```{{- with (first .Values.myArrayOfDictionaries) }}
+{{ .NameOrWhateverTheValueIs }}
+{{- end }}
+```
+
+You could also do `{{- with ( index .Values.myArrayOfDictionaries 3 ) }}` to get the fourth item in the dictiona
+
+
+## Object Traversal In Template language
+
+In deeply or optionally nested objects you may get a lot of `nil pointer evaluating interface {}.someField` messages. See [Helm issues about traversing deeply nested objects](https://github.com/helm/helm/issues/8026)
+
+The [empty](https://helm.sh/docs/chart_template_guide/function_list/#empty) function, for example, will error if something on the object path is nil. It may also error in _very_ odd places (I would have thought .Values.globals exists by default, but nope(?)).
+
+Two ways to handle this:
+
+`{{ empty (.Values.myDictionary | default dict).myField }}` <-- this will correctly not error and return empty for `myField` if the traversal fails.
+
+`dig "myDictionary" "myField" .Values)` ( [documentation](https://masterminds.github.io/sprig/dicts.html) ). **BUT** `dig` only works on Dictionary objects, it will not work on arbitrary objects that use the dot accessor for field access (aka: arbitrary objects)
 
 ## template includes
 
@@ -339,6 +384,19 @@ can specify in three locations (precedence):
 > 
 > - From Learning Helm by N/A on page 0 ()
 
+# CLI bits
+
+
+## Passing complex objects through --set
+
+
+an array where each element is a dictionary
+
+`-set 'mything.globals.myArrayOfDictionaries[0].myField=myValues' --set 'mything.globals.myArrayOfDictionaries[1].myField=myValueForArrayItemTwo' `
+
+[source of some of this documentation](https://newbedev.com/helm-passing-array-values-through-set)
+
+Alternative: maybe just [put the extra values in a seperate file and include them?](https://github.com/helm/helm/issues/4807#issuecomment-431447235)
 
 # Release
 
@@ -364,6 +422,8 @@ creates the skeleton of what you need
 > 
 > - From Learning Helm by N/A on page 0 ()
 
+[See excellent blog post on this](https://austindewey.com/2020/06/13/helm-tricks-input-validation-with-values-schema-json/)
+
 
 > When you run the commands helm install, helm upgrade, helm lint, and helm template, Helm will validate the values against what it finds in the values.schema.json file.
 > 
@@ -375,6 +435,7 @@ creates the skeleton of what you need
   * `helm template` <-- renders the Helm chart as a k8s resource. You could use this to ensure you're telling k8s to do what you think you're telling it
   * `helm install --dry-run` <-- same as `helm template` (?)
   *
+
 
 ## version numbering
 
@@ -587,6 +648,18 @@ my-sub-dependency-chart:
 ### Global values and charts
 
 use the `global` key in the parents values.yml and the name will be the same everywhere, in the subcharts and the parent chart.
+
+### and Chart.yaml
+
+[can not read parent .Chart value from subchart](https://github.com/helm/helm/issues/3307)
+
+> A subchart is considered "stand-alone", which means a subchart can never explicitly depend on its parent chart.
+> For that reason, a subchart cannot access the values of its parent.
+
+[source](https://helm.sh/docs/chart_template_guide/subcharts_and_globals/)
+
+when I tried this in a template file I was only able to access fields on `.Chart` where they were in the (current) chart, ie not exported from the parent chart.
+
 
 ## Dependent Charts
 

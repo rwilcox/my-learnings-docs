@@ -13,6 +13,7 @@ title: 'Learnings: Ops: Unix: Bash'
   * [See also](#see-also)
 - [>](#)
   * [See also:;](#see-also)
+- [`${}` vs `$() vs backticks`](#-vs--vs-backticks)
 - [See also:](#see-also)
 - [Book Recommendations](#book-recommendations)
 

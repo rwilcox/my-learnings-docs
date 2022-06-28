@@ -16,6 +16,7 @@ title: 'Learnings: Kubernetes'
   * [Minikube](#minikube)
   * [Kubectl](#kubectl)
     + [Operations with Kubectl](#operations-with-kubectl)
+    + [Multiple clusters with kubectl](#multiple-clusters-with-kubectl)
     + [neat tips](#neat-tips)
       - [give me a junk container to just do stuff](#give-me-a-junk-container-to-just-do-stuff)
   * [API Server](#api-server)
