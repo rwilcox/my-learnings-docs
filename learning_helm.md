@@ -44,7 +44,7 @@ title: Learning Helm
   * [Using Helm as a preprocessor for something else](#using-helm-as-a-preprocessor-for-something-else)
   * [Looking up very dynamic values from k8s](#looking-up-very-dynamic-values-from-k8s)
 - [CLI bits](#cli-bits)
-  * [Passing complex objects through --set](#passing-complex-objects-through---set)
+  * [Passing complex objects through set parameter](#passing-complex-objects-through-set-parameter)
 - [Release](#release)
 - [Developing](#developing)
   * [making a new chart](#making-a-new-chart)
@@ -387,7 +387,7 @@ can specify in three locations (precedence):
 # CLI bits
 
 
-## Passing complex objects through --set
+## Passing complex objects through set parameter
 
 
 an array where each element is a dictionary

@@ -306,7 +306,7 @@ can specify in three locations (precedence):
 # CLI bits
 
 
-## Passing complex objects through --set
+## Passing complex objects through set parameter
 
 
 an array where each element is a dictionary
