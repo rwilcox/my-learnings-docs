@@ -8,12 +8,15 @@ title: 'Learnings: Ops: Unix: Bash'
 
 - [>](#)
   * [>](#)
+  * [`${}` vs `$() vs backticks`](#-vs--vs-backticks)
+  * [globs](#globs)
+    + [replicating zsh double-star glob](#replicating-zsh-double-star-glob)
+      - [See also](#see-also)
 - [>](#)
 - [>](#)
-  * [See also](#see-also)
+  * [See also](#see-also-1)
 - [>](#)
   * [See also:;](#see-also)
-- [`${}` vs `$() vs backticks`](#-vs--vs-backticks)
 - [See also:](#see-also)
 - [Book Recommendations](#book-recommendations)
 

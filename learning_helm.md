@@ -271,7 +271,7 @@ Uses template functions from [Sprig template library](https://masterminds.github
 
 Pipe character to send values into another function
 
-Can use "with" to drill into a nested values object without navigating the object graph every time in a certain scope (Pascal has a similar syntax feature)
+Can use `with` to drill into a nested values object without navigating the object graph every time in a certain scope (Pascal has a similar syntax feature)
 
 Variables are assigned by Pascal / Smalltalk assignment syntax
 
@@ -396,7 +396,17 @@ an array where each element is a dictionary
 
 [source of some of this documentation](https://newbedev.com/helm-passing-array-values-through-set)
 
-Alternative: maybe just [put the extra values in a seperate file and include them?](https://github.com/helm/helm/issues/4807#issuecomment-431447235)
+Alternative: maybe just [put the extra values in a seperate file and include them](https://github.com/helm/helm/issues/4807#issuecomment-431447235)
+
+This would look like:
+```yaml
+mything:
+  globals:
+    myArrayOfDictionaries:
+      - myField: myValue
+```
+
+and call `helm template` with the `-f` option specifying the file name
 
 # Release
 

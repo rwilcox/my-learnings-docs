@@ -20,6 +20,7 @@ title: Learning Google Cloud
       - [configurations to manage multiple projects, etc](#configurations-to-manage-multiple-projects-etc)
         * [See also](#see-also)
   * [How much of my resource quotas am I using?](#how-much-of-my-resource-quotas-am-i-using)
+  * [Which APIs / services are currently enabled?](#which-apis--services-are-currently-enabled)
 - [Monitoring](#monitoring)
   * [Billing](#billing)
   * [Log Explorer](#log-explorer)
@@ -91,6 +92,7 @@ title: Learning Google Cloud
       - [Autoscaling](#autoscaling)
   * [Big Query](#big-query)
     + [Data Modelling](#data-modelling-1)
+    + [Permission Notes](#permission-notes)
   * [See also](#see-also-4)
 - [Cloud Deployment Manager](#cloud-deployment-manager)
 - [Cloud Build](#cloud-build)
@@ -198,6 +200,10 @@ Then you may want to do things like `gcloud container clusters get-credentials` 
 ## How much of my resource quotas am I using?
 
 [IAM Quota tool](https://console.cloud.google.com/iam-admin/quotas)
+
+## Which APIs / services are currently enabled?
+
+https://console.cloud.google.com/apis/dashboard
 
 # Monitoring
 
@@ -1623,6 +1629,9 @@ You _can_ ask for flate rate
 > 
 > - From Google Cloud Platform in Action by Geewax, JJ on page 0 ()
 
+### Permission Notes
+
+See [BigQuery access control documentation](https://cloud.google.com/bigquery/docs/access-control). Note that permissions given at the org level apply to all datasets in the organization, and the viewer role also allows enumeration of those resources
 
 ## See also
 
