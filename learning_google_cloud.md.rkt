@@ -111,6 +111,10 @@ Then you may want to do things like `gcloud container clusters get-credentials` 
 
 [IAM Quota tool](https://console.cloud.google.com/iam-admin/quotas)
 
+## Which APIs / services are currently enabled?
+
+https://console.cloud.google.com/apis/dashboard
+
 # Monitoring
 
 "Cloud Monitoring": formerly known as "StackDriver" (used to be a third party company, not acquired)
@@ -1396,6 +1400,9 @@ Extracting (or exporting) data from BigQuery to somewhere else (like Google Clou
   #:author  "Geewax, JJ"
   #:page-number 0]{Like a relational database has databases that contain tables, BigQuery has datasets that contain tables }
 
+### Permission Notes
+
+See [BigQuery access control documentation](https://cloud.google.com/bigquery/docs/access-control). Note that permissions given at the org level apply to all datasets in the organization, and the viewer role also allows enumeration of those resources
 
 ## See also
 
