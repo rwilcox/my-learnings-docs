@@ -29,6 +29,34 @@ or
 
     : ${FOO:=default_val_here}
 
+## `${}` vs `$() vs backticks`
+
+`$()` == two backticks. This is command substitution. [Source](https://unix.stackexchange.com/a/165637/193798)
+
+`${}` does the following things:
+
+  1. expand variable `${varHere}` <-- varHere
+  2. expanding array elements, as in ${array[42]}
+  3. using parameter expansion operations, as in ${filename%.*} (remove extension)
+  4. expanding positional parameters beyond 9: "$8 $9 ${10} ${11}"
+
+[Source](https://stackoverflow.com/a/8748880/224334)
+
+## globs
+
+### replicating zsh double-star glob
+
+[zsh documentation about this](https://zsh.sourceforge.io/Doc/Release/Expansion.html#Recursive-Globbing)
+
+While bash has this functionality (in the last decade...), `ash` seems to not?
+
+`find $1 -name '*.txt' | grep '.txt' > /dev/null` <-- gives you a 0 if files found, a 1 if no files found
+
+#### See also
+
+  * apparently this is a feature of Bash 4 (2010-ish)? see (this SO answer)[https://unix.stackexchange.com/a/197382/193798]
+  * and a [more comprehensive answer across all shells](https://unix.stackexchange.com/a/62665/193798)
+
 # <<Learning_Ops_Unix_Bash_Interactively>>
 
     $ r -1 # re-executes the last command you entered
@@ -40,7 +68,7 @@ or
 
     $ $_ # executes the result of the previous command (Thanks, Adam!)
 
-# <<Learning_Opn_Unix_STD_AS_File>>
+# <<Learning_Ops_Unix_STD_AS_File>>
 
 STDOUT, STDERR, STDIN are files too.
 
@@ -65,18 +93,6 @@ Q: what if you need to pipe the STDOUT of multiple commands? or send the output 
   * Bash Advanced Scripting Guide
   * Z Shell Manual
 
-# `${}` vs `$() vs backticks`
-
-`$()` == two backticks. This is command substitution. [Source](https://unix.stackexchange.com/a/165637/193798)
-
-`${}` does the following things:
-
-  1. expand variable `${varHere}` <-- varHere
-  2. expanding array elements, as in ${array[42]}
-  3. using parameter expansion operations, as in ${filename%.*} (remove extension)
-  4. expanding positional parameters beyond 9: "$8 $9 ${10} ${11}"
-
-[Source](https://stackoverflow.com/a/8748880/224334)
 
 # See also:
 
