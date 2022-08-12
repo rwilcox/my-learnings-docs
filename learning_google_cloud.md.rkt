@@ -367,7 +367,17 @@ This works at all because [kube-proxy currently uses iptables under the hood](ht
 
 Resource consumption monitoring: (in the TF plugin this defaults to `true`)
 
+### Config Connector
 
+It puts a K8s CRD interface over constructing resources in GCP.
+
+#### Common Errors
+
+`resource reference for kind  must include API group`
+
+If you `resourceRef` an object, make sure your `resourceRef` has an `apiVersion` field and the value of that field matches the apiVersion of the resource in question.
+
+it is not an error on the resource in question, but the reference to that resource...
 
 ## Cloud Functions
 
