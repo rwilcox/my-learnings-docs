@@ -335,7 +335,9 @@ If you go into a pod in the toolbar / menu bar there is a `KUBECTL` dropdown. Th
 
 ### and kubectl <<GCP_GKE_Kubectl>>
 
+### How many IP addresses do I need / what should my CIDR block look like?
 
+Your IP address range [corresponds to how many nodes you need](https://cloud.google.com/kubernetes-engine/docs/concepts/alias-ips#cluster_sizing_secondary_range_pods), but not as directly as you might think. see [IP address ranges for VPC native clusters](https://cloud.google.com/kubernetes-engine/docs/concepts/alias-ips#cluster_sizing) but also note that K8s reserves IP addresses for recently turned off pods (it will not instantly recycle those pods, assuming there may be traffic still flowing)
 
 ### and specialized networking concerns
 
