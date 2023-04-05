@@ -422,6 +422,46 @@ Network—5 GB of egress traffic per month}
   #:author  "Geewax, JJ"
   #:page-number 0]{The most common event that you’re likely familiar with is an HTTP request, but they can also come from other places such as Google Cloud Storage or Google Cloud Pub/Sub. Every event comes with attributes, which you can use when building your function, including the basic details of an event (such as a unique ID, the type of the event, and a timestamp of when the event occurred), the resource targeted by the event, and the payload of data specific to the event}
 
+### Node.js specific notes
+
+Point `--source` to your ie built code and `--target` to the Express middleware compatible property / function object you want to run.
+
+ES modules are supported. Two conditions:
+
+  1. The property you reference must be exported from whatever you've told `function-framework` to `--source`
+  2. It must be an exported [Express middleware compatible function](https://medium.com/google-cloud/express-routing-with-google-cloud-functions-36fb55885c68) (_not_ a function that returns a Express Router)
+
+#### "But I want to serve multiple endpoints from my one GCP Cloud Function?"
+
+For the normal case, of one endpoint per function, the docs say to do this (pardon the Typescript):
+
+```typescript
+
+import * as ff from '@google-cloud/functions-framework';
+export function doIt(req: ff.Request, res: ff.Response) {
+  res.send('hi')
+}
+```
+
+Then use `npx @google-cloud/functions-framework --target doIt` to execute the function
+
+In this use case, make use of the fact that Cloud Functions are Express compatible middleware, from point 2 above
+
+We'll get fancy here and wrap this up into a function
+
+```typescript
+export class CloudApp {
+  static get doIt() {
+    const app = express()
+    app.get("/hi", (req, res) => res.send('hi'))
+    app.get("/hello", (req, res) => res.send("hello"))
+
+    return app
+  }
+}
+```
+
+Then use `npx @google-cloud/functions-framework --target CloudApp.doIt` to execute the function
 
 ## App Engine
 
