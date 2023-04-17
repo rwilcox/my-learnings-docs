@@ -6,6 +6,12 @@ title: 'Learnings: CircleCI'
 
 <!-- toc -->
 
+- [Path filtering orb](#path-filtering-orb)
+  * [Silly example](#silly-example)
+  * [Limits](#limits)
+
+<!-- tocstop -->
+
 # Path filtering orb
 
 ## Silly example

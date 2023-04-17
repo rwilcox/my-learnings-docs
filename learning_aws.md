@@ -48,6 +48,8 @@ title: 'Learnings: AWS'
       - [AWS also includes a FraphQL console to poke at the store using graphql queries / mutations](#aws-also-includes-a-fraphql-console-to-poke-at-the-store-using-graphql-queries--mutations)
   * [>](#)
   * [Creating a No Code Backend with DynamoDB, Cognito, DynamoDB and AWS Gateway](#creating-a-no-code-backend-with-dynamodb-cognito-dynamodb-and-aws-gateway)
+    + [Setting up paths in API Gateway](#setting-up-paths-in-api-gateway)
+    + [API Gateway setup](#api-gateway-setup)
     + [Notes on getting Dynomodb and API Gateway talking to each other](#notes-on-getting-dynomodb-and-api-gateway-talking-to-each-other)
       - [Mapping documents](#mapping-documents)
     + [API Gateway + Cognito and querying for user's documents](#api-gateway--cognito-and-querying-for-users-documents)
