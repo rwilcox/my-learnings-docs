@@ -54,3 +54,21 @@ user:
     some.setting.you.set.in.this.file: "value"
     another.setting.you.set: "another value"
   ```
+
+# Using Python as a shell script replacement language
+
+Python has low level tools to handle this, deprecated tools to handle this, and high level tools to handle this. My favorite high level tool is currently `subprocess.check_output`.
+
+```python
+
+import subprocess
+
+res = subprocess.check_output("ls", shell=True, stderr=subprocess.STDOUT)
+# res is a bytes object
+
+output_as_lines = res.decode("utf-8").split("\n")
+```
+
+[docs for subprocess.check_output](https://docs.python.org/3.11/library/subprocess.html#subprocess.check_output).
+
+It will throw a `CalledProcessError` if non-zero error code
