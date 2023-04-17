@@ -393,6 +393,15 @@ Concepts:
 
 Resource -> Stage has many resources -> custom domain names map resources + stages to a URL / path exposed to the Internet.
 
+### Setting up paths in API Gateway
+
+API Gateway -> Custom Domain Mappings: where you can configure what path the API is under. Want all your APIs to be under `/rest/` or `/api` ? Set it in your custom domain name's API mapping, but this is optional (although likely a best practice - you don't know what non API related things your API gateway could serve)
+
+### API Gateway setup
+
+Resources - how to define your routes
+
+Can nest resources - ie have a resource that is /documents/ and a sub resource in that which is v1, so your resulting routes will be example.com/documents/v1/
 
 ### Notes on getting Dynomodb and API Gateway talking to each other
 
@@ -411,7 +420,8 @@ Remember regardless of what ACTION the request comes in as, you need to send POS
 
 #### Integration Request Mapping template for index actions (with ownership)
 
-Assumes that the DynamoDB document has a UserId field, which is populated with the Cognito username. You want to, on the "server side" ask for the documents (the logged in user) owns, for security reasons. Which involves some processing logic in the mapping document.
+Assumes that the DynamoDB document has a UserId field, which is populated with the Cognito username. You want to, on the "server side" ask for the documents (the logged in user) owns, for security reasons. Which involves some processing logic in the mapping document in the Integration Request:
+
 
 Content-Type: `application/json`
 
@@ -433,9 +443,9 @@ I _had to_ **explicitly** set my request's Content-Type to `application/json` to
 
 #### Integration Response Mapping Template for index actions
 
-You'll need to process DyamoDB's results to a better format, as it will return the attribute type where sterotypically REST apis would just return the value.
+You'll need to process DyamoDB's results to a better format, as DynamoDB will return the attribute type where sterotypically REST apis would just return the value.
 
-So `"foobar": {"S": "baz"}`. Which is very odd. You'll need to map the DynamoDB results back to something useful
+So `"foobar": {"S": "baz"}`. Which is very odd: not very RESTful, not very expected. You'll need to map the DynamoDB results back to something useful
 
 In the Integration Response, the mapping template:
 
@@ -454,12 +464,15 @@ Since you'll need to loop over _multiple_ documents coming back from DynamoDB (i
     #foreach($elem in $inputRoot.Items) {
       "user_id": "$elem.UserId.S",
       "title": "$elem.title.S"
-    }
+      "type": "object"
+    }#if($foreach.hasNext),#end
     #end
   ]
 }
 
 ```
+
+See that `hasNext` block here? Trailing commas are invalid JSON, so we must not include the for the last element. Use this `hasNext` trick to only include commas if there's more elements comming.
 
 #### Creation / POST actions
 
@@ -477,24 +490,41 @@ In API Gateway under the custom domains, you can set up API mappings - mapping a
 
 if you have an API gateway route you want to run locally, you'll likely just need to set the `Access-Control-Allow-Origin` header to `*` (not multiple domains, that doesn't seem to work, or I didn't know how to set it up correctly)
 
+Under Actions there's an Enable CORS choice, which propegates your CORS settings to your routes. It doesn't seem to be stateful, but that's how you do it (I did not have luck just creating an OPTIONS route myself).
+
+This Enable CORS seems to _not_ be  once and done thing, and does not apply to subresources. Keep a watch over your network opertions tab where you're calling API Gateway to see if you need to do it again, or on  different or new subset.
+
 ### Operations
 
 Logging: the logging stuff, through to CloudWatch logs, is really good at seeing what your mapping documents are doing.
 
 You may need to set up the IAM permissions correctly, [In the global API gateway Settings](https://stackoverflow.com/a/59057471/224334).
 
+Q: What's the UX around this, or around this making it easy? Plus, there's a debug flag, right?
+
 ### TODO BEFORE PUBLISHING
 
+Figure the answers to these questions out then integrate them into the article
+
+Q: how do I hook up a route that passes everything through: ie I've stood up a lambda with POST/PUT/GET verbs and want /api/v1/foobar to always go to that? Is that easy? AND what about /api/v2 routing to ie a replacement Rails app?
+
+A:
+
+Q:
 Q: what does canary deploys do / how to use that? ie want to be able to test this thing on prod before sending all the traffic to that point. Can do that with canary, somehow although the interface is not good.
 
 A: turn on canary, then when you deploy a change and it lets you pick a stage. It will default to the canary version of that stage. When you are happy use promote in the canary's settings page.
 
-TODO: write me!!!
-
 [Canary deployments in API gateway blog entry from Amazon](https://docs.aws.amazon.com/apigateway/latest/developerguide/create-canary-deployment.html)
+
+Q: how can I monitor that a deployment has really happened?
+
+Q: can I use API Gateway to control traffic to my api (aka maintaince window)?
+
+TODO: make one of those AWS arch diagrams: see mah, no step 3!
 
 ### See also
 
-  * [Noise.getoto.net: Using Amazon API Gateway As A Proxy For DynamoDB](https://noise.getoto.net/2016/02/26/using-amazon-api-gateway-as-a-proxy-for-dynamodb/)
+  * [Using Amazon API Gateway As A Proxy For DynamoDB](https://aws.amazon.com/blogs/compute/using-amazon-api-gateway-as-a-proxy-for-dynamodb/)
 
-Yes, you can run all this stuff through the serverless application model infrastructure as code stuff, including uploading OpenAPI documents with API Gateway extensions for the mapping document. If I was doing this for a paying project I might just leave this in, created by hand, because it's not that hard to set up AND if the project is updating these mappings a lot - or really wanting more than Just Mapping Code - that's probably a good sign at you're going to need some real code (perhaps implemented via a lambda? Or maybe a real server-ful deployment somewhere...)
+A less in depth version of this information. But it's a great summary!
