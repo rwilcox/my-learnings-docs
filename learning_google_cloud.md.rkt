@@ -424,12 +424,16 @@ Network—5 GB of egress traffic per month}
 
 ### Node.js specific notes
 
+To run locally:
 Point `--source` to your ie built code and `--target` to the Express middleware compatible property / function object you want to run.
+
+example command:
+`npx @google-cloud/functions-framework --source=dist/main/index.js --target=exportedPropertyInIndexThatCouldBeAFunction`
 
 ES modules are supported. Two conditions:
 
   1. The property you reference must be exported from whatever you've told `function-framework` to `--source`
-  2. It must be an exported [Express middleware compatible function](https://medium.com/google-cloud/express-routing-with-google-cloud-functions-36fb55885c68) (_not_ a function that returns a Express Router)
+  2. It can be an exported [Express middleware compatible function](https://medium.com/google-cloud/express-routing-with-google-cloud-functions-36fb55885c68) (_not_ a function that returns a Express Router)
 
 #### "But I want to serve multiple endpoints from my one GCP Cloud Function?"
 
@@ -445,7 +449,7 @@ export function doIt(req: ff.Request, res: ff.Response) {
 
 Then use `npx @google-cloud/functions-framework --target doIt` to execute the function
 
-In this use case, make use of the fact that Cloud Functions are Express compatible middleware, from point 2 above
+In a use case of multiple routes handled by the cloud function, make use of the fact that Cloud Functions are Express compatible middleware, from point 2 above
 
 We'll get fancy here and wrap this up into a function
 
@@ -462,6 +466,26 @@ export class CloudApp {
 ```
 
 Then use `npx @google-cloud/functions-framework --target CloudApp.doIt` to execute the function
+
+Google's cloud function target parameter really expects a property, not calling a function. But we want to be able to add routes at runtime!
+So make a class, with a static getter function, and all that fancy means we have dynamic property - when ES6+ requests the "app" property it automatically executes the function found there and returns the result as the value of the property.
+
+### Deploying Cloud Functions
+
+[Relatively simplistic answer for this](https://ryderdamen.com/blog/how-to-deploy-gcf-from-circleci/)
+
+#### when you use private Artifact Registries
+
+If they are in separate projects you need to give the default cloud build service account Artifact Reader to that repo. Note that this is NOT the service account you're calling gcloud functions deploy with, as gcloud does some fancy use another service account stuff.
+
+cloud functions deploy spits out serviceConfig YAML which lists serviceAccountEmail. This seems to be the default cloud build service account you need
+
+Alternatively, just specify the authorization key for Cloud Build to use, depending on the fact that the Cloud Functions are (now?) just a layer over Cloud Build + Cloud Run
+
+Source:
+
+  * [GCP Artifact Registry documentation on Cloud Functions](https://cloud.google.com/artifact-registry/docs/integrate-functions)
+  * [Injecting NPM authentication key into Cloud Build](https://cloud.google.com/blog/topics/developers-practitioners/using-private-repo-artifact-registry-google-cloud-functions)
 
 ## App Engine
 
