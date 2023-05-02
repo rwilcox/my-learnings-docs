@@ -373,6 +373,27 @@ Resource consumption monitoring: (in the TF plugin this defaults to `true`)
 
 It puts a K8s CRD interface over constructing resources in GCP.
 
+#### How to ask K8s for the documentation on Config Connector CRDs
+
+`kubectl describe crd iampartialpolicies.iam.cnrm.cloud.google.com`
+
+#### Referencing cross project resources
+
+(at this writing - May 2023 - this seems to be only documented in the OpenAPI spec for the CRDs...)
+
+The error:
+
+    Upgrade "THING" failed: failed to create resource: IAMPartialPolicy.iam.cnrm.cloud.google.com "THING" is invalid: [<nil>: Invalid value: "": "spec.resourceRef" must validate one and only one schema (oneOf). Found none valid, <nil>: Invalid value: "": "spec.resourceRef" must not validate the schema (not)]
+
+So, to reference a cross-project resource, here's the `resource` chunk of YAML to use - targetting some Spanner database that happens to live in another project
+
+    - resource:
+      apiVersion: spanner.cnrm.cloud.google.com/v1beta1
+      kind: SpannerDatabase
+      external: "projects/MY-OTHER-PROJECT/instances/SPANNER-INSTANCE-NAME/databases/MY-DB"
+    role: "roles/spanner.databaseReader"
+
+
 #### Common Errors
 
 `resource reference for kind  must include API group`
@@ -380,6 +401,8 @@ It puts a K8s CRD interface over constructing resources in GCP.
 If you `resourceRef` an object, make sure your `resourceRef` has an `apiVersion` field and the value of that field matches the apiVersion of the resource in question.
 
 it is not an error on the resource in question, but the reference to that resource...
+
+
 
 ## Cloud Functions
 
