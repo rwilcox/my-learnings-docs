@@ -33,6 +33,7 @@ Because if you're looking at the file list in Github, it's hard to know if a fil
   * [learning_aws_ecs.md](https://github.com/rwilcox/my-learnings-docs/blob/master/learning_aws_ecs.md)
   * [learning_c#.md](https://github.com/rwilcox/my-learnings-docs/blob/master/learning_c#.md)
   * [learning_cassandra.md](https://github.com/rwilcox/my-learnings-docs/blob/master/learning_cassandra.md)
+  * [learning_circleci.md](https://github.com/rwilcox/my-learnings-docs/blob/master/learning_circleci.md)
   * [learning_ddd.md](https://github.com/rwilcox/my-learnings-docs/blob/master/learning_ddd.md)
   * [learning_docker.md](https://github.com/rwilcox/my-learnings-docs/blob/master/learning_docker.md)
   * [learning_emacs.md](https://github.com/rwilcox/my-learnings-docs/blob/master/learning_emacs.md)

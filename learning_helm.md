@@ -69,6 +69,8 @@ title: Learning Helm
 - [Operating](#operating)
   * [Making and Tracking cluster changes](#making-and-tracking-cluster-changes)
   * [Best Practices](#best-practices)
+  * [Unwedging Stuff](#unwedging-stuff)
+    + [Where Helm stores state in k8s](#where-helm-stores-state-in-k8s)
 - [In a microsevice's CI/CD process](#in-a-microsevices-cicd-process)
 - [Charts that depend on other charts](#charts-that-depend-on-other-charts)
   * [On Sub Charts](#on-sub-charts)
@@ -597,6 +599,24 @@ By default `helm search` only returns latest version of an artifact in the repos
 > - From Learning Helm by N/A on page 0 ()
 
 My thoughts: Wait couldn’t you set them to (Dev machine minimum) and ??? have helm —set them on big boy targets (knowing that, practically speaking, QA resource allocations will != prod)
+
+## Unwedging Stuff
+
+Sometimes you can unwedge stuff by rolling back _then_ trying your `helm upgrade`
+
+`helm rollback $my-release $my-revision --namespace=$my-namespace`
+
+Which might work.
+
+You might be able to `helm delete $my-release -n $my-namespace`
+
+### Where Helm stores state in k8s
+
+Helm 3 stores its release state in secrets in k8s, in a format like so `sh.helm.release.v1.<RELEASE_NAME>.v<LATEST_REVISION>`
+
+You may have to delete these too, especially if you have deleted all the k8s services, deployments, etc etc that your Helm chart creates.
+
+[Source](https://stackoverflow.com/a/67429065/224334)
 
 # In a microsevice's CI/CD process
 

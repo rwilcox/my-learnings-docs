@@ -451,7 +451,7 @@ To run locally:
 Point `--source` to your ie built code and `--target` to the Express middleware compatible property / function object you want to run.
 
 example command:
-`npx @google-cloud/functions-framework --source=dist/main/index.js --target=exportedPropertyInIndexThatCouldBeAFunction`
+`npx @at-sign{}google-cloud/functions-framework --source=dist/main/index.js --target=exportedPropertyInIndexThatCouldBeAFunction`
 
 ES modules are supported. Two conditions:
 
@@ -464,13 +464,13 @@ For the normal case, of one endpoint per function, the docs say to do this (pard
 
 ```typescript
 
-import * as ff from '@google-cloud/functions-framework';
+import * as ff from '@at-sign{}google-cloud/functions-framework';
 export function doIt(req: ff.Request, res: ff.Response) {
   res.send('hi')
 }
 ```
 
-Then use `npx @google-cloud/functions-framework --target doIt` to execute the function
+Then use `npx @at-sign{}google-cloud/functions-framework --target doIt` to execute the function
 
 In a use case of multiple routes handled by the cloud function, make use of the fact that Cloud Functions are Express compatible middleware, from point 2 above
 
@@ -488,7 +488,7 @@ export class CloudApp {
 }
 ```
 
-Then use `npx @google-cloud/functions-framework --target CloudApp.doIt` to execute the function
+Then use `npx @at-sign{}google-cloud/functions-framework --target CloudApp.doIt` to execute the function
 
 Google's cloud function target parameter really expects a property, not calling a function. But we want to be able to add routes at runtime!
 So make a class, with a static getter function, and all that fancy means we have dynamic property - when ES6+ requests the "app" property it automatically executes the function found there and returns the result as the value of the property.

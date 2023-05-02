@@ -8,6 +8,7 @@ title: Learning Python
 
 - [Pip](#pip)
   * [Properly configuring](#properly-configuring)
+- [Using Python as a shell script replacement language](#using-python-as-a-shell-script-replacement-language)
 
 <!-- tocstop -->
 
