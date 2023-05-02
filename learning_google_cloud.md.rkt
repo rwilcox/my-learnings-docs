@@ -393,6 +393,8 @@ So, to reference a cross-project resource, here's the `resource` chunk of YAML t
       external: "projects/MY-OTHER-PROJECT/instances/SPANNER-INSTANCE-NAME/databases/MY-DB"
     role: "roles/spanner.databaseReader"
 
+Q: what are the allowed values for "external"?
+A: Well, for IAMPolicy or IAMPartialPolicies the [format is documented here](https://cloud.google.com/config-connector/docs/reference/resource-docs/iam/iampolicy#supported_resources)
 
 #### Common Errors
 
