@@ -36,3 +36,17 @@ Or as a function parameter:
   * easy cross-compilation
   * Can run Rust in "script" mode by using `run-cargo-script` ----> https://github.com/DanielKeep/cargo-script
      - can also embed Cargo manifests into program and run-cargo-script will find it.
+
+# With MacPorts.
+
+short answer: kinda eww.
+
+## configuring IntelliJ
+
+  * Toolchain location: (run `dirname $(which cargo)` in your terminal and paste the answer - which should be `/opt/local/bin` into this dialog via Command-Shift-C
+
+  * Standard Library: depends on what version of Rust you have installed, but mine was `/opt/local/libexec/rust/src/rustc-1.68.2-src/library`)
+
+You may also need to give it the location for rust-src, as `rustc --print sysroot` won't pick that up automatically on MacPorts. (This is kind of a problem for rust-analyizer but also :shrug: ??)
+
+If you run `port contents rust-src` you should get back a base path that look like: `/opt/local/libexec/rust/src/rustc-1.68.2-src/library`.
