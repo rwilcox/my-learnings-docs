@@ -2,6 +2,18 @@
 path: /learnings/javascript_lodash
 title: 'Learnings: Javascript: Lodash'
 ---
+# Table Of Contents
+
+<!-- toc -->
+
+- [Lodash Utilities](#lodash-utilities)
+- [How I'm replacing Lodash](#how-im-replacing-lodash)
+  * [`defaultTo`](#defaultto)
+  * [`isNull`](#isnull)
+  * [Lodash's iteration methods](#lodashs-iteration-methods)
+
+<!-- tocstop -->
+
 # Lodash Utilities
 
 # How I'm replacing Lodash
