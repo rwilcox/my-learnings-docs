@@ -2,7 +2,6 @@
 path: /learnings/javascript_lodash
 title: 'Learnings: Javascript: Lodash'
 ---
-
 # Lodash Utilities
 
 # How I'm replacing Lodash

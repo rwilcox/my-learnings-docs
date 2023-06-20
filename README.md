@@ -71,6 +71,7 @@ Because if you're looking at the file list in Github, it's hard to know if a fil
   * [learning_javascript_flow_generics.md](https://github.com/rwilcox/my-learnings-docs/blob/master/learning_javascript_flow_generics.md)
   * [learning_javascript_gotchas.md](https://github.com/rwilcox/my-learnings-docs/blob/master/learning_javascript_gotchas.md)
   * [learning_javascript_jsdoc.md](https://github.com/rwilcox/my-learnings-docs/blob/master/learning_javascript_jsdoc.md)
+  * [learning_javascript_lodash.md](https://github.com/rwilcox/my-learnings-docs/blob/master/learning_javascript_lodash.md)
   * [learning_javascript_own_packages.md](https://github.com/rwilcox/my-learnings-docs/blob/master/learning_javascript_own_packages.md)
   * [learning_javascript_rxjs.md](https://github.com/rwilcox/my-learnings-docs/blob/master/learning_javascript_rxjs.md)
   * [learning_javascript_security_for_apis.md](https://github.com/rwilcox/my-learnings-docs/blob/master/learning_javascript_security_for_apis.md)
