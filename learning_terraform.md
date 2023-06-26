@@ -54,6 +54,10 @@ Ways to define this:
   * during `terraform` invocation, with the `-var` CLI parameter
   * you can provide one by exporting env variables follow pattern sampled here: `TF_VAR_instance_size`
 
+# Variable literals
+
+maps: `{"key" = "value"}`
+
 # Lifecycle blocks
 
   * `create_before_destroy`

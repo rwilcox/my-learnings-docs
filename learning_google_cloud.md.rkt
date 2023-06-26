@@ -1648,6 +1648,19 @@ PREMIUM_1, which uses lots of workers and lots of parameter servers to coordinat
 
 [Source](https://cloud.google.com/resource-manager/docs/tags/tags-creating-and-managing)
 
+# Labels
+
+A label is a key-value pair that helps you organize your Google Cloud resources. You can attach a label to each resource, then filter the resources based on their labels. [Source](https://cloud.google.com/resource-manager/docs/creating-managing-labels)
+
+Labels can be used as queryable annotations for resources, but can't be used to set conditions on policies. (the latter is what a tag is for).
+
+## Important label restrictions
+`<<GCP_Label_Restrictions_>>`
+
+  * Most, but **not all** resource types can be labelled.
+  * Keys and values can contain only lowercase letters, numeric characters, underscores, and dashes. **NO, UPPERCASE IS NOT ALLOWED**
+
+
 # Certs
 
 ## (1) Associate Cloud Engineer
@@ -1681,3 +1694,4 @@ get more specific AFTER those two
 # See Also
 
   * [Programming Google Cloud](https://learning.oreilly.com/library/view/programming-google-cloud/9781492089025/)
+  * Terraform_Google_Cloud

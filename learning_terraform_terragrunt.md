@@ -22,7 +22,7 @@ title: 'Learnings: Terraform: Terragrunt'
 
 ## formatting terraform files in a terragrunt project
 
-`terraform fmt -recursive`. You don't even (seemingly) avoid .hcl folders.
+`terraform fmt -recursive`. You don't even (seemingly need to) avoid .hcl folders.
 
 Also have `-check` parameter you can pass which will fail on non-compliant source...
 
