@@ -29,3 +29,13 @@ Also have `-check` parameter you can pass which will fail on non-compliant sourc
 ## with tflint
 
 run it in the root of any folder that has `.tf` files. Yes this means iterating through the files in your project and running it only in certain files (it does not correctly recurse down)
+
+# Handling all the extra output from terragrunt
+
+does setting [terragrunt-log-level](https://terragrunt.gruntwork.io/docs/reference/cli-options/#terragrunt-log-level) `--terrgrunt-log-level warn` help?
+
+But also, don't set it too high or [you'll swallow logs for Terraform itself](https://github.com/gruntwork-io/terragrunt/issues/1626)
+
+Terragrunt also caches things in a .terragrunt-cache folder in your terragrunt folder (.terragrunt-cache/some-hash-that-will-be-random-idk/). Including the plan file that TerraFORM generates. This plan file will be named with what you told terraGRUNT to name it via its `--out` parameter.
+
+So `find` that file, and run [terraform show](https://developer.hashicorp.com/terraform/cli/commands/show) on it
