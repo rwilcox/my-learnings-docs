@@ -123,6 +123,7 @@ Because if you're looking at the file list in Github, it's hard to know if a fil
   * [learning_spring_spring_data.md](https://github.com/rwilcox/my-learnings-docs/blob/master/learning_spring_spring_data.md)
   * [learning_systemd.md](https://github.com/rwilcox/my-learnings-docs/blob/master/learning_systemd.md)
   * [learning_terraform.md](https://github.com/rwilcox/my-learnings-docs/blob/master/learning_terraform.md)
+  * [learning_terraform_provider_notes.md](https://github.com/rwilcox/my-learnings-docs/blob/master/learning_terraform_provider_notes.md)
   * [learning_terraform_terragrunt.md](https://github.com/rwilcox/my-learnings-docs/blob/master/learning_terraform_terragrunt.md)
   * [learning_time_series_database_druid.md](https://github.com/rwilcox/my-learnings-docs/blob/master/learning_time_series_database_druid.md)
   * [learning_unix_commands_i_forget.md](https://github.com/rwilcox/my-learnings-docs/blob/master/learning_unix_commands_i_forget.md)

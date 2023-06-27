@@ -48,6 +48,8 @@ title: Learning Google Cloud
       - [See Also](#see-also)
     + [Monitoring / Operating](#monitoring--operating)
     + [Config Connector](#config-connector)
+      - [How to ask K8s for the documentation on Config Connector CRDs](#how-to-ask-k8s-for-the-documentation-on-config-connector-crds)
+      - [Referencing cross project resources](#referencing-cross-project-resources)
       - [Common Errors](#common-errors)
   * [Cloud Functions](#cloud-functions)
     + [Node.js specific notes](#nodejs-specific-notes)
@@ -111,6 +113,8 @@ title: Learning Google Cloud
   * [Cloud Speech](#cloud-speech)
   * [Cloud Vision](#cloud-vision)
 - [Tags](#tags)
+- [Labels](#labels)
+  * [Important label restrictions](#important-label-restrictions)
 - [Certs](#certs)
   * [(1) Associate Cloud Engineer](#1-associate-cloud-engineer)
   * [(2) Pro Cloud Architect](#2-pro-cloud-architect)
@@ -490,6 +494,29 @@ Resource consumption monitoring: (in the TF plugin this defaults to `true`)
 
 It puts a K8s CRD interface over constructing resources in GCP.
 
+#### How to ask K8s for the documentation on Config Connector CRDs
+
+`kubectl describe crd iampartialpolicies.iam.cnrm.cloud.google.com`
+
+#### Referencing cross project resources
+
+(at this writing - May 2023 - this seems to be only documented in the OpenAPI spec for the CRDs...)
+
+The error:
+
+    Upgrade "THING" failed: failed to create resource: IAMPartialPolicy.iam.cnrm.cloud.google.com "THING" is invalid: [<nil>: Invalid value: "": "spec.resourceRef" must validate one and only one schema (oneOf). Found none valid, <nil>: Invalid value: "": "spec.resourceRef" must not validate the schema (not)]
+
+So, to reference a cross-project resource, here's the `resource` chunk of YAML to use - targetting some Spanner database that happens to live in another project
+
+    - resource:
+      apiVersion: spanner.cnrm.cloud.google.com/v1beta1
+      kind: SpannerDatabase
+      external: "projects/MY-OTHER-PROJECT/instances/SPANNER-INSTANCE-NAME/databases/MY-DB"
+    role: "roles/spanner.databaseReader"
+
+Q: what are the allowed values for "external"?
+A: Well, for IAMPolicy or IAMPartialPolicies the [format is documented here](https://cloud.google.com/config-connector/docs/reference/resource-docs/iam/iampolicy#supported_resources)
+
 #### Common Errors
 
 `resource reference for kind  must include API group`
@@ -497,6 +524,8 @@ It puts a K8s CRD interface over constructing resources in GCP.
 If you `resourceRef` an object, make sure your `resourceRef` has an `apiVersion` field and the value of that field matches the apiVersion of the resource in question.
 
 it is not an error on the resource in question, but the reference to that resource...
+
+
 
 ## Cloud Functions
 
@@ -1873,6 +1902,19 @@ NLP, translation, video intelligence, vision, ?? audio transscriptions ??
 
 [Source](https://cloud.google.com/resource-manager/docs/tags/tags-creating-and-managing)
 
+# Labels
+
+A label is a key-value pair that helps you organize your Google Cloud resources. You can attach a label to each resource, then filter the resources based on their labels. [Source](https://cloud.google.com/resource-manager/docs/creating-managing-labels)
+
+Labels can be used as queryable annotations for resources, but can't be used to set conditions on policies. (the latter is what a tag is for).
+
+## Important label restrictions
+`<<GCP_Label_Restrictions_>>`
+
+  * Most, but **not all** resource types can be labelled.
+  * Keys and values can contain only lowercase letters, numeric characters, underscores, and dashes. **NO, UPPERCASE IS NOT ALLOWED**
+
+
 # Certs
 
 ## (1) Associate Cloud Engineer
@@ -1906,3 +1948,4 @@ get more specific AFTER those two
 # See Also
 
   * [Programming Google Cloud](https://learning.oreilly.com/library/view/programming-google-cloud/9781492089025/)
+  * Terraform_Google_Cloud

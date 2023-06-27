@@ -6,6 +6,9 @@ title: Learning Google Cloud
 
 <!-- toc -->
 
+- [Terraform and GCP](#terraform-and-gcp)
+  * [Debugging HTTP 400 errors from a terraform apply](#debugging-http-400-errors-from-a-terraform-apply)
+
 <!-- tocstop -->
 
 # Terraform and GCP

@@ -8,6 +8,7 @@ title: 'Learnings: Terraform'
 
 - [Example](#example)
 - [Variables](#variables)
+- [Variable literals](#variable-literals)
 - [Lifecycle blocks](#lifecycle-blocks)
 - [modules](#modules)
 - [Random Notes](#random-notes)

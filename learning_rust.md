@@ -9,6 +9,8 @@ title: 'Learnings :Rust'
 - [Learning Rust](#learning-rust)
   * [closures](#closures)
   * [Systems programming in Rust](#systems-programming-in-rust)
+- [With MacPorts.](#with-macports)
+  * [configuring IntelliJ](#configuring-intellij)
 
 <!-- tocstop -->
 
