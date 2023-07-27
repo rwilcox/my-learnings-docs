@@ -57,17 +57,6 @@ Release schedule
 
 1.x version once every 6 months
 
-# Lambdas
-
-@quote-highlight[#:title "The Joy of Kotlin"
-  #:author  "Pierre-Yves Saumont"
-  #:page-number 0]{Kotlin offers a simplified syntax for lambdas with a single parameter. This parameter is implicitly named it.}
-
-@quote-highlight[#:title "The Joy of Kotlin"
-  #:author  "Pierre-Yves Saumont"
-  #:page-number 0]{The value returned by the lambda is the value of the expression on the last line. }
-
-Variables that live outside the lambda/closure can be changed inside the closure (ie: unlike Java does not have to be `final`). See Java_Lambda_Outside_Variable_Restrictions for info on that restriction in Java.
 
 Stupid Things I always forget
 ===================
@@ -267,6 +256,65 @@ NOTES:
   * `catch (t: Throwable)` > `catch(t: Exception)` . [See SO answer pointing to tweets by head Kotlin language designer](https://stackoverflow.com/a/64323675/224334)
 
 No such thing as checked exceptions
+
+# Functional Programming Patterns
+
+(classifications / patterns taking from my [blog entry on intermediate functional programming patterns in Javascript](https://blog.wilcoxd.com/2023/06/05/Intermediate-Functional-Programming-Patterns-in-Javascript/)
+
+## Lambdas
+
+@quote-highlight[#:title "The Joy of Kotlin"
+  #:author  "Pierre-Yves Saumont"
+  #:page-number 0]{Kotlin offers a simplified syntax for lambdas with a single parameter. This parameter is implicitly named it.}
+
+@quote-highlight[#:title "The Joy of Kotlin"
+  #:author  "Pierre-Yves Saumont"
+  #:page-number 0]{The value returned by the lambda is the value of the expression on the last line. }
+
+Variables that live outside the lambda/closure can be changed inside the closure (ie: unlike Java does not have to be `final`). See Java_Lambda_Outside_Variable_Restrictions for info on that restriction in Java.
+
+## Result / Optional types
+
+A [Result type](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-result/) returns some success object of type T, and on failure returns a Throwable (of which you have no control over the type)
+
+### returning a Result with a success
+
+```
+fun myThing(): Result<Boolean> {
+	return Result.success(true)
+}
+
+myThing().isFailure
+myThing().getOrThrow()
+```
+
+### returning a Result with a failure
+
+```
+fun myThing(): Result<Boolean> {
+	return Result.failure(Exception("boo"))
+}
+
+myThing().isFailure
+myThing().getOrThrow()
+```
+
+### other Result types (kotlin-result)
+
+A (probably better) result type is [kotlin-result](https://github.com/michaelbull/kotlin-result), which lets you ?? more easily model success or failure
+
+#### Kotlin-Result code examples
+
+```
+fun myThing(): Result<Boolean, String> {
+    return Ok(true)
+
+    // or...
+
+    return Err("boo!")
+}
+```
+
 
 # Random Notes
 
@@ -535,7 +583,7 @@ TODO: read Baeldug article
 
 # Build Tools and Kotlin
 
-Q: What version of Kotlin is my Gradle running?
+## Q: What version of Kotlin is my Gradle running?
 
 In your build.gradle.kt file - and this can be somewhat anywhere, do
 
@@ -543,7 +591,7 @@ In your build.gradle.kt file - and this can be somewhat anywhere, do
 
 `gradle -version` will also tell you that number
 
-Q: Can I check for this in my Kotlin code?
+## Q: Can I check for this in my Kotlin code?
 
 Sure, do something like this
 
@@ -570,6 +618,11 @@ Gradle Settings -> "Build and Run using Gradle" vs IntelliJ here.
 #### See also:
 
   * Kotlin_Gradle_BuildSrc
+
+## creating playground projects I can run / compile from the command line
+
+In IntelliJ you can use [Scratch files](https://kotlinlang.org/docs/run-code-snippets.html#ide-scratches-and-worksheets)
+
 
 # Basic Language Concepts
 
