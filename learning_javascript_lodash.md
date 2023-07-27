@@ -40,4 +40,24 @@ Yes this feels weird - I don't think I like it.
 
 I liked lodash's iteration methods because they took care of null variables. Oh well...
 
-`(myList ?? []).collect( (f) => f+1 )`
+`let theResult = (myList ?? []).collect( (f) => f+1 )`
+
+### replacing using optional chaining
+
+[optional chaining](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Optional_chaining) short circuits the statement when null is encountered
+
+```
+javascript
+
+let myList = null
+myList?.collect( (f) => f+1)  // will not throw method not found error b/c short circuited
+```
+
+If you want the result to always be _something_, like `theResult` above, you could:
+
+```
+javascript
+
+let myList = null
+let myResult = myList?.collect( (f) => f+1) ?? []
+```
