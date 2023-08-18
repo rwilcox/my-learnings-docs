@@ -323,6 +323,8 @@ A (probably better) result type is [kotlin-result](https://github.com/michaelbul
 #### Kotlin-Result code examples
 
 ```
+kotlin
+
 fun myThing(): Result<Boolean, String> {
     return Ok(true)
 
@@ -332,6 +334,25 @@ fun myThing(): Result<Boolean, String> {
 }
 ```
 
+#### Kotlin-Result using that function above
+
+```
+kotlin
+
+fun callMyThing() {
+    val res = myThing()
+
+    // want to get the Value and Error seperately?
+    // (just use Kotlin's destructuring abilities!)
+    val (value, error) = res
+
+    val actualResult = res.getOr(default=false)
+    // ^^ gets the Value part, or if there was an Error return the default parameter value
+
+
+}
+
+```
 
 # Random Notes
 
@@ -416,7 +437,32 @@ val length = str?.let {
 }
 ```
 
+**YES THAT ? part of the `?.let` is IMPORTANT!!**
+
 For more information around `let`, see Kotlin_Scope_Functions
+
+ALSO NOTE: this could be an alternative to [Swift's if-let statements](https://swiftly.dev/if-let)
+
+```
+swift
+
+if let l = functionThatMayReturnNull() {
+    print("l is something!")
+}
+
+```
+
+You'll write this in Kotlin as:
+
+```
+kotlin
+
+functionThatMayReturnNull().let { l ->
+    println("l is something")
+}
+```
+
+(Personally I'm not sure hiding the `if` statement in this way is a good idea, because it hides that potentially smelly `if` behind some syntax sugar.... but whatevs
 
 Duration
 ====================
