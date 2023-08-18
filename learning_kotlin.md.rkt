@@ -273,6 +273,23 @@ No such thing as checked exceptions
 
 Variables that live outside the lambda/closure can be changed inside the closure (ie: unlike Java does not have to be `final`). See Java_Lambda_Outside_Variable_Restrictions for info on that restriction in Java.
 
+### great but like, let's see some examples....
+
+```kotlin
+val mn = listOf("January", "February","March","April","May","June","July","August","September","October","November","December")
+
+mn.forEach { whatMonth: String ->
+    println(whatMonth)
+}
+
+```
+
+For multiple parameters: `{ (whatMonth: String, monthNumber: int) ->`
+
+Q: What about specifing the return type (ie the type inferience has fubar-ed up...)?
+A: [No, you can not](https://kotlinlang.org/docs/lambdas.html#anonymous-functions). Kotlin suggests writing an anonymous function and passing it, instead of inlining / using lambda literals.
+
+
 ## Result / Optional types
 
 A [Result type](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-result/) returns some success object of type T, and on failure returns a Throwable (of which you have no control over the type)
