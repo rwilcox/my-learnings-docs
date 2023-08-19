@@ -10,6 +10,7 @@ title: 'Learnings: Terraform: Terragrunt'
   * [terragrunt files](#terragrunt-files)
   * [formatting terraform files in a terragrunt project](#formatting-terraform-files-in-a-terragrunt-project)
   * [with tflint](#with-tflint)
+- [Handling all the extra output from terragrunt](#handling-all-the-extra-output-from-terragrunt)
 
 <!-- tocstop -->
 

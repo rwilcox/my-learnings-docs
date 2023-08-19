@@ -11,6 +11,7 @@ title: 'Learnings: Javascript: Lodash'
   * [`defaultTo`](#defaultto)
   * [`isNull`](#isnull)
   * [Lodash's iteration methods](#lodashs-iteration-methods)
+    + [replacing using optional chaining](#replacing-using-optional-chaining)
 
 <!-- tocstop -->
 

@@ -7,7 +7,6 @@ title: 'Learnings: Kotlin'
 <!-- toc -->
 
 - [Release schedule](#release-schedule)
-- [Lambdas](#lambdas)
 - [Stupid Things I always forget](#stupid-things-i-always-forget)
   * [val vs var](#val-vs-var)
   * [Ways to declare a method](#ways-to-declare-a-method)
@@ -27,6 +26,15 @@ title: 'Learnings: Kotlin'
     + [streaming vs intermediate collections](#streaming-vs-intermediate-collections)
   * [labels](#labels)
   * [Exception handling](#exception-handling)
+- [Functional Programming Patterns](#functional-programming-patterns)
+  * [Lambdas](#lambdas)
+    + [great but like, let's see some examples....](#great-but-like-lets-see-some-examples)
+  * [Result / Optional types](#result--optional-types)
+    + [returning a Result with a success](#returning-a-result-with-a-success)
+    + [returning a Result with a failure](#returning-a-result-with-a-failure)
+    + [other Result types (kotlin-result)](#other-result-types-kotlin-result)
+      - [Kotlin-Result code examples](#kotlin-result-code-examples)
+      - [Kotlin-Result using that function above](#kotlin-result-using-that-function-above)
 - [Random Notes](#random-notes)
   * [try with resources a like](#try-with-resources-a-like)
   * [kinds of methods](#kinds-of-methods)
@@ -66,9 +74,12 @@ title: 'Learnings: Kotlin'
     + [lazy](#lazy)
     + [See also](#see-also-1)
 - [Build Tools and Kotlin](#build-tools-and-kotlin)
+  * [Q: What version of Kotlin is my Gradle running?](#q-what-version-of-kotlin-is-my-gradle-running)
+  * [Q: Can I check for this in my Kotlin code?](#q-can-i-check-for-this-in-my-kotlin-code)
   * [and IntelliJ](#and-intellij)
     + [Gradle](#gradle)
       - [See also:](#see-also)
+  * [creating playground projects I can run / compile from the command line](#creating-playground-projects-i-can-run--compile-from-the-command-line)
 - [Basic Language Concepts](#basic-language-concepts)
   * [String](#string)
   * [Equality](#equality)
@@ -100,19 +111,6 @@ Release schedule
 
 1.x version once every 6 months
 
-# Lambdas
-
-
-> Kotlin offers a simplified syntax for lambdas with a single parameter. This parameter is implicitly named it.
-> 
-> - From The Joy of Kotlin by Pierre-Yves Saumont on page 0 ()
-
-
-> The value returned by the lambda is the value of the expression on the last line. 
-> 
-> - From The Joy of Kotlin by Pierre-Yves Saumont on page 0 ()
-
-Variables that live outside the lambda/closure can be changed inside the closure (ie: unlike Java does not have to be `final`). See Java_Lambda_Outside_Variable_Restrictions for info on that restriction in Java.
 
 Stupid Things I always forget
 ===================
@@ -321,6 +319,105 @@ NOTES:
 
 No such thing as checked exceptions
 
+# Functional Programming Patterns
+
+(classifications / patterns taking from my [blog entry on intermediate functional programming patterns in Javascript](https://blog.wilcoxd.com/2023/06/05/Intermediate-Functional-Programming-Patterns-in-Javascript/)
+
+## Lambdas
+
+
+> Kotlin offers a simplified syntax for lambdas with a single parameter. This parameter is implicitly named it.
+> 
+> - From The Joy of Kotlin by Pierre-Yves Saumont on page 0 ()
+
+
+> The value returned by the lambda is the value of the expression on the last line. 
+> 
+> - From The Joy of Kotlin by Pierre-Yves Saumont on page 0 ()
+
+Variables that live outside the lambda/closure can be changed inside the closure (ie: unlike Java does not have to be `final`). See Java_Lambda_Outside_Variable_Restrictions for info on that restriction in Java.
+
+### great but like, let's see some examples....
+
+```kotlin
+val mn = listOf("January", "February","March","April","May","June","July","August","September","October","November","December")
+
+mn.forEach { whatMonth: String ->
+    println(whatMonth)
+}
+
+```
+
+For multiple parameters: `{ (whatMonth: String, monthNumber: int) ->`
+
+Q: What about specifing the return type (ie the type inferience has fubar-ed up...)?
+A: [No, you can not](https://kotlinlang.org/docs/lambdas.html#anonymous-functions). Kotlin suggests writing an anonymous function and passing it, instead of inlining / using lambda literals.
+
+
+## Result / Optional types
+
+A [Result type](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-result/) returns some success object of type T, and on failure returns a Throwable (of which you have no control over the type)
+
+### returning a Result with a success
+
+```
+fun myThing(): Result<Boolean> {
+        return Result.success(true)
+}
+
+myThing().isFailure
+myThing().getOrThrow()
+```
+
+### returning a Result with a failure
+
+```
+fun myThing(): Result<Boolean> {
+        return Result.failure(Exception("boo"))
+}
+
+myThing().isFailure
+myThing().getOrThrow()
+```
+
+### other Result types (kotlin-result)
+
+A (probably better) result type is [kotlin-result](https://github.com/michaelbull/kotlin-result), which lets you ?? more easily model success or failure
+
+#### Kotlin-Result code examples
+
+```
+kotlin
+
+fun myThing(): Result<Boolean, String> {
+    return Ok(true)
+
+    // or...
+
+    return Err("boo!")
+}
+```
+
+#### Kotlin-Result using that function above
+
+```
+kotlin
+
+fun callMyThing() {
+    val res = myThing()
+
+    // want to get the Value and Error seperately?
+    // (just use Kotlin's destructuring abilities!)
+    val (value, error) = res
+
+    val actualResult = res.getOr(default=false)
+    // ^^ gets the Value part, or if there was an Error return the default parameter value
+
+
+}
+
+```
+
 # Random Notes
 
 methods are final by default
@@ -405,7 +502,32 @@ val length = str?.let {
 }
 ```
 
+**YES THAT ? part of the `?.let` is IMPORTANT!!**
+
 For more information around `let`, see Kotlin_Scope_Functions
+
+ALSO NOTE: this could be an alternative to [Swift's if-let statements](https://swiftly.dev/if-let)
+
+```
+swift
+
+if let l = functionThatMayReturnNull() {
+    print("l is something!")
+}
+
+```
+
+You'll write this in Kotlin as:
+
+```
+kotlin
+
+functionThatMayReturnNull().let { l ->
+    println("l is something")
+}
+```
+
+(Personally I'm not sure hiding the `if` statement in this way is a good idea, because it hides that potentially smelly `if` behind some syntax sugar.... but whatevs
 
 Duration
 ====================
@@ -592,7 +714,7 @@ TODO: read Baeldug article
 
 # Build Tools and Kotlin
 
-Q: What version of Kotlin is my Gradle running?
+## Q: What version of Kotlin is my Gradle running?
 
 In your build.gradle.kt file - and this can be somewhat anywhere, do
 
@@ -600,7 +722,7 @@ In your build.gradle.kt file - and this can be somewhat anywhere, do
 
 `gradle -version` will also tell you that number
 
-Q: Can I check for this in my Kotlin code?
+## Q: Can I check for this in my Kotlin code?
 
 Sure, do something like this
 
@@ -627,6 +749,11 @@ Gradle Settings -> "Build and Run using Gradle" vs IntelliJ here.
 #### See also:
 
   * Kotlin_Gradle_BuildSrc
+
+## creating playground projects I can run / compile from the command line
+
+In IntelliJ you can use [Scratch files](https://kotlinlang.org/docs/run-code-snippets.html#ide-scratches-and-worksheets)
+
 
 # Basic Language Concepts
 
