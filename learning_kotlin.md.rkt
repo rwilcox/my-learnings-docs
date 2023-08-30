@@ -289,6 +289,9 @@ For multiple parameters: `{ (whatMonth: String, monthNumber: int) ->`
 Q: What about specifing the return type (ie the type inferience has fubar-ed up...)?
 A: [No, you can not](https://kotlinlang.org/docs/lambdas.html#anonymous-functions). Kotlin suggests writing an anonymous function and passing it, instead of inlining / using lambda literals.
 
+### and Java interop
+
+Kotlin supports Learning_Java_Lambdas_Single_Abstract_Interface and it Just Works like it does it Plain Ol' Java.
 
 ## Result / Optional types
 
@@ -316,11 +319,17 @@ myThing().isFailure
 myThing().getOrThrow()
 ```
 
-### other Result types (kotlin-result)
+### other Result types
 
 A (probably better) result type is [kotlin-result](https://github.com/michaelbull/kotlin-result), which lets you ?? more easily model success or failure
 
-#### Kotlin-Result code examples
+#### Kotlin-Result
+
+##### See also
+
+  * [The Result Monad, Kotlin and Kotlin-Result](https://adambennett.dev/2020/05/the-result-monad/)
+
+##### Code examples
 
 ```
 kotlin
@@ -334,7 +343,7 @@ fun myThing(): Result<Boolean, String> {
 }
 ```
 
-#### Kotlin-Result using that function above
+##### Kotlin-Result using that function above
 
 ```
 kotlin
@@ -801,7 +810,7 @@ Do you really want to / need to test two dispatchers at a time, because coordina
 
 [CoroutineTestDispatcher lets you pause and resume the dispatcher](https://medium.com/androiddevelopers/testing-two-consecutive-livedata-emissions-in-coroutines-5680b693cbf8)
 
-## using Coroutines with nensense from the rest of the Java ecosystem
+## using Coroutines with nonsense from the rest of the Java ecosystem
 
 Coroutines provides integrations for a bunch of Reactive stuff, Java stuff Play, etc etc:
 
