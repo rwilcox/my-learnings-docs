@@ -570,15 +570,50 @@ See also:
 
 ## Where is Groovy's concept of Delegate?
 
-See Kotlin_Scope_Functions
+See Kotlin_Delegate_Equivalent
 
 # DSL Stuff
+
+## Avoiding punctuation in method calls or parameter specifications
+
+You can do this with [infix notation](https://kotlinlang.org/docs/functions.html#infix-notation).
+
+Rules:
+  * must be member functions
+  * must have a single parameter
+  * method must not accept variable number of args and must not have a default value
 
 ## Scope functions
 
 <<Kotlin_Scope_Functions>>
 
-AKA: Kotlin version of Gradles' Delegate object
+Scope functions: `let`, `run`, `also`, `with`, `apply`
+
+From Kotlin documentation:
+
+> `run`, `with`, and `apply` refer to the context object as a lambda receiver - by keyword this.
+
+> In turn, `let` and `also` have the context object as a lambda argument. If the argument name is not specified, the object is accessed by the implicit default name it. it is shorter than this and expressions with it are usually easier for reading. However, when calling the object functions or properties you don't have the object available implicitly like this.
+
+### Huha what is it good for?
+
+#### Optional to non optional variables
+
+`let` is good for turning optional objects into non-optional objects
+
+```kotlin
+var str: String? = "Hello"
+str?.let { println("only called when str is non null") }
+```
+
+You could also use this as a very fancy if statement
+
+`str?.let { it } ?: "default value"`
+
+#### Implicit objects / Groovy's Delegate object
+<<Kotlin_Delegate_Equivalent>>
+
+AKA: Kotlin version of Groovy's Delegate object
 
 See [Kotlin Documentation: Scope functions](https://kotlinlang.org/docs/scope-functions.html)
 
@@ -594,14 +629,6 @@ Without needing to provide the explicit `it`
 someVariableHere.with {methodThatwillactonsomeVarariableHere} // can also be `run`
 ```
 (You could also do `with(someVariableHere) {lambdaStuff}` but that may be showing off a bit...)
-
-Scope functions: `let`, `run`, `also`, `with`, `apply`
-
-From Kotlin documentation:
-
-> `run`, `with`, and `apply` refer to the context object as a lambda receiver - by keyword this.
-
-> In turn, `let` and `also` have the context object as a lambda argument. If the argument name is not specified, the object is accessed by the implicit default name it. it is shorter than this and expressions with it are usually easier for reading. However, when calling the object functions or properties you don't have the object available implicitly like this.
 
 ### See also
 
