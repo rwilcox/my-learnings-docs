@@ -23,12 +23,12 @@ can also create interface whece you don't care what kind of object is returned b
 
 # introspection / a simple query
 
-    query { 
-         __schema {  
-               types {  
-                       name 
-                       description    
-                }  
+    query {
+         __schema {
+               types {
+                       name
+                       description
+                }
         }
     }
 
@@ -36,15 +36,15 @@ can also create interface whece you don't care what kind of object is returned b
 or better
 
     query roots {
-         __schema {    
+         __schema {
              queryType        {  ...typeFields    }
-             mutationType     {  ...typeFields    }    
-             subscriptionType {  ...typeFields    }  
+             mutationType     {  ...typeFields    }
+             subscriptionType {  ...typeFields    }
         }
-    } 
-    fragment typeFields on __Type {  
+    }
+    fragment typeFields on __Type {
        name
-       fields { 
+       fields {
         name
        }
     }
@@ -62,7 +62,7 @@ Thus, you may need to join your strings into one before sending it.
     POST https://somegrapql.api.example.com
     content-type: application/json
 
-    {"query": "query roots { __schema {    queryType {      ...typeFields    } mutationType {      ...typeFields    }    subscriptionType {      ...typeFields    }  } } fragment typeFields on __Type {  name  fields {    name  }} "} 
+    {"query": "query roots { __schema {    queryType {      ...typeFields    } mutationType {      ...typeFields    }    subscriptionType {      ...typeFields    }  } } fragment typeFields on __Type {  name  fields {    name  }} "}
 
 
 # on server side
@@ -88,7 +88,7 @@ It can be deployed on their infrastructure, and they also provide a command to s
 
 It does however create a docker network: `local_graphcool`.
 
-    $ npm install 
+    $ npm install
 
     $ graphql deploy --target local
 
@@ -195,5 +195,5 @@ This will generate types for you, in this case in `graphql/Types.graphql.swift`
 
 #### See also
 
-  * Graph.cool lets you extend the schema in the source code.  [Per](https://github.com/apollographql/apollo-cli/issues/344#issuecomment-371530068). 
+  * Graph.cool lets you extend the schema in the source code.  [Per](https://github.com/apollographql/apollo-cli/issues/344#issuecomment-371530068).
   * ["when a graphQL file contains no operation definitions types.swift is empty"](https://github.com/apollographql/apollo-cli/issues/211).
