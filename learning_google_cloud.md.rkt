@@ -1501,7 +1501,60 @@ Extracting (or exporting) data from BigQuery to somewhere else (like Google Clou
   #:author  "Geewax, JJ"
   #:page-number 0]{Like a relational database has databases that contain tables, BigQuery has datasets that contain tables }
 
+### BigQuery connecting to "external" tables
+
+Can interact with databases in Google Cloud SQL, giving you a unified control services (data warehouse) across your data stores.
+
+#### Interacting with Postgres from BigQuery
+
+##### Terraform/SQL to set this up
+
+Example TF follows
+
+```terraform
+resource "google_bigquery_connection" "foodb_connection" {
+  provider      = google-beta
+  connection_id = "foodb"
+  friendly_name = "Connection for FOODB"
+  description   = "FOODB"
+  location      = "US"
+  cloud_sql {
+    instance_id = google_sql_database_instance.foodb.connection_name
+    database    = google_sql_database.foodb.name
+    type        = "POSTGRES"
+    credential {
+      username = google_sql_user.foodb_analytics_user.name
+      password = google_sql_user.foodb_analytics_user.password
+    }
+  }
+}
+
+resource "google_sql_user" "foodb_analytics_user" {
+  name     = "foodb-analytics-user"
+  instance = google_sql_database_instance.foodb.name
+  password = ....
+}
+
+resource "google_sql_database_instance" "foodb" {
+  name             = "foodb"
+  ....
+}
+```
+
+BUT this user you also have to give appropriate access to at the database level, ie in SQL!
+
+So in some database migration you need to
+
+```sql
+GRANT USAGE ON SCHEMA public                           TO "foodb-analytics-user";
+GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public    TO "foodb-analytics-user";
+GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA public TO "foodb-analytics-user";
+```
+
+You could also go into Postgres and check the access on  "foodb-analytics-user" to see what tables/fields you have access to before running the permission grants via sql.
+
 ### Permission Notes
+
 
 See [BigQuery access control documentation](https://cloud.google.com/bigquery/docs/access-control). Note that permissions given at the org level apply to all datasets in the organization, and the viewer role also allows enumeration of those resources
 
