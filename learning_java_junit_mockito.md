@@ -27,11 +27,11 @@ title: 'Learnings: Java: jUnit: Mockito'
 
 <!-- tocstop -->
 
-## <<Java_JUnit_Stubs>>
+# <<Java_JUnit_Stubs>>
 
   * must implement interface or subclass and override required methods of interface/class
 
-### Mocks vs Stubs vs spys
+## Mocks vs Stubs vs spys
 
 > Stubs are useful when we want to control the behavior of the replaced dependencies.
 > Mocks are useful when we want to control the behavior of the replaced dependencies and verify the interactions that
@@ -42,19 +42,19 @@ title: 'Learnings: Java: jUnit: Mockito'
 
 
 
-#### Stubs
+### Stubs
 
 > Because we cannot verify that an interaction happened between the system under test and a stub, we should use stubs
 > in situations where we don’t have to verify that the system under test actually invoked a method of a stub.
 
-#### Mocks
+### Mocks
 
 TOTALLY FAKE OBJECTS
 
 > Because we can verify that an interaction happened between the system under test and a mock, we should use mocks
 > in situations where we want to verify that the system under test actually invoked a method of our mock object.
 
-#### Spy
+### Spy
 
 CAN SPY ON REAL OBJECTS!!!!
 
@@ -223,3 +223,15 @@ May need to use special maven dep:
         given(repository.count(1L)).willAnswer(invocation -> {
         	return 42;
         } );
+
+# <<Kotlin_Mockito>>
+
+## Example Usage:
+
+`whenever( someInstance.someMethod(parameterNameOne = mockitoParameterMatcher)).thenReturn(somePrimative)`
+
+(don't use when Mockito function as that's a keyword in Kotlin. You can, but encase it with backticks then it looks awkward)
+
+## Example Verify it was called
+
+`verify(someInstance).someMethod(parameterNameOne = expectedValue)`
