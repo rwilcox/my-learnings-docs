@@ -235,3 +235,13 @@ May need to use special maven dep:
 ## Example Verify it was called
 
 `verify(someInstance).someMethod(parameterNameOne = expectedValue)`
+
+## WTF getting weird errors like Kotlin realizing a thing is null at runtime
+
+are you using your `someInstance` is a `mock<SomeClass>()`, or might it be a `SomeClass()` aka not actually a mock object?
+
+## Verifying methods that have default parameters
+
+use `anyOrNull` matcher.
+
+`verify(someInstance).someMethod(parameterName = anyOrNull)`
