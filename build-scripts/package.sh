@@ -3,7 +3,7 @@
 
 # MARKDOWN_TOC_BIN=~/.npm-packages/bin/markdown-toc
 MARKDOWN_TOC_BIN=/opt/local/bin/markdown-toc
-RACKET_BIN=~/Applications/Racket_v8.4/bin/racket
+RACKET_BIN=~/Applications/Racket_v8.9/bin/racket
 
 # TODO: make this dynamic
 # ^^^^^^^ npm install -g markdown-toc
