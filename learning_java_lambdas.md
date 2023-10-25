@@ -8,6 +8,7 @@ title: 'Learnings: Java: Lambdas'
 
 - [>](#)
   * [Restrictions:](#restrictions)
+  * [>](#)
 - [Book Recommendations](#book-recommendations)
 
 <!-- tocstop -->

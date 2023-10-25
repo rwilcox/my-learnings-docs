@@ -29,12 +29,15 @@ title: 'Learnings: Kotlin'
 - [Functional Programming Patterns](#functional-programming-patterns)
   * [Lambdas](#lambdas)
     + [great but like, let's see some examples....](#great-but-like-lets-see-some-examples)
+    + [and Java interop](#and-java-interop)
   * [Result / Optional types](#result--optional-types)
     + [returning a Result with a success](#returning-a-result-with-a-success)
     + [returning a Result with a failure](#returning-a-result-with-a-failure)
-    + [other Result types (kotlin-result)](#other-result-types-kotlin-result)
-      - [Kotlin-Result code examples](#kotlin-result-code-examples)
-      - [Kotlin-Result using that function above](#kotlin-result-using-that-function-above)
+    + [other Result types](#other-result-types)
+      - [Kotlin-Result](#kotlin-result)
+        * [See also](#see-also)
+        * [Code examples](#code-examples)
+        * [Kotlin-Result using that function above](#kotlin-result-using-that-function-above)
 - [Random Notes](#random-notes)
   * [try with resources a like](#try-with-resources-a-like)
   * [kinds of methods](#kinds-of-methods)
@@ -63,8 +66,12 @@ title: 'Learnings: Kotlin'
   * [Aka how as lazy is implemented](#aka-how-as-lazy-is-implemented)
   * [Where is Groovy's concept of Delegate?](#where-is-groovys-concept-of-delegate)
 - [DSL Stuff](#dsl-stuff)
+  * [Avoiding punctuation in method calls or parameter specifications](#avoiding-punctuation-in-method-calls-or-parameter-specifications)
   * [Scope functions](#scope-functions)
-    + [See also](#see-also)
+    + [Huha what is it good for?](#huha-what-is-it-good-for)
+      - [Optional to non optional variables](#optional-to-non-optional-variables)
+      - [Implicit objects / Groovy's Delegate object](#implicit-objects--groovys-delegate-object)
+    + [See also](#see-also-1)
 - [Ughhh Kotlin makes me sad](#ughhh-kotlin-makes-me-sad)
   * [tailrecursion support](#tailrecursion-support)
   * [RAII vs lazy](#raii-vs-lazy)
@@ -72,7 +79,7 @@ title: 'Learnings: Kotlin'
     + [intro / questions](#intro--questions)
     + [lateinit](#lateinit)
     + [lazy](#lazy)
-    + [See also](#see-also-1)
+    + [See also](#see-also-2)
 - [Build Tools and Kotlin](#build-tools-and-kotlin)
   * [Q: What version of Kotlin is my Gradle running?](#q-what-version-of-kotlin-is-my-gradle-running)
   * [Q: Can I check for this in my Kotlin code?](#q-can-i-check-for-this-in-my-kotlin-code)
@@ -90,12 +97,12 @@ title: 'Learnings: Kotlin'
     + [Dispatchers](#dispatchers)
     + [Job](#job)
     + [How these interact](#how-these-interact)
-    + [See also](#see-also-2)
+    + [See also](#see-also-3)
   * [using coroutines](#using-coroutines)
     + [builder examples](#builder-examples)
     + [but _using_ those functions...](#but-_using_-those-functions)
     + [And testing](#and-testing)
-  * [using Coroutines with nensense from the rest of the Java ecosystem](#using-coroutines-with-nensense-from-the-rest-of-the-java-ecosystem)
+  * [using Coroutines with nonsense from the rest of the Java ecosystem](#using-coroutines-with-nonsense-from-the-rest-of-the-java-ecosystem)
     + [Coroutines and other reactive type things in Java](#coroutines-and-other-reactive-type-things-in-java)
       - [Java 8's Future, CompletableFuture etc](#java-8s-future-completablefuture-etc)
       - [Using coroutines and RxJava 3, specifically](#using-coroutines-and-rxjava-3-specifically)
@@ -353,6 +360,9 @@ For multiple parameters: `{ (whatMonth: String, monthNumber: int) ->`
 Q: What about specifing the return type (ie the type inferience has fubar-ed up...)?
 A: [No, you can not](https://kotlinlang.org/docs/lambdas.html#anonymous-functions). Kotlin suggests writing an anonymous function and passing it, instead of inlining / using lambda literals.
 
+### and Java interop
+
+Kotlin supports Learning_Java_Lambdas_Single_Abstract_Interface and it Just Works like it does it Plain Ol' Java.
 
 ## Result / Optional types
 
@@ -380,11 +390,17 @@ myThing().isFailure
 myThing().getOrThrow()
 ```
 
-### other Result types (kotlin-result)
+### other Result types
 
 A (probably better) result type is [kotlin-result](https://github.com/michaelbull/kotlin-result), which lets you ?? more easily model success or failure
 
-#### Kotlin-Result code examples
+#### Kotlin-Result
+
+##### See also
+
+  * [The Result Monad, Kotlin and Kotlin-Result](https://adambennett.dev/2020/05/the-result-monad/)
+
+##### Code examples
 
 ```
 kotlin
@@ -398,7 +414,7 @@ fun myThing(): Result<Boolean, String> {
 }
 ```
 
-#### Kotlin-Result using that function above
+##### Kotlin-Result using that function above
 
 ```
 kotlin
@@ -628,15 +644,50 @@ See also:
 
 ## Where is Groovy's concept of Delegate?
 
-See Kotlin_Scope_Functions
+See Kotlin_Delegate_Equivalent
 
 # DSL Stuff
+
+## Avoiding punctuation in method calls or parameter specifications
+
+You can do this with [infix notation](https://kotlinlang.org/docs/functions.html#infix-notation).
+
+Rules:
+  * must be member functions
+  * must have a single parameter
+  * method must not accept variable number of args and must not have a default value
 
 ## Scope functions
 
 <<Kotlin_Scope_Functions>>
 
-AKA: Kotlin version of Gradles' Delegate object
+Scope functions: `let`, `run`, `also`, `with`, `apply`
+
+From Kotlin documentation:
+
+> `run`, `with`, and `apply` refer to the context object as a lambda receiver - by keyword this.
+
+> In turn, `let` and `also` have the context object as a lambda argument. If the argument name is not specified, the object is accessed by the implicit default name it. it is shorter than this and expressions with it are usually easier for reading. However, when calling the object functions or properties you don't have the object available implicitly like this.
+
+### Huha what is it good for?
+
+#### Optional to non optional variables
+
+`let` is good for turning optional objects into non-optional objects
+
+```kotlin
+var str: String? = "Hello"
+str?.let { println("only called when str is non null") }
+```
+
+You could also use this as a very fancy if statement
+
+`str?.let { it } ?: "default value"`
+
+#### Implicit objects / Groovy's Delegate object
+<<Kotlin_Delegate_Equivalent>>
+
+AKA: Kotlin version of Groovy's Delegate object
 
 See [Kotlin Documentation: Scope functions](https://kotlinlang.org/docs/scope-functions.html)
 
@@ -652,14 +703,6 @@ Without needing to provide the explicit `it`
 someVariableHere.with {methodThatwillactonsomeVarariableHere} // can also be `run`
 ```
 (You could also do `with(someVariableHere) {lambdaStuff}` but that may be showing off a bit...)
-
-Scope functions: `let`, `run`, `also`, `with`, `apply`
-
-From Kotlin documentation:
-
-> `run`, `with`, and `apply` refer to the context object as a lambda receiver - by keyword this.
-
-> In turn, `let` and `also` have the context object as a lambda argument. If the argument name is not specified, the object is accessed by the implicit default name it. it is shorter than this and expressions with it are usually easier for reading. However, when calling the object functions or properties you don't have the object available implicitly like this.
 
 ### See also
 
@@ -873,7 +916,7 @@ Do you really want to / need to test two dispatchers at a time, because coordina
 
 [CoroutineTestDispatcher lets you pause and resume the dispatcher](https://medium.com/androiddevelopers/testing-two-consecutive-livedata-emissions-in-coroutines-5680b693cbf8)
 
-## using Coroutines with nensense from the rest of the Java ecosystem
+## using Coroutines with nonsense from the rest of the Java ecosystem
 
 Coroutines provides integrations for a bunch of Reactive stuff, Java stuff Play, etc etc:
 

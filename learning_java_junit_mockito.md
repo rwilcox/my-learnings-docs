@@ -6,11 +6,11 @@ title: 'Learnings: Java: jUnit: Mockito'
 
 <!-- toc -->
 
-  * [>](#)
-    + [Mocks vs Stubs vs spys](#mocks-vs-stubs-vs-spys)
-      - [Stubs](#stubs)
-      - [Mocks](#mocks)
-      - [Spy](#spy)
+- [>](#)
+  * [Mocks vs Stubs vs spys](#mocks-vs-stubs-vs-spys)
+    + [Stubs](#stubs)
+    + [Mocks](#mocks)
+    + [Spy](#spy)
 - [>](#)
   * [Syntax Examples](#syntax-examples)
   * [`Mockito.mock` information:](#mockitomock-information)
@@ -24,6 +24,11 @@ title: 'Learnings: Java: jUnit: Mockito'
     + [Overriding implementation of specific methods, of an instance](#overriding-implementation-of-specific-methods-of-an-instance)
   * [Verifying mock methods called](#verifying-mock-methods-called)
   * [Overriding implementation of specific method with custom code](#overriding-implementation-of-specific-method-with-custom-code)
+- [>](#)
+  * [Example Usage:](#example-usage)
+  * [Example Verify it was called](#example-verify-it-was-called)
+  * [WTF getting weird errors like Kotlin realizing a thing is null at runtime](#wtf-getting-weird-errors-like-kotlin-realizing-a-thing-is-null-at-runtime)
+  * [Verifying methods that have default parameters](#verifying-methods-that-have-default-parameters)
 
 <!-- tocstop -->
 
