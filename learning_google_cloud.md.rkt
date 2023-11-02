@@ -70,6 +70,7 @@ this is on the test!
 
 right there in the IAM sidebar
 
+
 # Cloud SDK
 
 # Tools
@@ -395,6 +396,14 @@ So, to reference a cross-project resource, here's the `resource` chunk of YAML t
 
 Q: what are the allowed values for "external"?
 A: Well, for IAMPolicy or IAMPartialPolicies the [format is documented here](https://cloud.google.com/config-connector/docs/reference/resource-docs/iam/iampolicy#supported_resources)
+
+#### IAMPartialPolicy
+
+[IAMPartialPolicy](https://cloud.google.com/config-connector/docs/reference/resource-docs/iam/iampartialpolicy) seems to only exist for Cloud Connector (ie it does not exist for Terraform).
+
+> represents a non-authoritative intent for the associated Google Cloud resource's IAM policy bindings. Config Connector merges the bindings in the IAMPartialPolicy spec with the bindings and audit configs that already exist in the underlying IAM policy
+
+But it's helpful if you have to create more than one definition of policies... (but also _are you sure_?)
 
 #### Common Errors
 
