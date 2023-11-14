@@ -212,6 +212,8 @@ Use `spy`: this will only mock the methods you tell it about.
 			}
 		}
 
+**NOTE**: if you're doing this with a stub/mock you don't _have_ to set up a specific `when` clause just to verify some function will be called. (My default methods called on mocks/stubs this way return null).
+
 ## Overriding implementation of specific method with custom code
 
 May need to use special maven dep:
@@ -250,3 +252,14 @@ are you using your `someInstance` is a `mock<SomeClass>()`, or might it be a `So
 use `anyOrNull` matcher.
 
 `verify(someInstance).someMethod(parameterName = anyOrNull)`
+
+## Performing more complex checks for your mocks
+
+use `check` closure / (Java8 Functional Predicate ie  `bool Predicate<T>`)
+
+```
+verify(someInstance).someMethod(check { argumentOne ->
+  argumentOne shouldBe "foo"
+}, check { argumentTwo -> argumentTwo shouldBe "bar"})
+
+```
