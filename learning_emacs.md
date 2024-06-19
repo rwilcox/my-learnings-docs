@@ -52,3 +52,9 @@ Now you can use this variable in your update formula call, like so: ` $$ budget 
 Now, what if I'm computing things but want to keep the initial formula? Use ` =>`
 
 `$$ 500 - 400 => $$` results in `$$ 500 - 400 => 100 $$`. In fact, if I subtract 300 instead and run the calculations, Emacs updates the answer once I run `M-x calc-update-formula`
+
+# Find and Replace in Folders
+
+Use `swiper-all`, type your expression, press `M-q` for the replacement, ENT, `y` replaces one and goes on to the next, `n` skips, `!` replaces all
+
+[Source](https://emacs.stackexchange.com/a/58779)
