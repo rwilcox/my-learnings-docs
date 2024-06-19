@@ -42,6 +42,8 @@ title: 'Learnings: Kotlin'
   * [try with resources a like](#try-with-resources-a-like)
   * [kinds of methods](#kinds-of-methods)
   * [Unit, null, void, and nothing](#unit-null-void-and-nothing)
+    + [Void/Unit](#voidunit)
+    + [Nothing](#nothing)
 - [Classes, Objects and Instances](#classes-objects-and-instances)
   * [class FooBar](#class-foobar)
   * [object FooBar](#object-foobar)
@@ -460,12 +462,14 @@ NOTE: that `override` also by default means _your_ methods are `open` too!
 
 ## Unit, null, void, and nothing
 
+### Void/Unit
 By default, Java void is mapped to Unit type in Kotlin. This means that any method that returns void in Java when called from Kotlin will return Unit — for example the System.out.println() function.
 
 Also, Unit is the default return type and declaring it is optional, therefore, the below function is also valid:
 
 [Source](https://www.baeldung.com/kotlin/void-type)
 
+### Nothing
 There is a `Nothing` type which _kinda_ works like null but with more type checking???!!!
 
 Classes, Objects and Instances

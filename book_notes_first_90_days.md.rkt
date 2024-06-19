@@ -169,7 +169,7 @@ Acceleration checklist:
   2. Are there aspects of your new job that are critical to success but that you prefer not to focus on? Why is that the case?
   3. What do you need to do to ensure that you make the mental leap into the new position?
   }
-  
+
   @quote-highlight[
 	#:title       "First 90 Days"
 	#:author      "Watkins"
@@ -208,7 +208,7 @@ What are the defining features of each of the four STaRS situations?
   * TurnAround you take on a unit or group that is recognized to be in trouble and work with them to get back on track
   * Realginment your challenge is to revitalize a unit, product, proces or projecct that is drifting into trouble
   * Sustaining(-Succcess) you are sholdering the responsbility for preserving the viality of a successful organization and taking it to the next level}
-  
+
 @quote-highlight[
 	#:title       "First 90 Days"
 	#:author      "Watkins"
@@ -226,7 +226,7 @@ In particular, clarity helps you make three fundimental early choices:
   2. How much emphasis will you place on offense as opposed to defense?
   3. What should you do to get some early wins?
 }
-  
+
 @quote-highlight[
 	#:title       "First 90 Days"
 	#:author      "Watkins"
@@ -234,13 +234,13 @@ In particular, clarity helps you make three fundimental early choices:
 	#:page-number 72 ]{
 Securing early wins
 
-But what is a win differs drastically among the four situations. 
+But what is a win differs drastically among the four situations.
 
   * In a start-up, getting the right team in place an achieving strategic focus are key wins.
-  * In turnarounds, getting the right team in place is also a potential early win, as idenfitying the defendable core of the business and making major progress in paring the organization back up to it. 
+  * In turnarounds, getting the right team in place is also a potential early win, as idenfitying the defendable core of the business and making major progress in paring the organization back up to it.
   * In realignments, gaining acceptance of the need for change and instilling a sense of urgency are often big wins
   * in sustaining success situations, gaining and displayin understanding of what has made the organization successful is a key early win, because it helps you win the right to make decisions about the organization's future.}
-  
+
 @quote-highlight[
 	#:title       "First 90 Days"
 	#:author      "Watkins"
@@ -252,7 +252,7 @@ This should be part of a broader, four demensional, approach to high-potential t
   * Career crossroads
   * STaRS business situations
   }
-  
+
 @quote-highlight[
 	#:title       "First 90 Days"
 	#:author      "Watkins"
@@ -265,7 +265,7 @@ Do you watn to develop different horses for differnent courses ' for example, sp
 	#:author      "Watkins"
 	#:page-number 79
 	#:original-highlight "Elena began by communicating her goals to employees. In a series of memos and small-group meetings she laid out a vision for more participative, more problem solving culture. These overtures met with skepticism from frontline employees and outirght distrust from some supervisors"]{Ddid these match how the team works in a _Seeing Organizational Patterns_ type way?}
-	
+
 @quote-highlight[
 	#:title       "First 90 Days"
 	#:author      "Watkins"
@@ -299,7 +299,7 @@ The goal of the first wave of change is to secure early wins}
 The second wave of change address more fundimental issues of strategy, structure, systems, and skills to reshape the organization.}
 
 @quote-note[
-	#:title       "First 90 days
+	#:title       "First 90 days"
 	#:author      "Watkins"
 	#:page-number 85
 	#:original-highlight "In the frist 90 days, a key goal is to build personal credability and create organizational momemteum. You can do this by securing some early wins"]{
@@ -315,7 +315,7 @@ The second wave of change address more fundimental issues of strategy, structure
 	#:page-number 85 ]{Specfically, your efforts to secure early wins would be:
 	1. consistent with your A-item buisness priorities
 	2. introduce the new pattersn of behavior you want to introduce in the organization}
-	
+
 @quote-highlight[
 	#:title       "First 90 Days"
 	#:author      "Watkins"
@@ -325,7 +325,7 @@ Defining your A-item priorities:
   1. A-item priorities should follow naturally from core problems. Establishing A-item priorities calls for pinpointing the critical areas of your organization that demand attention, as well as those that offer the greatest opportunties to dramatic improvement in performance.
   2. A-item priorities should be neither too general nor too specfic
   3. A-item priorities should offer clear direction yet allow for flexability while you learn about the situation}
-  
+
 @quote-highlight[
 	#:title       "First 90 Days"
 	#:author      "Watkins"
@@ -467,7 +467,7 @@ Don't restrict your focus to hard skills. The higher you rise the more important
 Your 90 day plan should be written, even if it just consists of bullet points. It should specify priorities and goals as well as milestones. Critically, you should share it with your boss and seek buy-in for it}
 
 @quote-note[
-	#:title       "First 90 days
+	#:title       "First 90 days"
 	#:author      "Watkins"
 	#:page-number 130
 	#:original-highlight "The higher you climb in organizations, the more you take on the role of organizational architect, creating the context in which others can achieve superior performance. No matter how charismatic you are, you cannot hope to do much if the key elements in your unit are fundimentally out of alighment"]{OR organization not matching prevailing Organizational Pattern!}
@@ -493,13 +493,13 @@ A skills base comprises of these four types of knowledge:
   * meta-knowledge}
 
 @quote-note[
-	#:title       "First 90 days
+	#:title       "First 90 days"
 	#:author      "Watkins"
 	#:page-number 150
 	]{This may be part of onboarding and/or talent acquisition, not just team skills inventory}
 
 @quote-note[
-	#:title       "First 90 days
+	#:title       "First 90 days"
 	#:author      "Watkins"
 	#:page-number 186
 	#:original-highlight "One common mistake of new leaders is to devote too much of their transiton time to the verticle dimension of influence - upwards towards bosses and downwards to direct reports - and not enough to the horizontal dimension, namely peers and external contituencies."]{ESPECIALLY horizontal, see _Art of being Indispensible at Work_}
