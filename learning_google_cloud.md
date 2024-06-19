@@ -50,6 +50,7 @@ title: Learning Google Cloud
     + [Config Connector](#config-connector)
       - [How to ask K8s for the documentation on Config Connector CRDs](#how-to-ask-k8s-for-the-documentation-on-config-connector-crds)
       - [Referencing cross project resources](#referencing-cross-project-resources)
+      - [IAMPartialPolicy](#iampartialpolicy)
       - [Common Errors](#common-errors)
   * [Cloud Functions](#cloud-functions)
     + [Node.js specific notes](#nodejs-specific-notes)
@@ -173,6 +174,7 @@ this is on the test!
 ## Service Accounts
 
 right there in the IAM sidebar
+
 
 # Cloud SDK
 
@@ -519,6 +521,14 @@ So, to reference a cross-project resource, here's the `resource` chunk of YAML t
 
 Q: what are the allowed values for "external"?
 A: Well, for IAMPolicy or IAMPartialPolicies the [format is documented here](https://cloud.google.com/config-connector/docs/reference/resource-docs/iam/iampolicy#supported_resources)
+
+#### IAMPartialPolicy
+
+[IAMPartialPolicy](https://cloud.google.com/config-connector/docs/reference/resource-docs/iam/iampartialpolicy) seems to only exist for Cloud Connector (ie it does not exist for Terraform).
+
+> represents a non-authoritative intent for the associated Google Cloud resource's IAM policy bindings. Config Connector merges the bindings in the IAMPartialPolicy spec with the bindings and audit configs that already exist in the underlying IAM policy
+
+But it's helpful if you have to create more than one definition of policies... (but also _are you sure_?)
 
 #### Common Errors
 

@@ -430,6 +430,9 @@ fun callMyThing() {
     // ^^ gets the Value part, or if there was an Error return the default parameter value
 
 
+    val value = res.getOrElse { it == "boo!" }
+    // ^^ gets the Value part, or if there was an Error call that lambda.
+    // ESPECIALLY good for guard clauses where you want to exit the function if you have an error!!!!!!!
 }
 
 ```

@@ -7,6 +7,8 @@ title: 'Learnings: Emacs'
 <!-- toc -->
 
 - [Editing Javascript in emacs](#editing-javascript-in-emacs)
+- [Calc Mode](#calc-mode)
+- [Find and Replace in Folders](#find-and-replace-in-folders)
 
 <!-- tocstop -->
 

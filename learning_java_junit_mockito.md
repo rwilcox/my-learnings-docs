@@ -29,6 +29,7 @@ title: 'Learnings: Java: jUnit: Mockito'
   * [Example Verify it was called](#example-verify-it-was-called)
   * [WTF getting weird errors like Kotlin realizing a thing is null at runtime](#wtf-getting-weird-errors-like-kotlin-realizing-a-thing-is-null-at-runtime)
   * [Verifying methods that have default parameters](#verifying-methods-that-have-default-parameters)
+  * [Performing more complex checks for your mocks](#performing-more-complex-checks-for-your-mocks)
 
 <!-- tocstop -->
 
