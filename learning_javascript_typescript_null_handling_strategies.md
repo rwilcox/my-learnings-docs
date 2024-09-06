@@ -19,6 +19,32 @@ title: 'Learnings: Javascript: Typescript: Null Handling Strategies'
 
 <!-- tocstop -->
 
+# Huh What about the optional fields? How do these relate?
+
+    class P {
+        name?: string
+        recordIdentifier: string | null
+    }
+
+Optional - `name?` - means it's optional, but if it's there it must be a string
+
+The union type - `recordIdentifier` - means it's REQUIRED (ie to be passed as part of a function) put you could pass null.
+
+
+`function bazBar(recordIdentifier: string | null, name?: string)`
+
+I can call it like the following:
+
+`bazBar(null, "Ryan")`
+
+or like
+
+`bazBar("1123")`
+
+but NOT like `bazBar()` <-- that first parameter MUST have a value, even if I type out null. Vs the last name parameter, which can completely be excluded.
+
+(You could also see the `?` operator as `string | undefined`)
+
 # Introduction <<Learning_Typescript_Null_Handling_Strategies>>
 
 Typescript with it's `strict` compiler mode makes optional values something we have to think about all the time. If you have programming in Swift this feels familiar.

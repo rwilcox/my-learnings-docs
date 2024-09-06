@@ -330,7 +330,7 @@ Typescript alo has something similar to Learning_Javascript_Refinements
   * Learning_Typescript_Null_Handling_Predicate_Explaination
   * Effective Typescript Chapter 3 Item 22 calls this "type narrowing"
 
-# swicth statment completion
+# switch statment completion
 
 use the never type in the default case to man=ke sure you implemented all of switch
 
@@ -358,7 +358,7 @@ All this typing sometimes gets annoying, particularly when you have a lot of typ
   1. Function overloading / multiple type definitions per function <-- can do this but it looks odd
   2. Access modifiers `public`, `protected`, `private`
   3. (Java style) interfaces
-w
+
 
 # Javascript -> Typescript
 
@@ -405,6 +405,16 @@ in tsconfig.json
 
 - [TODO]: write me
 
+
+# Typescript and Unit Testing Patterns
+
+## "Ugh, can I just call this private method?"
+
+Typesript compiler will error if you call a private method. (This, however, is only enforced at the compiler level, JS don't care).
+
+But I want to unit test private methods, sometimes.
+
+Easiest answer? typecast the object to any (`(personObject as any).aVeryPrivateMethod()`)
 
 # Book Recommendations
 
