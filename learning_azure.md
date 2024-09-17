@@ -28,7 +28,22 @@ VNet - their network peering thing
 
 # Hierarchy etc
 
+## Subscriptions
+
 Azure Account has many subscriptions has many resource groups and resources
+
+each subscription can have different billing and payment configurations
+multiple subscriptions can be linked to the same account
+billing for azure is done on a per-subscription basis
+
+consider a shared services subscription
+
+# Cost
+
+## Microsoft Cost Management
+
+(the cost analytics dashboard thing + budget control)
+
 
 # Resource Manager
 
@@ -101,6 +116,23 @@ availiability sets:
 
 ### AKS
 
+# Storage
+
+Kinds:
+  * blob
+  * data lake
+  * azure files   : managed file share (SMB/NFS)
+  * queue storage : messaging store
+  * table storage : NoSQL table
+
+## Azure Migrate
+
+Sections:
+  * Migrate: Server Migration (VMWare or Hyper-V VMs, can also ID physical servers)
+  * Data Migration Assistant
+  * Database Migration Assistant
+  * App Service Migration Assistant
+
 # Network Related
 
 Virtual Network
@@ -131,3 +163,32 @@ Four models:
 ## DNS
 
 Azure DNS. Also supports private DNS domains. Can't use this to buy a domain name.
+
+# IAM
+
+## Entra (Active Directory)
+
+In hybrid scenarios you need to keep two different AD installs, but can connect them (Entra Connect) - one way sync.
+
+Entra Domain Services: connects Azure Entra with a more AD like interface for applications to use
+
+An Azure subscription must have only one Entra tenant but an Entra tenant may have multiple subscriptions
+
+Characteristics of Entra:
+
+  * Identity solution
+  * Users and groups in a flat structure
+  * Entra ID not queryable by LDAP
+  * Entra ID doesn't use Kerberos
+  * Includes OAuth federated signins
+
+User accounts supported:
+
+  * Cloud identity <-- only defined in Entra ID
+  * Directory Synced  <-- defined in the on-prem AD
+  * Guest user
+
+
+### Entra Domain Services
+
+Provides group policy joining, Kerberos auth to Entra tenant. Fully compatible with AD DS (does not require additional domain controllers in the cloud)
