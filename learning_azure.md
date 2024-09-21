@@ -28,6 +28,14 @@ VNet - their network peering thing
 
 # Hierarchy etc
 
+## Management Groups
+
+Scope above subscriptions
+
+Can nestle the groups, max depth of 6
+
+Can make use of policy inheritance
+
 ## Subscriptions
 
 Azure Account has many subscriptions has many resource groups and resources
@@ -37,6 +45,8 @@ multiple subscriptions can be linked to the same account
 billing for azure is done on a per-subscription basis
 
 consider a shared services subscription
+
+Subscriptions associated with a single Entra directory.
 
 # Cost
 
@@ -80,6 +90,21 @@ groups of policies called initiatives
 
 Set at each level: resource, resource group, subscription, etc and then apply to children within that group.
 
+Can set restrictions on ie location, kinds of resources created, etc etc
+
+policy defintion: condition to evaluate and actions to perform when it's met
+initiative definition: set of policy definitions
+
+Built in policy definitions include:
+  * (List of) not allowed resource types
+  * allowed storage SKUs
+  * allowed resource types
+  * allowed locations
+  * ... etc
+
+"Compliance" tab shows you areas in your subscription that are out of compliance with your set policies or initiatives
+
+JSON documents
 # Azure Arc
 
 Unifies management of azure compliance etc in hybrid scenarios
@@ -96,6 +121,10 @@ Azure Log Analytics : run log queries based on ^^^
   * user and session counts
   * machine performance
   * synthetic transactions
+
+## Monitor Activity Log
+
+provides logging for subscription level events
 
 # Compute
 
@@ -119,11 +148,46 @@ availiability sets:
 # Storage
 
 Kinds:
-  * blob
+  * blob                    : via HTTP(S); REST API; Powershell; NFS
   * data lake
-  * azure files   : managed file share (SMB/NFS)
-  * queue storage : messaging store
-  * table storage : NoSQL table
+  * azure files           : managed file share (SMB/NFS)
+  * queue storage    : messaging store. Up to 64K
+  * table storage      : NoSQL table (newer version use Cosmos DB Table API)
+
+Types:
+  * standard <-- spinning disks
+  * premium <-- SSD
+
+Storage Account is immutably created with one of these types
+
+Data is encrypted automatically before being persisted to managed disks, blob, queue etc; then decrypted before retrieval
+
+
+## Blob Storage
+
+"blob containers" is Azure's name for Buckets
+
+Access permissions:
+  * Private
+  * "Blob" <-- anon read only access
+  * Container <-- anon read access for containers - and by this they mean the heirarchy - and blobs
+
+You can use rules to ie if the last modified date was > 60 days ago move to cool storage
+
+Types:
+  * block (default) <-- can set the block size
+  * append (optimized for append operations)
+  * page (8TB in size)
+
+locally redundent: "basic protections against rack and drive failure"
+
+### Access
+
+  * shared access secrets (SAS)
+  * Entra backed auth
+  * RBAC roles
+  * shared key
+  * anon
 
 ## Azure Migrate
 
@@ -192,3 +256,38 @@ User accounts supported:
 ### Entra Domain Services
 
 Provides group policy joining, Kerberos auth to Entra tenant. Fully compatible with AD DS (does not require additional domain controllers in the cloud)
+
+#### Entra B2B
+
+Can give users in tenant A access to resources in tenant B.
+
+### and users
+
+You can assign users to a group, or there is Dynamic Assignment
+
+## RBAC
+
+Azure RBAC built on Resource Manager
+
+Role definition: collection of permissions with a name that you can assign a user, group, or application
+
+Parts:
+  * Security Principal
+  * Role Definition
+  * Scope
+  * Role Assignment     <-- attaches the role definition to security principal at scope
+
+  Azure RBAC provides built in roles/scopes, and you can create custom ones
+
+  System subtracts NoAction permissions from Actions permissions to arrive at ability
+
+  Fundimental Roles:
+
+    * Owner
+    * Contributor  <-- can create and manage all types of Azure resources, but can't grant user access
+    * Reader
+    * User Access Administrator
+
+### Seeing what permissions a user has
+
+IAM -> Check Access
