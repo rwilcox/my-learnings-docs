@@ -147,6 +147,8 @@ availiability sets:
 
 # Storage
 
+Storage Explorer: standalone app to manage all your storage content
+
 Kinds:
   * blob                    : via HTTP(S); REST API; Powershell; NFS
   * data lake
@@ -158,10 +160,32 @@ Types:
   * standard <-- spinning disks
   * premium <-- SSD
 
-Storage Account is immutably created with one of these types
+Storage Account is immutably created with one of these types above
+Storage account default is allow connections from all networks
+Storage account specifies Performane too
+... specifies replication
+access tier
 
 Data is encrypted automatically before being persisted to managed disks, blob, queue etc; then decrypted before retrieval
 
+## Azure Files
+
+can provided shared acces to files across multiple VMs
+
+Supports SMB or NFS (pick one per disk)
+
+Snapshots diff based but you just need to run the last one to restore
+
+Soft delete can be enabled on new or existing file shares
+
+Cloud Tiering: allowing frequently accessed files to be cached locally
+
+### Azure File Sync
+
+
+## Azure Disks
+
+Are page based blobs
 
 ## Blob Storage
 
@@ -181,13 +205,38 @@ Types:
 
 locally redundent: "basic protections against rack and drive failure"
 
+mocking out some of the cloud experience locally: Azure Storage Emulator (table, queue and blob) and Azurite (Azure Storage)
+
 ### Access
 
-  * shared access secrets (SAS)
+  * shared access secrets (SAS) <-- read only or read/write ; expiration time
   * Entra backed auth
   * RBAC roles
-  * shared key
+  * access keys
+  * shared key <-- grants anyone with access essentially root access
   * anon
+
+#### Stored Access Policy
+
+Can create based on four kinds of storage resources:
+  * blob containers
+  * file shares
+  * queues
+  * tables
+
+"The stored access policy you create for a blob container can be used for all the blobs in the container and for the container itself."
+
+#### SAS
+
+Parts: URI to a resource; token on how client may access resources
+
+Can reference a stored access policy
+
+Types:
+
+  * User delegation SAS <-- Entra ID; only for Blob storage
+  * Service SAS <-- Useful for Blob, Queu, Table or File
+  * Account SAS <-- same as service but can control access to service-level ops
 
 ## Azure Migrate
 
