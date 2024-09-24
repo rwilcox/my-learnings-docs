@@ -10,7 +10,9 @@ title: 'Learnings: Azure'
 
 # Regions
 
-regions & AZs
+regions & AZs (availibility zones)
+
+AZ is combo of fault domain and update domain
 
 regions are at least 300 miles apart, has automatic replication for some services
 
@@ -129,12 +131,44 @@ provides logging for subscription level events
 # Compute
 
 availiability sets:
-  * update domain: machines that can be rebooted at same time (I guess batch 1/2 or 1/3rd of your machines in a cluster in an update domain so you only lose half at a time to reboots??)
+  * update domain: machines that can be rebooted at same time (I guess batch 1/2 or 1/3rd of your machines in a cluster in an update domain so you only lose half at a time to reboots??).
   * fault domain: grouped by common hardware (power source, network switch). By default split across up to 3 fault domains.
+  * items in here should perform the same function
 
-## booting up a VM (ie from the CLI)
+Azure compute only supports 64bit OSes
+
+VMs have at least two disks: OS disk and temp disk
+(temp disk survives reboots BUT moving the VM around will NOT. NOT for storage of stuff)
+
+(then you need a data disk)
+
+You can use the Template (or Export Template) thing on the sidebar to get the BISON for the resources created when you ie create a VM via click-ops
+(the navigator thing with resources feels like a function popup/mini map
+
+Neat you can clickops have the VM run a script without leaving the Azure Portal
+
+## VMs
+
+Patch Orchestration / Update options:
+  * let OS on the VM do it
+  * Azure Orchestrated patching (patches across availibility sets)
+  * Manual updates
+
+
+### booting up a VM (ie from the CLI)
 
   `--settings` lets you specify a file URL to download and `--protected-settings` lets you specify a command to execute
+
+### Scale Sets
+
+orchestration mode:
+  * flexible: you manually create VM
+  * uniform: Azure generates instances based on the model
+
+Can do:
+  * auto scale based rules ?? (CPU)
+  * metrics based rules (App Insights)
+  * schedule rules (ie time/date)
 
 ## Azure App Service
 
