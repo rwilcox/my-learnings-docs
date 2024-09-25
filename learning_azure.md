@@ -59,7 +59,13 @@ Subscriptions associated with a single Entra directory.
 
 # Resource Manager
 
+Pre Resource Manager (or "classic deployments" or "Cloud Services (classic)")
+
+"Cloud Services (extended)" does let you use Resource Manager
+
 deploy, manage, monitor resources as a group. Tags, templates, etc
+
+Classic deployments limited to 20 virtual cores across all VMs in a region
 
 ## Resource Groups
 
@@ -107,6 +113,16 @@ Built in policy definitions include:
 "Compliance" tab shows you areas in your subscription that are out of compliance with your set policies or initiatives
 
 JSON documents
+
+# Containers
+
+## Container Instances
+
+Sources:
+  * Quickstart !?!!!
+  * Azure Container Registry
+  * (other registry)
+
 # Azure Arc
 
 Unifies management of azure compliance etc in hybrid scenarios
@@ -137,7 +153,7 @@ availiability sets:
 
 Azure compute only supports 64bit OSes
 
-VMs have at least two disks: OS disk and temp disk
+VMs have at least two disks: OS disk (limited to 2GB, BTW) and temp disk (sized based on VM size, reeallly wants you to use it for virtual memory...)
 (temp disk survives reboots BUT moving the VM around will NOT. NOT for storage of stuff)
 
 (then you need a data disk)
@@ -154,6 +170,9 @@ Patch Orchestration / Update options:
   * Azure Orchestrated patching (patches across availibility sets)
   * Manual updates
 
+[Virtual Machine Size(https://azure.microsoft.com/en-us/pricing/details/virtual-machines/series/)
+
+For Windows VMs the Connect tab gives you a .rdp file for Remote Desktop to connect to the VM
 
 ### booting up a VM (ie from the CLI)
 
@@ -172,10 +191,42 @@ Can do:
 
 ## Azure App Service
 
+"Deployment Slots" = ie whatever your environment setup is: blah-dev, blah-staging, blah-prod for example
+
+Auto Swap <-- when code changes to that slot App Service warms up the service then swaps the entire deployment slot to production (Win only)
+
+Has it's own auth services built in you can use
+
+Plans:
+  * Free / shared <-- no scale out
+  * Basic <-- 3 max instances
+  * Standard <-- starts supporting auto scale. 5 deployment slots. Up to 10 instances
+  * Premium <-- 5 instances. 20 deployment slots. Up to 30 instances
+  * Isolated <-- 20 deployment slots. Up to 100 instances.
+
+First class support for:
+  * ASP.NET
+  * Java
+  * Ruby
+  * Node
+  * PHP
+  * Python
+
+`az webapp up` / `az webapp deploy` <-- another way to deploy
 
 ## Container Runners
 
 ### Azure Container Apps
+
+See also: "Container Instances" in this document
+
+Container Group: collection of containers that get scheduled on a host machine
+
+Ways to specify:
+  * ARM template
+  * YAML <-- recommended if that's all you're deploying
+
+Teeeeecccchhhhhhnically it's running K8s under the hood, but you don't have access to all of it
 
 ### AKS
 
@@ -283,6 +334,14 @@ Sections:
 # Network Related
 
 Virtual Network
+
+## Network Security Group
+
+Azure processes security group associated to subnet, then the one applied to the network interface (for inbound. Outbound just opposite)
+
+If no Security Group is applied default is allow all traffic (!!)
+
+Last rule SHOULD be Deny All (would turn the NSG into an explicit allow-list, not a deny-list)
 
 ## W.R.T Hybrid Cloud
 
