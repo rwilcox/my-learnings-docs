@@ -127,6 +127,12 @@ Sources:
 
 Unifies management of azure compliance etc in hybrid scenarios
 
+# Tools
+
+## Cloud Shell
+
+ALSO has Visual Studio Code installed (via `code`) and it fires up the VSC UI right in the shell!!!
+
 # Monitoring etc
 
 Azure Monitor       : collects data on resources
@@ -347,7 +353,7 @@ Azure Services may create their own resources in a subnet (using that subnet's a
 
 Azure routes all traffic between subnets by default. (Can control or block this completely with a network virtual appliance.)
 
-Virtual Network
+subnet can have only one route table
 
 ## Network Security Group
 
@@ -357,7 +363,48 @@ If no Security Group is applied default is allow all traffic (!!)
 
 Last rule SHOULD be Deny All (would turn the NSG into an explicit allow-list, not a deny-list)
 
+DENY rules take precedence
+
+(Traffic that doesn't match a NSG is denied)
+
+## VPC
+
+System routes controls traffic for VMs in scenarios:
+  * between VMs in same subnet
+  * between VMs in different subnets in the same VPC
+  * traffic from VMs to the Internet
+
+peer networks don't give transitive peering affects
+
+Frequent patterns:
+  * hub and spoke
+  * User defined routes
+  * service chaining
+
+Gateway Transit allows peered virtual networks to share the gateway
+### Service Endpoint
+
+provides the identity of your virtual network to Azure.
+Normally traffic from VPC - including traffic going to Azure resources - are marked with public IP. HOWEVER, using Service Endpoints means it'll use the VPC address when accessing Azure resources
+
+### Peering VPCs
+
+
+## Application Security Group
+
+Let's you think about your network architecture from an application, not subnet / VPC level of abstraction.
+
+Valid next hops:
+  * virtual appliances
+  * virtual network gateway
+  * virtual network
+  * internet
+  * none
+
 ## W.R.T Hybrid Cloud
+
+### Azure Private Link
+
 
 ### point to point <-- computers to Azure
 
