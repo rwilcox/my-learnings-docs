@@ -333,6 +333,20 @@ Sections:
 
 # Network Related
 
+## IP addresses
+
+Dynamic: associated with an Azure resource and can change if the resource changes (ie stopped). <-- for Basic IP Addresses IPv6 must be dynamic
+
+Static: aren't released until you delete them. <-- Standard SKU allows IPv6
+
+## subnets
+
+Azure reserves 5 addresses in each subnet (first four, and last)
+
+Azure Services may create their own resources in a subnet (using that subnet's address space)
+
+Azure routes all traffic between subnets by default. (Can control or block this completely with a network virtual appliance.)
+
 Virtual Network
 
 ## Network Security Group
