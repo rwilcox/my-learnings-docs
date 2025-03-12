@@ -79,7 +79,7 @@ You can specify an internal host (ie a Terraform Enterprise) where modules are s
 
 To log into such a host - say terraform.example.com - use following command:
 
-`terraform login registry terraform.example.com`
+`terraform login terraform.example.com`
 
 Which will open a web page, log you into Terraform Enterprise, and give you a token to copy into your terminal.
 
