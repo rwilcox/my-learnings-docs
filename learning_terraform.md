@@ -73,7 +73,15 @@ In most cases this is not required but could be because [your provider isn't rou
 
 Can share code via modules, can also pass variables into these modules
 
+## Internally hosted modules
 
+You can specify an internal host (ie a Terraform Enterprise) where modules are stored. 
+
+To log into such a host - say terraform.example.com - use following command:
+
+`terraform login registry terraform.example.com`
+
+Which will open a web page, log you into Terraform Enterprise, and give you a token to copy into your terminal.
 
 # Random Notes
 
@@ -117,7 +125,12 @@ Ways around:
   * Terraform Enterprise
   * Terragrunt <-- stores semaphore in DynoDB
 
-# Teams and Terraform
+# Workarounds
+
+# M series macs and old, but still in use, modules
+
+See [this article on the tool to use to fix it](https://medium.com/@immanoj42/terraform-template-v2-2-0-does-not-have-a-package-available-mac-m1-m2-2b12c6281ea)
+Note that m1-terraform-provider-helper can also be installed as a binary (not _just_ through Homebrew), although you will need to set the xattr quartentine flag to false.
 
 ## PR Review
 
