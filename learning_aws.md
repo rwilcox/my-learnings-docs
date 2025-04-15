@@ -65,13 +65,18 @@ title: 'Learnings: AWS'
 
 <!-- tocstop -->
 
-# <<Learning_AWS>>
+# Learning AWS
+<<Learning_AWS>>
 
 
-## <<Learning_AWS_Route53>>
+## Route 53
+
+<<Learning_AWS_Route53>>
 
 
-## <<Learning_AWS_EC2>>
+## AWS EC2
+
+<<Learning_AWS_EC2>>
 
 ### ... and Memory Swap Space <<Learning_AWS_EC2_Swap>>
 
@@ -90,7 +95,9 @@ From http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-store-swap-volu
 
   * Learning_AWS_Good_DNS_Names_For_Instances
 
-## <<Learning_AWS_VPCs>>
+## AWS VPCs
+
+<<Learning_AWS_VPCs>>
 
 ### Allows you to create auto DNS support (private and public names)
 
@@ -190,7 +197,9 @@ Info about this:
 #### ... with Cloudwatch Logs as a destination
 
 
-## <<Learning_AWS_ECR>>
+## AWS ECR
+
+<<Learning_AWS_ECR>>
 
 Drawbacks / things need to worry about before using ECR:
 
@@ -209,13 +218,17 @@ Neat commands:
   *
 
 
-## <<Learning_AWS_Building_Build_And_Release_Pipelines>>
+## Learning AWS Building Build and Release Pipelines
+
+<<Learning_AWS_Building_Build_And_Release_Pipelines>>
 
 AWS Code Pipeline: Build Pipeline creation
 
 Pipelines contain steps like AWS CodeBuild, and others
 
-## <<Learning_AWS_CodePipeline>>
+## AWS CodePipeline
+
+<<Learning_AWS_CodePipeline>>
 
 CodePipeline: a lot of power hidden behind first interface!!!
 At first blush looks limiting (SOURCE, BUILD, DEPLOY) but can hook up many more stages: ie multiple CodeBuild commands, direct push to OpsWorks or ECS, etc
@@ -252,7 +265,9 @@ Example Deploy pipeline -> React:
 
 - [TODO]: Think about this use of CodePipeline!!!!
 
-## <<Learning_AWS_CodeDeploy>>
+## AWS CodeDeploy
+
+<<Learning_AWS_CodeDeploy>>
 
 Deploy and run code arctifacts on a VM
 
@@ -285,7 +300,9 @@ Allows many hooks to mutate state of machine before you launch your software on 
   2. By using / abusing post / pre hooks, can use this as a poor man's Chef: ie installing Wordpress or a third party application on Ec2 instances.
 
 
-## <<Learning_AWS_CodeBuild>>
+## AWS CodeBuild
+
+<<Learning_AWS_CodeBuild>>
 
 Takes files in (github, bitbucket, s3) and (optionally) copies the file result of some build to S3.
 
@@ -336,7 +353,9 @@ CodeBuild does this, even for Bitbucket or Bitbucket Cloud. AKA: Bitbucket fully
   1. Early early stage startups (5 cents a build, no $10-60/month min)
 
 
-## <<Learning_AWS_LoadBalancers>>
+## AWS Load Balancers
+
+<<Learning_AWS_LoadBalancers>>
 
 Default ( < 10-30ish????? minutes ) of requests seem to be rate limited at 6K rps / 800-ishMB/second
 
@@ -348,7 +367,9 @@ Should be able to scale *LBs up to Web Scale traffic: aka all of ESPN.com is ser
 
 Allows SSL termination on chosen instance, not just at load balancer level
 
-## <<Learning_AWS_Cloud9>>
+## AWS Cloud 9
+
+<<Learning_AWS_Cloud9>>
 
 ### <<Cloud9InstallingJava8>>
 
@@ -356,7 +377,9 @@ Allows SSL termination on chosen instance, not just at load balancer level
   2. `sudo alternatives --config java`
   3. `sudo yum remove java-1.7.0-openjdk-devel`
 
-## <<Learning_AWS_Amplify>>
+## AWS Amplify
+
+<<Learning_AWS_Amplify>>
 
 ### APIs on Amplify
 
@@ -367,10 +390,12 @@ For graphql APIs can auto generate your code for you to talk back to AWS AppSync
   Can generate in javascript, typescript or Flow
  Can also use Cognito to create application specific users for your app. Including, for react, widgets for sign up and sign in.
 
-#### AWS also includes a FraphQL console to poke at the store using graphql queries / mutations
+#### AWS also includes a GraphQL console to poke at the store using graphql queries / mutations
 
 
-## <<AWS_Cognito>>
+## Cognito
+
+<<AWS_Cognito>>
 
 Slows users to create sign ins with your application. provides a console to view all the users created, serarch through them, set the attributes of the username and password rules, customize the UI. can also use a lambda function to trigger when users are created etc etc
 
@@ -379,6 +404,17 @@ Can also use Google Auth time based one time passwords from the users auth app o
 Also [supports Sign In with Apple](https://aws.amazon.com/about-aws/whats-new/2019/11/amazon-cognito-now-supports-sign-in-with-apple/)
 
 Also lets people sign in with their Facebook or Google account
+
+## RDS
+
+<<AWS_Relational_Database_Service_RDS>>
+
+### Aurora Global Databases
+
+[Configuration Requirements](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-global-database.configuration.requirements.html)
+
+BIGGEST requirement that's super hidden: instance classes *must* be memory optimized instance classes. Ideally a db.r5.
+
 
 ## Creating a No Code Backend with DynamoDB, Cognito, DynamoDB and AWS Gateway
 
