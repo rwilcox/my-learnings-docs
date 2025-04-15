@@ -64,8 +64,8 @@ Stupid Things I always forget
 val vs var
 ------------
 
-  * var: mutable variable (can be reassigned)
-  * val: read only variable (not NOT be reassigned, like ES6's `const`, or `final` in Java). Mneomnic: both fina**l** and va**l** end with "l".
+  * var: mutable variable (can be reassigned). **VARIABLE** (ie can be reassigned)
+  * val: read only variable (not NOT be reassigned, like ES6's `const`, or `final` in Java). **VALUE** ("constant VALUE")
 
 
 
