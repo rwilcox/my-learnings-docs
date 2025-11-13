@@ -8,6 +8,28 @@ title: 'Learnings: Azure'
 
 <!-- tocstop -->
 
+# AZ-104
+
+| Objective                          | Percent |
+|:-----------------------------------|:--------|
+| Managing Identities and governance | 20-25%  |
+| Implement and manage storage       | 15-20%  |
+| Deploy and manage Azure compute    | 15-20%  |
+| Monitor / Backup                   | 10-15%  |
+
+
+Tools to know, in order:
+  1. Azure Powershell
+  2. Azure Cloud Shell
+  3. Azure CLI (`az`)
+
+about 2.5 hours for the exam itself
+watch for discounts, "free second shot"
+expect about 50 questions
+can park questions for review. (can go back/forward within a section BUT once you leave that section, no)
+
+DO need to do the hands on practice
+
 # Regions
 
 regions & AZs (availibility zones)
@@ -30,7 +52,10 @@ VNet - their network peering thing
 
 # Hierarchy etc
 
+Tenant -> Management Groups -> Subscriptions -> Resources
+
 ## Management Groups
+
 
 Scope above subscriptions
 
@@ -39,6 +64,8 @@ Can nestle the groups, max depth of 6
 Can make use of policy inheritance
 
 ## Subscriptions
+
+can add multiple subscriptions be tenant
 
 Azure Account has many subscriptions has many resource groups and resources
 
@@ -49,6 +76,7 @@ billing for azure is done on a per-subscription basis
 consider a shared services subscription
 
 Subscriptions associated with a single Entra directory.
+
 
 # Cost
 
@@ -82,7 +110,16 @@ Can prevent accidental deletion of resources
 
 Read-Only and Delete locks
 
+# Tags
+
+Name / value pairs
+not all resource types support tags, child do not inherit tags from containing parent
+
 # Cost Management
+
+## Budgets
+
+These are soft alerts: will not interrupt services, but will alert you
 
 ## Alert types
 
@@ -98,7 +135,7 @@ groups of policies called initiatives
 
 Set at each level: resource, resource group, subscription, etc and then apply to children within that group.
 
-Can set restrictions on ie location, kinds of resources created, etc etc
+Can set restrictions on ie location, kinds of resources created (SKU), etc etc
 
 policy defintion: condition to evaluate and actions to perform when it's met
 initiative definition: set of policy definitions
@@ -146,9 +183,54 @@ Azure Log Analytics : run log queries based on ^^^
   * machine performance
   * synthetic transactions
 
-## Monitor Activity Log
+## Azure Monitor
 
-provides logging for subscription level events
+Resources:
+  * Application
+  * OS
+  * Azure Resource
+  * Azure Sub
+  * Azure Tenant
+  * Custom Sources
+
+When alert is triggered Monitor can:
+  * send email, sms, app push, voice call
+  * azure funcion, logic app, webhook
+  * IT Service Management ticket
+  * USE A RUNBOOK??!!!!!!
+
+DCR = Data Collection Rule
+
+### Alerts
+
+RESOURCE on CONDITIONS do ACTIONS with DETAILS
+(details include syslog level)
+
+#### Metrics alerts
+
+threashold monitoring
+
+static threshold, dynamic threshold. Can create dimensions (ie CPU max) and apply to multiple RESOURCEs
+
+### Activity Log
+
+provides logging for subscription level events (ie when changes occur on a resource)
+
+categories:
+  * admin
+  * service health
+  * autoscale
+  * policy
+  * recommendation
+
+
+### Log Analytics
+
+Log Analytics supports the Kusto Query Language (KQL)
+
+### Network Watcher
+
+Azure Network Watcher provides tools to monitor, diagnose, view metrics, and enable or disable logs for resources in an Azure virtual network.
 
 # Compute
 
@@ -339,6 +421,20 @@ Sections:
 
 # Network Related
 
+routes can also be based on service tag
+
+if multiple routes are avail in the routing table azure selects the most specific route ("longest" in CIDR format)
+
+Network Virtual Applicance: consists of various layers (firewalls, wan optimizers, routers, LBs, IDS/IPS, Proxies)
+
+## Azure Bastion Service
+
+Jump server for RDP / SSH
+
+## Debugging
+
+IP Flow Verify feature in Network Watcher can diagnose issues from/to the internet, or how security rules affect traffic
+
 ## IP addresses
 
 Dynamic: associated with an Azure resource and can change if the resource changes (ie stopped). <-- for Basic IP Addresses IPv6 must be dynamic
@@ -355,7 +451,7 @@ Azure routes all traffic between subnets by default. (Can control or block this 
 
 subnet can have only one route table
 
-## Network Security Group
+## Network Security Group (NSG)
 
 Azure processes security group associated to subnet, then the one applied to the network interface (for inbound. Outbound just opposite)
 
@@ -367,6 +463,8 @@ DENY rules take precedence
 
 (Traffic that doesn't match a NSG is denied)
 
+Lower number rules = takes priority
+
 ## VPC
 
 System routes controls traffic for VMs in scenarios:
@@ -374,7 +472,6 @@ System routes controls traffic for VMs in scenarios:
   * between VMs in different subnets in the same VPC
   * traffic from VMs to the Internet
 
-peer networks don't give transitive peering affects
 
 Frequent patterns:
   * hub and spoke
@@ -389,6 +486,9 @@ Normally traffic from VPC - including traffic going to Azure resources - are mar
 
 ### Peering VPCs
 
+When creating only one side gets created, if you want to reciprocal need to create both
+
+peer networks don't give transitive peering affects
 
 ## Application Security Group
 
@@ -429,13 +529,64 @@ Four models:
 
 ## DNS
 
-Azure DNS. Also supports private DNS domains. Can't use this to buy a domain name.
+Azure DNS. Also supports private DNS domains (associated with a VPC, don't require a registrar).
+
+Can't use this to buy a domain name.
+
+To publish a private DNS zone to your virtual network, you specify the list of virtual networks that are allowed to resolve records within the zone.
+
+Gives role based access, activity logs and threat detection
+
+A Name and CNAME records don't support linking directly to Azure resources (but you can use an alias record to point to Traffic Manager, CDN endpoints, a public IP or a front-door profile)
+
+## Load Balancer
+
+Affity: by default 5 tuple hash (source ip, source port, destination port, IP, protocol)
+
+(but can use ie source ip affinity for protocols that require it, ala RDP etc etc)
+
+VMs that use an LB must be in the same virtual network
+
+Both internal and outbound
+
+Basic, Standard and Gateway
+
+Can configure session persistence
+
+
+### Basic
+
+Basic supports HTTP and TCP. No AZ support.
+
+By default open, Control through NSGs.
+
+Up to 300 VMs
+
+### Standard
+
+Standard supports HTTPS, HTTP and TCP. Zonal redudent for in and out. By default closed, control through NSGs.
+
+Up to 1000 VMs OR Scale Sets, including multiple combinations of same
+
+### Application Gateway
+
+Load balancer for web traffic
+
+Application layer routing
+
+Supports HTTP, HTTPS, HTTP/2, Websockets
+Firewall
+
+Load autoscaling
+
+can also send different HTTP paths to different pools, or rewrite headers
 
 # IAM
 
 ## Entra (Active Directory)
 
 In hybrid scenarios you need to keep two different AD installs, but can connect them (Entra Connect) - one way sync.
+(don't install on the DC, but needs to access the DC)
 
 Entra Domain Services: connects Azure Entra with a more AD like interface for applications to use
 
@@ -455,6 +606,32 @@ User accounts supported:
   * Directory Synced  <-- defined in the on-prem AD
   * Guest user
 
+### Entra ID
+
+JOIN a physical or virtual machine to Entra ID for managcement
+installs a computer cert
+user can then log in with entra ID
+Can't join Entra ID and on-prem AD network simultaneously
+Entra ID can also REGISTER devices, which installs a user cert and lets admin do _some_ things
+
+Groups:
+  * Security (access Azure apps and resources)
+  * Microsoft 365 (shared mailbox, calendar)
+
+Membership can be assigned or dynamic
+
+#### Devices:
+  * associated with use
+  * can be disabled
+  * can be deleted
+
+#### Hybrid Identies
+
+Goal: SSO
+
+#### Roles
+
+what people can do in context of Entra ID
 
 ### Entra Domain Services
 
@@ -469,6 +646,9 @@ Can give users in tenant A access to resources in tenant B.
 You can assign users to a group, or there is Dynamic Assignment
 
 ## RBAC
+
+create role, then associate it with a group, add users to the group and boom they get the roles
+created roles can be scoped to tenant, management group, sub, resource group, resource
 
 Azure RBAC built on Resource Manager
 
@@ -494,3 +674,9 @@ Parts:
 ### Seeing what permissions a user has
 
 IAM -> Check Access
+
+# Backup
+
+Backup Center is how you manage backup workflows on Azure
+
+Azure Backup Server (MABS) <-- for on-prem
