@@ -359,6 +359,13 @@ All this typing sometimes gets annoying, particularly when you have a lot of typ
   2. Access modifiers `public`, `protected`, `private`
   3. (Java style) interfaces
 
+# Making the compiler Do What I Say
+
+## cast to any then cast back
+
+## "just ignore this error"
+
+Use [`@ts-expect-error`](https://dev.to/maafaishal/ts-expect-error-over-ts-ignore-in-typescript-5140) comment annotation
 
 # Javascript -> Typescript
 
